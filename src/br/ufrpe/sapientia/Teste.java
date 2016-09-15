@@ -6,6 +6,7 @@ public class Teste {
 		
 		System.out.println("Projeto criado");
 		System.out.println("Git compartilhado");
+		System.out.println("Git Atualizado por Andre");
 
 	}
 
