@@ -31,110 +31,92 @@ public class Fachada implements IFachada {
 
 	@Override
 	public boolean efetuarEmprestimo() {
-		// TODO Auto-generated method stub
-		return false;
+		return controleEmprestimo.efetuarEmprestimo();
 	}
 
 	@Override
 	public ArrayList<Emprestimo> verificarPendenciasLivro(Livro livro) {
-		// TODO Auto-generated method stub
-		return null;
+		return controleHistorico.verificarPendenciasLivro(livro);
 	}
 
 	@Override
 	public ArrayList<Emprestimo> verificarPendenciasCliente(Usuario cliente) {
-		// TODO Auto-generated method stub
-		return null;
+		return controleHistorico.verificarPendenciasCliente(cliente);
 	}
 
 	@Override
 	public ArrayList<Emprestimo> verificarEmprestimoLivro(Livro livro) {
-		// TODO Auto-generated method stub
-		return null;
+		return controleHistorico.verificarEmprestimoLivro(livro);
 	}
-
+	
 	@Override
 	public ArrayList<Emprestimo> verificarEmprestimoCliente(Usuario cliente) {
-		// TODO Auto-generated method stub
-		return null;
+		return controleHistorico.verificarEmprestimoCliente(cliente);
 	}
 
 	@Override
 	public boolean atualizarLivro(Livro livro) {
-		// TODO Auto-generated method stub
-		return false;
+		return controleLivro.atualizarLivro(livro);
 	}
 
 	@Override
 	public Livro removerLivro() {
-		// TODO Auto-generated method stub
-		return null;
+		return controleLivro.removerLivro();
 	}
 
 	@Override
 	public Livro buscaLivro() {
-		// TODO Auto-generated method stub
-		return null;
+		return controleLivro.buscaLivro();
 	}
 
 	@Override
 	public boolean cadastraLivro() {
-		// TODO Auto-generated method stub
-		return false;
+		return controleLivro.cadastraLivro();
 	}
 
 	@Override
 	public Usuario efetuarLogin() {
-		// TODO Auto-generated method stub
-		return null;
+		return controleLogin.efetuarLogin();
 	}
 
 	@Override
 	public boolean atualizarFuncionario(Usuario funcionario) {
-		// TODO Auto-generated method stub
-		return false;
+		return controleUsuario.atualizarFuncionario(funcionario);
 	}
 
 	@Override
 	public Usuario removerFuncionario() {
-		// TODO Auto-generated method stub
-		return null;
+		return controleUsuario.removerFuncionario();
 	}
 
 	@Override
 	public Usuario buscaFuncionario() {
-		// TODO Auto-generated method stub
-		return null;
+		return controleUsuario.buscaFuncionario();
 	}
 
 	@Override
 	public boolean atualizarCliente(Usuario cliente) {
-		// TODO Auto-generated method stub
-		return false;
+		return controleUsuario.atualizarCliente(cliente);
 	}
 
 	@Override
 	public Usuario removerCliente() {
-		// TODO Auto-generated method stub
-		return null;
+		return controleUsuario.removerCliente();
 	}
 
 	@Override
 	public Usuario buscaCliente() {
-		// TODO Auto-generated method stub
-		return null;
+		return controleUsuario.buscaCliente();
 	}
 
 	@Override
 	public boolean CadastrarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return false;
+		return controleUsuario.CadastrarUsuario(usuario);
 	}
 
 	@Override
 	public boolean atualizarADM() {
-		// TODO Auto-generated method stub
-		return false;
+		return controleUsuario.atualizarADM();
 	}
 	
 	
