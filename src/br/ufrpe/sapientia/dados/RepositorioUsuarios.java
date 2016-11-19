@@ -43,12 +43,12 @@ public class RepositorioUsuarios {
 		return s;
 	}
 	
-	public boolean remover(int cpf){
+	public boolean remover(String cpf){
 		boolean s = false;
 		String sql = "delete from usuario where cpf_usuario = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			stmt.setInt(1, cpf);
+			stmt.setString(1, cpf);
 			stmt.execute();
 			stmt.close();
 			s = true;
@@ -125,24 +125,21 @@ public class RepositorioUsuarios {
 		return usuarios;
 	}
 	
-	public List<Usuario> pesquisarCPF(String cpf){
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+	public Usuario pesquisarCPF(String cpf){
+		Usuario u = new Usuario();
 		String sql = "select * from usuario where cpf_usuario = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cpf);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()){
-				Usuario u = new Usuario();
+			if(rs.next())
 				preencherUsuario(rs,u);
-				usuarios.add(u);
-			}
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return usuarios;
+		return u;
 	}
 	
 	private void preencherUsuario(ResultSet rs, Usuario u){
