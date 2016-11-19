@@ -20,7 +20,20 @@ public class Testes {
 		u.setTipo("C");
 		u.setSexo("M");
 		u.setId(6);
-		ru.atualizar(u);
+		ru.cadastrar(u);
+		
+		Usuario d = new Usuario();
+		d.setNome("Daniel Freire");
+		d.setCpf("10756365673");
+		d.setEmail("danjfreire@gmail.com");
+		d.setEndereco("r.antonio martiniano de barros");
+		d.setContato("76576769");
+		d.setLogin("danjfreire");
+		d.setSenha("senhasegura");
+		d.setTipo("C");
+		d.setSexo("M");
+		d.setId(7);
+		ru.cadastrar(d);
 		
 		//dao.atualizar(u);
 		//usuarios = dao.pesquisarCPF("07665566464");
