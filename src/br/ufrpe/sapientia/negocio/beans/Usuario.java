@@ -2,7 +2,7 @@ package br.ufrpe.sapientia.negocio.beans;
 
 public class Usuario {
 
-	private int id;
+	private int id; //acho que não precisa de id e poderiamos utilizar o cpf pra maioria das coisas assim como na rural
 	private String nome;
 	private String cpf;
 	private String contato;
@@ -12,6 +12,27 @@ public class Usuario {
 	private String sexo;
 	private String endereco;
 	private String tipo;
+	
+	public Usuario(){
+		
+	}
+	
+	public Usuario(String tipo, String nome, String cpf, String contato, 
+			String email, String login, String senha,String sexo, String endereco){ 
+		
+		this.tipo = tipo;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
+		
+		if(tipo == "cliente" || tipo == "funcionario"){
+			this.nome = nome;
+			this.cpf = cpf;
+			this.endereco = endereco;
+			this.contato = contato;
+			this.sexo = sexo;
+		}
+	}
 	
 	public String getNome() {
 		return nome;

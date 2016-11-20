@@ -18,6 +18,9 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		this.connection = new Conexao().construirConexao();
 	}
 	public boolean cadastrar(Usuario u){
+		/*
+		 * Não sei se esse método precisa de alguma mudança visto que criei um construtor para usuário
+		 */
 		boolean s = false;
 		String sql = "insert into usuario (cpf_usuario, nome_usuario, telefone_usuario,"
 				+ " endereco_usuario, email_usuario, login_usuario, senha_usuario, tipo_usuario, sexo_usuario)"
@@ -60,6 +63,14 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	}
 	
 	public boolean atualizar(Usuario u){
+		/*
+		 * Acho que pode ficar recebendo um usuário mesmo mas o ideal é que ele busque no banco um usuário que tenha o mesmo CPF 
+		 * do usuário passado como parâmetro e atualize os dados dele com os dados do usuário passado como parametro.
+		 * Isso porque esse método vai ser sempre usado depois de uma busca ou depois de um usuário estar logado então sempre saberemos
+		 * o cpf do usuário que vai ser atualizado.
+		 * Como o adm basicamente só possui login e senha e só existe um, seria bom criar um método separado atualizarADM que busca 
+		 * o unico adm do sistema e modifica com os valores passado por parametro. Ex: boolean atualizarADM(String login, String senha) 
+		 */
 		boolean s = false;
 		String sql = "update usuario set nome_usuario = ?, telefone_usuario = ?,"+
 		"endereco_usuario = ?, email_usuario = ?, login_usuario = ?, senha_usuario = ?,"+
@@ -106,6 +117,17 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	}
 	
 	public List<Usuario> pesquisarNome(String nome){
+		/*
+		 * Nesse caso a melhor opção seria o método também receber o tipo buscado como parâmetro para só buscar clientes ou
+		 * só buscar funcionários porque podem existir funcionários e clientes com o mesmo nome. 
+		 * 
+		 * Ex:
+		 * pesquisarNome(String nome, String tipo)
+		 * if(tipo == "cliente")
+		 * 	....
+		 * else
+		 *  ....
+		 */
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		String sql = "select * from usuario where nome_usuario = ?";
 		try{
@@ -126,6 +148,10 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	}
 	
 	public Usuario pesquisarCPF(String cpf){
+		/*
+		 * O mesmo caso de cima, deve possuir um parametro de tipo porque existem casos em que a busca só pode retornar um cliente
+		 * ou só um funcionário, não faz sentido uma busca por um cliente retornar um funcionário caso o cpf seja inserido incorretamente
+		 */
 		Usuario u = new Usuario();
 		String sql = "select * from usuario where cpf_usuario = ?";
 		try{
