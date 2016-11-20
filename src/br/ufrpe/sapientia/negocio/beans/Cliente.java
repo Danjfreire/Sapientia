@@ -7,8 +7,8 @@ public class Cliente extends Usuario{
 	private String contato;
 	//nascimento
 	
-	public Cliente(String email, String login, String senha, String sexo, String endereco,String cpf, String nome,String contato) {
-		//super(email, login, senha, sexo, endereco);
+	public Cliente(String tipo, String email, String login, String senha, String sexo, String endereco,String cpf, String nome,String contato) {
+		super(tipo, nome, cpf, contato, email, login, senha, sexo, endereco);
 		this.CPF = cpf;
 		this.nome = nome;
 		this.contato = contato;

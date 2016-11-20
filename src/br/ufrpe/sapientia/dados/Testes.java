@@ -9,22 +9,17 @@ import br.ufrpe.sapientia.negocio.beans.Usuario;
 public class Testes {
 	public static void main(String [] args){
 		RepositorioUsuarios ru = new RepositorioUsuarios();
-		Usuario u = new Usuario();
+		Usuario u = new Usuario("F", "wallaca", "78569", "84009198", 
+				"wallacesantana843@gmail.com", "wallace", "ruty", "M", "Rua Maria Augusta");
+		ru.atualizar("3", "wallace", "984009198", "wallace.lima", "wallacesantana843@gmail.com", "wallace.lima", "46576", "F", "M");
+
+		ru.cadastrar(u);
+		
 		List<Usuario> usuarios= new ArrayList<Usuario>();
-		u.setNome("wallace santana");
-		u.setCpf("6");
-		u.setEmail("wallacesantana843@gmail.com");
-		u.setEndereco("rua dracena 241");
-		u.setLogin("wallace.lima");
-		u.setSenha("wallacefrgb");
-		u.setContato("984009198");
-		u.setTipo("C");
-		u.setSexo("M");
-		u.setId(6);
 		//ru.cadastrar(u);
 		//ru.remover("611");
 		
-		Usuario d = new Usuario();
+		/*Usuario d = new Usuario();
 		d.setNome("Daniel Freire");
 		d.setCpf("10756365673");
 		d.setEmail("danjfreire@gmail.com");
@@ -39,11 +34,12 @@ public class Testes {
 		Usuario w = ru.pesquisarCPF("10756365673");
 		System.out.println(w);
 		//ru.cadastrar(d);
-		//usuarios = ru.pesquisarTodos();
-		//for(Usuario user : usuarios){
-		//	System.out.println(user);
+		*/usuarios = ru.pesquisarTodos();
+		usuarios = ru.pesquisarNome("wallaca", "F");
+		for(Usuario user : usuarios)
+			System.out.println(user);
 		//}
-		RepositorioLivros rl = new RepositorioLivros();
+		/*RepositorioLivros rl = new RepositorioLivros();
 		Livro l = new Livro();
 		List<Livro> livros = new ArrayList<Livro>();
 		l.setAno("2000");
@@ -61,9 +57,9 @@ public class Testes {
 		//ldao.atualizar(l);
 		//livros = ldao.pesquisarISBN("7985960");*/
 		//livros = rl.pesquisarTodos();
-		for(Livro li : livros){
+		/*for(Livro li : livros){
 			System.out.println(li);
-		}
+		}*/
 		//Emprestimo e = new Emprestimo();
 		//EmprestimoDao ed = new EmprestimoDao();
 		//e.setCliente_emprestimo(1);

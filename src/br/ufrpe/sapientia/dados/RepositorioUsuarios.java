@@ -18,9 +18,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		this.connection = new Conexao().construirConexao();
 	}
 	public boolean cadastrar(Usuario u){
-		/*
-		 * Não sei se esse método precisa de alguma mudança visto que criei um construtor para usuário
-		 */
+		
 		boolean s = false;
 		String sql = "insert into usuario (cpf_usuario, nome_usuario, telefone_usuario,"
 				+ " endereco_usuario, email_usuario, login_usuario, senha_usuario, tipo_usuario, sexo_usuario)"
@@ -62,31 +60,24 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		return s;
 	}
 	
-	public boolean atualizar(Usuario u){
-		/*
-		 * Acho que pode ficar recebendo um usuário mesmo mas o ideal é que ele busque no banco um usuário que tenha o mesmo CPF 
-		 * do usuário passado como parâmetro e atualize os dados dele com os dados do usuário passado como parametro.
-		 * Isso porque esse método vai ser sempre usado depois de uma busca ou depois de um usuário estar logado então sempre saberemos
-		 * o cpf do usuário que vai ser atualizado.
-		 * Como o adm basicamente só possui login e senha e só existe um, seria bom criar um método separado atualizarADM que busca 
-		 * o unico adm do sistema e modifica com os valores passado por parametro. Ex: boolean atualizarADM(String login, String senha) 
-		 */
+	public boolean atualizar(String cpf, String nome, String contato, String endereco, 
+			String email, String login, String senha, String tipo, String sexo){
+		
 		boolean s = false;
 		String sql = "update usuario set nome_usuario = ?, telefone_usuario = ?,"+
 		"endereco_usuario = ?, email_usuario = ?, login_usuario = ?, senha_usuario = ?,"+
-		"tipo_usuario = ?, cpf_usuario = ?, sexo_usuario = ? where id_usuario = ?";
+		"tipo_usuario = ?, sexo_usuario = ? where cpf_usuario = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			stmt.setString(1, u.getNome());
-			stmt.setString(2, u.getContato());
-			stmt.setString(3, u.getEndereco());
-			stmt.setString(4, u.getEmail());
-			stmt.setString(5, u.getLogin());
-			stmt.setString(6, u.getSenha());
-			stmt.setString(7, u.getTipo());
-			stmt.setString(8, u.getCpf());
-			stmt.setString(9, u.getSexo());
-			stmt.setInt(10, u.getId());
+			stmt.setString(1, nome);
+			stmt.setString(2, contato);
+			stmt.setString(3, endereco);
+			stmt.setString(4, email);
+			stmt.setString(5, login);
+			stmt.setString(6, senha);
+			stmt.setString(7, tipo);
+			stmt.setString(8, sexo);
+			stmt.setString(9, cpf);
 			stmt.execute();
 			stmt.close();
 			s = true;
@@ -103,11 +94,8 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()){
-				Usuario u = new Usuario();
-				preencherUsuario(rs,u);
-				usuarios.add(u);
-			}
+			while(rs.next())
+				usuarios.add(preencherUsuario(rs));
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
@@ -116,29 +104,17 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		return usuarios;
 	}
 	
-	public List<Usuario> pesquisarNome(String nome){
-		/*
-		 * Nesse caso a melhor opção seria o método também receber o tipo buscado como parâmetro para só buscar clientes ou
-		 * só buscar funcionários porque podem existir funcionários e clientes com o mesmo nome. 
-		 * 
-		 * Ex:
-		 * pesquisarNome(String nome, String tipo)
-		 * if(tipo == "cliente")
-		 * 	....
-		 * else
-		 *  ....
-		 */
+	public List<Usuario> pesquisarNome(String nome, String tipo){
+		
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "select * from usuario where nome_usuario = ?";
+		String sql = "select * from usuario where nome_usuario = ? and tipo_usuario = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, nome);
+			stmt.setString(2, tipo);
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()){
-				Usuario u = new Usuario();
-				preencherUsuario(rs,u);
-				usuarios.add(u);
-			}
+			while(rs.next())				
+				usuarios.add(preencherUsuario(rs));
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
@@ -147,19 +123,20 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		return usuarios;
 	}
 	
-	public Usuario pesquisarCPF(String cpf){
+	public Usuario pesquisarCPF(String cpf, String tipo){
 		/*
 		 * O mesmo caso de cima, deve possuir um parametro de tipo porque existem casos em que a busca só pode retornar um cliente
 		 * ou só um funcionário, não faz sentido uma busca por um cliente retornar um funcionário caso o cpf seja inserido incorretamente
 		 */
-		Usuario u = new Usuario();
-		String sql = "select * from usuario where cpf_usuario = ?";
+		Usuario u = null;
+		String sql = "select * from usuario where cpf_usuario = ? and tipo_usuario = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cpf);
+			stmt.setString(2, tipo);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
-				preencherUsuario(rs,u);
+				 u = preencherUsuario(rs);
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
@@ -168,56 +145,24 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		return u;
 	}
 	
-	private void preencherUsuario(ResultSet rs, Usuario u){
-		try {
-			u.setId(rs.getInt("id_usuario"));
-		} catch (SQLException e) {
+	private Usuario preencherUsuario(ResultSet rs){
+		Usuario u = null;
+		try{
+			int id = rs.getInt("id_usuario");
+			String nome = rs.getString("nome_usuario");
+			String cpf = rs.getString("cpf_usuario");
+			String endereco = rs.getString("endereco_usuario");
+			String email = rs.getString("email_usuario");
+			String login = rs.getString("login_usuario");
+			String senha = rs.getString("senha_usuario");
+			String contato = rs.getString("telefone_usuario");
+			String tipo = rs.getString("tipo_usuario");
+			String sexo = rs.getString("sexo_usuario");
+			u = new Usuario(tipo, nome, cpf, contato, email, login, senha, sexo, endereco);
+			u.setId(id);
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			u.setNome(rs.getString("nome_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setCpf(rs.getString("cpf_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setEndereco(rs.getString("endereco_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setEmail(rs.getString("email_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setLogin(rs.getString("login_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setSenha(rs.getString("senha_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setTipo(rs.getString("tipo_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setContato(rs.getString("telefone_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			u.setSexo(rs.getString("sexo_usuario"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		return u;
 	}
 }

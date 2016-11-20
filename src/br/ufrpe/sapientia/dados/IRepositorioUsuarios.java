@@ -6,9 +6,9 @@ public interface IRepositorioUsuarios {
 
 	boolean cadastrar(Usuario u);
 	boolean remover(String cpf);
-	boolean atualizar(Usuario u);
+	//boolean atualizar(Usuario u);
 	List<Usuario>pesquisarTodos();
-	List<Usuario>pesquisarNome(String nome);
-	Usuario pesquisarCPF(String cpf);
+	//List<Usuario>pesquisarNome(String nome);
+	//Usuario pesquisarCPF(String cpf);
 	
 }

@@ -13,10 +13,6 @@ public class Usuario {
 	private String endereco;
 	private String tipo;
 	
-	public Usuario(){
-		
-	}
-	
 	public Usuario(String tipo, String nome, String cpf, String contato, 
 			String email, String login, String senha,String sexo, String endereco){ 
 		
@@ -24,14 +20,11 @@ public class Usuario {
 		this.email = email;
 		this.login = login;
 		this.senha = senha;
-		
-		if(tipo == "cliente" || tipo == "funcionario"){
-			this.nome = nome;
-			this.cpf = cpf;
-			this.endereco = endereco;
-			this.contato = contato;
-			this.sexo = sexo;
-		}
+		this.nome = nome;
+		this.cpf = cpf;
+		this.endereco = endereco;
+		this.contato = contato;
+		this.sexo = sexo;
 	}
 	
 	public String getNome() {

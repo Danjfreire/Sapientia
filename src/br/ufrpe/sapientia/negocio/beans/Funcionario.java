@@ -6,8 +6,8 @@ public class Funcionario extends Usuario{
 	private String nome;
 	private int ID;
 	//nascimento
-	public Funcionario(String email, String login, String senha, String sexo, String endereco, String cpf, String nome, int id) {
-		//super(email, login, senha, sexo, endereco);
+	public Funcionario(String contato, String tipo, String email, String login, String senha, String sexo, String endereco, String cpf, String nome, int id) {
+		super(tipo, nome, cpf, contato, email, login, senha, sexo, endereco);;
 		
 		this.CPF = cpf;
 		this.nome = nome;
