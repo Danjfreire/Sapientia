@@ -11,7 +11,15 @@ public class Livro {
 	private String categoria;
 	private String resumo;
 	private String volume;
+	private int estoque;
 	
+	
+	public int getEstoque() {
+		return estoque;
+	}
+	public void setEstoque(int estoque) {
+		this.estoque = estoque;
+	}
 	public int getId() {
 		return id;
 	}

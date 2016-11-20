@@ -11,7 +11,7 @@ import br.ufrpe.sapientia.negocio.beans.Usuario;
 
 
 
-public class RepositorioUsuarios {
+public class RepositorioUsuarios implements IRepositorioUsuarios{
 	private Connection connection;
 	
 	public RepositorioUsuarios(){

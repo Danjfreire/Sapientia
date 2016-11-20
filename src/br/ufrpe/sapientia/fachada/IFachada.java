@@ -20,10 +20,10 @@ public interface IFachada {
 	boolean cadastraLivro();
 	Usuario efetuarLogin();
 	boolean atualizarFuncionario(Usuario funcionario);
-	Usuario removerFuncionario();
+	boolean removerUsuario(String cpf);
 	Usuario buscaFuncionario();
 	boolean atualizarCliente(Usuario cliente);
-	Usuario removerCliente();
+	//Usuario removerCliente();
 	Usuario buscaCliente();
 	boolean CadastrarUsuario(Usuario usuario);
 	boolean atualizarADM();

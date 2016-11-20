@@ -21,24 +21,28 @@ public class Testes {
 		u.setTipo("C");
 		u.setSexo("M");
 		u.setId(6);
-		ru.cadastrar(u);
-		ru.remover("611");
+		//ru.cadastrar(u);
+		//ru.remover("611");
+		
 		Usuario d = new Usuario();
 		d.setNome("Daniel Freire");
 		d.setCpf("10756365673");
 		d.setEmail("danjfreire@gmail.com");
-		d.setEndereco("r.antonio martiniano de barros");
+		d.setEndereco("r.antonio marciliano");
 		d.setContato("76576769");
-		d.setLogin("danjfreire");
+		d.setLogin("loginseguro");
 		d.setSenha("senhasegura");
 		d.setTipo("C");
 		d.setSexo("M");
 		d.setId(7);
-		ru.cadastrar(d);
-		usuarios = ru.pesquisarTodos();
-		for(Usuario user : usuarios){
-			System.out.println(user);
-		}
+		//ru.atualizar(d);
+		Usuario w = ru.pesquisarCPF("10756365673");
+		System.out.println(w);
+		//ru.cadastrar(d);
+		//usuarios = ru.pesquisarTodos();
+		//for(Usuario user : usuarios){
+		//	System.out.println(user);
+		//}
 		RepositorioLivros rl = new RepositorioLivros();
 		Livro l = new Livro();
 		List<Livro> livros = new ArrayList<Livro>();
@@ -51,12 +55,12 @@ public class Testes {
 		l.setTitulo("A culpa e das estrelas");
 		l.setVolume("1");
 		l.setId(1);
-		rl.atualizar(l);
-		rl.remove("7985");
+		//rl.atualizar(l);
+		//rl.remover("7985");
 		
 		//ldao.atualizar(l);
 		//livros = ldao.pesquisarISBN("7985960");*/
-		livros = rl.pesquisarTodos();
+		//livros = rl.pesquisarTodos();
 		for(Livro li : livros){
 			System.out.println(li);
 		}

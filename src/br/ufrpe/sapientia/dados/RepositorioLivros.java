@@ -9,7 +9,7 @@ import java.util.List;
 
 import br.ufrpe.sapientia.negocio.beans.Livro;
 
-public class RepositorioLivros {
+public class RepositorioLivros implements IRepositorioLivros{
 private Connection connection;
 	
 	public RepositorioLivros(){
@@ -40,7 +40,7 @@ private Connection connection;
 		return s;
 	}
 	
-	public boolean remove(String Isbn){
+	public boolean remover(String Isbn){
 		boolean s = false;
 		String sql = "delete from livro where isbn_livro = ?";
 		try{

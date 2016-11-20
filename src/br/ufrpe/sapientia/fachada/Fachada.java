@@ -85,8 +85,8 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public Usuario removerFuncionario() {
-		return controleUsuario.removerFuncionario();
+	public boolean removerUsuario(String cpf) {
+		return controleUsuario.removerUsuario(cpf);
 	}
 
 	@Override
@@ -99,10 +99,10 @@ public class Fachada implements IFachada {
 		return controleUsuario.atualizarCliente(cliente);
 	}
 
-	@Override
-	public Usuario removerCliente() {
-		return controleUsuario.removerCliente();
-	}
+	//@Override
+	//public Usuario removerCliente() {
+	//	return controleUsuario.removerCliente();
+	//}
 
 	@Override
 	public Usuario buscaCliente() {
