@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ControleLivro implements IControleLivro{
 
-	private IRepositorioLivros repositorio;
+	private RepositorioLivros repositorio;
 	
 	public ControleLivro(){
 		this.repositorio = new RepositorioLivros();
