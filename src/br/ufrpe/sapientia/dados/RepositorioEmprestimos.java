@@ -18,6 +18,10 @@ public class RepositorioEmprestimos {
 		this.connection = new Conexao().construirConexao();
 	}
 	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, int funcionario, int cliente){
+		/*
+		 * ao invés de receber numeros para identificar um funcionário e um cliente deve receber dois objetos usuário sendo um cliente e um funcionario.
+		 * Deve também receber um objeto Livro assim como no construtor
+		 */
 		boolean s = false;
 		String sql = "insert into emprestimo (funcionario_emprestimo, cliente_emprestimo, status_emprestimo,  data_saida_emprestimo,"
 				+ " data_entrega_emprestimo date)"
@@ -89,6 +93,9 @@ public class RepositorioEmprestimos {
 	}
 	
 	public List<Emprestimo> pesquisarEmrprestimoCliente(int id){
+		/*
+		 * Deve receber como parametro um Usuario cliente 
+		 */
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql = "select * from livro where cliente_emprestimo = ?";
 		try{
@@ -104,6 +111,12 @@ public class RepositorioEmprestimos {
 		}
 		return emprestimos;
 	}	
+	
+	/*
+	 * seria bom um método que busca os emprestimos realizados por um Funcionário, esquecemos de colocar então só vamo fazer depois
+	 * 
+	 * É necessário um método que busca um emprestimo baseado no livro assim como o método baseado no cliente
+	 */
 	
 	public List<Emprestimo> pesquisarEmrprestimo(int id){
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();

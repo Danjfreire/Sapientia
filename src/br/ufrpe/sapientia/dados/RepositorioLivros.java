@@ -16,6 +16,9 @@ public class RepositorioLivros implements IRepositorioLivros{
 	}
 	public boolean cadastrar(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, String estoque){
+		/*
+		 * no cadastro não deve ser possivel cadastrar livros com isbn repetidos
+		 */
 		
 		boolean s = false;
 		String sql = "insert into livro (titulo_livro, autor_livro, edicao_livro,"
@@ -43,6 +46,9 @@ public class RepositorioLivros implements IRepositorioLivros{
 	}
 	
 	public boolean remover(String Isbn, int id){
+		/*
+		 * já que o isbn é unico então deve ser pra remover só baseado no isbn
+		 */
 		boolean s = false;
 		String sql = "delete from livro where isbn_livro = ? and id_livro = ?";
 		try{
