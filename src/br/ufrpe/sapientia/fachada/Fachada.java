@@ -1,5 +1,5 @@
 package br.ufrpe.sapientia.fachada;
-import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.sapientia.negocio.*;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
@@ -35,22 +35,22 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public ArrayList<Emprestimo> verificarPendenciasLivro(Livro livro) {
+	public List<Emprestimo> verificarPendenciasLivro(Livro livro) {
 		return controleHistorico.verificarPendenciasLivro(livro);
 	}
 
 	@Override
-	public ArrayList<Emprestimo> verificarPendenciasCliente(Usuario cliente) {
+	public List<Emprestimo> verificarPendenciasCliente(Usuario cliente) {
 		return controleHistorico.verificarPendenciasCliente(cliente);
 	}
 
 	@Override
-	public ArrayList<Emprestimo> verificarEmprestimoLivro(Livro livro) {
+	public List<Emprestimo> verificarEmprestimoLivro(Livro livro) {
 		return controleHistorico.verificarEmprestimoLivro(livro);
 	}
 	
 	@Override
-	public ArrayList<Emprestimo> verificarEmprestimoCliente(Usuario cliente) {
+	public List<Emprestimo> verificarEmprestimoCliente(Usuario cliente) {
 		return controleHistorico.verificarEmprestimoCliente(cliente);
 	}
 
@@ -80,8 +80,9 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public boolean atualizarFuncionario(Usuario funcionario) {
-		return controleUsuario.atualizarFuncionario(funcionario);
+	public boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, 
+			String email, String login, String senha, String tipo, String sexo) {
+		return controleUsuario.atualizarUsuario(cpf, nome, contato, endereco, email, login, senha, tipo, sexo);
 	}
 
 	@Override
@@ -90,14 +91,10 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public Usuario buscaFuncionario() {
-		return controleUsuario.buscaFuncionario();
+	public Usuario buscarUsuarioCPF(String cpf, String tipo) {
+		return controleUsuario.buscarUsuarioCPF(cpf, tipo);
 	}
 
-	@Override
-	public boolean atualizarCliente(Usuario cliente) {
-		return controleUsuario.atualizarCliente(cliente);
-	}
 
 	//@Override
 	//public Usuario removerCliente() {
@@ -105,8 +102,8 @@ public class Fachada implements IFachada {
 	//}
 
 	@Override
-	public Usuario buscaCliente() {
-		return controleUsuario.buscaCliente();
+	public List<Usuario> buscarUsuarioNome(String nome, String tipo) {
+		return controleUsuario.buscarUsuarioNome(nome, tipo);
 	}
 
 	@Override
