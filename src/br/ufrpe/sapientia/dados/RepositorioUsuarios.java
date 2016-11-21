@@ -9,8 +9,6 @@ import java.util.List;
 
 import br.ufrpe.sapientia.negocio.beans.Usuario;
 
-
-
 public class RepositorioUsuarios implements IRepositorioUsuarios{
 	private Connection connection;
 	

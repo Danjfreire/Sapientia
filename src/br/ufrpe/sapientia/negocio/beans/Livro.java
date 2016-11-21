@@ -11,13 +11,26 @@ public class Livro {
 	private String categoria;
 	private String resumo;
 	private String volume;
-	private int estoque;
+	private String estoque;
 	
 	
-	public int getEstoque() {
+	
+	public Livro(String titulo, String autor, String edicao, String ano, String iSBN, String categoria,
+			String resumo, String volume, String estoque) {
+		this.titulo = titulo;
+		this.autor = autor;
+		this.edicao = edicao;
+		this.ano = ano;
+		ISBN = iSBN;
+		this.categoria = categoria;
+		this.resumo = resumo;
+		this.volume = volume;
+		this.estoque = estoque;
+	}
+	public String getEstoque() {
 		return estoque;
 	}
-	public void setEstoque(int estoque) {
+	public void setEstoque(String estoque) {
 		this.estoque = estoque;
 	}
 	public int getId() {
