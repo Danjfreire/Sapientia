@@ -45,5 +45,9 @@ public class ControleUsuario implements IControleUsuario{
 		return false;
 	}
 	
+	@Override
+	public List<Usuario> pesquisarTodos(){
+		return repositorio.pesquisarTodos();
+	}
 	
 }

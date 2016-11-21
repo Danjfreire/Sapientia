@@ -11,4 +11,5 @@ public interface IControleUsuario {
 	boolean removerUsuario(String cpf);
 	boolean CadastrarUsuario(Usuario usuario);
 	boolean atualizarADM();
+	List<Usuario> pesquisarTodos();
 }
