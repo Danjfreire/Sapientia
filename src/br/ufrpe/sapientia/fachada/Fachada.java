@@ -55,23 +55,35 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public boolean atualizarLivro(Livro livro) {
-		return controleLivro.atualizarLivro(livro);
+	public boolean atualizarLivro(String isbn, int id, String titulo, String autor, String edicao, String ano
+			, String volume, String categoria, String resumo, String estoque) {
+		return controleLivro.atualizarLivro(isbn, id, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
 	}
 
 	@Override
-	public Livro removerLivro() {
-		return controleLivro.removerLivro();
+	public boolean removerLivro(String isbn, int id) {
+		return controleLivro.removerLivro(isbn,id);
 	}
 
 	@Override
-	public Livro buscaLivro() {
-		return controleLivro.buscaLivro();
+	public Livro buscaLivroISBN(String isbn) {
+		return controleLivro.buscaISBN(isbn);
+	}
+	
+	@Override
+	public List<Livro> buscaLivroTitulo(String titulo){
+		return controleLivro.buscaTitulo(titulo);
+	}
+	
+	@Override
+	public List<Livro> exibirLivros(){
+		return controleLivro.pesquisarTodos();
 	}
 
 	@Override
-	public boolean cadastraLivro() {
-		return controleLivro.cadastraLivro();
+	public boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
+			, String volume, String categoria, String resumo, String estoque) {
+		return controleLivro.cadastraLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
 	}
 
 	@Override
@@ -95,7 +107,10 @@ public class Fachada implements IFachada {
 		return controleUsuario.buscarUsuarioCPF(cpf, tipo);
 	}
 
-
+	@Override
+	public List<Usuario> exibirUsuarios(){
+		return controleUsuario.pesquisarTodos();
+	}
 	//@Override
 	//public Usuario removerCliente() {
 	//	return controleUsuario.removerCliente();

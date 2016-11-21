@@ -1,11 +1,16 @@
 package br.ufrpe.sapientia.negocio;
 
 import br.ufrpe.sapientia.negocio.beans.*;
+import java.util.List;
 
 public interface IControleLivro {
 
-	boolean atualizarLivro(Livro livro);
-	Livro removerLivro();
-	Livro buscaLivro();
-	boolean cadastraLivro();
+	boolean atualizarLivro(String isbn, int id, String titulo, String autor, String edicao, String ano
+			, String volume, String categoria, String resumo, String estoqueo);
+	boolean removerLivro(String isbn, int id);
+	List<Livro> buscaTitulo(String titulo);
+	Livro buscaISBN(String isbn);
+	boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
+			, String volume, String categoria, String resumo, String estoque);
+	List<Livro> pesquisarTodos();
 }
