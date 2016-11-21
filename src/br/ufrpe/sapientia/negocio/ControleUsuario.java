@@ -2,6 +2,7 @@ package br.ufrpe.sapientia.negocio;
 
 import br.ufrpe.sapientia.negocio.beans.*;
 import br.ufrpe.sapientia.dados.*;
+import java.util.List;
 
 public class ControleUsuario implements IControleUsuario{
 
@@ -12,8 +13,9 @@ public class ControleUsuario implements IControleUsuario{
 	}
 
 	@Override
-	public boolean atualizarFuncionario(Usuario funcionario){ //AJUSTAR
-		return false; 
+	public boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, 
+			String email, String login, String senha, String tipo, String sexo){ //AJUSTAR
+		return repositorio.atualizar(cpf, nome, contato, endereco, email, login, senha, tipo, sexo); 
 	}
 
 	@Override
@@ -22,20 +24,14 @@ public class ControleUsuario implements IControleUsuario{
 	}
 
 	@Override
-	public Usuario buscaFuncionario() {
-		return null;
+	public Usuario buscarUsuarioCPF(String cpf,String tipo) {
+		return repositorio.pesquisarCPF(cpf, tipo);
 	}
 
-	@Override
-	public boolean atualizarCliente(Usuario cliente) { //AJUSTAR
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
-	public Usuario buscaCliente() { //AJUSTAR
-		// TODO Auto-generated method stub
-		return null;
+	public List<Usuario> buscarUsuarioNome(String nome, String tipo) { //AJUSTAR
+		return repositorio.pesquisarNome(nome, tipo);
 	}
 
 	@Override
