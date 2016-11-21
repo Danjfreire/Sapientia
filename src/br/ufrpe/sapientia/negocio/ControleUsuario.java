@@ -6,12 +6,16 @@ import java.util.List;
 
 public class ControleUsuario implements IControleUsuario{
 
-	private IRepositorioUsuarios repositorio;	
+	public RepositorioUsuarios repositorio;	
 	
 	public ControleUsuario(){
 		this.repositorio = new RepositorioUsuarios();
 	}
-
+    
+	public RepositorioUsuarios getRepo(){
+		return this.repositorio;
+	}
+	
 	@Override
 	public boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, 
 			String email, String login, String senha, String tipo, String sexo){ //AJUSTAR
