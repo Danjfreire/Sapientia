@@ -14,12 +14,15 @@ import br.ufrpe.sapientia.negocio.beans.Emprestimo;
 public class RepositorioEmprestimos {
 	private Connection connection;
 	private RepositorioUsuarios ru;
+	private RepositorioLivros rl;
 	
 	public RepositorioEmprestimos(){
 		this.connection = new Conexao().construirConexao();
 		this.ru = new RepositorioUsuarios();
+		this.rl = new RepositorioLivros();
 	}
-	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String cpf_funcionario, String cpf_cliente, String isbn_livro){
+	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status
+			, String cpf_funcionario, String cpf_cliente, String isbn_livro){
 		/*
 		 *  
 		 */
@@ -28,7 +31,8 @@ public class RepositorioEmprestimos {
 				+ " data_entrega_emprestimo, isbn_livro)"
 				+ " value(?,?,?,?,?,?)";
 		try{
-			if(ru.pesquisarCPF(cpf_cliente, "C") != null && ru.pesquisarCPF(cpf_funcionario, "F") != null){
+			if(ru.pesquisarCPF(cpf_cliente, "C") != null && ru.pesquisarCPF(cpf_funcionario, "F") != null 
+					&& rl.pesquisarISBN(isbn_livro).getEstoque() == "D"){
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 				stmt.setString(1, cpf_funcionario);
 				stmt.setString(2, cpf_cliente);
@@ -96,13 +100,14 @@ public class RepositorioEmprestimos {
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarEmrprestimoCliente(String cpf_cliente){
+	public List<Emprestimo> pesquisarEmrprestimoCliente(String cpf_cliente, String status){
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from livro where cliente_emprestimo = ?";
+		String sql = "select * from livro where cliente_emprestimo = ? and status_emprestimo = ?";
 		try{
 			if(ru.pesquisarCPF(cpf_cliente, "C") != null){
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 				stmt.setString(1, cpf_cliente);
+				stmt.setString(2, status);
 				ResultSet rs = stmt.executeQuery();
 				while(rs.next())
 					emprestimos.add(preencherEmprestimo(rs));
@@ -115,13 +120,14 @@ public class RepositorioEmprestimos {
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarEmrprestimoFuncionario(String cpf_funcionario){
+	public List<Emprestimo> pesquisarEmrprestimoFuncionario(String cpf_funcionario, String status){
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from livro where funcionario_emprestimo = ?";
+		String sql = "select * from livro where funcionario_emprestimo = ? and status_emprestimo = ?";
 		try{
 			if(ru.pesquisarCPF(cpf_funcionario, "F") != null){
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 				stmt.setString(1, cpf_funcionario);
+				stmt.setString(2, status);
 				ResultSet rs = stmt.executeQuery();
 				while(rs.next())
 					emprestimos.add(preencherEmprestimo(rs));
