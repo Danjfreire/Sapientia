@@ -15,6 +15,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 import java.awt.Color;
 import javax.swing.JButton;
 
@@ -37,14 +39,16 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				 try 
-				    {
-				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
-				    } 
-				    catch (Exception e) 
-				    {
-				      e.printStackTrace();
+				try {
+				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
 				    }
+				} catch (Exception e) {
+				    // If Nimbus is not available, you can set the GUI to another look and feel.
+				}
 				try {
 					TelaCadastrarFuncionario frame = new TelaCadastrarFuncionario();
 					frame.setVisible(true);
@@ -173,7 +177,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		
 		JComboBox cbEstado = new JComboBox();
 		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"PE", "AM", "BA", "SC", "RJ", "SP"}));
-		cbEstado.setBounds(224, 124, 46, 20);
+		cbEstado.setBounds(224, 124, 63, 20);
 		panel_1.add(cbEstado);
 		
 		JPanel panel_2 = new JPanel();

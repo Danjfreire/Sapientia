@@ -15,10 +15,12 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class TelaLogon extends JFrame {
 
@@ -32,14 +34,16 @@ public class TelaLogon extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				 try 
-				    {
-				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
-				    } 
-				    catch (Exception e) 
-				    {
-				      e.printStackTrace();
+				try {
+				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
 				    }
+				} catch (Exception e) {
+				    // If Nimbus is not available, you can set the GUI to another look and feel.
+				}
 				try {
 					TelaLogon frame = new TelaLogon();
 					frame.setVisible(true);
@@ -56,56 +60,91 @@ public class TelaLogon extends JFrame {
 	public TelaLogon() {
 		setTitle("SAPIENTIA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 305);
+		setBounds(100, 100, 818, 609);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblBemVindoAo = new JLabel("Bem vindo ao  Sapientia!");
-		lblBemVindoAo.setForeground(Color.WHITE);
-		lblBemVindoAo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBemVindoAo.setBounds(22, 34, 363, 32);
-		contentPane.add(lblBemVindoAo);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(47, 79, 79));
+		panel.setBounds(117, 203, 442, 244);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		JLabel lblLogin = new JLabel("Login.:");
-		lblLogin.setForeground(Color.WHITE);
-		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblLogin.setBounds(22, 95, 62, 32);
-		contentPane.add(lblLogin);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(94, 104, 264, 23);
-		contentPane.add(textField);
-		
-		JLabel lblSenha = new JLabel("Senha.:");
-		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSenha.setForeground(Color.WHITE);
-		lblSenha.setBounds(22, 134, 87, 32);
-		contentPane.add(lblSenha);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(94, 143, 139, 23);
-		contentPane.add(passwordField);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(365, 202, 75, 23);
+		panel.add(btnCancelar);
 		
 		JButton btnAcessar = new JButton("Acessar");
+		btnAcessar.setBounds(148, 202, 71, 23);
+		panel.add(btnAcessar);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(237, 123, 118, 20);
+		panel.add(passwordField);
+		
+		JLabel lblSenha = new JLabel("Senha.:");
+		lblSenha.setBounds(148, 119, 59, 22);
+		panel.add(lblSenha);
+		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSenha.setForeground(new Color(0, 0, 0));
+		
+		textField = new JTextField();
+		textField.setBounds(237, 86, 203, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblLogin = new JLabel("Login.:");
+		lblLogin.setBounds(148, 82, 54, 22);
+		panel.add(lblLogin);
+		lblLogin.setForeground(new Color(0, 0, 0));
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JLabel lblBemVindoAo = new JLabel("Identifica\u00E7\u00E3o do Usu\u00E1rio");
+		lblBemVindoAo.setBounds(146, 34, 198, 22);
+		panel.add(lblBemVindoAo);
+		lblBemVindoAo.setForeground(new Color(0, 0, 0));
+		lblBemVindoAo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pessoas.png")));
+		label_1.setBounds(10, 41, 128, 169);
+		panel.add(label_1);
 		btnAcessar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
 			}
 		});
-		btnAcessar.setBounds(94, 212, 89, 32);
-		contentPane.add(btnAcessar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(269, 212, 89, 32);
-		contentPane.add(btnCancelar);
+		JLabel lblSapientiaSistema = new JLabel("SAPIENTIA");
+		lblSapientiaSistema.setForeground(new Color(255, 255, 255));
+		lblSapientiaSistema.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+		lblSapientiaSistema.setBounds(10, 52, 182, 43);
+		contentPane.add(lblSapientiaSistema);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/azul.jpg")));
-		label.setBounds(0, 0, 434, 306);
-		contentPane.add(label);
+		JLabel lblSistemaDeGerenciamento = new JLabel("Sistema de Gerenciamento de Livros");
+		lblSistemaDeGerenciamento.setForeground(new Color(255, 255, 255));
+		lblSistemaDeGerenciamento.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSistemaDeGerenciamento.setBounds(10, 106, 377, 27);
+		contentPane.add(lblSistemaDeGerenciamento);
+		
+		JLabel lblVerso = new JLabel("Vers\u00E3o: 1.0");
+		lblVerso.setForeground(new Color(255, 255, 255));
+		lblVerso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblVerso.setBounds(10, 144, 176, 27);
+		contentPane.add(lblVerso);
+		
+		JLabel lblWwwsapientiacombr = new JLabel("www.sapientia.com.br");
+		lblWwwsapientiacombr.setForeground(new Color(255, 255, 255));
+		lblWwwsapientiacombr.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblWwwsapientiacombr.setBounds(10, 166, 176, 27);
+		contentPane.add(lblWwwsapientiacombr);
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador.jpg")));
+		lbTelaAzul.setBounds(0, 0, 802, 571);
+		contentPane.add(lbTelaAzul);
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
@@ -32,14 +33,16 @@ public class TelaInicialCliente extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				 try 
-				    {
-				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
-				    } 
-				    catch (Exception e) 
-				    {
-				      e.printStackTrace();
+				try {
+				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
 				    }
+				} catch (Exception e) {
+				    // If Nimbus is not available, you can set the GUI to another look and feel.
+				}
 				try {
 					TelaInicialCliente frame = new TelaInicialCliente();
 					frame.setVisible(true);
@@ -54,6 +57,7 @@ public class TelaInicialCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaInicialCliente() {
+		setResizable(false);
 		setTitle("Sapientia");
 		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,8 +75,8 @@ public class TelaInicialCliente extends JFrame {
 		contentPane.add(desktopPane, "name_4560701681448");
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaInicialCliente.class.getResource("/Imagens/azul.jpg")));
-		label.setBounds(0, 0, 703, 733);
+		label.setIcon(new ImageIcon(TelaInicialCliente.class.getResource("/Imagens/pensador1.png")));
+		label.setBounds(0, -72, 703, 733);
 		desktopPane.add(label);
 		
 		JMenu mnHistorico = new JMenu("Hist\u00F3rico");

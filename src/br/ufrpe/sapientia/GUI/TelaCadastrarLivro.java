@@ -9,6 +9,8 @@ import javax.swing.border.TitledBorder;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -36,14 +38,16 @@ public class TelaCadastrarLivro extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				 try 
-				    {
-				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
-				    } 
-				    catch (Exception e) 
-				    {
-				      e.printStackTrace();
+				try {
+				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
 				    }
+				} catch (Exception e) {
+				    // If Nimbus is not available, you can set the GUI to another look and feel.
+				}
 				try {
 					TelaCadastrarLivro frame = new TelaCadastrarLivro();
 					frame.setVisible(true);

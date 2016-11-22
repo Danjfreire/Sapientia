@@ -1,14 +1,12 @@
 package br.ufrpe.sapientia.GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
-
-import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JMenuBar;
 import java.awt.CardLayout;
@@ -20,7 +18,8 @@ import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Font;
 
 public class TelaInicialAdm extends JFrame {
 
@@ -36,14 +35,16 @@ public class TelaInicialAdm extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				 try 
-				    {
-				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
-				    } 
-				    catch (Exception e) 
-				    {
-				      e.printStackTrace();
+				try {
+				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
 				    }
+				} catch (Exception e) {
+				    // If Nimbus is not available, you can set the GUI to another look and feel.
+				}
 				try {
 					TelaInicialAdm frame = new TelaInicialAdm();
 					frame.setVisible(true);
@@ -74,9 +75,21 @@ public class TelaInicialAdm extends JFrame {
 		contentPane.add(desktopPane, "name_1356382438063");
 		desktopPane.setLayout(null);
 		
+		JLabel lblBemVindoAo = new JLabel("Bem vindo ao Sapientia!");
+		lblBemVindoAo.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblBemVindoAo.setForeground(Color.WHITE);
+		lblBemVindoAo.setBounds(10, 11, 256, 56);
+		desktopPane.add(lblBemVindoAo);
+		
+		JLabel lblSeuSistemaDe = new JLabel("Seu sistema de gerenciamento de Livros.");
+		lblSeuSistemaDe.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSeuSistemaDe.setForeground(Color.WHITE);
+		lblSeuSistemaDe.setBounds(10, 78, 432, 31);
+		desktopPane.add(lblSeuSistemaDe);
+		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaInicialAdm.class.getResource("/Imagens/azul.jpg")));
-		label.setBounds(0, 0, 1024, 688);
+		label.setIcon(new ImageIcon(TelaInicialAdm.class.getResource("/Imagens/pensador1.png")));
+		label.setBounds(0, -61, 1024, 688);
 		desktopPane.add(label);
 		
 		JMenuBar menuBar = new JMenuBar();
