@@ -5,7 +5,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+
 import java.awt.CardLayout;
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
@@ -15,6 +19,7 @@ import javax.swing.JMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JButton;
 
 public class TelaInicialCliente extends JFrame {
 
@@ -26,6 +31,14 @@ public class TelaInicialCliente extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaInicialCliente frame = new TelaInicialCliente();
 					frame.setVisible(true);
@@ -43,7 +56,7 @@ public class TelaInicialCliente extends JFrame {
 		setTitle("Sapientia");
 		setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 553);
+		setBounds(100, 100, 1021, 744);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -58,7 +71,7 @@ public class TelaInicialCliente extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(TelaInicialCliente.class.getResource("/Imagens/azul.jpg")));
-		label.setBounds(0, 0, 634, 504);
+		label.setBounds(0, 0, 1024, 733);
 		desktopPane.add(label);
 		
 		JMenu mnHistorico = new JMenu("Hist\u00F3rico");

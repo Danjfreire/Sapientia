@@ -5,7 +5,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+
 import javax.swing.JMenuBar;
 import java.awt.CardLayout;
 import javax.swing.JDesktopPane;
@@ -31,6 +35,14 @@ public class TelaInicialAdm extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaInicialAdm frame = new TelaInicialAdm();
 					frame.setVisible(true);

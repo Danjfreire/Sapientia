@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 public class FormPesqCliente extends JFrame {
 
@@ -17,6 +20,14 @@ public class FormPesqCliente extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					FormPesqCliente frame = new FormPesqCliente();
 					frame.setVisible(true);

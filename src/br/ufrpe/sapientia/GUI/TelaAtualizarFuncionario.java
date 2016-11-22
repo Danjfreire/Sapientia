@@ -6,6 +6,10 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+
 import java.awt.Button;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -21,6 +25,14 @@ public class TelaAtualizarFuncionario extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaAtualizarFuncionario frame = new TelaAtualizarFuncionario();
 					frame.setVisible(true);

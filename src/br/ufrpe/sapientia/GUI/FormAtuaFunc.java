@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -37,6 +40,14 @@ public class FormAtuaFunc extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					FormAtuaFunc frame = new FormAtuaFunc();
 					frame.setVisible(true);

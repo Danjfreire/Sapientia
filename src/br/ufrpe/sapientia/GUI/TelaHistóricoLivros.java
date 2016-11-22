@@ -6,12 +6,15 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 public class TelaHistóricoLivros extends JInternalFrame {
 	private JTextField textField;
@@ -23,6 +26,14 @@ public class TelaHistóricoLivros extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaHistóricoLivros frame = new TelaHistóricoLivros();
 					frame.setVisible(true);

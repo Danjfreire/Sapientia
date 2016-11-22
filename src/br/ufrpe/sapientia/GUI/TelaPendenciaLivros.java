@@ -8,10 +8,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 public class TelaPendenciaLivros extends JInternalFrame {
 	private JTextField textField;
@@ -23,6 +26,14 @@ public class TelaPendenciaLivros extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaPendenciaLivros frame = new TelaPendenciaLivros();
 					frame.setVisible(true);

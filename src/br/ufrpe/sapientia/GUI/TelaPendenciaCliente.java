@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 public class TelaPendenciaCliente extends JInternalFrame {
 	private JTable table;
@@ -16,6 +19,14 @@ public class TelaPendenciaCliente extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaPendenciaCliente frame = new TelaPendenciaCliente();
 					frame.setVisible(true);

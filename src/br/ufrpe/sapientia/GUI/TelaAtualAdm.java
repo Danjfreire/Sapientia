@@ -7,6 +7,10 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,6 +25,14 @@ public class TelaAtualAdm extends JInternalFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaAtualAdm frame = new TelaAtualAdm();
 					frame.setVisible(true);

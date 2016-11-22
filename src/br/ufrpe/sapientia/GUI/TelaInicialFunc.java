@@ -5,7 +5,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+
 import javax.swing.JMenuBar;
 import java.awt.CardLayout;
 import javax.swing.JDesktopPane;
@@ -31,6 +35,14 @@ public class TelaInicialFunc extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				 try 
+				    {
+				      UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+				    } 
+				    catch (Exception e) 
+				    {
+				      e.printStackTrace();
+				    }
 				try {
 					TelaInicialFunc frame = new TelaInicialFunc();
 					frame.setVisible(true);
@@ -49,7 +61,7 @@ public class TelaInicialFunc extends JFrame {
 		setTitle("Sapientia");
 		setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1040, 647);
+		setBounds(100, 100, 1040, 730);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
