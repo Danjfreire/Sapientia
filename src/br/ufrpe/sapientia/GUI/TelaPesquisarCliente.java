@@ -21,10 +21,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class TelaPesquisarCliente extends JInternalFrame {
 	private JTextField tfPesquisa;
-	private JTable table;
 	private JTable table_1;
 
 	/**
@@ -55,46 +55,34 @@ public class TelaPesquisarCliente extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public TelaPesquisarCliente() {
-		setTitle("Pesquisar Clientes");
+		setTitle("Pesquisar Funcion\u00E1rios");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 567, 400);
+		setBounds(100, 100, 802, 618);
 		getContentPane().setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 11, 531, 61);
+		panel_1.setBounds(39, 11, 706, 109);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		tfPesquisa = new JTextField();
-		tfPesquisa.setBounds(85, 28, 334, 20);
+		tfPesquisa.setBounds(105, 34, 403, 37);
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(429, 27, 92, 23);
+		btnPesquisar.setBounds(518, 33, 136, 39);
 		panel_1.add(btnPesquisar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nome", "Cpf"}));
-		comboBox.setBounds(10, 28, 65, 20);
+		comboBox.setBounds(10, 34, 88, 37);
 		panel_1.add(comboBox);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
-			}
-		));
-		table.setBounds(324, 253, -271, -130);
-		getContentPane().add(table);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 119, 521, 103);
+		scrollPane.setBounds(39, 176, 706, 204);
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -111,16 +99,25 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		btnOk.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-				FormPesqCliente form = new FormPesqCliente();
+				FormPesqFunc form = new FormPesqFunc();
 				form.show();
 			}
 		});
-		btnOk.setBounds(81, 305, 89, 23);
+		btnOk.setBounds(494, 430, 89, 61);
 		getContentPane().add(btnOk);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(394, 305, 89, 23);
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSair.setBounds(656, 430, 89, 61);
 		getContentPane().add(btnSair);
+		
+		JLabel lblDigiteONome = new JLabel("Escolha o Funcion\u00E1rio e pressione OK!");
+		lblDigiteONome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDigiteONome.setBounds(69, 431, 415, 54);
+		getContentPane().add(lblDigiteONome);
 
 	}
 }

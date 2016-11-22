@@ -9,6 +9,9 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
 
 public class TelaPendenciaCliente extends JInternalFrame {
 	private JTable table;
@@ -44,11 +47,11 @@ public class TelaPendenciaCliente extends JInternalFrame {
 		setTitle("Pend\u00EAncias");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 596, 499);
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(34, 49, 364, 190);
+		scrollPane.setBounds(73, 118, 524, 275);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -60,6 +63,18 @@ public class TelaPendenciaCliente extends JInternalFrame {
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		JLabel lblNewLabel = new JLabel("Livros em atraso!");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setBounds(285, 70, 201, 14);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblContatarCliente = new JLabel("Devolva Imediatamente!");
+		lblContatarCliente.setForeground(Color.RED);
+		lblContatarCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblContatarCliente.setBounds(285, 445, 201, 14);
+		getContentPane().add(lblContatarCliente);
 
 	}
 }

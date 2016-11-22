@@ -9,6 +9,9 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Font;
 
 public class TelaHistoricoCliente extends JInternalFrame {
 	private JTable table;
@@ -44,11 +47,11 @@ public class TelaHistoricoCliente extends JInternalFrame {
 		setClosable(true);
 		setIconifiable(true);
 		setTitle("Hist\u00F3rico");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 642, 574);
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 39, 414, 189);
+		scrollPane.setBounds(62, 117, 554, 312);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -60,6 +63,12 @@ public class TelaHistoricoCliente extends JInternalFrame {
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		JLabel lblNewLabel = new JLabel("Empr\u00E9stimos realizados!");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setBounds(246, 67, 205, 22);
+		getContentPane().add(lblNewLabel);
 
 	}
 

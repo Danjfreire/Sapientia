@@ -48,6 +48,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 				try {
 					TelaCadastrarCliente frame = new TelaCadastrarCliente();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,123 +64,123 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		setTitle("Cadastrar Clientes");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 750, 433);
+		setBounds(100, 100, 750, 478);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 427, 176);
+		panel.setBounds(10, 11, 427, 215);
 		panel.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(TelaCadastrarCliente.class.getResource("/Imagens/pessoas.png")));
-		label.setBounds(10, 23, 128, 151);
+		label.setBounds(10, 42, 128, 151);
 		panel.add(label);
 		
 		JLabel lblNome = new JLabel("Nome.:");
-		lblNome.setBounds(147, 23, 46, 14);
+		lblNome.setBounds(147, 42, 46, 14);
 		panel.add(lblNome);
 		
 		tfNome = new JTextField();
-		tfNome.setBounds(228, 23, 174, 20);
+		tfNome.setBounds(228, 42, 174, 20);
 		panel.add(tfNome);
 		tfNome.setColumns(10);
 		
 		JLabel lblCpf = new JLabel("Cpf.:");
-		lblCpf.setBounds(148, 48, 46, 14);
+		lblCpf.setBounds(148, 67, 46, 14);
 		panel.add(lblCpf);
 		
 		tfCpf = new JTextField();
-		tfCpf.setBounds(228, 48, 174, 20);
+		tfCpf.setBounds(228, 67, 174, 20);
 		panel.add(tfCpf);
 		tfCpf.setColumns(10);
 		
 		JLabel lblNascimento = new JLabel("Nascimento.:");
-		lblNascimento.setBounds(148, 73, 86, 14);
+		lblNascimento.setBounds(148, 92, 86, 14);
 		panel.add(lblNascimento);
 		
 		tfNascimento = new JTextField();
-		tfNascimento.setBounds(228, 70, 86, 20);
+		tfNascimento.setBounds(229, 92, 86, 20);
 		panel.add(tfNascimento);
 		tfNascimento.setColumns(10);
 		
 		JLabel lblLogin = new JLabel("Login.:");
-		lblLogin.setBounds(147, 98, 46, 14);
+		lblLogin.setBounds(147, 117, 46, 14);
 		panel.add(lblLogin);
 		
 		tfLogin = new JTextField();
-		tfLogin.setBounds(228, 95, 174, 20);
+		tfLogin.setBounds(229, 117, 174, 20);
 		panel.add(tfLogin);
 		tfLogin.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha.:");
-		lblSenha.setBounds(148, 123, 46, 14);
+		lblSenha.setBounds(148, 142, 46, 14);
 		panel.add(lblSenha);
 		
 		psSenha = new JPasswordField();
-		psSenha.setBounds(228, 120, 174, 20);
+		psSenha.setBounds(229, 142, 174, 20);
 		panel.add(psSenha);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(20, 198, 417, 176);
+		panel_1.setBounds(20, 258, 417, 202);
 		panel_1.setBorder(new TitledBorder(null, "Endere\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(TelaCadastrarCliente.class.getResource("/Imagens/casa.png")));
-		label_1.setBounds(10, 24, 119, 128);
+		label_1.setBounds(10, 51, 119, 128);
 		panel_1.add(label_1);
 		
 		JLabel lblLogradouro = new JLabel("Logradouro.:");
-		lblLogradouro.setBounds(139, 24, 75, 14);
+		lblLogradouro.setBounds(139, 51, 75, 14);
 		panel_1.add(lblLogradouro);
 		
 		tfLogradouro = new JTextField();
-		tfLogradouro.setBounds(224, 18, 183, 20);
+		tfLogradouro.setBounds(224, 45, 183, 20);
 		panel_1.add(tfLogradouro);
 		tfLogradouro.setColumns(10);
 		
 		JLabel lblNmero = new JLabel("N\u00FAmero.:");
-		lblNmero.setBounds(139, 49, 63, 14);
+		lblNmero.setBounds(139, 76, 63, 14);
 		panel_1.add(lblNmero);
 		
 		tfNumero = new JTextField();
-		tfNumero.setBounds(224, 43, 86, 20);
+		tfNumero.setBounds(224, 70, 86, 20);
 		panel_1.add(tfNumero);
 		tfNumero.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro.:");
-		lblBairro.setBounds(139, 74, 46, 14);
+		lblBairro.setBounds(139, 101, 46, 14);
 		panel_1.add(lblBairro);
 		
 		tfBairro = new JTextField();
-		tfBairro.setBounds(224, 68, 149, 20);
+		tfBairro.setBounds(224, 95, 149, 20);
 		panel_1.add(tfBairro);
 		tfBairro.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Cidade.:");
-		lblCidade.setBounds(139, 99, 46, 14);
+		lblCidade.setBounds(139, 126, 46, 14);
 		panel_1.add(lblCidade);
 		
 		tfCidade = new JTextField();
-		tfCidade.setBounds(224, 93, 149, 20);
+		tfCidade.setBounds(224, 120, 149, 20);
 		panel_1.add(tfCidade);
 		tfCidade.setColumns(10);
 		
 		JLabel lblEstado = new JLabel("Estado.:");
-		lblEstado.setBounds(139, 124, 46, 14);
+		lblEstado.setBounds(139, 151, 46, 14);
 		panel_1.add(lblEstado);
 		
 		JComboBox cbEstado = new JComboBox();
 		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"PE", "AM", "BA", "SC", "RJ", "SP"}));
-		cbEstado.setBounds(224, 124, 46, 20);
+		cbEstado.setBounds(224, 151, 46, 20);
 		panel_1.add(cbEstado);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Contato", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(451, 21, 261, 261);
+		panel_2.setBounds(473, 87, 261, 261);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -207,11 +208,11 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		tfTelefone.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(461, 330, 98, 23);
+		btnCadastrar.setBounds(483, 396, 98, 23);
 		getContentPane().add(btnCadastrar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(623, 330, 89, 23);
+		btnCancelar.setBounds(645, 396, 89, 23);
 		getContentPane().add(btnCancelar);
 
 	}

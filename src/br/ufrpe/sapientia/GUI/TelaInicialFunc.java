@@ -16,6 +16,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -57,11 +58,12 @@ public class TelaInicialFunc extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaInicialFunc() {
+		setResizable(false);
 		
 		setTitle("Sapientia");
-		setExtendedState( MAXIMIZED_BOTH );
+		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1040, 730);
+		setBounds(100, 100, 800, 600);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -97,6 +99,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaCadastrarFuncionario tela = new TelaCadastrarFuncionario();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -109,6 +117,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaPesquisarFuncionario tela = new TelaPesquisarFuncionario();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -121,6 +135,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaAtualizarFuncionario tela = new TelaAtualizarFuncionario();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 			}
 		});
@@ -132,6 +152,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaExcluirFuncionario tela = new TelaExcluirFuncionario();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 			}
 		});
@@ -146,6 +172,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaCadastrarLivro tela = new TelaCadastrarLivro();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -158,6 +190,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaPesquisarLivro tela = new TelaPesquisarLivro();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -170,6 +208,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaAtualizarLivro tela = new TelaAtualizarLivro();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -182,6 +226,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaExcluirLivro tela = new TelaExcluirLivro();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -197,6 +247,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaCadastrarCliente tela = new TelaCadastrarCliente();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -209,6 +265,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaPesquisarCliente tela = new TelaPesquisarCliente();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -221,6 +283,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaAtualizarCliente tela = new TelaAtualizarCliente();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -233,6 +301,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaExcluirCliente tela = new TelaExcluirCliente();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -258,6 +332,12 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaHistóricoLivros tela = new TelaHistóricoLivros();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -270,11 +350,38 @@ public class TelaInicialFunc extends JFrame {
 				
 				TelaPendenciaLivros tela = new TelaPendenciaLivros();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
 		});
 		mnBuscas.add(mntmLivrosPendentes);
+		
+		JMenu mnEmprstimo = new JMenu("Empr\u00E9stimo");
+		menuBar.add(mnEmprstimo);
+		
+		JMenuItem mntmEmprestarLivro = new JMenuItem("Emprestar Livro");
+		mntmEmprestarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				TelaEmpréstimo tela = new TelaEmpréstimo();
+				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				tela.show();
+				
+			}
+		});
+		mnEmprstimo.add(mntmEmprestarLivro);
 		
 		
 		

@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
@@ -54,9 +55,9 @@ public class TelaInicialCliente extends JFrame {
 	 */
 	public TelaInicialCliente() {
 		setTitle("Sapientia");
-		setExtendedState( MAXIMIZED_BOTH );
+		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1021, 744);
+		setBounds(100, 100, 700, 641);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -71,7 +72,7 @@ public class TelaInicialCliente extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(TelaInicialCliente.class.getResource("/Imagens/azul.jpg")));
-		label.setBounds(0, 0, 1024, 733);
+		label.setBounds(0, 0, 703, 733);
 		desktopPane.add(label);
 		
 		JMenu mnHistorico = new JMenu("Hist\u00F3rico");
@@ -83,6 +84,12 @@ public class TelaInicialCliente extends JFrame {
 				
 				TelaHistoricoCliente tela = new TelaHistoricoCliente();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
@@ -104,6 +111,12 @@ public class TelaInicialCliente extends JFrame {
 				
 				TelaPendenciaCliente tela = new TelaPendenciaCliente();
 				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				tela.show();
 				
 			}
