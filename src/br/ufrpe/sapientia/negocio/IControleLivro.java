@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface IControleLivro {
 
-	boolean atualizarLivro(String isbn, int id, String titulo, String autor, String edicao, String ano
+	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, String estoqueo);
-	boolean removerLivro(String isbn, int id);
+	boolean removerLivro(String isbn);
 	List<Livro> buscaTitulo(String titulo);
 	Livro buscaISBN(String isbn);
 	boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano

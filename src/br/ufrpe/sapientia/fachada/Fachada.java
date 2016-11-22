@@ -55,14 +55,14 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public boolean atualizarLivro(String isbn, int id, String titulo, String autor, String edicao, String ano
+	public boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, String estoque) {
-		return controleLivro.atualizarLivro(isbn, id, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
+		return controleLivro.atualizarLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
 	}
 
 	@Override
-	public boolean removerLivro(String isbn, int id) {
-		return controleLivro.removerLivro(isbn,id);
+	public boolean removerLivro(String isbn) {
+		return controleLivro.removerLivro(isbn);
 	}
 
 	@Override
