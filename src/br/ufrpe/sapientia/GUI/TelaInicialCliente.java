@@ -5,30 +5,32 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
+import br.ufrpe.sapientia.fachada.Fachada;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
-import java.awt.CardLayout;
-import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
-import javax.swing.JMenuItem;
-import javax.swing.JButton;
-
+import java.awt.SystemColor;
+import java.awt.event.*;
 import br.ufrpe.sapientia.negocio.beans.*;
 
-public class TelaInicialCliente extends JFrame {
+public class TelaLogon extends JFrame {
 
 	private JPanel contentPane;
-	private Usuario usuario;
+	private JTextField textField;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -47,7 +49,7 @@ public class TelaInicialCliente extends JFrame {
 				    // If Nimbus is not available, you can set the GUI to another look and feel.
 				}
 				try {
-					TelaInicialCliente frame = new TelaInicialCliente();
+					TelaLogon frame = new TelaLogon();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,78 +61,115 @@ public class TelaInicialCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaInicialCliente(Usuario u) {
-		
-		this.usuario = u;
-		setResizable(false);
-		setTitle("Sapientia");
-		//setExtendedState( MAXIMIZED_BOTH );
+	public TelaLogon() {
+		setTitle("SAPIENTIA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 641);
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
+		setBounds(100, 100, 818, 609);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout(0, 0));
+		contentPane.setLayout(null);
 		
-		JDesktopPane desktopPane = new JDesktopPane();
-		contentPane.add(desktopPane, "name_4560701681448");
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(47, 79, 79));
+		panel.setBounds(117, 203, 442, 244);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaInicialCliente.class.getResource("/Imagens/pensador1.png")));
-		label.setBounds(0, -72, 703, 733);
-		desktopPane.add(label);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(365, 202, 75, 23);
+		panel.add(btnCancelar);
 		
-		JMenu mnHistorico = new JMenu("Hist\u00F3rico");
-		menuBar.add(mnHistorico);
+		JButton btnAcessar = new JButton("Acessar");
+		btnAcessar.setBounds(148, 202, 71, 23);
+		panel.add(btnAcessar);
 		
-		JMenuItem mntmHistricoEmprstimos = new JMenuItem("Hist\u00F3rico Empr\u00E9stimos");
-		mntmHistricoEmprstimos.addActionListener(new ActionListener() {
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(237, 123, 118, 20);
+		panel.add(passwordField);
+		
+		JLabel lblSenha = new JLabel("Senha.:");
+		lblSenha.setBounds(148, 119, 59, 22);
+		panel.add(lblSenha);
+		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSenha.setForeground(new Color(0, 0, 0));
+		
+		textField = new JTextField();
+		textField.setBounds(237, 86, 203, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblLogin = new JLabel("Login.:");
+		lblLogin.setBounds(148, 82, 54, 22);
+		panel.add(lblLogin);
+		lblLogin.setForeground(new Color(0, 0, 0));
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JLabel lblBemVindoAo = new JLabel("Identifica\u00E7\u00E3o do Usu\u00E1rio");
+		lblBemVindoAo.setBounds(146, 34, 198, 22);
+		panel.add(lblBemVindoAo);
+		lblBemVindoAo.setForeground(new Color(0, 0, 0));
+		lblBemVindoAo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pessoas.png")));
+		label_1.setBounds(10, 41, 128, 169);
+		panel.add(label_1);
+		btnAcessar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				TelaHistoricoCliente tela = new TelaHistoricoCliente();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				try{
+				Usuario u =  Fachada.getInstance().efetuarLogin(textField.getText(), passwordField.getText());
+				System.out.println(u.getTipo());
+				System.out.println(u);
+				if(u.getTipo().equals("C")){
+					TelaInicialCliente tela = new TelaInicialCliente(u);
+					dispose();
+					tela.setVisible(true);
 				}
-				tela.show();
-				
-			}
-		});
-		mnHistorico.add(mntmHistricoEmprstimos);
-		
-		JMenu mnPendncias = new JMenu("Pend\u00EAncias");
-		mnPendncias.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				
-			}
-		});
-		menuBar.add(mnPendncias);
-		
-		JMenuItem mntmPendnciasDeLivros = new JMenuItem("Pend\u00EAncias de Livros");
-		mntmPendnciasDeLivros.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaPendenciaCliente tela = new TelaPendenciaCliente();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				else if(u.getTipo().equals("F")){
+					TelaInicialFunc tela = new TelaInicialFunc(u);
+					dispose();
+					tela.setVisible(true);
 				}
-				tela.show();
-				
+				else{
+					TelaInicialAdm tela = new TelaInicialAdm();
+					dispose();
+					tela.setVisible(true);
+				}
+				}catch(Exception exception){
+					System.out.println(exception.getMessage());
+				}
 			}
 		});
-		mnPendncias.add(mntmPendnciasDeLivros);
 		
+		JLabel lblSapientiaSistema = new JLabel("SAPIENTIA");
+		lblSapientiaSistema.setForeground(new Color(255, 255, 255));
+		lblSapientiaSistema.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+		lblSapientiaSistema.setBounds(10, 52, 182, 43);
+		contentPane.add(lblSapientiaSistema);
+		
+		JLabel lblSistemaDeGerenciamento = new JLabel("Sistema de Gerenciamento de Livros");
+		lblSistemaDeGerenciamento.setForeground(new Color(255, 255, 255));
+		lblSistemaDeGerenciamento.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSistemaDeGerenciamento.setBounds(10, 106, 377, 27);
+		contentPane.add(lblSistemaDeGerenciamento);
+		
+		JLabel lblVerso = new JLabel("Vers\u00E3o: 1.0");
+		lblVerso.setForeground(new Color(255, 255, 255));
+		lblVerso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblVerso.setBounds(10, 144, 176, 27);
+		contentPane.add(lblVerso);
+		
+		JLabel lblWwwsapientiacombr = new JLabel("www.sapientia.com.br");
+		lblWwwsapientiacombr.setForeground(new Color(255, 255, 255));
+		lblWwwsapientiacombr.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblWwwsapientiacombr.setBounds(10, 166, 176, 27);
+		contentPane.add(lblWwwsapientiacombr);
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador.jpg")));
+		lbTelaAzul.setBounds(0, 0, 802, 571);
+		contentPane.add(lbTelaAzul);
 	}
 }
