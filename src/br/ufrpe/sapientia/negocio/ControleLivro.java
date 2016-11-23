@@ -13,14 +13,14 @@ public class ControleLivro implements IControleLivro{
 	}
 
 	@Override
-	public boolean atualizarLivro(String isbn, int id, String titulo, String autor, String edicao, String ano
+	public boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, String estoque) {
-		return repositorio.atualizar(isbn, id, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
+		return repositorio.atualizar(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
 	}
 
 	@Override
-	public boolean removerLivro(String isbn, int id) {
-		return repositorio.remover(isbn, id);
+	public boolean removerLivro(String isbn) {
+		return repositorio.remover(isbn);
 	}
 
 	@Override

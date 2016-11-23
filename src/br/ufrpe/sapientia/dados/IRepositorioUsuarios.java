@@ -11,5 +11,5 @@ public interface IRepositorioUsuarios {
 	List<Usuario>pesquisarTodos();
 	List<Usuario>pesquisarNome(String nome, String tipo);
 	Usuario pesquisarCPF(String cpf, String tipo);
-	
+    Usuario pesquisarLoginSenha(String login, String senha);
 }

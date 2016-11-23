@@ -143,6 +143,24 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		return u;
 	}
 	
+	public Usuario pesquisarLoginSenha(String login, String senha){
+		Usuario u = null;
+		String sql = "select * from usuario where login_usuario = ? and senha_usuario = ?";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, login);
+			stmt.setString(2, senha);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next())
+				 u = preencherUsuario(rs);
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return u;
+	}
+	
 	private Usuario preencherUsuario(ResultSet rs){
 		Usuario u = null;
 		try{

@@ -15,16 +15,16 @@ public interface IFachada {
 	List<Emprestimo> verificarEmprestimoLivro(Livro livro);
 	List<Emprestimo> verificarEmprestimoCliente(Usuario cliente);
 	
-	boolean atualizarLivro(String isbn, int id, String titulo, String autor, String edicao, String ano
+	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, String estoque);
-	boolean removerLivro(String isbn, int id);
+	boolean removerLivro(String isbn);
 	List<Livro> buscaLivroTitulo(String titulo);
 	Livro buscaLivroISBN(String isbn);
 	List<Livro>exibirLivros();
 	boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, String estoque);
 	
-	Usuario efetuarLogin();
+	Usuario efetuarLogin(String login, String senha);
 	
 	boolean removerUsuario(String cpf);
 	Usuario buscarUsuarioCPF(String cpf , String tipo);
@@ -35,5 +35,6 @@ public interface IFachada {
 	List<Usuario> exibirUsuarios();
 	boolean CadastrarUsuario(Usuario usuario);
 	boolean atualizarADM();
+
 	
 }

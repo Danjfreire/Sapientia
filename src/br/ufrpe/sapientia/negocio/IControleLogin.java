@@ -3,5 +3,5 @@ import br.ufrpe.sapientia.negocio.beans.*;
 
 public interface IControleLogin {
 
-	Usuario efetuarLogin();
+	Usuario efetuarLogin(String login, String senha);
 }

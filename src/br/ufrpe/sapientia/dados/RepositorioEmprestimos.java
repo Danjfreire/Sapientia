@@ -13,26 +13,38 @@ import br.ufrpe.sapientia.negocio.beans.Emprestimo;
 
 public class RepositorioEmprestimos {
 	private Connection connection;
+	private RepositorioUsuarios ru;
+	private RepositorioLivros rl;
 	
 	public RepositorioEmprestimos(){
 		this.connection = new Conexao().construirConexao();
+		this.ru = new RepositorioUsuarios();
+		this.rl = new RepositorioLivros();
 	}
-	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, int funcionario, int cliente){
+	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status
+			, String cpf_funcionario, String cpf_cliente, String isbn_livro){
+		/*
+		 *  
+		 */
 		boolean s = false;
 		String sql = "insert into emprestimo (funcionario_emprestimo, cliente_emprestimo, status_emprestimo,  data_saida_emprestimo,"
-				+ " data_entrega_emprestimo date)"
-				+ " value(?,?,?,?,?)";
+				+ " data_entrega_emprestimo, isbn_livro)"
+				+ " value(?,?,?,?,?,?)";
 		try{
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			stmt.setInt(1, funcionario);
-			stmt.setInt(2, cliente);
-			stmt.setString(3, status);
-			stmt.setDate(4, new Date(dataEmprestimo.getTimeInMillis()));
-			stmt.setDate(5, new Date(dataDevolucao.getTimeInMillis()));
-			stmt.execute();
-			stmt.close();
-			s = true;
-			System.out.println("Cadastrado");
+			if(ru.pesquisarCPF(cpf_cliente, "C") != null && ru.pesquisarCPF(cpf_funcionario, "F") != null 
+					&& rl.pesquisarISBN(isbn_livro).getEstoque() == "D"){
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+				stmt.setString(1, cpf_funcionario);
+				stmt.setString(2, cpf_cliente);
+				stmt.setString(3, status);
+				stmt.setDate(4, new Date(dataEmprestimo.getTimeInMillis()));
+				stmt.setDate(5, new Date(dataDevolucao.getTimeInMillis()));
+				stmt.setString(6, isbn_livro);
+				stmt.execute();
+				stmt.close();
+				s = true;
+				System.out.println("Cadastrado");
+			}
 		}catch(SQLException ex){
 			ex.printStackTrace();
 		}
@@ -88,34 +100,40 @@ public class RepositorioEmprestimos {
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarEmrprestimoCliente(int id){
+	public List<Emprestimo> pesquisarEmrprestimoCliente(String cpf_cliente, String status){
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from livro where cliente_emprestimo = ?";
+		String sql = "select * from livro where cliente_emprestimo = ? and status_emprestimo = ?";
 		try{
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			stmt.setInt(1, id);
-			ResultSet rs = stmt.executeQuery();
-			while(rs.next())
-				emprestimos.add(preencherEmprestimo(rs));
-			stmt.close();
-			System.out.println("Resultados:\n\n");
+			if(ru.pesquisarCPF(cpf_cliente, "C") != null){
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+				stmt.setString(1, cpf_cliente);
+				stmt.setString(2, status);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next())
+					emprestimos.add(preencherEmprestimo(rs));
+				stmt.close();
+				System.out.println("Resultados:\n\n");
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		return emprestimos;
-	}	
+	}
 	
-	public List<Emprestimo> pesquisarEmrprestimo(int id){
+	public List<Emprestimo> pesquisarEmrprestimoFuncionario(String cpf_funcionario, String status){
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from livro where id_emprestimo = ?";
+		String sql = "select * from livro where funcionario_emprestimo = ? and status_emprestimo = ?";
 		try{
-			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
-			stmt.setInt(1, id);
-			ResultSet rs = stmt.executeQuery();
-			while(rs.next())
-				emprestimos.add(preencherEmprestimo(rs));
-			stmt.close();
-			System.out.println("Resultados:\n\n");
+			if(ru.pesquisarCPF(cpf_funcionario, "F") != null){
+				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+				stmt.setString(1, cpf_funcionario);
+				stmt.setString(2, status);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next())
+					emprestimos.add(preencherEmprestimo(rs));
+				stmt.close();
+				System.out.println("Resultados:\n\n");
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -131,9 +149,10 @@ public class RepositorioEmprestimos {
 			Calendar dataDevolucao = Calendar.getInstance();
 			dataDevolucao.setTime( rs.getDate("data_entrega_emprestimo"));
 			String status = rs.getString("status_emprestimo");
-			int funcionario = rs.getInt("funcionario_emprestimo");
-			int cliente = rs.getInt("cliente_emprestimo");
-			em = new Emprestimo(dataEmprestimo, dataDevolucao, status, funcionario, cliente);
+			String funcionario = rs.getString("funcionario_emprestimo");
+			String cliente = rs.getString("cliente_emprestimo");
+			String isbn = rs.getString("isbn_livro");
+			em = new Emprestimo(dataEmprestimo, dataDevolucao, status, isbn, cliente, funcionario);
 			em.setIdEmprestimo(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
