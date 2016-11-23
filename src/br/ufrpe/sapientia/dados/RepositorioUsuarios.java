@@ -85,11 +85,12 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		return s;
 	}
 	
-	public List<Usuario> pesquisarTodos(){
+	public List<Usuario> pesquisarTodos(String tipo){
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "select * from usuario";
+		String sql = "select * from usuario where tipo = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, tipo);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next())
 				usuarios.add(preencherUsuario(rs));
