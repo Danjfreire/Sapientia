@@ -120,13 +120,15 @@ public class TelaLogon extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{
 				Usuario u =  Fachada.getInstance().efetuarLogin(textField.getText(), passwordField.getText());
-				if(u.getTipo() == "C"){
+				System.out.println(u.getTipo());
+				System.out.println(u);
+				if(u.getTipo().equals("C")){
 					TelaInicialCliente tela = new TelaInicialCliente(u);
 					dispose();
 					tela.setVisible(true);
 				}
-				else if(u.getTipo() == "F"){
-					TelaInicialFunc tela = new TelaInicialFunc();
+				else if(u.getTipo().equals("F")){
+					TelaInicialFunc tela = new TelaInicialFunc(u);
 					dispose();
 					tela.setVisible(true);
 				}

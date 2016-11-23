@@ -12,10 +12,10 @@ public class Test {
 		ControleUsuario controle = new ControleUsuario();
 		ControleLivro controleLivro = new ControleLivro();
 		
-		Usuario usuario1 = new Usuario("F", "Joao jose", "12345678", "81937539590",
+		Usuario usuario1 = new Usuario("C", "Joao jose", "12345678", "81937539590",
 				"email@email.com", "loginseguro", "senhasegura", "M", "Rua um");
 		
-		Usuario usuario2 = new Usuario("C", "Jose joao", "645679456", "79235743498",
+		Usuario usuario2 = new Usuario("F", "Jose joao", "645679456", "79235743498",
 				"email@email.com", "loginruim", "senharuim", "M", "Rua dois");
 		
 		Usuario usuario4 = new Usuario("C", "Repetido2", "645679456", "79235743498",
@@ -30,20 +30,20 @@ public class Test {
 		
 		//Livro livro = controleLivro.buscaISBN("1213122112");
 		//System.out.println(livro);
-		for(Livro livro : teste){
-			System.out.println(livro);
-		}
+		//for(Livro livro : teste){
+		//	System.out.println(livro);
+		//}
 		//controle.CadastrarUsuario(usuario4);
 		//controle.CadastrarUsuario(usuario1);
 		//controle.CadastrarUsuario(usuario2);
 		
-		
+		controle.CadastrarUsuario(usuario2);
 		List<Usuario> usuarios= new ArrayList<Usuario>();
 		
 		
 		//controle.getRepo().atualizar("12345678", "nomeatualizado", "123456", "novo endereco", "novo@email.com", "novologin", "novasenha", "C", "M");
 		//controle.getRepo().remover("12345678");
-		//usuarios = controle.getRepo().pesquisarTodos();
+		usuarios = controle.getRepo().pesquisarTodos();
 		
 		//for(Usuario user : usuarios){
 		//	System.out.println(user);
@@ -51,8 +51,8 @@ public class Test {
 		//usuarios = controle.getRepo().pesquisarNome("Joao jose", "C");
 		//System.out.println(result);
 		
-		//for(Usuario user : usuarios){
-		//		System.out.println(user);
-		//	}
+		for(Usuario user : usuarios){
+				System.out.println(user);
+			}
 	}
 }
