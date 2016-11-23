@@ -19,6 +19,10 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.*;
+
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaCadastrarCliente extends JInternalFrame {
 	private JTextField tfNome;
@@ -214,10 +218,29 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(483, 396, 98, 23);
 		getContentPane().add(btnCadastrar);
+		btnCadastrar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					Usuario u = new Usuario("", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "H", 
+							tfLogradouro.getText()+ " " + tfBairro.getText()+ " " + tfCidade.getText());
+					if(Fachada.getInstance().CadastrarUsuario(u)){
+						//msg de sucesso
+						dispose();
+					}
+					
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(645, 396, 89, 23);
 		getContentPane().add(btnCancelar);
-
+		btnCancelar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				dispose();
+			}
+		});
 	}
 }

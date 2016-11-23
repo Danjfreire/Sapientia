@@ -16,7 +16,6 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		this.connection = new Conexao().construirConexao();
 	}
 	public boolean cadastrar(Usuario u){
-		
 		boolean s = false;
 		String sql = "insert into usuario (cpf_usuario, nome_usuario, telefone_usuario,"
 				+ " endereco_usuario, email_usuario, login_usuario, senha_usuario, tipo_usuario, sexo_usuario)"
@@ -35,7 +34,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			stmt.execute();
 			stmt.close();
 			s = true;
-			System.out.println("Cadastrado");
+			//System.out.println("Cadastrado");
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

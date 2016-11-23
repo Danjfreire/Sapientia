@@ -335,7 +335,7 @@ public class TelaInicialFunc extends JFrame {
 		mntmHistricoDeEmprstimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				TelaHistÃ³ricoLivros tela = new TelaHistÃ³ricoLivros();
+				TelaHistóricoLivros tela = new TelaHistóricoLivros();
 				desktopPane.add(tela);
 				try {
 					tela.setMaximum(true);
@@ -374,7 +374,7 @@ public class TelaInicialFunc extends JFrame {
 		mntmEmprestarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				TelaEmprÃ©stimo tela = new TelaEmprÃ©stimo();
+				TelaEmpréstimo tela = new TelaEmpréstimo();
 				desktopPane.add(tela);
 				try {
 					tela.setMaximum(true);

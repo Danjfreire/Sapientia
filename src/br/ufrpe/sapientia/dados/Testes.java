@@ -9,11 +9,13 @@ import br.ufrpe.sapientia.negocio.beans.Usuario;
 public class Testes {
 	public static void main(String [] args){
 		RepositorioUsuarios ru = new RepositorioUsuarios();
-		Usuario u = new Usuario("F", "wallaca", "785690", "84009198", "wallacesantana843@gmail.com", "wallace", "ruty", "M", "Rua Maria Augusta");
-		ru.remover("78569");
+		
+		Usuario u = new Usuario("F", "dan", "785690", "6324782684", "dan123@gmail.com", "login", "senha", "H", "Rua um");
+		//ru.remover("78569");
 		ru.cadastrar(u);
-		ru.atualizar("785690", "wallace", "984009198", "Vila chan", "wallacesantana843@gmail", "wallace", "radiopatrulha", "C", "M");
-		System.out.println(ru.pesquisarNome("wallace", "C"));
+		//ru.atualizar("785690", "wallace", "984009198", "Vila chan", "wallacesantana843@gmail", "wallace", "radiopatrulha", "C", "M");
+		
+		/*System.out.println(ru.pesquisarNome("wallace", "C"));
 		List<Usuario> usuarios= new ArrayList<Usuario>();
 		usuarios = ru.pesquisarTodos();
 		for(Usuario user : usuarios)
@@ -31,6 +33,6 @@ public class Testes {
 			System.out.println(l);
 		
 		RepositorioEmprestimos re = new RepositorioEmprestimos();
-	
+*/	
 	}
 }
