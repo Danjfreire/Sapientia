@@ -23,14 +23,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
+
 public class TelaCadastrarLivro extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField tfTitulo;
+	private JTextField tfAutor;
+	private JTextField tfEdicao;
+	private JTextField tfAno;
+	private JTextField tfISBN;
+	private JTextField tfVolume;
+	private JTextField tfCategoria;
 
 	/**
 	 * Launch the application.
@@ -39,14 +42,15 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				        if ("Nimbus".equals(info.getName())) {
-				            UIManager.setLookAndFeel(info.getClassName());
-				            break;
-				        }
-				    }
+					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+						if ("Nimbus".equals(info.getName())) {
+							UIManager.setLookAndFeel(info.getClassName());
+							break;
+						}
+					}
 				} catch (Exception e) {
-				    // If Nimbus is not available, you can set the GUI to another look and feel.
+					// If Nimbus is not available, you can set the GUI to
+					// another look and feel.
 				}
 				try {
 					TelaCadastrarLivro frame = new TelaCadastrarLivro();
@@ -109,35 +113,35 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		lblVolume.setBounds(262, 302, 62, 14);
 		panel.add(lblVolume);
 		
-		textField = new JTextField();
-		textField.setBounds(344, 65, 143, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		tfTitulo= new JTextField();
+		tfTitulo.setBounds(344, 65, 143, 20);
+		panel.add(tfTitulo);
+		tfTitulo.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(344, 161, 115, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		tfAutor = new JTextField();
+		tfAutor.setBounds(344, 161, 115, 20);
+		panel.add(tfAutor);
+		tfAutor.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(344, 115, 115, 20);
-		panel.add(textField_2);
+		tfEdicao = new JTextField();
+		tfEdicao.setColumns(10);
+		tfEdicao.setBounds(344, 115, 115, 20);
+		panel.add(tfEdicao);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(344, 207, 72, 20);
-		panel.add(textField_3);
+		tfAno = new JTextField();
+		tfAno.setColumns(10);
+		tfAno.setBounds(344, 207, 72, 20);
+		panel.add(tfAno);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(344, 251, 72, 20);
-		panel.add(textField_4);
+		tfISBN = new JTextField();
+		tfISBN.setColumns(10);
+		tfISBN.setBounds(344, 251, 72, 20);
+		panel.add(tfISBN);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(344, 299, 115, 20);
-		panel.add(textField_5);
+		tfVolume = new JTextField();
+		tfVolume.setColumns(10);
+		tfVolume.setBounds(344, 299, 115, 20);
+		panel.add(tfVolume);
 		
 		JLabel lblCategoria = new JLabel("Categoria.:");
 		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -149,28 +153,45 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		lblResumo.setBounds(528, 72, 72, 14);
 		panel.add(lblResumo);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(344, 340, 143, 20);
-		panel.add(textField_6);
+		tfCategoria = new JTextField();
+		tfCategoria.setColumns(10);
+		tfCategoria.setBounds(344, 340, 143, 20);
+		panel.add(tfCategoria);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(528, 97, 188, 269);
+		panel.add(textArea);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnSalvar.setBounds(10, 292, 89, 68);
 		panel.add(btnSalvar);
+		btnSalvar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					
+				if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(),
+							tfCategoria.getText(), textArea.getText(), tfVolume.getText(), "D")){
+					//cadastrado com sucesso
+					dispose();
+				}
+					
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
+				dispose();			}
 		});
 		btnCancelar.setBounds(132, 292, 89, 68);
 		panel.add(btnCancelar);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(528, 97, 188, 269);
-		panel.add(textArea);
+		
 
 	}
 }
