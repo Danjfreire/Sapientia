@@ -72,36 +72,36 @@ public class TelaLogon extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(47, 79, 79));
-		panel.setBounds(117, 203, 442, 244);
+		panel.setBounds(117, 203, 455, 244);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(365, 202, 75, 23);
+		btnCancelar.setBounds(350, 191, 90, 34);
 		panel.add(btnCancelar);
 		
 		JButton btnAcessar = new JButton("Acessar");
-		btnAcessar.setBounds(148, 202, 71, 23);
+		btnAcessar.setBounds(148, 191, 90, 34);
 		panel.add(btnAcessar);
 		
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(237, 123, 118, 20);
+		passwordField.setBounds(237, 137, 118, 22);
 		panel.add(passwordField);
 		
 		JLabel lblSenha = new JLabel("Senha.:");
-		lblSenha.setBounds(148, 119, 59, 22);
+		lblSenha.setBounds(148, 134, 59, 22);
 		panel.add(lblSenha);
 		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSenha.setForeground(new Color(0, 0, 0));
 		
 		textField = new JTextField();
-		textField.setBounds(237, 86, 203, 20);
+		textField.setBounds(237, 82, 203, 24);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblLogin = new JLabel("Login.:");
-		lblLogin.setBounds(148, 82, 54, 22);
+		lblLogin.setBounds(148, 80, 54, 22);
 		panel.add(lblLogin);
 		lblLogin.setForeground(new Color(0, 0, 0));
 		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));

@@ -98,29 +98,32 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		));
 		scrollPane.setViewportView(table_1);
 		
-		JButton btnOk = new JButton("Ok");
-		btnOk.addActionListener(new ActionListener() {
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				FormPesqFunc form = new FormPesqFunc();
 				form.show();
 			}
 		});
-		btnOk.setBounds(494, 430, 89, 61);
-		getContentPane().add(btnOk);
+		btnAtualizar.setBounds(332, 431, 89, 61);
+		getContentPane().add(btnAtualizar);
 		
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSair.setBounds(656, 430, 89, 61);
-		getContentPane().add(btnSair);
+		btnExcluir.setBounds(494, 431, 89, 61);
+		getContentPane().add(btnExcluir);
 		
-		JLabel lblDigiteONome = new JLabel("Escolha o Funcion\u00E1rio e pressione OK!");
-		lblDigiteONome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDigiteONome.setBounds(69, 431, 415, 54);
-		getContentPane().add(lblDigiteONome);
+		JButton btnExibirTodos = new JButton("Exibir Todos");
+		btnExibirTodos.setBounds(640, 131, 105, 34);
+		getContentPane().add(btnExibirTodos);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.setBounds(656, 431, 89, 61);
+		getContentPane().add(btnSair);
 
 	}
 }

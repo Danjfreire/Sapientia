@@ -85,7 +85,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		panel_1.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(39, 176, 706, 204);
+		scrollPane.setBounds(39, 192, 706, 204);
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -124,29 +124,32 @@ public class TelaPesquisarCliente extends JInternalFrame {
 			}
 		});
 		
-		JButton btnOk = new JButton("Ok");
-		btnOk.addActionListener(new ActionListener() {
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				
 					
 					
 				}
 		});
-		btnOk.setBounds(494, 430, 89, 61);
-		getContentPane().add(btnOk);
+		btnAtualizar.setBounds(333, 453, 89, 61);
+		getContentPane().add(btnAtualizar);
 		
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSair.setBounds(656, 430, 89, 61);
-		getContentPane().add(btnSair);
+		btnExcluir.setBounds(495, 453, 89, 61);
+		getContentPane().add(btnExcluir);
 		
-		JLabel lblDigiteONome = new JLabel("Escolha o Cliente e pressione OK!");
-		lblDigiteONome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDigiteONome.setBounds(69, 431, 415, 54);
-		getContentPane().add(lblDigiteONome);
+		JButton btnExibirTodos = new JButton("Exibir todos");
+		btnExibirTodos.setBounds(607, 131, 138, 50);
+		getContentPane().add(btnExibirTodos);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.setBounds(656, 453, 89, 61);
+		getContentPane().add(btnSair);
 
 	}
 }
