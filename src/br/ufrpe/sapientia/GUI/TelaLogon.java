@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.ufrpe.sapientia.fachada.Fachada;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JLabel;
@@ -19,8 +20,11 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.event.*;
+import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaLogon extends JFrame {
 
@@ -80,6 +84,7 @@ public class TelaLogon extends JFrame {
 		btnAcessar.setBounds(148, 202, 71, 23);
 		panel.add(btnAcessar);
 		
+		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(237, 123, 118, 20);
 		panel.add(passwordField);
@@ -113,8 +118,26 @@ public class TelaLogon extends JFrame {
 		panel.add(label_1);
 		btnAcessar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				try{
+				Usuario u =  Fachada.getInstance().efetuarLogin(textField.getText(), passwordField.getText());
+				if(u.getTipo() == "C"){
+					TelaInicialCliente tela = new TelaInicialCliente(u);
+					dispose();
+					tela.setVisible(true);
+				}
+				else if(u.getTipo() == "F"){
+					TelaInicialFunc tela = new TelaInicialFunc();
+					dispose();
+					tela.setVisible(true);
+				}
+				else{
+					TelaInicialAdm tela = new TelaInicialAdm();
+					dispose();
+					tela.setVisible(true);
+				}
+				}catch(Exception exception){
+					System.out.println(exception.getMessage());
+				}
 			}
 		});
 		

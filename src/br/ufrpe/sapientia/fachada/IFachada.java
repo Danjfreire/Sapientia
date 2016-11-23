@@ -24,7 +24,7 @@ public interface IFachada {
 	boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, String estoque);
 	
-	Usuario efetuarLogin();
+	Usuario efetuarLogin(String login, String senha);
 	
 	boolean removerUsuario(String cpf);
 	Usuario buscarUsuarioCPF(String cpf , String tipo);
@@ -35,5 +35,6 @@ public interface IFachada {
 	List<Usuario> exibirUsuarios();
 	boolean CadastrarUsuario(Usuario usuario);
 	boolean atualizarADM();
+
 	
 }

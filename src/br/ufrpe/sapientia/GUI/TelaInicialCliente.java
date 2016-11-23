@@ -23,9 +23,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
 
+import br.ufrpe.sapientia.negocio.beans.*;
+
 public class TelaInicialCliente extends JFrame {
 
 	private JPanel contentPane;
+	private Usuario usuario;
 
 	/**
 	 * Launch the application.
@@ -56,7 +59,9 @@ public class TelaInicialCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaInicialCliente() {
+	public TelaInicialCliente(Usuario u) {
+		
+		this.usuario = u;
 		setResizable(false);
 		setTitle("Sapientia");
 		//setExtendedState( MAXIMIZED_BOTH );

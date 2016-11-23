@@ -87,8 +87,8 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public Usuario efetuarLogin() {
-		return controleLogin.efetuarLogin();
+	public Usuario efetuarLogin(String login, String senha) {
+		return controleLogin.efetuarLogin(login, senha);
 	}
 
 	@Override
