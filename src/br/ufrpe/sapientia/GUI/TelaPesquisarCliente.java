@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.ufrpe.sapientia.fachada.Fachada;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JScrollPane;
@@ -23,6 +24,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.util.List;
+import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaPesquisarCliente extends JInternalFrame {
 	private JTextField tfPesquisa;
@@ -58,7 +61,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public TelaPesquisarCliente() {
-		setTitle("Pesquisar Funcion\u00E1rios");
+		setTitle("Pesquisar Clientes");
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 802, 618);
@@ -75,9 +78,6 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(518, 33, 136, 39);
-		panel_1.add(btnPesquisar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nome", "Cpf"}));
@@ -89,22 +89,48 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		/*table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Nome", "Cpf"
 			}
-		));
+		));*/
+		DefaultTableModel modelo = new DefaultTableModel();
+		table_1.setModel(modelo);
+		modelo.addColumn("Nome");
+		modelo.addColumn("CPF");
 		scrollPane.setViewportView(table_1);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBounds(518, 33, 136, 39);
+		panel_1.add(btnPesquisar);
+		btnPesquisar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+				
+					
+					if(comboBox.getSelectedItem().equals("Nome")){
+						List<Usuario> usuarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "C");
+						for(Usuario u : usuarios){
+							String nome = u.getNome();
+							String cpf = u.getCpf();
+							modelo.addRow(new Object[]{nome,cpf});
+						}
+					}
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 		
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {
-				FormPesqFunc form = new FormPesqFunc();
-				form.show();
-			}
+			public void actionPerformed(ActionEvent e){
+				
+					
+					
+				}
 		});
 		btnOk.setBounds(494, 430, 89, 61);
 		getContentPane().add(btnOk);
@@ -117,7 +143,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		btnSair.setBounds(656, 430, 89, 61);
 		getContentPane().add(btnSair);
 		
-		JLabel lblDigiteONome = new JLabel("Escolha o Funcion\u00E1rio e pressione OK!");
+		JLabel lblDigiteONome = new JLabel("Escolha o Cliente e pressione OK!");
 		lblDigiteONome.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDigiteONome.setBounds(69, 431, 415, 54);
 		getContentPane().add(lblDigiteONome);
