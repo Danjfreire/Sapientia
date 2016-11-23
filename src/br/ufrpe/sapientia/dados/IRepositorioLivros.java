@@ -5,10 +5,10 @@ import java.util.List;
 public interface IRepositorioLivros {
 
 	boolean cadastrar(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, String estoque);
+			, String volume, String categoria, String resumo, int estoque);
 	boolean remover(String isbn);
 	boolean atualizar(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, String estoque);
+			, String volume, String categoria, String resumo, int estoque);
 	List<Livro>pesquisarTodos();
 	List<Livro>pesquisarTitulo(String titulo);
 	Livro pesquisarISBN(String isbn);

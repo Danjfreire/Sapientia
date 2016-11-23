@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
+import br.ufrpe.sapientia.negocio.beans.Livro;
 
 
 public class RepositorioEmprestimos {
@@ -30,9 +31,11 @@ public class RepositorioEmprestimos {
 		String sql = "insert into emprestimo (funcionario_emprestimo, cliente_emprestimo, status_emprestimo,  data_saida_emprestimo,"
 				+ " data_entrega_emprestimo, isbn_livro)"
 				+ " value(?,?,?,?,?,?)";
+		Livro l = rl.pesquisarISBN(isbn_livro);
+		int quantidade = l.getEstoque();
 		try{
 			if(ru.pesquisarCPF(cpf_cliente, "C") != null && ru.pesquisarCPF(cpf_funcionario, "F") != null 
-					&& rl.pesquisarISBN(isbn_livro).getEstoque() == "D"){
+					&& quantidade > 0){
 				PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 				stmt.setString(1, cpf_funcionario);
 				stmt.setString(2, cpf_cliente);
@@ -44,6 +47,8 @@ public class RepositorioEmprestimos {
 				stmt.close();
 				s = true;
 				System.out.println("Cadastrado");
+				rl.atualizar(l.getISBN(), l.getTitulo(), l.getAutor(), l.getEdicao()
+				, l.getAno(), l.getVolume(), l.getCategoria(), l.getResumo(), --quantidade);
 			}
 		}catch(SQLException ex){
 			ex.printStackTrace();
@@ -54,13 +59,20 @@ public class RepositorioEmprestimos {
 	public boolean remove(int id){
 		boolean s = false;
 		String sql = "delete from emprestimo where id_emprestimo = ?";
+		String sql2 = "select isbn_livro from emprestimo where id_emprestimo = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stmt2 = (PreparedStatement) connection.prepareStatement(sql2);
+			ResultSet rs = stmt2.executeQuery();
 			stmt.setInt(1, id);
 			stmt.execute();
 			stmt.close();
 			s = true;
 			System.out.println("removido");
+			Livro l = rl.pesquisarISBN(rs.getString("isbn_livro"));
+			int quantidade = l.getEstoque();
+			rl.atualizar(l.getISBN(), l.getTitulo(), l.getAutor(), l.getEdicao()
+					, l.getAno(), l.getVolume(), l.getCategoria(), l.getResumo(), ++quantidade);
 		}catch(SQLException ex){
 			ex.printStackTrace();
 		}

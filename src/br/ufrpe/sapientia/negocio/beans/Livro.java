@@ -11,12 +11,12 @@ public class Livro {
 	private String categoria;
 	private String resumo;
 	private String volume;
-	private String estoque;
+	private int estoque;
 	
 	
 	
 	public Livro(String titulo, String autor, String edicao, String ano, String iSBN, String categoria,
-			String resumo, String volume, String estoque) {
+			String resumo, String volume, int estoque) {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.edicao = edicao;
@@ -27,10 +27,10 @@ public class Livro {
 		this.volume = volume;
 		this.estoque = estoque;
 	}
-	public String getEstoque() {
+	public int getEstoque() {
 		return estoque;
 	}
-	public void setEstoque(String estoque) {
+	public void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
 	public int getId() {

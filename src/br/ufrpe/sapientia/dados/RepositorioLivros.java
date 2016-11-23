@@ -15,7 +15,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 		this.connection = new Conexao().construirConexao();
 	}
 	public boolean cadastrar(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, String estoque){
+			, String volume, String categoria, String resumo, int estoque){
 		
 		boolean s = false;
 		String sql = "insert into livro (titulo_livro, autor_livro, edicao_livro,"
@@ -31,7 +31,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.setString(6, volume);
 			stmt.setString(7, categoria);
 			stmt.setString(8, resumo);
-			stmt.setString(9, estoque);
+			stmt.setInt(9, estoque);
 			stmt.execute();
 			stmt.close();
 			s = true;
@@ -59,12 +59,12 @@ public class RepositorioLivros implements IRepositorioLivros{
 	}
 	
 	public boolean atualizar(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, String estoque){
+			, String volume, String categoria, String resumo, int estoque){
 		
 		boolean s = false;
 		String sql = "update livro set titulo_livro = ?, autor_livro = ?,"+
 		"edicao_livro = ?, ano_livro = ?, volume_livro = ?, categoria_livro = ?,"+
-		"resumo_livro = ? where isbn_livro = ?";
+		"resumo_livro = ?  estoque = ? where isbn_livro = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, titulo);
@@ -74,7 +74,8 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.setString(5, volume);
 			stmt.setString(6, categoria);
 			stmt.setString(7, resumo);
-			stmt.setString(8, isbn);
+			stmt.setInt(8, estoque);
+			stmt.setString(9, isbn);
 			stmt.execute();
 			stmt.close();
 			s = true;
@@ -148,7 +149,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 			String volume = rs.getString("volume_livro");
 			String categoria = rs.getString("categoria_livro");
 			String resumo = rs.getString("resumo_livro");
-			String estoque = rs.getString("estoque");
+			int estoque = rs.getInt("estoque");
 			l = new Livro(titulo, autor, edicao, ano, isbn, categoria, resumo, volume, estoque);
 			l.setId(id);
 		} catch (SQLException e) {

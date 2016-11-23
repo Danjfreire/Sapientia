@@ -11,6 +11,7 @@ public class Testes {
 		RepositorioUsuarios ru = new RepositorioUsuarios();
 		
 		Usuario u = new Usuario("F", "dan", "785690", "6324782684", "dan123@gmail.com", "login", "senha", "H", "Rua um");
+		ru.cadastrar(u);
 		List<Usuario> usuarios= new ArrayList<Usuario>();
 		usuarios = ru.pesquisarNome("dan", "F");
 		for(Usuario user : usuarios)

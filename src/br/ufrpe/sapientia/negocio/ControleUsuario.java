@@ -46,8 +46,8 @@ public class ControleUsuario implements IControleUsuario{
 	}
 	
 	@Override
-	public List<Usuario> pesquisarTodos(){
-		return repositorio.pesquisarTodos();
+	public List<Usuario> pesquisarTodos(String tipo){
+		return repositorio.pesquisarTodos(tipo);
 	}
 	
 }
