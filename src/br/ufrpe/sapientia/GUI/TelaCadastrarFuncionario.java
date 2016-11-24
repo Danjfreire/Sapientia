@@ -221,7 +221,8 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 				try{
 					Usuario u =  new Usuario("F", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "M",
 							tfLogradouro.getText()+" "+ tfBairro.getText()+" "+ tfCidade.getText());
-					if(Fachada.getInstance().CadastrarUsuario(u)){
+					boolean a = Fachada.getInstance().CadastrarUsuario(u);
+					if(a){
 						//mensagem de sucesso
 						dispose();
 					}

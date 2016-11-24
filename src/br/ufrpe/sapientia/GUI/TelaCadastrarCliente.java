@@ -221,10 +221,10 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		btnCadastrar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-					Usuario u = new Usuario("", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "H", 
+					Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "H", 
 							tfLogradouro.getText()+ " " + tfBairro.getText()+ " " + tfCidade.getText());
 					if(Fachada.getInstance().CadastrarUsuario(u)){
-						//msg de sucesso
+						//mensagem de sucesso
 						dispose();
 					}
 					

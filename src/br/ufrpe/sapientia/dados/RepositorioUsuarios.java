@@ -34,7 +34,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			stmt.execute();
 			stmt.close();
 			s = true;
-			//System.out.println("Cadastrado");
+			System.out.println("Cadastrado");
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

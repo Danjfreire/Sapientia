@@ -18,26 +18,31 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.event.*;
+
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
 
 public class FormAtuaFunc extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField tfNome;
+	private JTextField tfCPF;
+	private JTextField tfNascimento;
+	private JTextField tfLogin;
 	private JPasswordField passwordField;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private JTextField tfEndereco;
+	private JTextField tfNumero;
+	private JTextField tfBairro;
+	private JTextField tfCidade;
+	private JTextField tfEmail;
+	private JTextField tfContato;
+	private Usuario funcionario;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				 try 
@@ -56,12 +61,13 @@ public class FormAtuaFunc extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FormAtuaFunc() {
+	public FormAtuaFunc(Usuario u) {
+		funcionario = u;
 		setTitle("Atualizando Funcion\u00E1rio");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 750, 433);
@@ -85,37 +91,43 @@ public class FormAtuaFunc extends JFrame {
 		label_1.setBounds(147, 23, 46, 14);
 		panel.add(label_1);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(228, 23, 174, 20);
-		panel.add(textField);
+		tfNome = new JTextField();
+		tfNome.setColumns(10);
+		tfNome.setBounds(228, 23, 174, 20);
+		panel.add(tfNome);
+		tfNome.setText(funcionario.getNome());
+		tfNome.setEditable(false);
 		
 		JLabel label_2 = new JLabel("Cpf.:");
 		label_2.setBounds(148, 48, 46, 14);
 		panel.add(label_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(228, 48, 174, 20);
-		panel.add(textField_1);
+		tfCPF = new JTextField();
+		tfCPF.setColumns(10);
+		tfCPF.setBounds(228, 48, 174, 20);
+		panel.add(tfCPF);
+		tfCPF.setText(funcionario.getCpf());
+		tfCPF.setEditable(false);
 		
 		JLabel label_3 = new JLabel("Nascimento.:");
 		label_3.setBounds(148, 73, 86, 14);
 		panel.add(label_3);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(228, 70, 86, 20);
-		panel.add(textField_2);
+		tfNascimento = new JTextField();
+		tfNascimento.setColumns(10);
+		tfNascimento.setBounds(228, 70, 86, 20);
+		panel.add(tfNascimento);
 		
 		JLabel label_4 = new JLabel("Login.:");
 		label_4.setBounds(147, 98, 46, 14);
 		panel.add(label_4);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(228, 95, 174, 20);
-		panel.add(textField_3);
+		
+		tfLogin = new JTextField();
+		tfLogin.setColumns(10);
+		tfLogin.setBounds(228, 95, 174, 20);
+		panel.add(tfLogin);
+		tfLogin.setText(funcionario.getLogin());
 		
 		JLabel label_5 = new JLabel("Senha.:");
 		label_5.setBounds(148, 123, 46, 14);
@@ -140,37 +152,38 @@ public class FormAtuaFunc extends JFrame {
 		label_7.setBounds(139, 24, 75, 14);
 		panel_1.add(label_7);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(224, 18, 183, 20);
-		panel_1.add(textField_4);
+		tfEndereco = new JTextField();
+		tfEndereco.setColumns(10);
+		tfEndereco.setBounds(224, 18, 183, 20);
+		panel_1.add(tfEndereco);
+		tfEndereco.setText(funcionario.getEndereco());
 		
 		JLabel label_8 = new JLabel("N\u00FAmero.:");
 		label_8.setBounds(139, 49, 63, 14);
 		panel_1.add(label_8);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(224, 43, 86, 20);
-		panel_1.add(textField_5);
+		tfNumero = new JTextField();
+		tfNumero.setColumns(10);
+		tfNumero.setBounds(224, 43, 86, 20);
+		panel_1.add(tfNumero);
 		
 		JLabel label_9 = new JLabel("Bairro.:");
 		label_9.setBounds(139, 74, 46, 14);
 		panel_1.add(label_9);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(224, 68, 149, 20);
-		panel_1.add(textField_6);
+		tfBairro = new JTextField();
+		tfBairro.setColumns(10);
+		tfBairro.setBounds(224, 68, 149, 20);
+		panel_1.add(tfBairro);
 		
 		JLabel label_10 = new JLabel("Cidade.:");
 		label_10.setBounds(139, 99, 46, 14);
 		panel_1.add(label_10);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(224, 93, 149, 20);
-		panel_1.add(textField_7);
+		tfCidade = new JTextField();
+		tfCidade.setColumns(10);
+		tfCidade.setBounds(224, 93, 149, 20);
+		panel_1.add(tfCidade);
 		
 		JLabel label_11 = new JLabel("Estado.:");
 		label_11.setBounds(139, 124, 46, 14);
@@ -199,19 +212,36 @@ public class FormAtuaFunc extends JFrame {
 		label_14.setBounds(10, 219, 56, 14);
 		panel_2.add(label_14);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(76, 179, 175, 20);
-		panel_2.add(textField_8);
+		tfEmail = new JTextField();
+		tfEmail.setColumns(10);
+		tfEmail.setBounds(76, 179, 175, 20);
+		panel_2.add(tfEmail);
+		tfEmail.setText(funcionario.getEmail());
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(76, 216, 136, 20);
-		panel_2.add(textField_9);
+		tfContato = new JTextField();
+		tfContato.setColumns(10);
+		tfContato.setBounds(76, 216, 136, 20);
+		panel_2.add(tfContato);
+		tfContato.setText(funcionario.getContato());
 		
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBounds(447, 319, 89, 23);
 		contentPane.add(btnAtualizar);
+		btnAtualizar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					boolean a = Fachada.getInstance().atualizarUsuario(funcionario.getCpf(), funcionario.getNome(), tfContato.getText(), tfEndereco.getText(),
+							tfEmail.getText(), tfLogin.getText(), passwordField.getText(), "F", "H");	
+					if(a){
+						//sucesso
+						dispose();
+					}
+					
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(619, 319, 89, 23);

@@ -13,6 +13,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.Usuario;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JScrollPane;
@@ -24,9 +26,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
+import java.util.List;
+
 public class TelaPesquisarFuncionario extends JInternalFrame {
 	private JTextField tfPesquisa;
 	private JTable table_1;
+	private List<Usuario>funcionarios;
 
 	/**
 	 * Launch the application.
@@ -75,55 +80,141 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(518, 33, 136, 39);
-		panel_1.add(btnPesquisar);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(39, 176, 706, 204);
+		getContentPane().add(scrollPane);
+		
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nome", "Cpf"}));
 		comboBox.setBounds(10, 34, 88, 37);
 		panel_1.add(comboBox);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(39, 176, 706, 204);
-		getContentPane().add(scrollPane);
-		
 		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		/*table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Nome", "Cpf"
 			}
-		));
+		));*/
+		DefaultTableModel modelo = new DefaultTableModel();
+		table_1.setModel(modelo);
+		modelo.addColumn("Nome");
+		modelo.addColumn("CPF");
 		scrollPane.setViewportView(table_1);
 		
-		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {
-				FormPesqFunc form = new FormPesqFunc();
-				form.show();
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBounds(518, 33, 136, 39);
+		panel_1.add(btnPesquisar);
+		btnPesquisar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					
+					if(comboBox.getSelectedItem().equals("Nome")){
+						funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
+						for(Usuario u : funcionarios){
+							String nome = u.getNome();
+							String cpf = u.getCpf();
+							modelo.addRow(new Object[]{nome,cpf});
+						}
+					}
+				}catch(Exception exception){
+					
+				}
 			}
 		});
-		btnAtualizar.setBounds(332, 431, 89, 61);
+		
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBounds(332, 422, 89, 61);
 		getContentPane().add(btnAtualizar);
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				try{
+					Usuario u = funcionarios.get(table_1.getSelectedRow());
+					
+					FormAtuaFunc tela = new FormAtuaFunc(u);
+					//dispose();
+					tela.setVisible(true);
+					
+				}catch(Exception exception){
+					
+				}
+					
+					
+				}
+		});
 		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnExcluir.setBounds(494, 422, 89, 61);
+		getContentPane().add(btnExcluir);
 		btnExcluir.setBounds(494, 431, 89, 61);
 		getContentPane().add(btnExcluir);
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					int linha = table_1 .getSelectedRow();
+					Usuario u = funcionarios.get(table_1.getSelectedRow());
+					boolean a = Fachada.getInstance().removerUsuario(u.getCpf());
+					
+					if(a){
+						//sucesso
+						if(comboBox.getSelectedItem().equals("Nome")){
+							table_1 = new JTable();
+							DefaultTableModel modelo = new DefaultTableModel();
+							table_1.setModel(modelo);
+							modelo.addColumn("Nome");
+							modelo.addColumn("CPF");
+							scrollPane.setViewportView(table_1);
+							funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
+							for(Usuario user : funcionarios){
+								String nome = user.getNome();
+								String cpf = user.getCpf();
+								modelo.addRow(new Object[]{nome,cpf});
+							 }
+					      }
+				        } 
+					}catch(Exception exception){
+					
+				}
+			}
+		});
 		
-		JButton btnExibirTodos = new JButton("Exibir Todos");
-		btnExibirTodos.setBounds(640, 131, 105, 34);
+		
+		
+		JButton btnExibirTodos = new JButton("Exibir todos");
+		btnExibirTodos.setBounds(607, 121, 138, 50);
 		getContentPane().add(btnExibirTodos);
+		btnExibirTodos.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					funcionarios = Fachada.getInstance().exibirUsuarios("C");
+					for(Usuario user : funcionarios){
+						String nome = user.getNome();
+						String cpf = user.getCpf();
+						modelo.addRow(new Object[]{nome,cpf});
+					 }
+					
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(656, 431, 89, 61);
+		btnSair.setBounds(655, 422, 89, 61);
 		getContentPane().add(btnSair);
+		btnSair.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					dispose();
+					
+				}catch(Exception exception){
+					
+				}
+			}
+		});
+
 
 	}
 }
