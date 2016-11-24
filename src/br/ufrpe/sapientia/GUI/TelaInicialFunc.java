@@ -132,40 +132,6 @@ public class TelaInicialFunc extends JFrame {
 		});
 		mnFuncionrios.add(mntmPesquisar);
 		
-		JMenuItem mntmAtualizar = new JMenuItem("Atualizar");
-		mntmAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaAtualizarFuncionario tela = new TelaAtualizarFuncionario();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-			}
-		});
-		mnFuncionrios.add(mntmAtualizar);
-		
-		JMenuItem mntmExcluir = new JMenuItem("Excluir");
-		mntmExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaExcluirFuncionario tela = new TelaExcluirFuncionario();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-			}
-		});
-		mnFuncionrios.add(mntmExcluir);
-		
 		JMenu mnLivros = new JMenu("Livros");
 		mnGerenciamento.add(mnLivros);
 		
@@ -205,42 +171,6 @@ public class TelaInicialFunc extends JFrame {
 		});
 		mnLivros.add(mntmPesquisar_1);
 		
-		JMenuItem mntmAtualizar_1 = new JMenuItem("Atualizar");
-		mntmAtualizar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaAtualizarLivro tela = new TelaAtualizarLivro();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-				
-			}
-		});
-		mnLivros.add(mntmAtualizar_1);
-		
-		JMenuItem mntmExcluir_1 = new JMenuItem("Excluir");
-		mntmExcluir_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaExcluirLivro tela = new TelaExcluirLivro();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-				
-			}
-		});
-		mnLivros.add(mntmExcluir_1);
-		
 		JMenu mnClientes = new JMenu("Clientes");
 		mnGerenciamento.add(mnClientes);
 		
@@ -279,42 +209,6 @@ public class TelaInicialFunc extends JFrame {
 			}
 		});
 		mnClientes.add(mntmPesquisar_2);
-		
-		JMenuItem mntmAtualizar_2 = new JMenuItem("Atualizar");
-		mntmAtualizar_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaAtualizarCliente tela = new TelaAtualizarCliente();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-				
-			}
-		});
-		mnClientes.add(mntmAtualizar_2);
-		
-		JMenuItem mntmExcluir_2 = new JMenuItem("Excluir");
-		mntmExcluir_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaExcluirCliente tela = new TelaExcluirCliente();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-				
-			}
-		});
-		mnClientes.add(mntmExcluir_2);
 		
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mntmSair.addActionListener(new ActionListener() {

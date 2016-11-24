@@ -60,31 +60,31 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		setTitle("Pesquisar Livros");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 567, 400);
+		setBounds(100, 100, 750, 527);
 		getContentPane().setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 11, 531, 61);
+		panel_1.setBounds(37, 34, 687, 130);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		tfPesquisa = new JTextField();
-		tfPesquisa.setBounds(85, 28, 334, 20);
+		tfPesquisa.setBounds(182, 28, 393, 49);
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(429, 27, 92, 23);
+		btnPesquisar.setBounds(585, 27, 92, 50);
 		panel_1.add(btnPesquisar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"T\u00EDtulo", "Autor", "ISBN"}));
-		comboBox.setBounds(10, 28, 65, 20);
+		comboBox.setBounds(10, 28, 92, 49);
 		panel_1.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 119, 521, 103);
+		scrollPane.setBounds(37, 243, 687, 151);
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -98,7 +98,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		));
 		scrollPane.setViewportView(table_1);
 		
-		JButton btnOk = new JButton("Ok");
+		JButton btnOk = new JButton("Excluir");
 		btnOk.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -106,12 +106,24 @@ public class TelaPesquisarLivro extends JInternalFrame {
 				form.show();
 			}
 		});
-		btnOk.setBounds(81, 305, 89, 23);
+		btnOk.setBounds(536, 447, 89, 40);
 		getContentPane().add(btnOk);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(394, 305, 89, 23);
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSair.setBounds(635, 447, 89, 40);
 		getContentPane().add(btnSair);
+		
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBounds(437, 447, 89, 40);
+		getContentPane().add(btnAtualizar);
+		
+		JButton btnMostrarTodos = new JButton("Mostrar Todos");
+		btnMostrarTodos.setBounds(601, 192, 123, 40);
+		getContentPane().add(btnMostrarTodos);
 
 	}
 }

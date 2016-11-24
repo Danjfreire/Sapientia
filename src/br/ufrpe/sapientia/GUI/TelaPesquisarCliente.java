@@ -69,7 +69,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(39, 11, 706, 109);
+		panel_1.setBounds(39, 11, 706, 99);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -85,7 +85,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		panel_1.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(39, 192, 706, 204);
+		scrollPane.setBounds(39, 192, 706, 181);
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -132,7 +132,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					
 				}
 		});
-		btnAtualizar.setBounds(333, 453, 89, 61);
+		btnAtualizar.setBounds(332, 422, 89, 61);
 		getContentPane().add(btnAtualizar);
 		
 		JButton btnExcluir = new JButton("Excluir");
@@ -140,15 +140,15 @@ public class TelaPesquisarCliente extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnExcluir.setBounds(495, 453, 89, 61);
+		btnExcluir.setBounds(494, 422, 89, 61);
 		getContentPane().add(btnExcluir);
 		
 		JButton btnExibirTodos = new JButton("Exibir todos");
-		btnExibirTodos.setBounds(607, 131, 138, 50);
+		btnExibirTodos.setBounds(607, 121, 138, 50);
 		getContentPane().add(btnExibirTodos);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(656, 453, 89, 61);
+		btnSair.setBounds(655, 422, 89, 61);
 		getContentPane().add(btnSair);
 
 	}
