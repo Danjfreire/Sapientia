@@ -87,7 +87,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	
 	public List<Usuario> pesquisarTodos(String tipo){
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "select * from usuario where tipo = ?";
+		String sql = "select * from usuario where tipo_usuario = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, tipo);

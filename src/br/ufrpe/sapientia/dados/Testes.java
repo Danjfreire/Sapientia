@@ -10,10 +10,10 @@ public class Testes {
 	public static void main(String [] args){
 		RepositorioUsuarios ru = new RepositorioUsuarios();
 		
-		Usuario u = new Usuario("F", "dan", "785690", "6324782684", "dan123@gmail.com", "login", "senha", "H", "Rua um");
+		Usuario u = new Usuario("F", "dan", "7856923", "6324782684", "dan13@gmail.com", "logi", "senha", "H", "Rua um");
 		//ru.cadastrar(u);
 		List<Usuario> usuarios= new ArrayList<Usuario>();
-		usuarios = ru.pesquisarNome("joao","C");
+		usuarios = ru.pesquisarTodos("F");
 		for(Usuario user : usuarios)
 			System.out.println(user);
 		//ru.remover("78569");
