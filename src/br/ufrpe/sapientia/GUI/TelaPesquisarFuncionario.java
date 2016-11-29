@@ -118,6 +118,11 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 							String cpf = u.getCpf();
 							modelo.addRow(new Object[]{nome,cpf});
 						}
+					}else{
+						Usuario func = Fachada.getInstance().buscarUsuarioCPF(tfPesquisa.getText(), "F");
+						String nome = func.getNome();
+						String cpf = func.getCpf();
+						modelo.addRow(new Object[]{nome,cpf});
 					}
 				}catch(Exception exception){
 					
@@ -166,7 +171,10 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 							modelo.addColumn("Nome");
 							modelo.addColumn("CPF");
 							scrollPane.setViewportView(table_1);
-							funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
+							if(tfPesquisa.getText()!="")
+								funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
+							else
+								funcionarios = Fachada.getInstance().exibirUsuarios("F");
 							for(Usuario user : funcionarios){
 								String nome = user.getNome();
 								String cpf = user.getCpf();

@@ -246,5 +246,15 @@ public class FormAtuaFunc extends JFrame {
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(619, 319, 89, 23);
 		contentPane.add(btnSair);
+		btnSair.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					
+					dispose();
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 	}
 }

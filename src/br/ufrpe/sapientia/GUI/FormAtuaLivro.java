@@ -12,6 +12,7 @@ import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.event.*;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -19,21 +20,25 @@ import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.ImageIcon;
 
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
+
 public class FormAtuaLivro extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField tfTitulo;
+	private JTextField tfAutor;
+	private JTextField tfEdicao;
+	private JTextField tfAno;
+	private JTextField tfISBN;
+	private JTextField tfVolume;
+	private JTextField tfCategoria;
+	Livro livro;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				 try 
@@ -52,12 +57,13 @@ public class FormAtuaLivro extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public FormAtuaLivro() {
+	public FormAtuaLivro(Livro livro) {
+		this.livro = livro;
 		setTitle("Atualizando Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -101,35 +107,41 @@ public class FormAtuaLivro extends JFrame {
 		label_6.setBounds(369, 16, 46, 14);
 		panel.add(label_6);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(235, 11, 115, 20);
-		panel.add(textField);
+		tfTitulo = new JTextField();
+		tfTitulo.setColumns(10);
+		tfTitulo.setBounds(235, 11, 115, 20);
+		panel.add(tfTitulo);
+		tfTitulo.setText(livro.getTitulo());
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(235, 73, 115, 20);
-		panel.add(textField_1);
+		tfAutor = new JTextField();
+		tfAutor.setColumns(10);
+		tfAutor.setBounds(235, 73, 115, 20);
+		panel.add(tfAutor);
+		tfAutor.setText(livro.getAutor());
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(235, 42, 115, 20);
-		panel.add(textField_2);
+		tfEdicao = new JTextField();
+		tfEdicao.setColumns(10);
+		tfEdicao.setBounds(235, 42, 115, 20);
+		panel.add(tfEdicao);
+		tfEdicao.setText(livro.getEdicao());
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(235, 104, 115, 20);
-		panel.add(textField_3);
+		tfAno = new JTextField();
+		tfAno.setColumns(10);
+		tfAno.setBounds(235, 104, 115, 20);
+		panel.add(tfAno);
+		tfAno.setText(livro.getAno());
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(235, 135, 115, 20);
-		panel.add(textField_4);
+		tfISBN = new JTextField();
+		tfISBN.setColumns(10);
+		tfISBN.setBounds(235, 135, 115, 20);
+		panel.add(tfISBN);
+		tfISBN.setText(livro.getISBN());
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(439, 14, 115, 20);
-		panel.add(textField_5);
+		tfVolume = new JTextField();
+		tfVolume.setColumns(10);
+		tfVolume.setBounds(439, 14, 115, 20);
+		panel.add(tfVolume);
+		tfVolume.setText(livro.getVolume());
 		
 		JLabel label_7 = new JLabel("Categoria.:");
 		label_7.setBounds(369, 46, 72, 14);
@@ -139,22 +151,49 @@ public class FormAtuaLivro extends JFrame {
 		label_8.setBounds(369, 81, 46, 14);
 		panel.add(label_8);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(439, 45, 115, 20);
-		panel.add(textField_6);
+		tfCategoria = new JTextField();
+		tfCategoria.setColumns(10);
+		tfCategoria.setBounds(439, 45, 115, 20);
+		panel.add(tfCategoria);
+		tfCategoria.setText(livro.getCategoria());
 		
-		JButton button = new JButton("Salvar");
-		button.setBounds(56, 214, 89, 23);
-		panel.add(button);
+		JTextArea resumo = new JTextArea();
+		resumo.setBounds(369, 106, 185, 196);
+		panel.add(resumo);
+		resumo.setText(livro.getResumo());
 		
-		JButton button_1 = new JButton("Cancelar");
-		button_1.setBounds(235, 214, 89, 23);
-		panel.add(button_1);
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBounds(56, 214, 89, 23);
+		panel.add(btnSalvar);
+		btnSalvar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					boolean a = Fachada.getInstance().atualizarLivro(tfISBN.getText(), tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(),
+							tfAno.getText(), tfVolume.getText(), tfCategoria.getText(), resumo.getText(), 10);
+					if(a){
+						//sucesso
+						dispose();
+					}
+					
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(369, 106, 185, 196);
-		panel.add(textArea);
+		JButton btnSair = new JButton("Cancelar");
+		btnSair.setBounds(235, 214, 89, 23);
+		panel.add(btnSair);
+		btnSair.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					
+					dispose();
+				}catch(Exception exception){
+					
+				}
+			}
+		});
 		
 		JList list = new JList();
 		list.setBounds(440, 141, 72, 96);
