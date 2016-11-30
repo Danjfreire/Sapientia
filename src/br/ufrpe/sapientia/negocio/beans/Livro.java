@@ -7,31 +7,24 @@ public class Livro {
 	private String autor;
 	private String edicao;
 	private String ano;
-	private String ISBN;
+	private String isbn;
 	private String categoria;
 	private String resumo;
 	private String volume;
 	private int estoque;
-	
-	
-	
-	public Livro(String titulo, String autor, String edicao, String ano, String iSBN, String categoria,
-			String resumo, String volume, int estoque) {
+	private int total;
+	public Livro(String titulo, String autor, String edicao, String ano, String isbn, String categoria, String resumo,
+			String volume, int estoque, int total) {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.edicao = edicao;
 		this.ano = ano;
-		ISBN = iSBN;
+		this.isbn = isbn;
 		this.categoria = categoria;
 		this.resumo = resumo;
 		this.volume = volume;
 		this.estoque = estoque;
-	}
-	public int getEstoque() {
-		return estoque;
-	}
-	public void setEstoque(int estoque) {
-		this.estoque = estoque;
+		this.total = total;
 	}
 	public int getId() {
 		return id;
@@ -63,11 +56,11 @@ public class Livro {
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
-	public String getISBN() {
-		return ISBN;
+	public String getIsbn() {
+		return isbn;
 	}
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 	public String getCategoria() {
 		return categoria;
@@ -87,10 +80,22 @@ public class Livro {
 	public void setVolume(String volume) {
 		this.volume = volume;
 	}
-	@Override
+	public int getEstoque() {
+		return estoque;
+	}
+	public void setEstoque(int estoque) {
+		this.estoque = estoque;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 	public String toString() {
 		return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", edicao=" + edicao + ", ano=" + ano
-				+ ", ISBN=" + ISBN + ", categoria=" + categoria + ", resumo=" + resumo + ", volume=" + volume + "]";
+				+ ", isbn=" + isbn + ", categoria=" + categoria + ", resumo=" + resumo + ", volume=" + volume
+				+ ", estoque=" + estoque + ", total=" + total + "]";
 	}
 	
 }

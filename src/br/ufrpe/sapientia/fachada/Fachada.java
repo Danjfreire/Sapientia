@@ -57,8 +57,8 @@ public class Fachada implements IFachada {
 
 	@Override
 	public boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque) {
-		return controleLivro.atualizarLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
+			, String volume, String categoria, String resumo, int estoque, int total) {
+		return controleLivro.atualizarLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque, total);
 	}
 
 	@Override
@@ -83,8 +83,8 @@ public class Fachada implements IFachada {
 
 	@Override
 	public boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque) {
-		return controleLivro.cadastraLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
+			, String volume, String categoria, String resumo, int estoque, int total) {
+		return controleLivro.cadastraLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque, total);
 	}
 
 	@Override

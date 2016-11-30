@@ -171,7 +171,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 				try{
 					
 				if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(),
-							tfCategoria.getText(), textArea.getText(), tfVolume.getText(), 10 /*estoque*/)){
+							tfCategoria.getText(), textArea.getText(), tfVolume.getText(), 10 /*estoque*/, 10 /*total*/)){
 					//cadastrado com sucesso
 					dispose();
 				}

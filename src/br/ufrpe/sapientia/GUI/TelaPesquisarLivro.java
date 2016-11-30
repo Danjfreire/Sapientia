@@ -109,14 +109,14 @@ public class TelaPesquisarLivro extends JInternalFrame {
 						for(Livro u : livros){
 							String titulo = u.getTitulo();
 							String autor = u.getAutor();
-							String isbn = u.getISBN();
+							String isbn = u.getIsbn();
 							modelo.addRow(new Object[]{titulo,autor,isbn});
 						}
 					}else{
 						Livro livro = Fachada.getInstance().buscaLivroISBN(tfPesquisa.getText());
 							String titulo = livro.getTitulo();
 							String autor = livro.getAutor();
-							String isbn = livro.getISBN();
+							String isbn = livro.getIsbn();
 							modelo.addRow(new Object[]{titulo,autor,isbn});
 					}
 				}catch(Exception exception){
@@ -132,7 +132,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					Livro u = livros.get(table_1.getSelectedRow());
-					boolean a = Fachada.getInstance().removerLivro(u.getISBN());
+					boolean a = Fachada.getInstance().removerLivro(u.getIsbn());
 					
 					if(a){
 						//sucesso
@@ -151,7 +151,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 							for(Livro livro : livros){
 								String titulo = livro.getTitulo();
 								String autor = livro.getAutor();
-								String isbn = livro.getISBN();
+								String isbn = livro.getIsbn();
 								modelo.addRow(new Object[]{titulo,autor,isbn});
 							 }
 					      }
@@ -206,7 +206,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 					for(Livro livro : livros){
 						String titulo = livro.getTitulo();
 						String autor = livro.getAutor();
-						String isbn = livro.getISBN();
+						String isbn = livro.getIsbn();
 						modelo.addRow(new Object[]{titulo,autor,isbn});
 					 }
 					

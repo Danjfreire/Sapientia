@@ -135,7 +135,7 @@ public class FormAtuaLivro extends JFrame {
 		tfISBN.setColumns(10);
 		tfISBN.setBounds(235, 135, 115, 20);
 		panel.add(tfISBN);
-		tfISBN.setText(livro.getISBN());
+		tfISBN.setText(livro.getIsbn());
 		
 		tfVolume = new JTextField();
 		tfVolume.setColumns(10);
@@ -169,7 +169,7 @@ public class FormAtuaLivro extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					boolean a = Fachada.getInstance().atualizarLivro(tfISBN.getText(), tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(),
-							tfAno.getText(), tfVolume.getText(), tfCategoria.getText(), resumo.getText(), 10);
+							tfAno.getText(), tfVolume.getText(), tfCategoria.getText(), resumo.getText(), 10, 10);
 					if(a){
 						//sucesso
 						dispose();

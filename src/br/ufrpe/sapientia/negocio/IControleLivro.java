@@ -6,11 +6,11 @@ import java.util.List;
 public interface IControleLivro {
 
 	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoqueo);
+			, String volume, String categoria, String resumo, int estoque, int total);
 	boolean removerLivro(String isbn);
 	List<Livro> buscaTitulo(String titulo);
 	Livro buscaISBN(String isbn);
 	boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque);
+			, String volume, String categoria, String resumo, int estoque, int total);
 	List<Livro> pesquisarTodos();
 }

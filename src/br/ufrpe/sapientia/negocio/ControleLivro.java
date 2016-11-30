@@ -14,8 +14,8 @@ public class ControleLivro implements IControleLivro{
 
 	@Override
 	public boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque) {
-		return repositorio.atualizar(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
+			, String volume, String categoria, String resumo, int estoque, int total) {
+		return repositorio.atualizar(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque, total);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class ControleLivro implements IControleLivro{
 
 	@Override
 	public boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque) {
-		return repositorio.cadastrar(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque);
+			, String volume, String categoria, String resumo, int estoque, int total) {
+		return repositorio.cadastrar(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque, total);
 	}
 	
 	
