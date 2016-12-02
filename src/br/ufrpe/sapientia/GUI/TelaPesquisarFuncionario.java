@@ -131,7 +131,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		});
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(332, 422, 89, 61);
+		btnAtualizar.setBounds(332, 431, 89, 61);
 		getContentPane().add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -191,7 +191,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		
 		
 		JButton btnExibirTodos = new JButton("Exibir todos");
-		btnExibirTodos.setBounds(607, 121, 138, 50);
+		btnExibirTodos.setBounds(560, 126, 130, 39);
 		getContentPane().add(btnExibirTodos);
 		btnExibirTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -210,7 +210,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(655, 422, 89, 61);
+		btnSair.setBounds(656, 431, 89, 61);
 		getContentPane().add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

@@ -16,6 +16,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaHistóricoLivros extends JInternalFrame {
 	private JTextField textField;
@@ -54,31 +56,35 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		setTitle("Hist\u00F3rico de Empr\u00E9stimo de Livro");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 561, 376);
+		setBounds(100, 100, 780, 499);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 22, 531, 61);
+		panel.setBounds(10, 22, 730, 79);
 		getContentPane().add(panel);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(85, 28, 334, 20);
+		textField.setBounds(85, 28, 515, 22);
 		panel.add(textField);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(429, 27, 92, 23);
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnBuscar.setBounds(628, 21, 92, 36);
 		panel.add(btnBuscar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"ISBN", "T\u00EDtulo"}));
-		comboBox.setBounds(10, 28, 65, 20);
+		comboBox.setBounds(10, 20, 65, 36);
 		panel.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 112, 525, 191);
+		scrollPane.setBounds(10, 112, 730, 305);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();

@@ -36,6 +36,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 	private JTextField tfCidade;
 	private JTextField tfEmail;
 	private JTextField tfTelefone;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -74,7 +75,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 43, 427, 176);
+		panel.setBounds(10, 43, 427, 190);
 		panel.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -89,7 +90,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel.add(lblNome);
 		
 		tfNome = new JTextField();
-		tfNome.setBounds(228, 23, 174, 20);
+		tfNome.setBounds(238, 23, 164, 20);
 		panel.add(tfNome);
 		tfNome.setColumns(10);
 		
@@ -98,35 +99,43 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel.add(lblCpf);
 		
 		tfCpf = new JTextField();
-		tfCpf.setBounds(228, 48, 174, 20);
+		tfCpf.setBounds(238, 48, 164, 20);
 		panel.add(tfCpf);
 		tfCpf.setColumns(10);
 		
 		JLabel lblNascimento = new JLabel("Nascimento.:");
-		lblNascimento.setBounds(148, 73, 86, 14);
+		lblNascimento.setBounds(148, 79, 86, 14);
 		panel.add(lblNascimento);
 		
 		tfNascimento = new JTextField();
-		tfNascimento.setBounds(228, 70, 86, 20);
+		tfNascimento.setBounds(238, 76, 76, 20);
 		panel.add(tfNascimento);
 		tfNascimento.setColumns(10);
 		
 		JLabel lblLogin = new JLabel("Login.:");
-		lblLogin.setBounds(147, 98, 46, 14);
+		lblLogin.setBounds(147, 104, 46, 14);
 		panel.add(lblLogin);
 		
 		tfLogin = new JTextField();
-		tfLogin.setBounds(228, 95, 174, 20);
+		tfLogin.setBounds(238, 101, 164, 20);
 		panel.add(tfLogin);
 		tfLogin.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha.:");
-		lblSenha.setBounds(148, 123, 46, 14);
+		lblSenha.setBounds(148, 129, 46, 14);
 		panel.add(lblSenha);
 		
 		psSenha = new JPasswordField();
-		psSenha.setBounds(228, 120, 174, 20);
+		psSenha.setBounds(238, 126, 164, 20);
 		panel.add(psSenha);
+		
+		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha.:");
+		lblConfirmarSenha.setBounds(147, 157, 133, 14);
+		panel.add(lblConfirmarSenha);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(238, 154, 163, 20);
+		panel.add(passwordField);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 268, 417, 176);

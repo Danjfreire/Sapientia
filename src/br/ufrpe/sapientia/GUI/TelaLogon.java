@@ -31,7 +31,6 @@ public class TelaLogon extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
 
 	/**
 	 * Launch the application.
@@ -72,7 +71,7 @@ public class TelaLogon extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(47, 79, 79));
-		panel.setBounds(268, 221, 295, 293);
+		panel.setBounds(268, 221, 295, 255);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -82,45 +81,40 @@ public class TelaLogon extends JFrame {
 			}
 		});
 		btnCancelar.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/delete.png")));
-		btnCancelar.setBounds(197, 208, 90, 63);
+		btnCancelar.setBounds(197, 169, 90, 63);
 		panel.add(btnCancelar);
 		
 		JButton btnAcessar = new JButton("");
 		btnAcessar.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/entrar.png")));
-		btnAcessar.setBounds(10, 208, 90, 63);
+		btnAcessar.setBounds(10, 169, 90, 63);
 		panel.add(btnAcessar);
 		
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(84, 85, 203, 22);
+		passwordField.setBounds(84, 122, 203, 22);
 		panel.add(passwordField);
 		
 		JLabel lblSenha = new JLabel("Senha.:");
-		lblSenha.setBounds(10, 82, 257, 22);
+		lblSenha.setBounds(10, 119, 257, 22);
 		panel.add(lblSenha);
 		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblSenha.setForeground(new Color(0, 0, 0));
 		
 		textField = new JTextField();
-		textField.setBounds(84, 33, 203, 24);
+		textField.setBounds(84, 70, 203, 24);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblLogin = new JLabel("Login.:");
-		lblLogin.setBounds(10, 31, 257, 22);
+		lblLogin.setBounds(10, 68, 257, 22);
 		panel.add(lblLogin);
 		lblLogin.setForeground(new Color(0, 0, 0));
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
-		JLabel lblOnfirmarsenha = new JLabel("Confirmar Senha.:");
-		lblOnfirmarsenha.setForeground(Color.BLACK);
-		lblOnfirmarsenha.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblOnfirmarsenha.setBounds(10, 127, 257, 22);
-		panel.add(lblOnfirmarsenha);
-		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(10, 160, 203, 22);
-		panel.add(passwordField_1);
+		JLabel lblNewLabel = new JLabel("Identifica\u00E7\u00E3o do Usu\u00E1rio");
+		lblNewLabel.setBounds(41, 11, 226, 27);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAcessar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
@@ -171,11 +165,6 @@ public class TelaLogon extends JFrame {
 		lblWwwsapientiacombr.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblWwwsapientiacombr.setBounds(10, 166, 176, 27);
 		contentPane.add(lblWwwsapientiacombr);
-		
-		JLabel lblNewLabel = new JLabel("Identifica\u00E7\u00E3o do Usu\u00E1rio");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(307, 183, 226, 27);
-		contentPane.add(lblNewLabel);
 		
 		JLabel lbTelaAzul = new JLabel("");
 		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador.jpg")));

@@ -188,7 +188,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		});
 		
 		JButton btnExibirTodos = new JButton("Exibir todos");
-		btnExibirTodos.setBounds(607, 121, 138, 50);
+		btnExibirTodos.setBounds(559, 121, 135, 41);
 		getContentPane().add(btnExibirTodos);
 		btnExibirTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

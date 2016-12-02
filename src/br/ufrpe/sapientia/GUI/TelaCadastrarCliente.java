@@ -36,6 +36,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 	private JTextField tfCidade;
 	private JTextField tfEmail;
 	private JTextField tfTelefone;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -91,7 +92,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(lblNome);
 		
 		tfNome = new JTextField();
-		tfNome.setBounds(228, 42, 174, 20);
+		tfNome.setBounds(238, 42, 164, 20);
 		panel.add(tfNome);
 		tfNome.setColumns(10);
 		
@@ -100,7 +101,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(lblCpf);
 		
 		tfCpf = new JTextField();
-		tfCpf.setBounds(228, 67, 174, 20);
+		tfCpf.setBounds(238, 67, 164, 20);
 		panel.add(tfCpf);
 		tfCpf.setColumns(10);
 		
@@ -109,7 +110,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(lblNascimento);
 		
 		tfNascimento = new JTextField();
-		tfNascimento.setBounds(229, 92, 86, 20);
+		tfNascimento.setBounds(238, 92, 103, 20);
 		panel.add(tfNascimento);
 		tfNascimento.setColumns(10);
 		
@@ -118,7 +119,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(lblLogin);
 		
 		tfLogin = new JTextField();
-		tfLogin.setBounds(229, 117, 174, 20);
+		tfLogin.setBounds(239, 117, 164, 20);
 		panel.add(tfLogin);
 		tfLogin.setColumns(10);
 		
@@ -127,8 +128,16 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(lblSenha);
 		
 		psSenha = new JPasswordField();
-		psSenha.setBounds(229, 142, 174, 20);
+		psSenha.setBounds(239, 142, 164, 20);
 		panel.add(psSenha);
+		
+		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha.:");
+		lblConfirmarSenha.setBounds(147, 167, 128, 14);
+		panel.add(lblConfirmarSenha);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(239, 167, 163, 20);
+		panel.add(passwordField);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(20, 258, 417, 202);
