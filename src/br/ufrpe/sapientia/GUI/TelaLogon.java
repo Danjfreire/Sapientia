@@ -11,6 +11,7 @@ import br.ufrpe.sapientia.fachada.Fachada;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
@@ -78,6 +79,7 @@ public class TelaLogon extends JFrame {
 		JButton btnCancelar = new JButton("");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
 		btnCancelar.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/delete.png")));
@@ -137,6 +139,9 @@ public class TelaLogon extends JFrame {
 					tela.setVisible(true);
 				}
 				}catch(Exception exception){
+					JOptionPane.showMessageDialog(null,"Login ou Senha Inválida!\n Digite os dados novamente!");
+					textField.setText("");
+					passwordField.setText("");
 					System.out.println(exception.getMessage());
 				}
 			}

@@ -19,6 +19,8 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -172,13 +174,22 @@ public class TelaCadastrarLivro extends JInternalFrame {
 					
 				if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(),
 							tfCategoria.getText(), textArea.getText(), tfVolume.getText(), 10 /*estoque*/, 10 /*total*/)){
-					//cadastrado com sucesso
+					JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
 					dispose();
+				}else{
+					JOptionPane.showMessageDialog(null,"Dados inválidos!");
+					tfTitulo.setText("");
+					tfAutor.setText("");
+					tfEdicao.setText("");
+					tfAno.setText("");
+					tfISBN.setText("");
+					textArea.setText("");
+					tfVolume.setText("");
 				}
-					
-				}catch(Exception exception){
-					
-				}
+			}catch(Exception exception){
+				
+				
+			}
 			}
 		});
 		

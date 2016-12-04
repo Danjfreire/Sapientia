@@ -4,15 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -20,14 +23,15 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.*;
+import java.text.ParseException;
 
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaCadastrarCliente extends JInternalFrame {
 	private JTextField tfNome;
-	private JTextField tfCpf;
-	private JTextField tfNascimento;
+	private JFormattedTextField tfCpf;
+	private JFormattedTextField tfNascimento;
 	private JTextField tfLogin;
 	private JPasswordField psSenha;
 	private JTextField tfLogradouro;
@@ -35,7 +39,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 	private JTextField tfBairro;
 	private JTextField tfCidade;
 	private JTextField tfEmail;
-	private JTextField tfTelefone;
+	private JFormattedTextField tfTelefone;
 	private JPasswordField passwordField;
 
 	/**
@@ -100,8 +104,13 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblCpf.setBounds(148, 67, 46, 14);
 		panel.add(lblCpf);
 		
-		tfCpf = new JTextField();
-		tfCpf.setBounds(238, 67, 164, 20);
+		try {
+			tfCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		tfCpf.setBounds(238, 67, 86, 20);
 		panel.add(tfCpf);
 		tfCpf.setColumns(10);
 		
@@ -109,8 +118,13 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblNascimento.setBounds(148, 92, 86, 14);
 		panel.add(lblNascimento);
 		
-		tfNascimento = new JTextField();
-		tfNascimento.setBounds(238, 92, 103, 20);
+		try {
+			tfNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		tfNascimento.setBounds(238, 92, 69, 20);
 		panel.add(tfNascimento);
 		tfNascimento.setColumns(10);
 		
@@ -191,8 +205,8 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel_1.add(lblEstado);
 		
 		JComboBox cbEstado = new JComboBox();
-		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"PE", "AM", "BA", "SC", "RJ", "SP"}));
-		cbEstado.setBounds(224, 151, 46, 20);
+		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"SELECIONE", "PE", "AM", "BA", "SC", "RJ", "SP"}));
+		cbEstado.setBounds(224, 151, 86, 20);
 		panel_1.add(cbEstado);
 		
 		JPanel panel_2 = new JPanel();
@@ -219,8 +233,13 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel_2.add(tfEmail);
 		tfEmail.setColumns(10);
 		
-		tfTelefone = new JTextField();
-		tfTelefone.setBounds(76, 216, 136, 20);
+		try {
+			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		tfTelefone.setBounds(76, 216, 106, 20);
 		panel_2.add(tfTelefone);
 		tfTelefone.setColumns(10);
 		
@@ -233,8 +252,19 @@ public class TelaCadastrarCliente extends JInternalFrame {
 					Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "H", 
 							tfLogradouro.getText()+ " " + tfBairro.getText()+ " " + tfCidade.getText());
 					if(Fachada.getInstance().CadastrarUsuario(u)){
-						//mensagem de sucesso
+						JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
 						dispose();
+					}else{
+						JOptionPane.showMessageDialog(null,"Dados inválidos!");
+						tfNome.setText("");
+						tfCpf.setText("");
+						tfTelefone.setText("");
+						tfEmail.setText("");
+						tfLogin.setText("");
+						psSenha.setText("");
+						tfLogradouro.setText("");
+						tfBairro.setText("");
+						tfCidade.setText("");
 					}
 					
 				}catch(Exception exception){

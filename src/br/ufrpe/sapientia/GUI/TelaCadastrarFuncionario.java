@@ -4,9 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
@@ -18,16 +20,18 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import java.awt.event.*;
+import java.text.ParseException;
 import java.awt.Color;
 import javax.swing.JButton;
 
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
+import javax.swing.JFormattedTextField;
 
 public class TelaCadastrarFuncionario extends JInternalFrame {
 	private JTextField tfNome;
-	private JTextField tfCpf;
-	private JTextField tfNascimento;
+	private JFormattedTextField tfCpf;
+	private JFormattedTextField tfNascimento;
 	private JTextField tfLogin;
 	private JPasswordField psSenha;
 	private JTextField tfLogradouro;
@@ -35,7 +39,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 	private JTextField tfBairro;
 	private JTextField tfCidade;
 	private JTextField tfEmail;
-	private JTextField tfTelefone;
+	private JFormattedTextField tfTelefone;
 	private JPasswordField passwordField;
 
 	/**
@@ -90,6 +94,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel.add(lblNome);
 		
 		tfNome = new JTextField();
+		tfNome.setToolTipText("Digite seu nome");
 		tfNome.setBounds(238, 23, 164, 20);
 		panel.add(tfNome);
 		tfNome.setColumns(10);
@@ -98,8 +103,14 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblCpf.setBounds(148, 48, 46, 14);
 		panel.add(lblCpf);
 		
-		tfCpf = new JTextField();
-		tfCpf.setBounds(238, 48, 164, 20);
+		try {
+			tfCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+			tfCpf.setToolTipText("Digite seu cpf");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		tfCpf.setBounds(238, 48, 86, 20);
 		panel.add(tfCpf);
 		tfCpf.setColumns(10);
 		
@@ -107,8 +118,14 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblNascimento.setBounds(148, 79, 86, 14);
 		panel.add(lblNascimento);
 		
-		tfNascimento = new JTextField();
-		tfNascimento.setBounds(238, 76, 76, 20);
+		try {
+			tfNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
+			tfNascimento.setToolTipText("Data de nascimento");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		tfNascimento.setBounds(238, 76, 67, 20);
 		panel.add(tfNascimento);
 		tfNascimento.setColumns(10);
 		
@@ -117,6 +134,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel.add(lblLogin);
 		
 		tfLogin = new JTextField();
+		tfLogin.setToolTipText("Digite seu Login");
 		tfLogin.setBounds(238, 101, 164, 20);
 		panel.add(tfLogin);
 		tfLogin.setColumns(10);
@@ -126,7 +144,8 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel.add(lblSenha);
 		
 		psSenha = new JPasswordField();
-		psSenha.setBounds(238, 126, 164, 20);
+		psSenha.setToolTipText("8 Caracteres");
+		psSenha.setBounds(238, 126, 76, 20);
 		panel.add(psSenha);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha.:");
@@ -134,7 +153,8 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel.add(lblConfirmarSenha);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(238, 154, 163, 20);
+		passwordField.setToolTipText("8 caracteres");
+		passwordField.setBounds(238, 154, 76, 20);
 		panel.add(passwordField);
 		
 		JPanel panel_1 = new JPanel();
@@ -153,6 +173,9 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel_1.add(lblLogradouro);
 		
 		tfLogradouro = new JTextField();
+		tfLogradouro.addFocusListener(new FocusAdapter() {
+		});
+		tfLogradouro.setToolTipText("Rua");
 		tfLogradouro.setBounds(224, 18, 183, 20);
 		panel_1.add(tfLogradouro);
 		tfLogradouro.setColumns(10);
@@ -162,6 +185,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel_1.add(lblNmero);
 		
 		tfNumero = new JTextField();
+		tfNumero.setToolTipText("N\u00FAmero da Resid\u00EAncia");
 		tfNumero.setBounds(224, 43, 86, 20);
 		panel_1.add(tfNumero);
 		tfNumero.setColumns(10);
@@ -171,6 +195,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel_1.add(lblBairro);
 		
 		tfBairro = new JTextField();
+		tfBairro.setToolTipText("Seu Bairro");
 		tfBairro.setBounds(224, 68, 149, 20);
 		panel_1.add(tfBairro);
 		tfBairro.setColumns(10);
@@ -180,6 +205,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel_1.add(lblCidade);
 		
 		tfCidade = new JTextField();
+		tfCidade.setToolTipText("Sua cidade");
 		tfCidade.setBounds(224, 93, 149, 20);
 		panel_1.add(tfCidade);
 		tfCidade.setColumns(10);
@@ -189,8 +215,8 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel_1.add(lblEstado);
 		
 		JComboBox cbEstado = new JComboBox();
-		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"PE", "AM", "BA", "SC", "RJ", "SP"}));
-		cbEstado.setBounds(224, 124, 63, 20);
+		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"SELECIONE","PE", "AM", "BA", "SC", "RJ", "SP"}));
+		cbEstado.setBounds(224, 124, 86, 20);
 		panel_1.add(cbEstado);
 		
 		JPanel panel_2 = new JPanel();
@@ -213,12 +239,19 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel_2.add(lblTelefone);
 		
 		tfEmail = new JTextField();
+		tfEmail.setToolTipText("Seu email");
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_2.add(tfEmail);
 		tfEmail.setColumns(10);
 		
-		tfTelefone = new JTextField();
-		tfTelefone.setBounds(76, 216, 136, 20);
+		try {
+			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
+			tfTelefone.setToolTipText("Telefone");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		tfTelefone.setBounds(76, 216, 109, 20);
 		panel_2.add(tfTelefone);
 		tfTelefone.setColumns(10);
 		
@@ -227,17 +260,29 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		getContentPane().add(btnCadastrar);
 		btnCadastrar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				
+				
 				try{
 					Usuario u =  new Usuario("F", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "M",
 							tfLogradouro.getText()+" "+ tfBairro.getText()+" "+ tfCidade.getText());
 					boolean a = Fachada.getInstance().CadastrarUsuario(u);
 					if(a){
-						//mensagem de sucesso
+						JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
 						dispose();
+					}else{
+						JOptionPane.showMessageDialog(null,"Dados inválidos!");
+						tfNome.setText("");
+						tfCpf.setText("");
+						tfTelefone.setText("");
+						tfEmail.setText("");
+						tfLogin.setText("");
+						psSenha.setText("");
+						tfLogradouro.setText("");
+						tfBairro.setText("");
+						tfCidade.setText("");
 					}
-					
-					
 				}catch(Exception exception){
+					
 					
 				}
 			}
@@ -246,6 +291,8 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(635, 410, 89, 23);
 		getContentPane().add(btnCancelar);
+		
+		
 		btnCancelar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
