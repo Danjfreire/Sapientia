@@ -139,6 +139,24 @@ public class RepositorioLivros implements IRepositorioLivros{
 		return l;
 	}
 	
+	public List<Livro> pesquisarAutor(String autor){
+		List<Livro> livros = new ArrayList<Livro>();
+		String sql = "select * from livro where autor_livro = ?";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, autor);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				livros.add(preencherLivro(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return livros;
+
+	}
+	
 	private Livro preencherLivro(ResultSet rs){
 		Livro l = null;
 		try {
