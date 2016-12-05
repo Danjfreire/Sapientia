@@ -14,7 +14,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 	public RepositorioLivros(){
 		this.connection = new Conexao().construirConexao();
 	}
-	public boolean cadastrar(String isbn, String titulo, String autor, String edicao, String ano
+	public boolean cadastrar(String titulo, String autor, String edicao, String ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total){
 		
 		boolean s = false;

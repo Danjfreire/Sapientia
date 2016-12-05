@@ -21,7 +21,7 @@ public interface IFachada {
 	List<Livro> buscaLivroTitulo(String titulo);
 	Livro buscaLivroISBN(String isbn);
 	List<Livro>exibirLivros();
-	boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
+	boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total);
 	
 	Usuario efetuarLogin(String login, String senha);

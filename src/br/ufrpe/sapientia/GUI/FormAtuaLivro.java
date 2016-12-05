@@ -27,8 +27,8 @@ public class FormAtuaLivro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTitulo;
-	private JTextField tfAutor;
 	private JTextField tfEdicao;
+	private JTextField tfAutor;
 	private JTextField tfAno;
 	private JTextField tfISBN;
 	private JTextField tfVolume;
@@ -113,17 +113,17 @@ public class FormAtuaLivro extends JFrame {
 		panel.add(tfTitulo);
 		tfTitulo.setText(livro.getTitulo());
 		
-		tfAutor = new JTextField();
-		tfAutor.setColumns(10);
-		tfAutor.setBounds(235, 73, 115, 20);
-		panel.add(tfAutor);
-		tfAutor.setText(livro.getAutor());
-		
 		tfEdicao = new JTextField();
 		tfEdicao.setColumns(10);
-		tfEdicao.setBounds(235, 42, 115, 20);
+		tfEdicao.setBounds(235, 73, 115, 20);
 		panel.add(tfEdicao);
 		tfEdicao.setText(livro.getEdicao());
+		
+		tfAutor = new JTextField();
+		tfAutor.setColumns(10);
+		tfAutor.setBounds(235, 42, 115, 20);
+		panel.add(tfAutor);
+		tfAutor.setText(livro.getAutor());
 		
 		tfAno = new JTextField();
 		tfAno.setColumns(10);
@@ -168,7 +168,7 @@ public class FormAtuaLivro extends JFrame {
 		btnSalvar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-					boolean a = Fachada.getInstance().atualizarLivro(tfISBN.getText(), tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(),
+					boolean a = Fachada.getInstance().atualizarLivro(tfISBN.getText(), tfTitulo.getText(), tfEdicao.getText(), tfAutor.getText(),
 							tfAno.getText(), tfVolume.getText(), tfCategoria.getText(), resumo.getText(), 10, 10);
 					if(a){
 						//sucesso

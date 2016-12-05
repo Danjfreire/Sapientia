@@ -10,7 +10,7 @@ public interface IControleLivro {
 	boolean removerLivro(String isbn);
 	List<Livro> buscaTitulo(String titulo);
 	Livro buscaISBN(String isbn);
-	boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
+	boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total);
 	List<Livro> pesquisarTodos();
 }

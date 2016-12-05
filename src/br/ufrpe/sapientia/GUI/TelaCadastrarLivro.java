@@ -29,13 +29,14 @@ import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaCadastrarLivro extends JInternalFrame {
-	private JTextField tfTitulo;
-	private JTextField tfAutor;
-	private JTextField tfEdicao;
-	private JTextField tfAno;
-	private JTextField tfISBN;
-	private JTextField tfVolume;
-	private JTextField tfCategoria;
+	private JTextField tfTitulo; //titulo
+	private JTextField tfEdicao; // ano
+	private JTextField tfAutor; // autor
+	private JTextField tfAno;// edicao
+	private JTextField tfISBN;// isbn
+	private JTextField tfVolume;// volume
+	private JTextField tfCategoria; // categoria
+	//resumo = edicao
 
 	/**
 	 * Launch the application.
@@ -120,15 +121,15 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		panel.add(tfTitulo);
 		tfTitulo.setColumns(10);
 		
-		tfAutor = new JTextField();
-		tfAutor.setBounds(344, 161, 115, 20);
-		panel.add(tfAutor);
-		tfAutor.setColumns(10);
-		
 		tfEdicao = new JTextField();
-		tfEdicao.setColumns(10);
-		tfEdicao.setBounds(344, 115, 115, 20);
+		tfEdicao.setBounds(344, 161, 115, 20);
 		panel.add(tfEdicao);
+		tfEdicao.setColumns(10);
+		
+		tfAutor = new JTextField();
+		tfAutor.setColumns(10);
+		tfAutor.setBounds(344, 115, 115, 20);
+		panel.add(tfAutor);
 		
 		tfAno = new JTextField();
 		tfAno.setColumns(10);
@@ -172,15 +173,18 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					
-				if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(),
-							tfCategoria.getText(), textArea.getText(), tfVolume.getText(), 10 /*estoque*/, 10 /*total*/)){
+				if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(), 
+						tfVolume.getText(), tfCategoria.getText(), textArea.getText(), 10, 10)){
 					JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
+					//Livro l = new Livro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(), 
+					//		tfVolume.getText(), tfCategoria.getText(), textArea.getText(), 10, 10);
+					//System.out.println(l);
 					dispose();
 				}else{
 					JOptionPane.showMessageDialog(null,"Dados inválidos!");
 					tfTitulo.setText("");
-					tfAutor.setText("");
 					tfEdicao.setText("");
+					tfAutor.setText("");
 					tfAno.setText("");
 					tfISBN.setText("");
 					textArea.setText("");

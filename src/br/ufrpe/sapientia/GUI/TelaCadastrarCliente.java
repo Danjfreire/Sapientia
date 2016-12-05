@@ -249,12 +249,13 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		btnCadastrar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-					Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "H", 
+					if(psSenha.getText().equals(passwordField.getText())){
+						Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "H", 
 							tfLogradouro.getText()+ " " + tfBairro.getText()+ " " + tfCidade.getText());
-					if(Fachada.getInstance().CadastrarUsuario(u)){
+						if(Fachada.getInstance().CadastrarUsuario(u)){
 						JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
 						dispose();
-					}else{
+						}else{
 						JOptionPane.showMessageDialog(null,"Dados inválidos!");
 						tfNome.setText("");
 						tfCpf.setText("");
@@ -265,8 +266,10 @@ public class TelaCadastrarCliente extends JInternalFrame {
 						tfLogradouro.setText("");
 						tfBairro.setText("");
 						tfCidade.setText("");
+					 }
 					}
-					
+					else
+						JOptionPane.showMessageDialog(null, "As senhas não são iguais");
 				}catch(Exception exception){
 					
 				}

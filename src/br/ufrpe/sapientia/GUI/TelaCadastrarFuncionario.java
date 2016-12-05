@@ -263,6 +263,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 				
 				
 				try{
+					if(psSenha.getText().equals(passwordField.getText())){
 					Usuario u =  new Usuario("F", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "M",
 							tfLogradouro.getText()+" "+ tfBairro.getText()+" "+ tfCidade.getText());
 					boolean a = Fachada.getInstance().CadastrarUsuario(u);
@@ -280,7 +281,9 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 						tfLogradouro.setText("");
 						tfBairro.setText("");
 						tfCidade.setText("");
-					}
+					 }
+					}else
+						JOptionPane.showMessageDialog(null, "As senhas não são iguais");
 				}catch(Exception exception){
 					
 					

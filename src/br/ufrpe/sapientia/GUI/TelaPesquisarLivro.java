@@ -112,7 +112,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 							String isbn = u.getIsbn();
 							modelo.addRow(new Object[]{titulo,autor,isbn});
 						}
-					}else{
+					}else if(comboBox.getSelectedItem().equals("ISBN")){
 						Livro livro = Fachada.getInstance().buscaLivroISBN(tfPesquisa.getText());
 							String titulo = livro.getTitulo();
 							String autor = livro.getAutor();
@@ -183,7 +183,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					Livro u = livros.get(table_1.getSelectedRow());
-					
+					System.out.println(u);
 					FormAtuaLivro tela = new FormAtuaLivro(u);
 					//dispose();
 					tela.setVisible(true);

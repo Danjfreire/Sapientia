@@ -82,9 +82,9 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public boolean cadastraLivro(String isbn, String titulo, String autor, String edicao, String ano
+	public boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total) {
-		return controleLivro.cadastraLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque, total);
+		return controleLivro.cadastraLivro(titulo, autor, edicao, ano, isbn, volume, categoria, resumo, estoque, total);
 	}
 
 	@Override
