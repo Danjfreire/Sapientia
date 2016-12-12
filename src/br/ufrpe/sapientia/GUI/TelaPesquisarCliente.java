@@ -109,6 +109,12 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		btnPesquisar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
+					table_1 = new JTable();
+					DefaultTableModel modelo = new DefaultTableModel();
+					table_1.setModel(modelo);
+					modelo.addColumn("Nome");
+					modelo.addColumn("CPF");
+					scrollPane.setViewportView(table_1);
 					
 					if(comboBox.getSelectedItem().equals("Nome")){
 						clientes = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "C");
@@ -118,7 +124,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 							modelo.addRow(new Object[]{nome,cpf});
 						}
 					}
-					else{
+					else if(comboBox.getSelectedItem().equals("Cpf")){
 						Usuario u = Fachada.getInstance().buscarUsuarioCPF(tfPesquisa.getText(), "C");
 						String nome = u.getNome();
 						String cpf = u.getCpf();
@@ -163,23 +169,29 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					
 					if(a){
 						//sucesso
+						table_1 = new JTable();
+						DefaultTableModel modelo = new DefaultTableModel();
+						table_1.setModel(modelo);
+						modelo.addColumn("Nome");
+						modelo.addColumn("CPF");
+						scrollPane.setViewportView(table_1);
+						
 						if(comboBox.getSelectedItem().equals("Nome")){
-							table_1 = new JTable();
-							DefaultTableModel modelo = new DefaultTableModel();
-							table_1.setModel(modelo);
-							modelo.addColumn("Nome");
-							modelo.addColumn("CPF");
-							scrollPane.setViewportView(table_1);
 							if(tfPesquisa.getText()!="")
 								clientes = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "C");
 							else
 								clientes = Fachada.getInstance().exibirUsuarios("C");
-							for(Usuario user : clientes){
-								String nome = user.getNome();
-								String cpf = user.getCpf();
-								modelo.addRow(new Object[]{nome,cpf});
-							 }
+					      }else{
+					    	  if(tfPesquisa.getText().equals("")){
+					    		  clientes = Fachada.getInstance().exibirUsuarios("C");
+					    	  }
 					      }
+						
+						for(Usuario user : clientes){
+			    			  String nome = user.getNome();
+			    			  String cpf = user.getCpf();
+			    			  modelo.addRow(new Object[]{nome,cpf});
+			    		  }
 				        } 
 					}catch(Exception exception){
 					
@@ -193,6 +205,13 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		btnExibirTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
+					table_1 = new JTable();
+					DefaultTableModel modelo = new DefaultTableModel();
+					table_1.setModel(modelo);
+					modelo.addColumn("Nome");
+					modelo.addColumn("CPF");
+					scrollPane.setViewportView(table_1);
+					
 					clientes = Fachada.getInstance().exibirUsuarios("C");
 					for(Usuario user : clientes){
 						String nome = user.getNome();

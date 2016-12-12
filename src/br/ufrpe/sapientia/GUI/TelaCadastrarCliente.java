@@ -250,11 +250,11 @@ public class TelaCadastrarCliente extends JInternalFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					if(psSenha.getText().equals(passwordField.getText())){
-						Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "H", 
+						Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "M", 
 							tfLogradouro.getText()+ " " + tfBairro.getText()+ " " + tfCidade.getText());
 						if(Fachada.getInstance().CadastrarUsuario(u)){
-						JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
-						dispose();
+							JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
+							dispose();
 						}else{
 						JOptionPane.showMessageDialog(null,"Dados inválidos!");
 						tfNome.setText("");

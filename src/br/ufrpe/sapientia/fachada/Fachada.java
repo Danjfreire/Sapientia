@@ -72,6 +72,11 @@ public class Fachada implements IFachada {
 	}
 	
 	@Override
+	public List<Livro> buscaLivroAutor(String autor){
+		return controleLivro.buscaAutor(autor);
+	}
+	
+	@Override
 	public List<Livro> buscaLivroTitulo(String titulo){
 		return controleLivro.buscaTitulo(titulo);
 	}

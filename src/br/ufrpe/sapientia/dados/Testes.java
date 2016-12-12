@@ -8,10 +8,10 @@ import br.ufrpe.sapientia.negocio.beans.Usuario;
 
 public class Testes {
 	public static void main(String [] args){
-		//RepositorioUsuarios ru = new RepositorioUsuarios();
+		RepositorioUsuarios ru = new RepositorioUsuarios();
 		
-		//Usuario u = new Usuario("F", "dan", "7856923", "6324782684", "dan13@gmail.com", "logi", "senha", "H", "Rua um");
-		//ru.cadastrar(u);
+		Usuario u = new Usuario("C", "dan", "7856923", "6324782684", "dan13@gmail.com", "logi", "senha", "M", "Rua um");
+		ru.cadastrar(u);
 		//List<Usuario> usuarios= new ArrayList<Usuario>();
 		//usuarios = ru.pesquisarTodos("F");
 		/*for(Usuario user : usuarios)
@@ -27,15 +27,15 @@ public class Testes {
 			System.out.println(user);*/
 		
 		
-		RepositorioLivros rl = new RepositorioLivros();
+		//RepositorioLivros rl = new RepositorioLivros();
 		//rl.remover("12");
 		//rl.atualizar("129", "harry poter", "j.k. rowling", "unico", "2000", "unico", "amor", "bruxos", 10, 10);
-		rl.cadastrar("129", "a culpa e das estrelas", "alice", "unico", "2000", "unico", "amor", "historia de amor", 10, 10);
-		List<Livro> livros = new ArrayList<Livro>();
+		//rl.cadastrar("129", "a culpa e das estrelas", "alice", "unico", "2000", "unico", "amor", "historia de amor", 10, 10);
+		//List<Livro> livros = new ArrayList<Livro>();
 		//System.out.println(rl.pesquisarISBN("129"));
-		livros = rl.pesquisarAutor("wallace");
-		for(Livro l : livros)
-			System.out.println(l);
+		//livros = rl.pesquisarAutor("wallace");
+		//for(Livro l : livros)
+		//	System.out.println(l);
 		
 		//RepositorioEmprestimos re = new RepositorioEmprestimos();
 	}

@@ -34,6 +34,11 @@ public class ControleLivro implements IControleLivro{
 	}
 	
 	@Override
+	public List<Livro> buscaAutor(String autor){
+		return repositorio.pesquisarAutor(autor);
+	}
+	
+	@Override
 	public List<Livro> pesquisarTodos(){
 		return repositorio.pesquisarTodos();
 	}

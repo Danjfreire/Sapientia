@@ -104,6 +104,14 @@ public class TelaPesquisarLivro extends JInternalFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					
+					table_1 = new JTable();
+					DefaultTableModel modelo = new DefaultTableModel();
+					table_1.setModel(modelo);
+					modelo.addColumn("Titulo");
+					modelo.addColumn("Autor");
+					modelo.addColumn("ISBN");
+					scrollPane.setViewportView(table_1);
+					
 					if(comboBox.getSelectedItem().equals("Titulo")){
 						livros = Fachada.getInstance().buscaLivroTitulo(tfPesquisa.getText());
 						for(Livro u : livros){
@@ -118,6 +126,14 @@ public class TelaPesquisarLivro extends JInternalFrame {
 							String autor = livro.getAutor();
 							String isbn = livro.getIsbn();
 							modelo.addRow(new Object[]{titulo,autor,isbn});
+					}else if(comboBox.getSelectedItem().equals("Autor")){
+						 livros = Fachada.getInstance().buscaLivroAutor(tfPesquisa.getText());
+						 for(Livro u : livros){
+								String titulo = u.getTitulo();
+								String autor = u.getAutor();
+								String isbn = u.getIsbn();
+								modelo.addRow(new Object[]{titulo,autor,isbn});
+						 }
 					}
 				}catch(Exception exception){
 					
@@ -135,27 +151,37 @@ public class TelaPesquisarLivro extends JInternalFrame {
 					boolean a = Fachada.getInstance().removerLivro(u.getIsbn());
 					
 					if(a){
-						//sucesso
+						table_1 = new JTable();
+						DefaultTableModel modelo = new DefaultTableModel();
+						table_1.setModel(modelo);
+						modelo.addColumn("Titulo");
+						modelo.addColumn("Autor");
+						modelo.addColumn("ISBN");
+						scrollPane.setViewportView(table_1);
+						
 						if(comboBox.getSelectedItem().equals("Nome")){
-							table_1 = new JTable();
-							DefaultTableModel modelo = new DefaultTableModel();
-							table_1.setModel(modelo);
-							modelo.addColumn("Titulo");
-							modelo.addColumn("Autor");
-							modelo.addColumn("ISBN");
-							scrollPane.setViewportView(table_1);
 							if(tfPesquisa.getText()!= "")
 								livros = Fachada.getInstance().buscaLivroTitulo(tfPesquisa.getText());
 							else
+								livros = Fachada.getInstance().exibirLivros(); 
+						   }
+						else if(comboBox.getSelectedItem().equals("Autor")){
+							if(tfPesquisa.getText()!="")
+								livros = Fachada.getInstance().buscaLivroAutor(tfPesquisa.getText());
+							else
 								livros = Fachada.getInstance().exibirLivros();
-							for(Livro livro : livros){
-								String titulo = livro.getTitulo();
-								String autor = livro.getAutor();
-								String isbn = livro.getIsbn();
-								modelo.addRow(new Object[]{titulo,autor,isbn});
-							 }
-					      }
-				        } 
+						}
+						else 
+							if(tfPesquisa.getText().equals(""))
+								livros = Fachada.getInstance().exibirLivros();
+						
+						for(Livro livro : livros){
+							String titulo = livro.getTitulo();
+							String autor = livro.getAutor();
+							String isbn = livro.getIsbn();
+							modelo.addRow(new Object[]{titulo,autor,isbn});
+						}
+				       } 
 					}catch(Exception exception){
 					
 				}
@@ -202,6 +228,14 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		btnMostrarTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
+					table_1 = new JTable();
+					DefaultTableModel modelo = new DefaultTableModel();
+					table_1.setModel(modelo);
+					modelo.addColumn("Titulo");
+					modelo.addColumn("Autor");
+					modelo.addColumn("ISBN");
+					scrollPane.setViewportView(table_1);
+					
 					livros = Fachada.getInstance().exibirLivros();
 					for(Livro livro : livros){
 						String titulo = livro.getTitulo();

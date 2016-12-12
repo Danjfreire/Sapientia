@@ -13,4 +13,5 @@ public interface IControleLivro {
 	boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total);
 	List<Livro> pesquisarTodos();
+	List<Livro> buscaAutor(String autor);
 }

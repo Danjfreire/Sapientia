@@ -110,6 +110,11 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		btnPesquisar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
+					DefaultTableModel modelo = new DefaultTableModel();
+					table_1.setModel(modelo);
+					modelo.addColumn("Nome");
+					modelo.addColumn("CPF");
+					scrollPane.setViewportView(table_1);
 					
 					if(comboBox.getSelectedItem().equals("Nome")){
 						funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
@@ -164,23 +169,30 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 					
 					if(a){
 						//sucesso
+						
+						DefaultTableModel modelo = new DefaultTableModel();
+						table_1.setModel(modelo);
+						modelo.addColumn("Nome");
+						modelo.addColumn("CPF");
+						scrollPane.setViewportView(table_1);
+						
 						if(comboBox.getSelectedItem().equals("Nome")){
-							table_1 = new JTable();
-							DefaultTableModel modelo = new DefaultTableModel();
-							table_1.setModel(modelo);
-							modelo.addColumn("Nome");
-							modelo.addColumn("CPF");
-							scrollPane.setViewportView(table_1);
+							
 							if(tfPesquisa.getText()!="")
 								funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
 							else
 								funcionarios = Fachada.getInstance().exibirUsuarios("F");
-							for(Usuario user : funcionarios){
-								String nome = user.getNome();
-								String cpf = user.getCpf();
-								modelo.addRow(new Object[]{nome,cpf});
-							 }
+					      }else{
+					    	  if(tfPesquisa.getText().equals("")){
+					    		  funcionarios = Fachada.getInstance().exibirUsuarios("F");
+					    	  }
 					      }
+						for(Usuario user : funcionarios){
+							String nome = user.getNome();
+							String cpf = user.getCpf();
+							modelo.addRow(new Object[]{nome,cpf});
+						 }
+						
 				        } 
 					}catch(Exception exception){
 					
@@ -196,7 +208,13 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		btnExibirTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-					funcionarios = Fachada.getInstance().exibirUsuarios("C");
+					DefaultTableModel modelo = new DefaultTableModel();
+					table_1.setModel(modelo);
+					modelo.addColumn("Nome");
+					modelo.addColumn("CPF");
+					scrollPane.setViewportView(table_1);
+					
+					funcionarios = Fachada.getInstance().exibirUsuarios("F");
 					for(Usuario user : funcionarios){
 						String nome = user.getNome();
 						String cpf = user.getCpf();

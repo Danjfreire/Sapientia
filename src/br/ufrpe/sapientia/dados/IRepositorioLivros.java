@@ -12,5 +12,6 @@ public interface IRepositorioLivros {
 	List<Livro>pesquisarTodos();
 	List<Livro>pesquisarTitulo(String titulo);
 	Livro pesquisarISBN(String isbn);
+	List<Livro> pesquisarAutor(String autor);
 	
 }
