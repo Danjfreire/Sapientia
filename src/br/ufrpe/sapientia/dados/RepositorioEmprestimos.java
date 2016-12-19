@@ -11,12 +11,13 @@ import java.util.List;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
 
 
-public class RepositorioEmprestimos {
+public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	private Connection connection;
 	
 	public RepositorioEmprestimos(){
 		this.connection = new Conexao().construirConexao();
 	}
+	//cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
 	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status
 			, String cpf_funcionario, String cpf_cliente, String isbn_livro){
 		/*

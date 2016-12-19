@@ -13,46 +13,68 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.*;
+
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaEmpréstimo extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-
+	private JTextField tfNome;
+	private JTextField tfCpf;
+	private JTextField tfTitulo;
+	private JTextField tfIsbn;
+	private JTextField tfFuncionario;
+	private JTextField tfDataInicio;
+	private JTextField tfDataFinal;
+	private Usuario funcionario;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				        if ("Nimbus".equals(info.getName())) {
-				            UIManager.setLookAndFeel(info.getClassName());
-				            break;
-				        }
-				    }
-				} catch (Exception e) {
-				    // If Nimbus is not available, you can set the GUI to another look and feel.
-				}
-				try {
-					TelaEmpréstimo frame = new TelaEmpréstimo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//				        if ("Nimbus".equals(info.getName())) {
+//				            UIManager.setLookAndFeel(info.getClassName());
+//				            break;
+//				        }
+//				    }
+//				} catch (Exception e) {
+//				    // If Nimbus is not available, you can set the GUI to another look and feel.
+//				}
+//				try {
+//					TelaEmpréstimo frame = new TelaEmpréstimo();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaEmpréstimo() {
+	
+	
+	/*Opcoes
+	 * 1 - Essa tela deveria ter campos para realizar uma pesquisa de livro por isbn ou nome e abrir outra tela para que o cliente entre com o cpf 
+	 * 	   e complete o emprestimo.
+	 * 
+	 * 2 - Criar um botão empréstimo na tela de busca de livro que redireciona para esta página onde seria inserido o cpf do cliente e as datas de empréstimo,
+	 * 	   o botão que redireciona para essa tela não seria mais na tela principal e sim na tela de pesquisa de livro, enquanto o botão da tela principal iria redirecionar 
+	 * 	   para a tela de livros.
+	 * 
+	 * 3 - Manter do modo que está, apenas removendo os campos de nome e cpf de cliente.Seria uma tela que mudaria quando um livro fosse buscado.
+	 *     Ex: Busca o livro e após selecionado na lista os campos de cpf do cliente se tornam habilitados, e assim que o campo de cpf estiver preenchido 
+	 *     	   o botão de efetuar emprestimo se torna habilitado
+	 */
+	
+	
+	public TelaEmpréstimo(Usuario func) {
+		this.funcionario = func;
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("\t\t\t\t\t\t\tSapientia - Empr\u00E9stimo de Livros");
@@ -69,19 +91,19 @@ public class TelaEmpréstimo extends JInternalFrame {
 		lblNome.setBounds(10, 23, 48, 14);
 		panel.add(lblNome);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(48, 20, 220, 20);
-		panel.add(textField);
+		tfNome = new JTextField();
+		tfNome.setColumns(10);
+		tfNome.setBounds(48, 20, 220, 20);
+		panel.add(tfNome);
 		
 		JLabel lblCpf = new JLabel("Cpf.:");
 		lblCpf.setBounds(278, 23, 32, 14);
 		panel.add(lblCpf);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(320, 20, 148, 20);
-		panel.add(textField_1);
+		tfCpf = new JTextField();
+		tfCpf.setColumns(10);
+		tfCpf.setBounds(320, 20, 148, 20);
+		panel.add(tfCpf);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados do Livro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -93,23 +115,34 @@ public class TelaEmpréstimo extends JInternalFrame {
 		lblTtulo.setBounds(194, 27, 46, 14);
 		panel_1.add(lblTtulo);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(244, 24, 235, 20);
-		panel_1.add(textField_2);
+		tfTitulo = new JTextField();
+		tfTitulo.setColumns(10);
+		tfTitulo.setBounds(244, 24, 235, 20);
+		panel_1.add(tfTitulo);
 		
 		JLabel lblIsbn = new JLabel("ISBN.:");
 		lblIsbn.setBounds(10, 27, 46, 14);
 		panel_1.add(lblIsbn);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(53, 24, 131, 20);
-		panel_1.add(textField_3);
+		tfIsbn = new JTextField();
+		tfIsbn.setColumns(10);
+		tfIsbn.setBounds(53, 24, 131, 20);
+		panel_1.add(tfIsbn);
 		
 		JButton btnNovo = new JButton("Novo");
 		btnNovo.setBounds(390, 72, 89, 23);
 		panel_1.add(btnNovo);
+		btnNovo.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					//Fachada.getInstance().efetuarEmprestimo( tfDataInicio.getText(),tfDataFinal.getText(), "status", 
+					//funcionario, cliente)
+				}
+				catch(Exception exception){
+					//msg de erro
+				}
+			}
+		});
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Empr\u00E9stimo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -121,28 +154,30 @@ public class TelaEmpréstimo extends JInternalFrame {
 		lblFuncionrio.setBounds(10, 24, 70, 14);
 		panel_2.add(lblFuncionrio);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(82, 21, 235, 20);
-		panel_2.add(textField_4);
+		tfFuncionario = new JTextField();
+		tfFuncionario.setColumns(10);
+		tfFuncionario.setBounds(82, 21, 235, 20);
+		panel_2.add(tfFuncionario);
+		tfFuncionario.setText(funcionario.getNome());
+		tfFuncionario.setEditable(false);
 		
 		JLabel lblDadtaIncio = new JLabel("Data In\u00EDcio.:");
 		lblDadtaIncio.setBounds(10, 61, 70, 14);
 		panel_2.add(lblDadtaIncio);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(82, 58, 121, 20);
-		panel_2.add(textField_5);
+		tfDataInicio = new JTextField();
+		tfDataInicio.setColumns(10);
+		tfDataInicio.setBounds(82, 58, 121, 20);
+		panel_2.add(tfDataInicio);
 		
 		JLabel lblDataDevoluo = new JLabel("Data Devolu\u00E7\u00E3o.:");
 		lblDataDevoluo.setBounds(232, 61, 84, 14);
 		panel_2.add(lblDataDevoluo);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(326, 58, 121, 20);
-		panel_2.add(textField_6);
+		tfDataFinal = new JTextField();
+		tfDataFinal.setColumns(10);
+		tfDataFinal.setBounds(326, 58, 121, 20);
+		panel_2.add(tfDataFinal);
 
 	}
 }

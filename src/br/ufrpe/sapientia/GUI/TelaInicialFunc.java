@@ -266,7 +266,7 @@ public class TelaInicialFunc extends JFrame {
 		mntmEmprestarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				TelaEmpréstimo tela = new TelaEmpréstimo();
+				TelaEmpréstimo tela = new TelaEmpréstimo(funcionario);
 				desktopPane.add(tela);
 				try {
 					tela.setMaximum(true);

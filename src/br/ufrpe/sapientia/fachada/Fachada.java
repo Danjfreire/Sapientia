@@ -34,6 +34,9 @@ public class Fachada implements IFachada {
 	public boolean efetuarEmprestimo() {
 		return controleEmprestimo.efetuarEmprestimo();
 	}
+	//public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente){
+	//	return controleEmprestimo.efetuarEmprestimo();
+	//}
 
 	@Override
 	public List<Emprestimo> verificarPendenciasLivro(Livro livro) {

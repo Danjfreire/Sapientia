@@ -10,6 +10,7 @@ public interface IFachada {
 
 	
 	boolean efetuarEmprestimo();
+	//efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
 	List<Emprestimo> verificarPendenciasLivro(Livro livro);
 	List<Emprestimo> verificarPendenciasCliente(Usuario cliente);
 	List<Emprestimo> verificarEmprestimoLivro(Livro livro);
@@ -31,7 +32,7 @@ public interface IFachada {
 	Usuario buscarUsuarioCPF(String cpf , String tipo);
 	boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, 
 			String email, String login, String senha, String tipo, String sexo);
-	//Usuario removerCliente();
+	
 	List<Usuario> buscarUsuarioNome(String nome, String tipo);
 	List<Usuario> exibirUsuarios(String tipo);
 	boolean CadastrarUsuario(Usuario usuario);
