@@ -62,12 +62,12 @@ public class TelaHistoricoCliente extends JInternalFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"C\u00F3digo", "T\u00EDtulo", "Autor", "Funcion\u00E1rio", "Empr\u00E9stimo", "Devolu\u00E7\u00E3o"
+				"C\u00F3digo", "T\u00EDtulo", "Funcion\u00E1rio", "Empr\u00E9stimo", "Devolu\u00E7\u00E3o"
 			}
 		));
 		scrollPane.setViewportView(table);
 		
-		JLabel lblNewLabel = new JLabel("Empr\u00E9stimos realizados!");
+		JLabel lblNewLabel = new JLabel("Meu historico");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setBounds(246, 67, 205, 22);

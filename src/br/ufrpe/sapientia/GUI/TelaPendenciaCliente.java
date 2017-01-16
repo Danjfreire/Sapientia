@@ -62,7 +62,7 @@ public class TelaPendenciaCliente extends JInternalFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"C\u00F3digo", "T\u00EDtulo", "Autor", "In\u00EDcio", "Devolu\u00E7\u00E3o", "Atraso"
+				"C\u00F3digo", "T\u00EDtulo", "In\u00EDcio", "Devolu\u00E7\u00E3o", "Atraso"
 			}
 		));
 		scrollPane.setViewportView(table);

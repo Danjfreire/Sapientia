@@ -1,5 +1,6 @@
 package br.ufrpe.sapientia.fachada;
 
+import java.util.Calendar;
 import java.util.List;
 
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
@@ -9,7 +10,8 @@ import br.ufrpe.sapientia.negocio.beans.Usuario;
 public interface IFachada {
 
 	
-	boolean efetuarEmprestimo();
+	boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
+			,String cliente, String isbn);
 	//efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
 	List<Emprestimo> verificarPendenciasLivro(Livro livro);
 	List<Emprestimo> verificarPendenciasCliente(Usuario cliente);
@@ -37,6 +39,8 @@ public interface IFachada {
 	List<Usuario> exibirUsuarios(String tipo);
 	boolean CadastrarUsuario(Usuario usuario);
 	boolean atualizarADM();
+	
+	
 
 	
 }

@@ -14,6 +14,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
@@ -75,6 +78,8 @@ public class TelaEmpréstimo extends JInternalFrame {
 	
 	public TelaEmpréstimo(Usuario func) {
 		this.funcionario = func;
+		Calendar inicio = Calendar.getInstance();
+		
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("\t\t\t\t\t\t\tSapientia - Empr\u00E9stimo de Livros");
@@ -135,8 +140,13 @@ public class TelaEmpréstimo extends JInternalFrame {
 		btnNovo.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-					//Fachada.getInstance().efetuarEmprestimo( tfDataInicio.getText(),tfDataFinal.getText(), "status", 
-					//funcionario, cliente)
+					SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+					Date fim = df.parse(tfDataFinal.getText());
+					Calendar termino = Calendar.getInstance();
+					termino.setTime(fim);
+					if(Fachada.getInstance().efetuarEmprestimo(inicio, termino, "novo",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
+						System.out.println("emprestimo realizado com sucesso");
+					}
 				}
 				catch(Exception exception){
 					//msg de erro
@@ -169,6 +179,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 		tfDataInicio.setColumns(10);
 		tfDataInicio.setBounds(82, 58, 121, 20);
 		panel_2.add(tfDataInicio);
+		tfDataInicio.setText(inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR));
 		
 		JLabel lblDataDevoluo = new JLabel("Data Devolu\u00E7\u00E3o.:");
 		lblDataDevoluo.setBounds(232, 61, 84, 14);

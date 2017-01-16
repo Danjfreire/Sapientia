@@ -1,4 +1,5 @@
 package br.ufrpe.sapientia.fachada;
+import java.util.Calendar;
 import java.util.List;
 
 import br.ufrpe.sapientia.negocio.*;
@@ -31,8 +32,10 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public boolean efetuarEmprestimo() {
-		return controleEmprestimo.efetuarEmprestimo();
+	public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
+			,String cliente, String isbn) {
+		return controleEmprestimo.efetuarEmprestimo(dataEmprestimo,dataDevolucao, status, funcionario
+				,cliente,isbn);
 	}
 	//public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente){
 	//	return controleEmprestimo.efetuarEmprestimo();
