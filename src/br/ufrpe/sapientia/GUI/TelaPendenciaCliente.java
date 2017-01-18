@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
+import java.util.List;
+
 public class TelaPendenciaCliente extends JInternalFrame {
 	private JTable table;
 
@@ -66,6 +70,12 @@ public class TelaPendenciaCliente extends JInternalFrame {
 			}
 		));
 		scrollPane.setViewportView(table);
+		try{
+			//List<Emprestimo> emprestimos = Fachada.getInstance().verificarPendenciasCliente(cliente)
+		}catch(Exception e){
+			
+		}
+		
 		
 		JLabel lblNewLabel = new JLabel("Livros em atraso!");
 		lblNewLabel.setForeground(Color.RED);

@@ -13,10 +13,10 @@ public interface IFachada {
 	boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
 			,String cliente, String isbn);
 	//efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
-	List<Emprestimo> verificarPendenciasLivro(Livro livro);
-	List<Emprestimo> verificarPendenciasCliente(Usuario cliente);
-	List<Emprestimo> verificarEmprestimoLivro(Livro livro);
-	List<Emprestimo> verificarEmprestimoCliente(Usuario cliente);
+	List<Emprestimo> verificarPendenciasLivro(String isbn);
+	List<Emprestimo> verificarPendenciasCliente(String cpf, String status);
+	List<Emprestimo> verificarEmprestimoLivro(String isbn);
+	List<Emprestimo> verificarEmprestimoCliente(String cpf);
 	
 	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, int estoque, int total);
