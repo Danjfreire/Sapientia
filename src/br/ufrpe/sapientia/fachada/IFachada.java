@@ -28,17 +28,17 @@ public interface IFachada {
 	boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total);
 	
-	Usuario efetuarLogin(String login, String senha);
+	Usuario efetuarLogin(String login, String senha) throws Exception;
 	
-	boolean removerUsuario(String cpf);
-	Usuario buscarUsuarioCPF(String cpf , String tipo);
+	boolean removerUsuario(String cpf) throws Exception;
+	Usuario buscarUsuarioCPF(String cpf , String tipo) throws Exception;
 	boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, 
-			String email, String login, String senha, String tipo, String sexo);
+			String email, String login, String senha, String tipo, String sexo) throws Exception;
 	
-	List<Usuario> buscarUsuarioNome(String nome, String tipo);
-	List<Usuario> exibirUsuarios(String tipo);
-	boolean CadastrarUsuario(Usuario usuario);
-	boolean atualizarADM();
+	List<Usuario> buscarUsuarioNome(String nome, String tipo) throws Exception;
+	List<Usuario> exibirUsuarios(String tipo) throws Exception;
+	boolean CadastrarUsuario(Usuario usuario) throws Exception;
+	boolean atualizarADM() throws Exception;
 	
 	
 

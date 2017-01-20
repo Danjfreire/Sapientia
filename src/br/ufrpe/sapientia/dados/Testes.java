@@ -10,8 +10,13 @@ public class Testes {
 	public static void main(String [] args){
 		RepositorioUsuarios ru = new RepositorioUsuarios();
 		
-		Usuario u = new Usuario("C", "dan", "7856923", "6324782684", "dan13@gmail.com", "logi", "senha", "M", "Rua um");
-		ru.cadastrar(u);
+		Usuario u = new Usuario("C", "dan", "785692334567", "63247826855654", "daggttutn13@gmail.com", "logiooooo", "senha", "M", "Rua um");
+		try {
+			ru.cadastrar(u);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();;
+		}
 		//List<Usuario> usuarios= new ArrayList<Usuario>();
 		//usuarios = ru.pesquisarTodos("F");
 		/*for(Usuario user : usuarios)

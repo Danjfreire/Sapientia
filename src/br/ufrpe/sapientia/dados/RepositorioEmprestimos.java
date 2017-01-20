@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
+import br.ufrpe.sapientia.negocio.beans.Livro;
 
 
 public class RepositorioEmprestimos implements IRepositorioEmprestimos {
@@ -25,9 +26,10 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		 */
 		boolean s = false;
 		String sql = "insert into emprestimo (funcionario_emprestimo, cliente_emprestimo, status_emprestimo,  data_saida_emprestimo,"
-				+ " data_entrega_emprestimo, isbn_livro)"
-				+ " value(?,?,?,?,?,?)";
+				+ " data_entrega_emprestimo, isbn_livro, titulo_livro)"
+				+ " value(?,?,?,?,?,?,?)";
 		try{
+			RepositorioLivros rl = new RepositorioLivros();
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cpf_funcionario);
 			stmt.setString(2, cpf_cliente);
@@ -35,6 +37,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.setDate(4, new Date(dataEmprestimo.getTimeInMillis()));
 			stmt.setDate(5, new Date(dataDevolucao.getTimeInMillis()));
 			stmt.setString(6, isbn_livro);
+			stmt.setString(7, rl.pesquisarISBN(isbn_livro).getTitulo());
 			stmt.execute();
 			stmt.close();
 			s = true;
@@ -77,6 +80,24 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			ex.printStackTrace();
 		}
 		return s;
+	}
+	
+	public List<Emprestimo> pesquisarEmprestimoTitulo(String titulo){
+		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		String consulta = '%' + titulo + '%';
+		String sql = "select * from emprestimo where titulo_livro like ?";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, consulta);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				emprestimos.add(preencherEmprestimo(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return emprestimos;
 	}
 	
 	public List<Emprestimo> pesquisarTodos(){
@@ -143,7 +164,8 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			String funcionario = rs.getString("funcionario_emprestimo");
 			String cliente = rs.getString("cliente_emprestimo");
 			String isbn = rs.getString("isbn_livro");
-			em = new Emprestimo(dataEmprestimo, dataDevolucao, status, isbn, cliente, funcionario);
+			String titulo = rs.getString("titulo_livro");
+			em = new Emprestimo(dataEmprestimo, dataDevolucao, status, isbn, cliente, funcionario, titulo);
 			em.setIdEmprestimo(id);
 		} catch (SQLException e) {
 			e.printStackTrace();

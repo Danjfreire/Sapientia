@@ -11,7 +11,7 @@ public class ControleLogin implements IControleLogin{
 	}
 
 	@Override
-	public Usuario efetuarLogin(String login, String senha) {
+	public Usuario efetuarLogin(String login, String senha) throws Exception{
 		return repositorio.pesquisarLoginSenha(login, senha);
 	}
 	

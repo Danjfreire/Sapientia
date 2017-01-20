@@ -99,28 +99,28 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public Usuario efetuarLogin(String login, String senha) {
+	public Usuario efetuarLogin(String login, String senha) throws Exception{
 		return controleLogin.efetuarLogin(login, senha);
 	}
 
 	@Override
 	public boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, String email,
-			String login, String senha, String tipo, String sexo) {
+			String login, String senha, String tipo, String sexo) throws Exception{
 		return controleUsuario.atualizarUsuario(cpf, nome, contato, endereco, email, login, senha, tipo, sexo);
 	}
 
 	@Override
-	public boolean removerUsuario(String cpf) {
+	public boolean removerUsuario(String cpf) throws Exception{
 		return controleUsuario.removerUsuario(cpf);
 	}
 
 	@Override
-	public Usuario buscarUsuarioCPF(String cpf, String tipo) {
+	public Usuario buscarUsuarioCPF(String cpf, String tipo) throws Exception{
 		return controleUsuario.buscarUsuarioCPF(cpf, tipo);
 	}
 
 	@Override
-	public List<Usuario> exibirUsuarios(String tipo) {
+	public List<Usuario> exibirUsuarios(String tipo) throws Exception{
 		return controleUsuario.pesquisarTodos(tipo);
 	}
 	// @Override
@@ -129,17 +129,17 @@ public class Fachada implements IFachada {
 	// }
 
 	@Override
-	public List<Usuario> buscarUsuarioNome(String nome, String tipo) {
+	public List<Usuario> buscarUsuarioNome(String nome, String tipo) throws Exception{
 		return controleUsuario.buscarUsuarioNome(nome, tipo);
 	}
 
 	@Override
-	public boolean CadastrarUsuario(Usuario usuario) {
+	public boolean CadastrarUsuario(Usuario usuario) throws Exception{
 		return controleUsuario.CadastrarUsuario(usuario);
 	}
 
 	@Override
-	public boolean atualizarADM() {
+	public boolean atualizarADM() throws Exception{
 		return controleUsuario.atualizarADM();
 	}
 

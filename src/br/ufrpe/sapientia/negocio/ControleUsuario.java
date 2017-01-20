@@ -14,39 +14,39 @@ public class ControleUsuario implements IControleUsuario{
 
 	@Override
 	public boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, 
-			String email, String login, String senha, String tipo, String sexo){ //AJUSTAR
+			String email, String login, String senha, String tipo, String sexo) throws Exception{ //AJUSTAR
 		return repositorio.atualizar(cpf, nome, contato, endereco, email, login, senha, tipo, sexo); 
 	}
 
 	@Override
-	public boolean removerUsuario(String cpf) {
+	public boolean removerUsuario(String cpf) throws Exception{
 		return repositorio.remover(cpf);
 	}
 
 	@Override
-	public Usuario buscarUsuarioCPF(String cpf,String tipo) {
+	public Usuario buscarUsuarioCPF(String cpf,String tipo) throws Exception{
 		return repositorio.pesquisarCPF(cpf, tipo);
 	}
 
 
 	@Override
-	public List<Usuario> buscarUsuarioNome(String nome, String tipo) { //AJUSTAR
+	public List<Usuario> buscarUsuarioNome(String nome, String tipo) throws Exception{ //AJUSTAR
 		return repositorio.pesquisarNome(nome, tipo);
 	}
 
 	@Override
-	public boolean CadastrarUsuario(Usuario usuario) {
+	public boolean CadastrarUsuario(Usuario usuario) throws Exception{
 		return repositorio.cadastrar(usuario);
 	}
 
 	@Override
-	public boolean atualizarADM() { //AJUSTAR
+	public boolean atualizarADM() throws Exception{ //AJUSTAR
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
 	@Override
-	public List<Usuario> pesquisarTodos(String tipo){
+	public List<Usuario> pesquisarTodos(String tipo) throws Exception{
 		return repositorio.pesquisarTodos(tipo);
 	}
 	

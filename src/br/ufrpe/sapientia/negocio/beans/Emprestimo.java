@@ -10,14 +10,17 @@ public class Emprestimo {
 	private String isbnLivro;
 	private String cpfCliente;
 	private String cpfFuncionario;
-	public Emprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String isbnLivro,
-			String cpfCliente, String cpfFuncionario) {
+	private String tituloLivro;
+	public Emprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status,
+			String isbnLivro, String cpfCliente, String cpfFuncionario, String tituloLivro) {
 		this.dataEmprestimo = dataEmprestimo;
 		this.dataDevolucao = dataDevolucao;
+		this.idEmprestimo = idEmprestimo;
 		this.status = status;
 		this.isbnLivro = isbnLivro;
 		this.cpfCliente = cpfCliente;
 		this.cpfFuncionario = cpfFuncionario;
+		this.tituloLivro = tituloLivro;
 	}
 	public Calendar getDataEmprestimo() {
 		return dataEmprestimo;
@@ -61,12 +64,16 @@ public class Emprestimo {
 	public void setCpfFuncionario(String cpfFuncionario) {
 		this.cpfFuncionario = cpfFuncionario;
 	}
-	
+	public String getTituloLivro() {
+		return tituloLivro;
+	}
+	public void setTituloLivro(String tituloLivro) {
+		this.tituloLivro = tituloLivro;
+	}
 	public String toString() {
 		return "Emprestimo [dataEmprestimo=" + dataEmprestimo + ", dataDevolucao=" + dataDevolucao + ", idEmprestimo="
 				+ idEmprestimo + ", status=" + status + ", isbnLivro=" + isbnLivro + ", cpfCliente=" + cpfCliente
-				+ ", cpfFuncionario=" + cpfFuncionario + "]";
+				+ ", cpfFuncionario=" + cpfFuncionario + ", tituloLivro=" + tituloLivro + "]";
 	}
-	
 	
 }
