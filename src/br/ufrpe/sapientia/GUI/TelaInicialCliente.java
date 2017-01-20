@@ -116,7 +116,7 @@ public class TelaInicialCliente extends JFrame {
 		mntmPendnciasDeLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				TelaPendenciaCliente tela = new TelaPendenciaCliente();
+				TelaPendenciaCliente tela = new TelaPendenciaCliente(u);
 				desktopPane.add(tela);
 				try {
 					tela.setMaximum(true);
