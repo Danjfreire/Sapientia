@@ -32,7 +32,7 @@ public class Fachada implements IFachada {
 
 	@Override
 	public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario,
-			String cliente, String isbn) {
+			String cliente, String isbn) throws Exception{
 		return controleEmprestimo.efetuarEmprestimo(dataEmprestimo, dataDevolucao, status, funcionario, cliente, isbn);
 	}
 	// public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar
@@ -46,55 +46,55 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public List<Emprestimo> verificarPendenciasCliente(String cpf, String status) {
+	public List<Emprestimo> verificarPendenciasCliente(String cpf, String status) throws Exception{
 		return controleEmprestimo.verificarPendenciasCliente(cpf,status);
 	}
 
 	@Override
-	public List<Emprestimo> verificarEmprestimoLivro(String isbn) {
+	public List<Emprestimo> verificarEmprestimoLivro(String isbn) throws Exception{
 		return controleEmprestimo.verificarEmprestimoLivro(isbn);
 	}
 
 	@Override
-	public List<Emprestimo> verificarEmprestimoCliente(String cpf) {
+	public List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception{
 		return controleEmprestimo.verificarEmprestimoCliente(cpf);
 	}
 
 	@Override
 	public boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano, String volume,
-			String categoria, String resumo, int estoque, int total) {
+			String categoria, String resumo, int estoque, int total) throws Exception{
 		return controleLivro.atualizarLivro(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque,
 				total);
 	}
 
 	@Override
-	public boolean removerLivro(String isbn) {
+	public boolean removerLivro(String isbn) throws Exception{
 		return controleLivro.removerLivro(isbn);
 	}
 
 	@Override
-	public Livro buscaLivroISBN(String isbn) {
+	public Livro buscaLivroISBN(String isbn) throws Exception{
 		return controleLivro.buscaISBN(isbn);
 	}
 
 	@Override
-	public List<Livro> buscaLivroAutor(String autor) {
+	public List<Livro> buscaLivroAutor(String autor) throws Exception{
 		return controleLivro.buscaAutor(autor);
 	}
 
 	@Override
-	public List<Livro> buscaLivroTitulo(String titulo) {
+	public List<Livro> buscaLivroTitulo(String titulo) throws Exception{
 		return controleLivro.buscaTitulo(titulo);
 	}
 
 	@Override
-	public List<Livro> exibirLivros() {
+	public List<Livro> exibirLivros() throws Exception{
 		return controleLivro.pesquisarTodos();
 	}
 
 	@Override
 	public boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn, String volume,
-			String categoria, String resumo, int estoque, int total) {
+			String categoria, String resumo, int estoque, int total) throws Exception{
 		return controleLivro.cadastraLivro(titulo, autor, edicao, ano, isbn, volume, categoria, resumo, estoque, total);
 	}
 

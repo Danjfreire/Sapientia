@@ -14,10 +14,10 @@ public interface IControleEmprestimo {
 	//Usuario funcionario, Usuario cliente);
 
 	boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
-			,String cliente, String isbn);
+			,String cliente, String isbn) throws Exception;
 
 	List<Emprestimo>verificarPendenciasLivro(String isbn);
-	List<Emprestimo>verificarPendenciasCliente(String cpf, String status);
-	List<Emprestimo>verificarEmprestimoLivro(String isbn);
-	List<Emprestimo>verificarEmprestimoCliente(String cpf);
+	List<Emprestimo>verificarPendenciasCliente(String cpf, String status) throws Exception;
+	List<Emprestimo>verificarEmprestimoLivro(String isbn) throws Exception;
+	List<Emprestimo>verificarEmprestimoCliente(String cpf) throws Exception;
 }

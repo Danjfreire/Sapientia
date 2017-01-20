@@ -14,38 +14,38 @@ public class ControleLivro implements IControleLivro{
 
 	@Override
 	public boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque, int total) {
+			, String volume, String categoria, String resumo, int estoque, int total) throws Exception{
 		return repositorio.atualizar(isbn, titulo, autor, edicao, ano, volume, categoria, resumo, estoque, total);
 	}
 
 	@Override
-	public boolean removerLivro(String isbn) {
+	public boolean removerLivro(String isbn) throws Exception{
 		return repositorio.remover(isbn);
 	}
 
 	@Override
-	public Livro buscaISBN(String isbn) {
+	public Livro buscaISBN(String isbn) throws Exception{
 		return repositorio.pesquisarISBN(isbn);
 	}
 	
 	@Override
-	public List<Livro> buscaTitulo(String titulo){
+	public List<Livro> buscaTitulo(String titulo) throws Exception{
 		return repositorio.pesquisarTitulo(titulo);
 	}
 	
 	@Override
-	public List<Livro> buscaAutor(String autor){
+	public List<Livro> buscaAutor(String autor) throws Exception{
 		return repositorio.pesquisarAutor(autor);
 	}
 	
 	@Override
-	public List<Livro> pesquisarTodos(){
+	public List<Livro> pesquisarTodos() throws Exception{
 		return repositorio.pesquisarTodos();
 	}
 
 	@Override
 	public boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
-			, String volume, String categoria, String resumo, int estoque, int total) {
+			, String volume, String categoria, String resumo, int estoque, int total) throws Exception{
 		return repositorio.cadastrar(titulo, autor,edicao , ano, isbn, volume, categoria, resumo, estoque, total);
 	}
 	

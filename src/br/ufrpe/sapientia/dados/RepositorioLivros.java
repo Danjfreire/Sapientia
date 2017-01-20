@@ -15,7 +15,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 		this.connection = new Conexao().construirConexao();
 	}
 	public boolean cadastrar(String titulo, String autor, String edicao, String ano, String isbn
-			, String volume, String categoria, String resumo, int estoque, int total){
+			, String volume, String categoria, String resumo, int estoque, int total) throws Exception{
 		
 		boolean s = false;
 		String sql = "insert into livro (titulo_livro, autor_livro, edicao_livro,"
@@ -38,12 +38,13 @@ public class RepositorioLivros implements IRepositorioLivros{
 			s = true;
 			System.out.println("Cadastrado");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Faha no cadastro do livro!");
 		}
 		return s;
 	}
 	
-	public boolean remover(String Isbn){
+	public boolean remover(String Isbn) throws Exception{
 		boolean s = false;
 		String sql = "delete from livro where isbn_livro = ?";
 		try{
@@ -54,13 +55,14 @@ public class RepositorioLivros implements IRepositorioLivros{
 			s = true;
 			System.out.println("removido");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na remoção do livro!");
 		}
 		return s;
 	}
 	
 	public boolean atualizar(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque, int total){
+			, String volume, String categoria, String resumo, int estoque, int total) throws Exception{
 		
 		boolean s = false;
 		String sql = "update livro set titulo_livro = ?, autor_livro = ?,"+
@@ -83,12 +85,13 @@ public class RepositorioLivros implements IRepositorioLivros{
 			s = true;
 			System.out.println("atualizado");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na atualização do livro!");
 		}
 		return s;
 	}
 	
-	public List<Livro> pesquisarTodos(){
+	public List<Livro> pesquisarTodos() throws Exception{
 		List<Livro> livros = new ArrayList<Livro>();
 		String sql = "select * from livro";
 		try{
@@ -99,12 +102,13 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa!");
 		}
 		return livros;
 	}
 	
-	public List<Livro> pesquisarTitulo(String titulo){
+	public List<Livro> pesquisarTitulo(String titulo) throws Exception{
 		List<Livro> livros = new ArrayList<Livro>();
 		String consulta = '%' + titulo + '%';
 		String sql = "select * from livro where titulo_livro like ?";
@@ -117,12 +121,13 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa do título!");
 		}
 		return livros;
 	}
 	
-	public Livro pesquisarISBN(String isbn){
+	public Livro pesquisarISBN(String isbn) throws Exception{
 		Livro l = null;
 		String sql = "select * from livro where isbn_livro = ?";
 		try{
@@ -134,12 +139,13 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Faalha na pesquisa do livro!");
 		}
 		return l;
 	}
 	
-	public List<Livro> pesquisarAutor(String autor){
+	public List<Livro> pesquisarAutor(String autor) throws Exception{
 		List<Livro> livros = new ArrayList<Livro>();
 		String sql = "select * from livro where autor_livro = ?";
 		try{
@@ -151,7 +157,8 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa do autor!");
 		}
 		return livros;
 

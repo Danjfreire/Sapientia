@@ -20,7 +20,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	}
 	//cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
 	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status
-			, String cpf_funcionario, String cpf_cliente, String isbn_livro){
+			, String cpf_funcionario, String cpf_cliente, String isbn_livro) throws Exception{
 		/*
 		 *  
 		 */
@@ -43,13 +43,14 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			s = true;
 			System.out.println("Cadastrado");	
 			
-		}catch(SQLException ex){
-			ex.printStackTrace();
+		}catch(SQLException e){
+			System.out.print(e.getMessage());
+			throw new Exception("Falha no cadastro do empréstimo!");
 		}
 		return s;
 	}
 	
-	public boolean remove(int id){
+	public boolean remove(int id) throws Exception{
 		boolean s = false;
 		String sql = "delete from emprestimo where id_emprestimo = ?";
 		try{
@@ -59,13 +60,14 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			s = true;
 			System.out.println("removido");
-		}catch(SQLException ex){
-			ex.printStackTrace();
+		}catch(SQLException e){
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na remoção do livro!");
 		}
 		return s;
 	}
 	
-	public boolean atualizar(int id, String status){
+	public boolean atualizar(int id, String status) throws Exception{
 		boolean s = false;
 		String sql = "update emprestimo"
 				+ " set status = ? where isbn_livro = ?";
@@ -76,13 +78,14 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			s = true;
 			System.out.println("atualizado");
-		}catch(SQLException ex){
-			ex.printStackTrace();
+		}catch(SQLException e){
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na atualização do livro!");
 		}
 		return s;
 	}
 	
-	public List<Emprestimo> pesquisarEmprestimoTitulo(String titulo){
+	public List<Emprestimo> pesquisarEmprestimoTitulo(String titulo) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String consulta = '%' + titulo + '%';
 		String sql = "select * from emprestimo where titulo_livro like ?";
@@ -95,12 +98,13 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa do título do livro!");
 		}
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarTodos(){
+	public List<Emprestimo> pesquisarTodos() throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql = "select * from livro";
 		try{
@@ -111,12 +115,13 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa!");
 		}
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarEmrprestimoCliente(String cpf_cliente, String status){
+	public List<Emprestimo> pesquisarEmrprestimoCliente(String cpf_cliente, String status) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql = "select * from livro where cliente_emprestimo = ? and status_emprestimo = ?";
 		try{
@@ -129,12 +134,13 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();				
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa por cliente!");
 		}
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarEmrprestimoFuncionario(String cpf_funcionario, String status){
+	public List<Emprestimo> pesquisarEmrprestimoFuncionario(String cpf_funcionario, String status) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql = "select * from livro where funcionario_emprestimo = ? and status_emprestimo = ?";
 		try{
@@ -147,7 +153,8 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			e.printStackTrace();
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa por funcionário!");
 		}
 		return emprestimos;
 	}

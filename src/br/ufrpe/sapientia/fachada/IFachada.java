@@ -11,22 +11,22 @@ public interface IFachada {
 
 	
 	boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
-			,String cliente, String isbn);
+			,String cliente, String isbn) throws Exception;
 	//efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
 	List<Emprestimo> verificarPendenciasLivro(String isbn);
-	List<Emprestimo> verificarPendenciasCliente(String cpf, String status);
-	List<Emprestimo> verificarEmprestimoLivro(String isbn);
-	List<Emprestimo> verificarEmprestimoCliente(String cpf);
+	List<Emprestimo> verificarPendenciasCliente(String cpf, String status) throws Exception;
+	List<Emprestimo> verificarEmprestimoLivro(String isbn) throws Exception;
+	List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception;
 	
 	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque, int total);
-	boolean removerLivro(String isbn);
-	List<Livro> buscaLivroTitulo(String titulo);
-	Livro buscaLivroISBN(String isbn);
-	List<Livro> buscaLivroAutor(String autor);
-	List<Livro>exibirLivros();
+			, String volume, String categoria, String resumo, int estoque, int total) throws Exception;
+	boolean removerLivro(String isbn) throws Exception;
+	List<Livro> buscaLivroTitulo(String titulo) throws Exception;
+	Livro buscaLivroISBN(String isbn) throws Exception;
+	List<Livro> buscaLivroAutor(String autor) throws Exception;
+	List<Livro>exibirLivros() throws Exception;
 	boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
-			, String volume, String categoria, String resumo, int estoque, int total);
+			, String volume, String categoria, String resumo, int estoque, int total) throws Exception;
 	
 	Usuario efetuarLogin(String login, String senha) throws Exception;
 	

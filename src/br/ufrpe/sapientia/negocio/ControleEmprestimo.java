@@ -18,7 +18,7 @@ public class ControleEmprestimo implements IControleEmprestimo{
 
 	@Override
 	public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
-			,String cliente, String isbn) {
+			,String cliente, String isbn) throws Exception{
 		return repositorio.cadastrar(dataEmprestimo, dataDevolucao, status, funcionario, cliente, isbn);
 	
 	}
@@ -30,7 +30,7 @@ public class ControleEmprestimo implements IControleEmprestimo{
 	}
 
 	@Override
-	public List<Emprestimo> verificarPendenciasCliente(String cpf, String status) {
+	public List<Emprestimo> verificarPendenciasCliente(String cpf, String status) throws Exception{
 		return repositorio.pesquisarEmrprestimoCliente(cpf, status);
 	}
 
@@ -41,7 +41,7 @@ public class ControleEmprestimo implements IControleEmprestimo{
 	}
 
 	@Override
-	public List<Emprestimo> verificarEmprestimoCliente(String cpf) {
+	public List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception{
 		return repositorio.pesquisarEmrprestimoCliente(cpf, "E");
 	}
 

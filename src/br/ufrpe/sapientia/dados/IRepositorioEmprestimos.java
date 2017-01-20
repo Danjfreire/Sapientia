@@ -7,14 +7,14 @@ import br.ufrpe.sapientia.negocio.beans.Emprestimo;
 
 public interface IRepositorioEmprestimos {
 
-    boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario, String cliente,String isbn);
+    boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario, String cliente,String isbn) throws Exception;
 	//cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente
-    boolean remove(int id);
-	boolean atualizar(int id, String status);
-	List<Emprestimo> pesquisarTodos();
+    boolean remove(int id) throws Exception;
+	boolean atualizar(int id, String status) throws Exception;
+	List<Emprestimo> pesquisarTodos() throws Exception;
 	//List<Emprestimo> pesquisarEmrprestimoCliente(int id);
-	List<Emprestimo> pesquisarEmrprestimoCliente(String cpf_cliente, String status);
+	List<Emprestimo> pesquisarEmrprestimoCliente(String cpf_cliente, String status) throws Exception;
 	//List<Emprestimo> pesquisarEmrprestimo(int id);
-	List<Emprestimo> pesquisarEmrprestimoFuncionario(String cpf_funcionario, String status);
+	List<Emprestimo> pesquisarEmrprestimoFuncionario(String cpf_funcionario, String status) throws Exception;
 	
 }
