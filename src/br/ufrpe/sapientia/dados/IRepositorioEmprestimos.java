@@ -7,7 +7,7 @@ import br.ufrpe.sapientia.negocio.beans.Emprestimo;
 
 public interface IRepositorioEmprestimos {
 
-    boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario, String cliente,String isbn) throws Exception;
+    boolean cadastrar(String dataEmprestimo, String dataDevolucao, String status, String funcionario, String cliente,String isbn) throws Exception;
 	//cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente
     boolean remove(int id) throws Exception;
 	boolean atualizar(int id, String status) throws Exception;

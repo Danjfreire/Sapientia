@@ -10,7 +10,7 @@ import br.ufrpe.sapientia.negocio.beans.Usuario;
 public interface IFachada {
 
 	
-	boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
+	boolean efetuarEmprestimo(String dataEmprestimo, String dataDevolucao, String status, String funcionario
 			,String cliente, String isbn) throws Exception;
 	//efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
 	List<Emprestimo> verificarPendenciasLivro(String isbn);

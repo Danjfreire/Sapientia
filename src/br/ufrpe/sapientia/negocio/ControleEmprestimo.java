@@ -4,9 +4,8 @@ import br.ufrpe.sapientia.dados.*;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
 import br.ufrpe.sapientia.negocio.beans.Livro;
 import br.ufrpe.sapientia.negocio.beans.Usuario;
-
 import java.util.List;
-import java.util.Calendar;
+
 
 public class ControleEmprestimo implements IControleEmprestimo{
 
@@ -17,7 +16,7 @@ public class ControleEmprestimo implements IControleEmprestimo{
 	}
 
 	@Override
-	public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
+	public boolean efetuarEmprestimo(String dataEmprestimo, String dataDevolucao, String status, String funcionario
 			,String cliente, String isbn) throws Exception{
 		return repositorio.cadastrar(dataEmprestimo, dataDevolucao, status, funcionario, cliente, isbn);
 	

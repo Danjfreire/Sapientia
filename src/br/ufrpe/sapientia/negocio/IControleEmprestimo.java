@@ -13,7 +13,7 @@ public interface IControleEmprestimo {
 	//boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, 
 	//Usuario funcionario, Usuario cliente);
 
-	boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, String funcionario
+	boolean efetuarEmprestimo(String dataEmprestimo, String dataDevolucao, String status, String funcionario
 			,String cliente, String isbn) throws Exception;
 
 	List<Emprestimo>verificarPendenciasLivro(String isbn);

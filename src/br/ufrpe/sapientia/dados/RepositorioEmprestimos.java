@@ -5,11 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
-import br.ufrpe.sapientia.negocio.beans.Livro;
 
 
 public class RepositorioEmprestimos implements IRepositorioEmprestimos {
@@ -19,13 +19,16 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		this.connection = new Conexao().construirConexao();
 	}
 	//cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
-	public boolean cadastrar(Calendar dataEmprestimo, Calendar dataDevolucao, String status
+	public boolean cadastrar(String dataEmprestimo, String dataDevolucao, String status
 			, String cpf_funcionario, String cpf_cliente, String isbn_livro) throws Exception{
 		/*
 		 *  
 		 */
 		boolean s = false;
-		String sql = "insert into emprestimo (funcionario_emprestimo, cliente_emprestimo, status_emprestimo,  data_saida_emprestimo,"
+		SimpleDateFormat forma = new SimpleDateFormat("dd/MM/yyyy");
+		Date dataEmprestimoForma = new Date(forma.parse(dataEmprestimo).getTime());
+		Date dataDevolucaoForma = new Date(forma.parse(dataDevolucao).getTime());
+		String sql = "insert into emprestimo (funcionario_cpf, cliente_cpf, status_emprestimo,  data_saida_emprestimo,"
 				+ " data_entrega_emprestimo, isbn_livro, titulo_livro)"
 				+ " value(?,?,?,?,?,?,?)";
 		try{
@@ -34,8 +37,8 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.setString(1, cpf_funcionario);
 			stmt.setString(2, cpf_cliente);
 			stmt.setString(3, status);
-			stmt.setDate(4, new Date(dataEmprestimo.getTimeInMillis()));
-			stmt.setDate(5, new Date(dataDevolucao.getTimeInMillis()));
+			stmt.setDate(4, dataEmprestimoForma);
+			stmt.setDate(5, dataDevolucaoForma);
 			stmt.setString(6, isbn_livro);
 			stmt.setString(7, rl.pesquisarISBN(isbn_livro).getTitulo());
 			stmt.execute();
@@ -106,7 +109,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	
 	public List<Emprestimo> pesquisarTodos() throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from livro";
+		String sql = "select * from emprestimo";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -168,8 +171,8 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			Calendar dataDevolucao = Calendar.getInstance();
 			dataDevolucao.setTime( rs.getDate("data_entrega_emprestimo"));
 			String status = rs.getString("status_emprestimo");
-			String funcionario = rs.getString("funcionario_emprestimo");
-			String cliente = rs.getString("cliente_emprestimo");
+			String funcionario = rs.getString("funcionario_cpf");
+			String cliente = rs.getString("cliente_cpf");
 			String isbn = rs.getString("isbn_livro");
 			String titulo = rs.getString("titulo_livro");
 			em = new Emprestimo(dataEmprestimo, dataDevolucao, status, isbn, cliente, funcionario, titulo);

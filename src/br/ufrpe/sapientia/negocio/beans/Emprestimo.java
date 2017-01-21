@@ -1,4 +1,5 @@
 package br.ufrpe.sapientia.negocio.beans;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Emprestimo {
@@ -71,7 +72,10 @@ public class Emprestimo {
 		this.tituloLivro = tituloLivro;
 	}
 	public String toString() {
-		return "Emprestimo [dataEmprestimo=" + dataEmprestimo + ", dataDevolucao=" + dataDevolucao + ", idEmprestimo="
+		SimpleDateFormat forma = new SimpleDateFormat("dd/MM/yyyy");
+		String dataE = forma.format(dataEmprestimo.getTime());
+		String dataD = forma.format(dataDevolucao.getTime());
+		return "Emprestimo [dataEmprestimo=" + dataE + ", dataDevolucao=" + dataD + ", idEmprestimo="
 				+ idEmprestimo + ", status=" + status + ", isbnLivro=" + isbnLivro + ", cpfCliente=" + cpfCliente
 				+ ", cpfFuncionario=" + cpfFuncionario + ", tituloLivro=" + tituloLivro + "]";
 	}
