@@ -1,6 +1,7 @@
 package br.ufrpe.sapientia.GUI;
 
 import java.awt.EventQueue;
+import java.awt.ItemSelectable;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -73,6 +74,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastrarCliente() {
+		
 		
 		setTitle("Cadastrar Clientes");
 		setClosable(true);
@@ -158,7 +160,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(lblSexo);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"SELECIONE O SEXO", "MASCULINO", "FEMININO"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"MASCULINO", "FEMININO"}));
 		comboBox.setBounds(239, 102, 164, 20);
 		panel.add(comboBox);
 		
@@ -214,7 +216,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel_1.add(lblEstado);
 		
 		JComboBox cbEstado = new JComboBox();
-		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"SELECIONE O ESTADO", "PE", "AM", "BA", "SC", "RJ", "SP"}));
+		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"PE", "AM", "BA", "SC", "RJ", "SP"}));
 		cbEstado.setBounds(224, 151, 183, 20);
 		panel_1.add(cbEstado);
 		
@@ -258,9 +260,10 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		btnCadastrar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
+					String sexo = (String)comboBox.getSelectedItem();
 					if(psSenha.getText().equals(passwordField.getText())){
-						Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "M", 
-							tfLogradouro.getText()+ " " + tfBairro.getText()+ " " + tfCidade.getText());
+						Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "" + sexo.charAt(0), 
+							tfLogradouro.getText()+ ", " + tfNumero.getText() + " -" + tfBairro.getText()+ "- " + tfCidade.getText() + "/" + (String)cbEstado.getSelectedItem());
 						if(Fachada.getInstance().CadastrarUsuario(u)){
 							JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
 							dispose();
