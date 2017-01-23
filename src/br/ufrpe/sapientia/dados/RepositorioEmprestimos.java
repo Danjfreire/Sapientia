@@ -107,6 +107,24 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		return emprestimos;
 	}
 	
+	public List<Emprestimo> pesquisarEmprestimoIsbn(String isbn) throws Exception{
+		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		String sql = "select * from emprestimo where isbn_livro like ?";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, isbn);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				emprestimos.add(preencherEmprestimo(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			System.out.print(e.getMessage());
+			throw new Exception("Falha na pesquisa do isbn do livro!");
+		}
+		return emprestimos;
+	}
+	
 	public List<Emprestimo> pesquisarTodos() throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql = "select * from emprestimo";
