@@ -128,7 +128,7 @@ public class TelaLogon extends JFrame {
 					dispose();
 					tela.setVisible(true);
 				}
-				else if(u.getTipo().equals("F")){
+				else if(u.getTipo().equals("F")){ 
 					TelaInicialFunc tela = new TelaInicialFunc(u);
 					dispose();
 					tela.setVisible(true);

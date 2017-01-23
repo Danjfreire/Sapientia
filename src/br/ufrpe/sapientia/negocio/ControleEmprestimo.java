@@ -30,18 +30,17 @@ public class ControleEmprestimo implements IControleEmprestimo{
 
 	@Override
 	public List<Emprestimo> verificarPendenciasCliente(String cpf, String status) throws Exception{
-		return repositorio.pesquisarEmrprestimoCliente(cpf, status);
+		return repositorio.pesquisarEmprestimoCliente(cpf, status);
 	}
 
 	@Override
-	public List<Emprestimo> verificarEmprestimoLivro(String isbn) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Emprestimo> verificarEmprestimoLivro(String titulo) throws Exception {
+		return repositorio.pesquisarEmprestimoTitulo(titulo);
 	}
 
 	@Override
 	public List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception{
-		return repositorio.pesquisarEmrprestimoCliente(cpf, "E");
+		return repositorio.pesquisarEmprestimoCliente(cpf, "E");
 	}
 
 	

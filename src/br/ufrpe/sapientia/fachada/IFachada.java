@@ -15,7 +15,7 @@ public interface IFachada {
 	//efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status, Usuario funcionario, Usuario cliente)
 	List<Emprestimo> verificarPendenciasLivro(String isbn);
 	List<Emprestimo> verificarPendenciasCliente(String cpf, String status) throws Exception;
-	List<Emprestimo> verificarEmprestimoLivro(String isbn) throws Exception;
+	List<Emprestimo> verificarEmprestimoLivro(String titulo) throws Exception;
 	List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception;
 	
 	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano

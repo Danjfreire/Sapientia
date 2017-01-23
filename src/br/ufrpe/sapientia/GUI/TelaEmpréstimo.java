@@ -140,11 +140,11 @@ public class TelaEmpréstimo extends JInternalFrame {
 		btnNovo.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-					SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
-					Date fim = df.parse(tfDataFinal.getText());
-					Calendar termino = Calendar.getInstance();
-					termino.setTime(fim);
-					if(Fachada.getInstance().efetuarEmprestimo(inicio, termino, "P",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
+//					SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+//					Date fim = df.parse(tfDataFinal.getText());
+//					Calendar termino = Calendar.getInstance();
+//					termino.setTime(fim);
+					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "P",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
 						System.out.println("emprestimo realizado com sucesso");
 					}
 				}
