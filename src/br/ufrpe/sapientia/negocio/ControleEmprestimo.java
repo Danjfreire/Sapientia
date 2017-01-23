@@ -37,10 +37,17 @@ public class ControleEmprestimo implements IControleEmprestimo{
 	public List<Emprestimo> verificarEmprestimoLivro(String titulo) throws Exception {
 		return repositorio.pesquisarEmprestimoTitulo(titulo);
 	}
+	
+	
 
 	@Override
 	public List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception{
 		return repositorio.pesquisarEmprestimoCliente(cpf, "E");
+	}
+
+	@Override
+	public List<Emprestimo> verificarEmprestimoISBN(String isbn) throws Exception {
+		return repositorio.pesquisarEmprestimoISBN(isbn);
 	}
 
 	

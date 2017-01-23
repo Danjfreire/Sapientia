@@ -52,6 +52,11 @@ public class Fachada implements IFachada {
 	public List<Emprestimo> verificarEmprestimoLivro(String isbn) throws Exception{
 		return controleEmprestimo.verificarEmprestimoLivro(isbn);
 	}
+	
+	@Override
+	public List<Emprestimo> verificarEmprestimoISBN(String isbn) throws Exception{
+		return controleEmprestimo.verificarEmprestimoISBN(isbn);
+	}
 
 	@Override
 	public List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception{

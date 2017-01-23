@@ -107,7 +107,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarEmprestimoIsbn(String isbn) throws Exception{
+	public List<Emprestimo> pesquisarEmprestimoISBN(String isbn) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql = "select * from emprestimo where isbn_livro like ?";
 		try{

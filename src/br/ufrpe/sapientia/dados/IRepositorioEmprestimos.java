@@ -14,5 +14,6 @@ public interface IRepositorioEmprestimos {
 	List<Emprestimo> pesquisarEmprestimoCliente(String cpf_cliente, String status) throws Exception;
 	List<Emprestimo> pesquisarEmprestimoFuncionario(String cpf_funcionario, String status) throws Exception;
 	List<Emprestimo> pesquisarEmprestimoTitulo(String titulo) throws Exception;
+	List<Emprestimo> pesquisarEmprestimoISBN(String isbn) throws Exception;
 	
 }
