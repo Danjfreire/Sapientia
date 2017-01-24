@@ -1,5 +1,11 @@
 use sapientia;
-alter table emprestimo modify column status_emprestimo  varchar(8);
+alter table emprestimo modify column status_emprestimo varchar(8);
+alter table usuario drop column endereco_usuario;
+alter table usuario add logradouro varchar(50);
+alter table usuario add numero int;
+alter table usuario add bairro varchar(50);
+alter table usuario add cidade varchar(50);
+alter table usuario add estado varchar(2);
 drop trigger if exists inserirEmprestimo;
 delimiter //
 create trigger inserirEmprestimo

@@ -133,6 +133,7 @@ public class FormAtuaFunc extends JFrame {
 		tfLogin.setColumns(10);
 		tfLogin.setBounds(277, 95, 174, 20);
 		panel.add(tfLogin);
+		tfLogin.setText(funcionario.getLogin());
 		
 		JLabel label_5 = new JLabel("Senha.:");
 		label_5.setBounds(148, 123, 46, 14);
@@ -141,6 +142,7 @@ public class FormAtuaFunc extends JFrame {
 		pfSenha = new JPasswordField();
 		pfSenha.setBounds(277, 120, 174, 20);
 		panel.add(pfSenha);
+		pfSenha.setText(funcionario.getSenha());
 		
 		pfConfirmar = new JPasswordField();
 		pfConfirmar.setBounds(277, 145, 174, 20);
@@ -150,6 +152,7 @@ public class FormAtuaFunc extends JFrame {
 		JLabel lblConfimarSenha = new JLabel("Confimar Senha.:");
 		lblConfimarSenha.setBounds(148, 148, 86, 14);
 		panel.add(lblConfimarSenha);
+		pfConfirmar.setText(funcionario.getSenha());
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -170,6 +173,7 @@ public class FormAtuaFunc extends JFrame {
 		tfLogradouro.setColumns(10);
 		tfLogradouro.setBounds(224, 18, 217, 20);
 		panel_1.add(tfLogradouro);
+		tfLogradouro.setText(funcionario.getLogradouro());
 		
 		JLabel label_8 = new JLabel("N\u00FAmero.:");
 		label_8.setBounds(139, 49, 63, 14);
@@ -179,6 +183,7 @@ public class FormAtuaFunc extends JFrame {
 		tfNumero.setColumns(10);
 		tfNumero.setBounds(224, 43, 217, 20);
 		panel_1.add(tfNumero);
+		tfNumero.setText(Integer.toString(funcionario.getNumero()));
 		
 		JLabel label_9 = new JLabel("Bairro.:");
 		label_9.setBounds(139, 74, 46, 14);
@@ -188,6 +193,7 @@ public class FormAtuaFunc extends JFrame {
 		tfBairro.setColumns(10);
 		tfBairro.setBounds(224, 68, 217, 20);
 		panel_1.add(tfBairro);
+		tfBairro.setText(funcionario.getBairro());
 		
 		JLabel label_10 = new JLabel("Cidade.:");
 		label_10.setBounds(139, 99, 46, 14);
@@ -197,6 +203,7 @@ public class FormAtuaFunc extends JFrame {
 		tfCidade.setColumns(10);
 		tfCidade.setBounds(224, 93, 217, 20);
 		panel_1.add(tfCidade);
+		tfCidade.setText(funcionario.getCidade());
 		
 		JLabel label_11 = new JLabel("Estado.:");
 		label_11.setBounds(139, 124, 46, 14);
@@ -230,6 +237,7 @@ public class FormAtuaFunc extends JFrame {
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_2.add(tfEmail);
+		tfEmail.setText(funcionario.getEmail());
 		
 		try {
 			tfContato = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
@@ -249,8 +257,9 @@ public class FormAtuaFunc extends JFrame {
 				if(pfSenha.getText().equals(pfConfirmar.getText())){
 					try{
 						String sexo = (String)tfSexo.getSelectedItem();
-						boolean a = Fachada.getInstance().atualizarUsuario(funcionario.getCpf(), funcionario.getNome(), tfContato.getText(), tfLogradouro.getText(),
-								tfEmail.getText(), tfLogin.getText(), pfSenha.getText(), "F", "" + sexo.charAt(0));	
+						boolean a = Fachada.getInstance().atualizarUsuario(funcionario.getCpf(), funcionario.getNome(), tfContato.getText(), 
+								tfEmail.getText(), tfLogin.getText(), pfSenha.getText(), "F", "" + sexo.charAt(0), tfLogradouro.getText(), 
+								Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)comboBox.getSelectedItem());	
 						if(a){
 							JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
 							dispose();

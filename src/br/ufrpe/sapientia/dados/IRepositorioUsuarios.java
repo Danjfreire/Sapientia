@@ -8,8 +8,8 @@ public interface IRepositorioUsuarios {
 
 	boolean cadastrar(Usuario u) throws Exception;
 	boolean remover(String cpf) throws Exception;
-	boolean atualizar(String cpf, String nome, String contato, String endereco, 
-			String email, String login, String senha, String tipo, String sexo) throws Exception;
+	boolean atualizar(String cpf, String nome, String contato, String email, String login, String senha, String tipo, String sexo, 
+			String logradouro, int numero, String bairro, String cidade, String estado) throws Exception;
 	List<Usuario>pesquisarTodos(String tipo) throws Exception;
 	List<Usuario>pesquisarNome(String nome, String tipo) throws Exception;
 	Usuario pesquisarCPF(String cpf, String tipo) throws Exception;

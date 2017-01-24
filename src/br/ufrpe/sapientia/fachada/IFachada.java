@@ -34,8 +34,9 @@ public interface IFachada {
 	
 	boolean removerUsuario(String cpf) throws Exception;
 	Usuario buscarUsuarioCPF(String cpf , String tipo) throws Exception;
-	boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, 
-			String email, String login, String senha, String tipo, String sexo) throws Exception;
+	boolean atualizarUsuario(String cpf, String nome, String contato, 
+			String email, String login, String senha, String tipo, String sexo,
+			String logradouro, int numero, String bairro, String cidade, String estado) throws Exception;
 	
 	List<Usuario> buscarUsuarioNome(String nome, String tipo) throws Exception;
 	List<Usuario> exibirUsuarios(String tipo) throws Exception;

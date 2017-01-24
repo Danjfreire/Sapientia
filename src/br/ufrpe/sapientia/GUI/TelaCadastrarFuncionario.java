@@ -252,31 +252,33 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(473, 410, 98, 23);
 		getContentPane().add(btnCadastrar);
+		
 		btnCadastrar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
-				
 				try{
 					if(psSenha.getText().equals(passwordField.getText())){
-					String sexo = (String)cbSexo.getSelectedItem();
-					Usuario u =  new Usuario("F", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "" + sexo.charAt(0),
-							tfLogradouro.getText()+ ", " + tfNumero.getText() + " -" + tfBairro.getText()+ "- " + tfCidade.getText() + "/" + (String)cbEstado.getSelectedItem());
-					boolean a = Fachada.getInstance().CadastrarUsuario(u);
-					if(a){
-						JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
-						dispose();
-					}else{
-						JOptionPane.showMessageDialog(null,"Dados inválidos!");
-						tfNome.setText("");
-						tfCpf.setText("");
-						tfTelefone.setText("");
-						tfEmail.setText("");
-						tfLogin.setText("");
-						psSenha.setText("");
-						tfLogradouro.setText("");
-						tfBairro.setText("");
-						tfCidade.setText("");
-					 }
+						String sexo = (String)cbSexo.getSelectedItem();
+						
+						Usuario u =  new Usuario(tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(),
+								tfLogin.getText(), psSenha.getText(), "" + sexo.charAt(0), "F", tfLogradouro.getText(),
+								Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)cbEstado.getSelectedItem());
+						boolean a = Fachada.getInstance().CadastrarUsuario(u);
+						if(a){
+							JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null,"Dados inválidos!");
+							tfNome.setText("");
+							tfCpf.setText("");
+							tfTelefone.setText("");
+							tfEmail.setText("");
+							tfLogin.setText("");
+							psSenha.setText("");
+							tfLogradouro.setText("");
+							tfBairro.setText("");
+							tfCidade.setText("");
+						}
 					}else{
 						JOptionPane.showMessageDialog(null, "As senhas não são iguais");
 						psSenha.setText("");

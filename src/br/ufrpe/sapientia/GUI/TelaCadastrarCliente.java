@@ -247,8 +247,8 @@ public class TelaCadastrarCliente extends JInternalFrame {
 				try{
 					String sexo = (String)comboBox.getSelectedItem();
 					if(psSenha.getText().equals(passwordField.getText())){
-						Usuario u = new Usuario("C", tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "" + sexo.charAt(0), 
-							tfLogradouro.getText()+ ", " + tfNumero.getText() + " -" + tfBairro.getText()+ "- " + tfCidade.getText() + "/" + (String)cbEstado.getSelectedItem());
+						Usuario u = new Usuario(tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "" + sexo.charAt(0), 
+							"C", tfLogradouro.getText(), Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)cbEstado.getSelectedItem());
 						if(Fachada.getInstance().CadastrarUsuario(u)){
 							JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
 							dispose();

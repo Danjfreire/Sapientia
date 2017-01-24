@@ -112,9 +112,10 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public boolean atualizarUsuario(String cpf, String nome, String contato, String endereco, String email,
-			String login, String senha, String tipo, String sexo) throws Exception{
-		return controleUsuario.atualizarUsuario(cpf, nome, contato, endereco, email, login, senha, tipo, sexo);
+	public boolean atualizarUsuario(String cpf, String nome, String contato, String email,
+			String login, String senha, String tipo, String sexo, String logradouro, int numero,
+			String bairro, String cidade, String estado) throws Exception{
+		return controleUsuario.atualizarUsuario(cpf, nome, contato, email, login, senha, tipo, sexo, logradouro, numero, bairro, cidade, estado);
 	}
 
 	@Override

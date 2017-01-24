@@ -24,6 +24,7 @@ import javax.swing.ImageIcon;
 import java.awt.FlowLayout;
 import br.ufrpe.sapientia.negocio.beans.*;
 import javax.swing.JToggleButton;
+import java.awt.Color;
 
 public class TelaInicialFunc extends JFrame {
 
@@ -62,6 +63,8 @@ public class TelaInicialFunc extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaInicialFunc(Usuario u) {
+		setForeground(new Color(135, 206, 235));
+		setBackground(new Color(135, 206, 235));
 		
 		this.funcionario = u;
 		setTitle("Sapientia");
@@ -70,6 +73,8 @@ public class TelaInicialFunc extends JFrame {
 		setBounds(100, 100, 800, 600);
 		
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(135, 206, 235));
+		contentPane.setForeground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
@@ -80,7 +85,7 @@ public class TelaInicialFunc extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador1.png")));
-		label.setBounds(0, -115, 1024, 734);
+		label.setBounds(0, -115, 1024, 728);
 		desktopPane.add(label);
 		
 		JMenuBar menuBar = new JMenuBar();

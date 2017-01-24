@@ -134,6 +134,7 @@ public class FormAtualCliente extends JFrame {
 		tfLogin.setColumns(10);
 		tfLogin.setBounds(270, 95, 187, 20);
 		panel.add(tfLogin);
+		tfLogin.setText(cliente.getLogin());
 		
 		JLabel label_5 = new JLabel("Senha.:");
 		label_5.setBounds(148, 123, 46, 14);
@@ -142,6 +143,7 @@ public class FormAtualCliente extends JFrame {
 		pfSenha = new JPasswordField();
 		pfSenha.setBounds(270, 120, 187, 20);
 		panel.add(pfSenha);
+		pfSenha.setText(cliente.getSenha());
 		
 		JLabel lblConfirmar = new JLabel("Confirmar Senha:.");
 		lblConfirmar.setBounds(148, 148, 97, 14);
@@ -151,6 +153,7 @@ public class FormAtualCliente extends JFrame {
 		pfConfirmar.setBounds(270, 145, 187, 20);
 		panel.add(pfConfirmar);
 		pfConfirmar.setColumns(10);
+		pfConfirmar.setText(cliente.getSenha());
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -175,6 +178,7 @@ public class FormAtualCliente extends JFrame {
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_1.add(tfEmail);
+		tfEmail.setText(cliente.getEmail());
 		
 		try {
 			tfContato = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
@@ -205,6 +209,7 @@ public class FormAtualCliente extends JFrame {
 		tfLogradouro.setColumns(10);
 		tfLogradouro.setBounds(264, 21, 183, 20);
 		panel_2.add(tfLogradouro);
+		tfLogradouro.setText(cliente.getLogradouro());
 		
 		JLabel label_11 = new JLabel("N\u00FAmero.:");
 		label_11.setBounds(139, 49, 63, 14);
@@ -214,6 +219,7 @@ public class FormAtualCliente extends JFrame {
 		tfNumero.setColumns(10);
 		tfNumero.setBounds(264, 46, 183, 20);
 		panel_2.add(tfNumero);
+		tfNumero.setText(Integer.toString(cliente.getNumero()));
 		
 		JLabel label_12 = new JLabel("Bairro.:");
 		label_12.setBounds(139, 74, 46, 14);
@@ -223,6 +229,7 @@ public class FormAtualCliente extends JFrame {
 		tfBairro.setColumns(10);
 		tfBairro.setBounds(264, 71, 183, 20);
 		panel_2.add(tfBairro);
+		tfBairro.setText(cliente.getBairro());
 		
 		JLabel label_13 = new JLabel("Cidade.:");
 		label_13.setBounds(139, 99, 46, 14);
@@ -232,6 +239,7 @@ public class FormAtualCliente extends JFrame {
 		tfCidade.setColumns(10);
 		tfCidade.setBounds(264, 96, 183, 20);
 		panel_2.add(tfCidade);
+		tfCidade.setText(cliente.getCidade());
 		
 		JLabel label_14 = new JLabel("Estado.:");
 		label_14.setBounds(139, 124, 46, 14);
@@ -251,8 +259,8 @@ public class FormAtualCliente extends JFrame {
 					try{
 						String sexo = (String)cbSexo.getSelectedItem();
 						boolean a = Fachada.getInstance().atualizarUsuario(cliente.getCpf(), cliente.getNome(), tfContato.getText(), 
-								tfLogradouro.getText()+ ", " + tfNumero.getText() + " -" + tfBairro.getText()+ "- " + tfCidade.getText() + "/" + (String)cbEstado.getSelectedItem()
-								, tfEmail.getText(), tfLogin.getText(), pfSenha.getText(), "C", "" + sexo.charAt(0));	
+								 tfEmail.getText(), tfLogin.getText(), pfSenha.getText(), "C", "" + sexo.charAt(0), tfLogradouro.getText(),
+								 Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)cbEstado.getSelectedItem());	
 						if(a){
 							JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
 							dispose();

@@ -109,7 +109,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
 		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaCadastrarFuncionario tela = new TelaCadastrarFuncionario();
 				desktopPane.add(tela);
 				try {
@@ -127,7 +128,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmPesquisar = new JMenuItem("Pesquisar");
 		mntmPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaPesquisarFuncionario tela = new TelaPesquisarFuncionario();
 				desktopPane.add(tela);
 				try {
@@ -148,7 +150,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmCadastrar_1 = new JMenuItem("Cadastrar");
 		mntmCadastrar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaCadastrarLivro tela = new TelaCadastrarLivro();
 				desktopPane.add(tela);
 				try {
@@ -166,7 +169,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmPesquisar_1 = new JMenuItem("Pesquisar");
 		mntmPesquisar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaPesquisarLivro tela = new TelaPesquisarLivro();
 				desktopPane.add(tela);
 				try {
@@ -187,7 +191,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmCadastrar_2 = new JMenuItem("Cadastrar");
 		mntmCadastrar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaCadastrarCliente tela = new TelaCadastrarCliente();
 				desktopPane.add(tela);
 				try {
@@ -205,7 +210,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmPesquisar_2 = new JMenuItem("Pesquisar");
 		mntmPesquisar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaPesquisarCliente tela = new TelaPesquisarCliente();
 				desktopPane.add(tela);
 				try {
@@ -236,7 +242,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmHistricoDeEmprstimo = new JMenuItem("Hist\u00F3rico de Empr\u00E9stimo");
 		mntmHistricoDeEmprstimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaHistóricoLivros tela = new TelaHistóricoLivros();
 				desktopPane.add(tela);
 				try {
@@ -254,7 +261,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmLivrosPendentes = new JMenuItem("Livros Pendentes");
 		mntmLivrosPendentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaPendenciaLivros tela = new TelaPendenciaLivros();
 				desktopPane.add(tela);
 				try {
@@ -275,7 +283,8 @@ public class TelaInicialAdm extends JFrame {
 		JMenuItem mntmAtualizarAdm = new JMenuItem("Atualizar Adm");
 		mntmAtualizarAdm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaAtualAdm tela = new TelaAtualAdm();
 				desktopPane.add(tela);
 				try {

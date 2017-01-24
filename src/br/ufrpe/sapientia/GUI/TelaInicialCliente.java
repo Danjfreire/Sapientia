@@ -88,7 +88,8 @@ public class TelaInicialCliente extends JFrame {
 		JMenuItem mntmHistricoEmprstimos = new JMenuItem("Hist\u00F3rico Empr\u00E9stimos");
 		mntmHistricoEmprstimos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaHistoricoCliente tela = new TelaHistoricoCliente(u);
 				desktopPane.add(tela);
 				try {
@@ -115,7 +116,8 @@ public class TelaInicialCliente extends JFrame {
 		JMenuItem mntmPendnciasDeLivros = new JMenuItem("Pend\u00EAncias de Livros");
 		mntmPendnciasDeLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
 				TelaPendenciaCliente tela = new TelaPendenciaCliente(u);
 				desktopPane.add(tela);
 				try {

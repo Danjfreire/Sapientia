@@ -10,23 +10,34 @@ public class Usuario {
 	private String login;
 	private String senha;
 	private String sexo;
-	private String endereco;
 	private String tipo;
-	
-	public Usuario(String tipo, String nome, String cpf, String contato, 
-			String email, String login, String senha,String sexo, String endereco){ 
-		
-		this.tipo = tipo;
+	private String logradouro;
+	private int numero;
+	private String bairro;
+	private String cidade;
+	private String estado;
+	public Usuario(String nome, String cpf, String contato, String email, String login, String senha,
+			String sexo, String tipo, String logradouro, int numero, String bairro, String cidade, String estado) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.contato = contato;
 		this.email = email;
 		this.login = login;
 		this.senha = senha;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.endereco = endereco;
-		this.contato = contato;
 		this.sexo = sexo;
+		this.tipo = tipo;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
 	}
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -44,12 +55,6 @@ public class Usuario {
 	}
 	public void setContato(String contato) {
 		this.contato = contato;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getEmail() {
 		return email;
@@ -75,23 +80,48 @@ public class Usuario {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public String getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
 	public String getTipo() {
 		return tipo;
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	@Override
 	public String toString() {
-		return "Usuario [nome=" + nome + ", cpf=" + cpf + ", contato=" + contato + ", id=" + id + ", email=" + email
-				+ ", login=" + login + ", senha=" + senha + ", sexo=" + sexo + ", endereco=" + endereco + ", tipo="
-				+ tipo + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", contato=" + contato + ", email=" + email
+				+ ", login=" + login + ", senha=" + senha + ", sexo=" + sexo + ", tipo=" + tipo + ", logradouro="
+				+ logradouro + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado
+				+ "]";
 	}
 	
 }

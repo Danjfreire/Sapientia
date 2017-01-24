@@ -18,19 +18,23 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	public boolean cadastrar(Usuario u) throws Exception{
 		boolean s = false;
 		String sql = "insert into usuario (cpf_usuario, nome_usuario, telefone_usuario,"
-				+ " endereco_usuario, email_usuario, login_usuario, senha_usuario, tipo_usuario, sexo_usuario)"
-				+ " value(?,?,?,?,?,?,?,?,?)";
+				+ " email_usuario, login_usuario, senha_usuario, tipo_usuario, sexo_usuario, logradouro, numero, bairro, cidade, estado)"
+				+ " value(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, u.getCpf());
 			stmt.setString(2, u.getNome());
 			stmt.setString(3, u.getContato());
-			stmt.setString(4, u.getEndereco());
-			stmt.setString(5, u.getEmail());
-			stmt.setString(6, u.getLogin());
-			stmt.setString(7, u.getSenha());
-			stmt.setString(8, u.getTipo());
-			stmt.setString(9, u.getSexo());
+			stmt.setString(4, u.getEmail());
+			stmt.setString(5, u.getLogin());
+			stmt.setString(6, u.getSenha());
+			stmt.setString(7, u.getTipo());
+			stmt.setString(8, u.getSexo());
+			stmt.setString(9, u.getLogradouro());
+			stmt.setInt(10, u.getNumero());
+			stmt.setString(11, u.getBairro());
+			stmt.setString(12, u.getCidade());
+			stmt.setString(13, u.getEstado());
 			stmt.execute();
 			stmt.close();
 			s = true;
@@ -59,24 +63,30 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		return s;
 	}
 	
-	public boolean atualizar(String cpf, String nome, String contato, String endereco, 
-			String email, String login, String senha, String tipo, String sexo) throws Exception{
+	public boolean atualizar(String cpf, String nome, String contato, 
+			String email, String login, String senha, String tipo, String sexo, String logradouro, 
+			int numero, String bairro, String cidade, String estado) throws Exception{
 		
 		boolean s = false;
 		String sql = "update usuario set nome_usuario = ?, telefone_usuario = ?,"+
-		"endereco_usuario = ?, email_usuario = ?, login_usuario = ?, senha_usuario = ?,"+
-		"tipo_usuario = ?, sexo_usuario = ? where cpf_usuario = ?";
+		" email_usuario = ?, login_usuario = ?, senha_usuario = ?,"+
+		"tipo_usuario = ?, sexo_usuario = ?, logradouro = ?, numero = ?"
+		+ ", bairro = ?, cidade = ?, estado = ? where cpf_usuario = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, nome);
 			stmt.setString(2, contato);
-			stmt.setString(3, endereco);
-			stmt.setString(4, email);
-			stmt.setString(5, login);
-			stmt.setString(6, senha);
-			stmt.setString(7, tipo);
-			stmt.setString(8, sexo);
-			stmt.setString(9, cpf);
+			stmt.setString(3, email);
+			stmt.setString(4, login);
+			stmt.setString(5, senha);
+			stmt.setString(6, tipo);
+			stmt.setString(7, sexo);
+			stmt.setString(8, logradouro);
+			stmt.setInt(9, numero);
+			stmt.setString(10, bairro);
+			stmt.setString(11, cidade);
+			stmt.setString(12, estado);
+			stmt.setString(13, cpf);
 			stmt.execute();
 			stmt.close();
 			s = true;
@@ -174,14 +184,18 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			int id = rs.getInt("id_usuario");
 			String nome = rs.getString("nome_usuario");
 			String cpf = rs.getString("cpf_usuario");
-			String endereco = rs.getString("endereco_usuario");
 			String email = rs.getString("email_usuario");
 			String login = rs.getString("login_usuario");
 			String senha = rs.getString("senha_usuario");
 			String contato = rs.getString("telefone_usuario");
 			String tipo = rs.getString("tipo_usuario");
 			String sexo = rs.getString("sexo_usuario");
-			u = new Usuario(tipo, nome, cpf, contato, email, login, senha, sexo, endereco);
+			String logradouro = rs.getString("logradouro");
+			int numero = rs.getInt("numero");
+			String bairro = rs.getString("bairro");
+			String cidade = rs.getString("cidade");
+			String estado = rs.getString("estado");
+			u = new Usuario(nome, cpf, contato, email, login, senha, sexo, tipo, logradouro, numero, bairro, cidade, estado);
 			u.setId(id);
 		}catch (SQLException e) {
 			e.printStackTrace();

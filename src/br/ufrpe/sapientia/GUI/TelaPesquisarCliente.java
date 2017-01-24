@@ -133,7 +133,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 						for(Usuario u : clientes){
 							String nome = u.getNome();
 							String cpf = u.getCpf();
-							String endereco = u.getEndereco();
+							String endereco = u.getLogradouro() + ", " + u.getNumero() + " -" + u.getBairro() + "- " + u.getCidade() + "/" + u.getEstado();
 							String contato = u.getContato();
 							String email = u.getEmail();
 							String sexo = u.getSexo();
@@ -145,7 +145,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 						Usuario u = Fachada.getInstance().buscarUsuarioCPF(tfPesquisa.getText(), "C");
 						String nome = u.getNome();
 						String cpf = u.getCpf();
-						String endereco = u.getEndereco();
+						String endereco = u.getLogradouro() + ", " + u.getNumero() + " -" + u.getBairro() + "- " + u.getCidade() + "/" + u.getEstado();
 						String contato = u.getContato();
 						String email = u.getEmail();
 						String sexo = u.getSexo();
@@ -217,7 +217,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 						for(Usuario user : clientes){
 							String nome = user.getNome();
 							String cpf = user.getCpf();
-							String endereco = user.getEndereco();
+							String endereco = user.getLogradouro() + ", " + user.getNumero() + " -" + user.getBairro() + "- " + user.getCidade() + "/" + user.getEstado();
 							String contato = user.getContato();
 							String email = user.getEmail();
 							String sexo = user.getSexo();
@@ -253,7 +253,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					for(Usuario u : clientes){
 						String nome = u.getNome();
 						String cpf = u.getCpf();
-						String endereco = u.getEndereco();
+						String endereco = u.getLogradouro() + ", " + u.getNumero() + " -" + u.getBairro() + "- " + u.getCidade() + "/" + u.getEstado();
 						String contato = u.getContato();
 						String email = u.getEmail();
 						String sexo = u.getSexo();

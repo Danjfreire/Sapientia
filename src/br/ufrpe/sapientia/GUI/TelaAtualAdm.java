@@ -55,6 +55,7 @@ public class TelaAtualAdm extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public TelaAtualAdm() {
+		getContentPane().setForeground(new Color(135, 206, 250));
 		setClosable(true);
 		setTitle("Atualizar ADM");
 		setIconifiable(true);
