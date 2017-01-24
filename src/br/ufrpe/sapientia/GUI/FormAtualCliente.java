@@ -7,10 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
@@ -22,22 +24,27 @@ import javax.swing.JButton;
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
 import java.awt.event.*;
+import java.text.ParseException;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFormattedTextField;
 
 public class FormAtualCliente extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfNome;
 	private JTextField tfCPF;
-	private JTextField tfNascimento;
+	private JComboBox cbSexo;
 	private JTextField tfLogin;
-	private JPasswordField passwordField;
+	private JPasswordField pfSenha;
 	private JTextField tfEmail;
-	private JTextField tfContato;
-	private JTextField tfEndereco;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private JFormattedTextField tfContato;
+	private JTextField tfLogradouro;
+	private JTextField tfNumero;
+	private JTextField tfBairro;
+	private JTextField tfCidade;
 	private Usuario cliente;
+	private JPasswordField pfConfirmar;
 
 	/**
 	 * Launch the application.
@@ -70,7 +77,7 @@ public class FormAtualCliente extends JFrame {
 		cliente = u;
 		setTitle("Atualizando Cliente");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 750, 433);
+		setBounds(100, 100, 809, 434);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,7 +86,7 @@ public class FormAtualCliente extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 427, 176);
+		panel.setBounds(10, 11, 467, 176);
 		contentPane.add(panel);
 		
 		JLabel label = new JLabel("");
@@ -88,12 +95,12 @@ public class FormAtualCliente extends JFrame {
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("Nome.:");
-		label_1.setBounds(147, 23, 46, 14);
+		label_1.setBounds(148, 23, 46, 14);
 		panel.add(label_1);
 		
 		tfNome = new JTextField();
 		tfNome.setColumns(10);
-		tfNome.setBounds(228, 23, 174, 20);
+		tfNome.setBounds(270, 20, 187, 20);
 		panel.add(tfNome);
 		tfNome.setText(cliente.getNome());
 		tfNome.setEditable(false);
@@ -105,44 +112,50 @@ public class FormAtualCliente extends JFrame {
 		
 		tfCPF = new JTextField();
 		tfCPF.setColumns(10);
-		tfCPF.setBounds(228, 48, 174, 20);
+		tfCPF.setBounds(270, 45, 187, 20);
 		panel.add(tfCPF);
 		tfCPF.setText(cliente.getCpf());
 		tfCPF.setEditable(false);
 		
-		JLabel label_3 = new JLabel("Nascimento.:");
-		label_3.setBounds(148, 73, 86, 14);
-		panel.add(label_3);
+		JLabel lblSexo = new JLabel("Sexo.:");
+		lblSexo.setBounds(148, 73, 86, 14);
+		panel.add(lblSexo);
 		
-		tfNascimento = new JTextField();
-		tfNascimento.setColumns(10);
-		tfNascimento.setBounds(228, 70, 86, 20);
-		panel.add(tfNascimento);
-		// nao tem mais nascimento
-		
+		cbSexo = new JComboBox();
+		cbSexo.setModel(new DefaultComboBoxModel(new String[] {"MASCULINO", "FEMININO"}));
+		cbSexo.setBounds(270, 70, 187, 20);
+		panel.add(cbSexo);		
 		
 		JLabel label_4 = new JLabel("Login.:");
-		label_4.setBounds(147, 98, 46, 14);
+		label_4.setBounds(148, 98, 46, 14);
 		panel.add(label_4);
 		
 		tfLogin = new JTextField();
 		tfLogin.setColumns(10);
-		tfLogin.setBounds(228, 95, 174, 20);
+		tfLogin.setBounds(270, 95, 187, 20);
 		panel.add(tfLogin);
-		tfLogin.setText(cliente.getLogin());
 		
 		JLabel label_5 = new JLabel("Senha.:");
 		label_5.setBounds(148, 123, 46, 14);
 		panel.add(label_5);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(228, 120, 174, 20);
-		panel.add(passwordField);
+		pfSenha = new JPasswordField();
+		pfSenha.setBounds(270, 120, 187, 20);
+		panel.add(pfSenha);
+		
+		JLabel lblConfirmar = new JLabel("Confirmar Senha:.");
+		lblConfirmar.setBounds(148, 148, 97, 14);
+		panel.add(lblConfirmar);
+		
+		pfConfirmar = new JPasswordField();
+		pfConfirmar.setBounds(270, 145, 187, 20);
+		panel.add(pfConfirmar);
+		pfConfirmar.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Contato", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(447, 11, 261, 261);
+		panel_1.setBounds(499, 11, 261, 261);
 		contentPane.add(panel_1);
 		
 		JLabel label_6 = new JLabel("");
@@ -162,18 +175,21 @@ public class FormAtualCliente extends JFrame {
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_1.add(tfEmail);
-		tfEmail.setText(cliente.getEmail());
 		
-		tfContato = new JTextField();
+		try {
+			tfContato = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfContato.setColumns(10);
-		tfContato.setBounds(76, 216, 136, 20);
+		tfContato.setBounds(76, 216, 175, 20);
 		panel_1.add(tfContato);
-		tfContato.setText(cliente.getContato());
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBorder(new TitledBorder(null, "Endere\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(20, 198, 417, 176);
+		panel_2.setBounds(20, 198, 457, 176);
 		contentPane.add(panel_2);
 		
 		JLabel label_9 = new JLabel("");
@@ -185,68 +201,87 @@ public class FormAtualCliente extends JFrame {
 		label_10.setBounds(139, 24, 75, 14);
 		panel_2.add(label_10);
 		
-		tfEndereco = new JTextField();
-		tfEndereco.setColumns(10);
-		tfEndereco.setBounds(224, 18, 183, 20);
-		panel_2.add(tfEndereco);
-		tfEndereco.setText(cliente.getEndereco());
+		tfLogradouro = new JTextField();
+		tfLogradouro.setColumns(10);
+		tfLogradouro.setBounds(264, 21, 183, 20);
+		panel_2.add(tfLogradouro);
 		
 		JLabel label_11 = new JLabel("N\u00FAmero.:");
 		label_11.setBounds(139, 49, 63, 14);
 		panel_2.add(label_11);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(224, 43, 86, 20);
-		panel_2.add(textField_7);
+		tfNumero = new JTextField();
+		tfNumero.setColumns(10);
+		tfNumero.setBounds(264, 46, 183, 20);
+		panel_2.add(tfNumero);
 		
 		JLabel label_12 = new JLabel("Bairro.:");
 		label_12.setBounds(139, 74, 46, 14);
 		panel_2.add(label_12);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(224, 68, 149, 20);
-		panel_2.add(textField_8);
+		tfBairro = new JTextField();
+		tfBairro.setColumns(10);
+		tfBairro.setBounds(264, 71, 183, 20);
+		panel_2.add(tfBairro);
 		
 		JLabel label_13 = new JLabel("Cidade.:");
 		label_13.setBounds(139, 99, 46, 14);
 		panel_2.add(label_13);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(224, 93, 149, 20);
-		panel_2.add(textField_9);
+		tfCidade = new JTextField();
+		tfCidade.setColumns(10);
+		tfCidade.setBounds(264, 96, 183, 20);
+		panel_2.add(tfCidade);
 		
 		JLabel label_14 = new JLabel("Estado.:");
 		label_14.setBounds(139, 124, 46, 14);
 		panel_2.add(label_14);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(224, 124, 46, 20);
-		panel_2.add(comboBox);
+		JComboBox cbEstado = new JComboBox();
+		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"PE", "AM", "BA", "SC", "RJ", "SP"}));
+		cbEstado.setBounds(264, 121, 183, 20);
+		panel_2.add(cbEstado);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(447, 319, 89, 23);
+		btnAtualizar.setBounds(532, 319, 89, 23);
 		contentPane.add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				try{
-				boolean a = Fachada.getInstance().atualizarUsuario(cliente.getCpf(), cliente.getNome(), tfContato.getText(), tfEndereco.getText(),
-						tfEmail.getText(), tfLogin.getText(), passwordField.getText(), "C", "H");	
-				if(a){
-					//sucesso
-					dispose();
-				}
-				
-				}catch(Exception exception){
+				if(pfSenha.getText().equals(pfConfirmar.getText())){
+					try{
+						String sexo = (String)cbSexo.getSelectedItem();
+						boolean a = Fachada.getInstance().atualizarUsuario(cliente.getCpf(), cliente.getNome(), tfContato.getText(), 
+								tfLogradouro.getText()+ ", " + tfNumero.getText() + " -" + tfBairro.getText()+ "- " + tfCidade.getText() + "/" + (String)cbEstado.getSelectedItem()
+								, tfEmail.getText(), tfLogin.getText(), pfSenha.getText(), "C", "" + sexo.charAt(0));	
+						if(a){
+							JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
+							dispose();
+						}
+						else{
+							JOptionPane.showMessageDialog(null,"Dados inválidos!");
+							tfContato.setText("");
+							tfEmail.setText("");
+							tfLogin.setText("");
+							pfSenha.setText("");
+							tfLogradouro.setText("");
+							tfBairro.setText("");
+							tfCidade.setText("");
+						}
 					
+					}catch(Exception exception){
+						
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "As senhas não são iguais");
+					pfSenha.setText("");
+					pfConfirmar.setText("");
 				}
 			}
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(619, 319, 89, 23);
+		btnSair.setBounds(653, 319, 89, 23);
 		contentPane.add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -259,5 +294,4 @@ public class FormAtualCliente extends JFrame {
 			}
 		});
 	}
-
 }

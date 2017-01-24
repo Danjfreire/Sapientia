@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.beans.*;
+import javax.swing.ScrollPaneConstants;
 
 public class TelaPesquisarCliente extends JInternalFrame {
 	private JTextField tfPesquisa;
@@ -65,28 +66,29 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		setTitle("Pesquisar Clientes");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 802, 618);
+		setBounds(100, 100, 798, 548);
 		getContentPane().setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(39, 11, 706, 99);
+		panel_1.setBounds(39, 11, 706, 84);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		tfPesquisa = new JTextField();
-		tfPesquisa.setBounds(105, 34, 403, 37);
+		tfPesquisa.setBounds(106, 34, 402, 25);
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
 		
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nome", "Cpf"}));
-		comboBox.setBounds(10, 34, 88, 37);
+		comboBox.setBounds(10, 34, 88, 25);
 		panel_1.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(39, 192, 706, 181);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(39, 140, 706, 297);
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -101,10 +103,15 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		table_1.setModel(modelo);
 		modelo.addColumn("Nome");
 		modelo.addColumn("CPF");
+		modelo.addColumn("Endereço");
+		modelo.addColumn("Contato");
+		modelo.addColumn("Email");
+		modelo.addColumn("Sexo");
+		modelo.addColumn("Login");
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(518, 33, 136, 39);
+		btnPesquisar.setBounds(518, 33, 136, 26);
 		panel_1.add(btnPesquisar);
 		btnPesquisar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -114,6 +121,11 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					table_1.setModel(modelo);
 					modelo.addColumn("Nome");
 					modelo.addColumn("CPF");
+					modelo.addColumn("Endereço");
+					modelo.addColumn("Contato");
+					modelo.addColumn("Email");
+					modelo.addColumn("Sexo");
+					modelo.addColumn("Login");
 					scrollPane.setViewportView(table_1);
 					
 					if(comboBox.getSelectedItem().equals("Nome")){
@@ -121,14 +133,24 @@ public class TelaPesquisarCliente extends JInternalFrame {
 						for(Usuario u : clientes){
 							String nome = u.getNome();
 							String cpf = u.getCpf();
-							modelo.addRow(new Object[]{nome,cpf});
+							String endereco = u.getEndereco();
+							String contato = u.getContato();
+							String email = u.getEmail();
+							String sexo = u.getSexo();
+							String login = u.getLogin();
+							modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
 						}
 					}
 					else if(comboBox.getSelectedItem().equals("Cpf")){
 						Usuario u = Fachada.getInstance().buscarUsuarioCPF(tfPesquisa.getText(), "C");
 						String nome = u.getNome();
 						String cpf = u.getCpf();
-						modelo.addRow(new Object[]{nome,cpf});
+						String endereco = u.getEndereco();
+						String contato = u.getContato();
+						String email = u.getEmail();
+						String sexo = u.getSexo();
+						String login = u.getLogin();
+						modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
 					}
 						
 				}catch(Exception exception){
@@ -138,7 +160,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		});
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(332, 422, 89, 61);
+		btnAtualizar.setBounds(187, 448, 89, 29);
 		getContentPane().add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -159,7 +181,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		
 		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(494, 422, 89, 61);
+		btnExcluir.setBounds(345, 448, 89, 29);
 		getContentPane().add(btnExcluir);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,6 +196,11 @@ public class TelaPesquisarCliente extends JInternalFrame {
 						table_1.setModel(modelo);
 						modelo.addColumn("Nome");
 						modelo.addColumn("CPF");
+						modelo.addColumn("Endereço");
+						modelo.addColumn("Contato");
+						modelo.addColumn("Email");
+						modelo.addColumn("Sexo");
+						modelo.addColumn("Login");
 						scrollPane.setViewportView(table_1);
 						
 						if(comboBox.getSelectedItem().equals("Nome")){
@@ -188,9 +215,14 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					      }
 						
 						for(Usuario user : clientes){
-			    			  String nome = user.getNome();
-			    			  String cpf = user.getCpf();
-			    			  modelo.addRow(new Object[]{nome,cpf});
+							String nome = user.getNome();
+							String cpf = user.getCpf();
+							String endereco = user.getEndereco();
+							String contato = user.getContato();
+							String email = user.getEmail();
+							String sexo = user.getSexo();
+							String login = user.getLogin();
+							modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
 			    		  }
 				        } 
 					}catch(Exception exception){
@@ -200,7 +232,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		});
 		
 		JButton btnExibirTodos = new JButton("Exibir todos");
-		btnExibirTodos.setBounds(559, 121, 135, 41);
+		btnExibirTodos.setBounds(305, 106, 135, 23);
 		getContentPane().add(btnExibirTodos);
 		btnExibirTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -210,13 +242,23 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					table_1.setModel(modelo);
 					modelo.addColumn("Nome");
 					modelo.addColumn("CPF");
+					modelo.addColumn("Endereço");
+					modelo.addColumn("Contato");
+					modelo.addColumn("Email");
+					modelo.addColumn("Sexo");
+					modelo.addColumn("Login");
 					scrollPane.setViewportView(table_1);
 					
 					clientes = Fachada.getInstance().exibirUsuarios("C");
-					for(Usuario user : clientes){
-						String nome = user.getNome();
-						String cpf = user.getCpf();
-						modelo.addRow(new Object[]{nome,cpf});
+					for(Usuario u : clientes){
+						String nome = u.getNome();
+						String cpf = u.getCpf();
+						String endereco = u.getEndereco();
+						String contato = u.getContato();
+						String email = u.getEmail();
+						String sexo = u.getSexo();
+						String login = u.getLogin();
+						modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
 					 }
 					
 				}catch(Exception exception){
@@ -226,7 +268,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(655, 422, 89, 61);
+		btnSair.setBounds(501, 448, 89, 29);
 		getContentPane().add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

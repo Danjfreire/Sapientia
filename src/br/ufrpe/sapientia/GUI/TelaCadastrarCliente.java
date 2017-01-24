@@ -32,7 +32,6 @@ import br.ufrpe.sapientia.negocio.beans.*;
 public class TelaCadastrarCliente extends JInternalFrame {
 	private JTextField tfNome;
 	private JFormattedTextField tfCpf;
-	private JFormattedTextField tfNascimento;
 	private JTextField tfLogin;
 	private JPasswordField psSenha;
 	private JTextField tfLogradouro;
@@ -116,52 +115,38 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(tfCpf);
 		tfCpf.setColumns(10);
 		
-		JLabel lblNascimento = new JLabel("Nascimento.:");
-		lblNascimento.setBounds(148, 80, 86, 14);
-		panel.add(lblNascimento);
-		
-		try {
-			tfNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		tfNascimento.setBounds(238, 77, 165, 20);
-		panel.add(tfNascimento);
-		tfNascimento.setColumns(10);
-		
 		JLabel lblLogin = new JLabel("Login.:");
-		lblLogin.setBounds(148, 130, 46, 14);
+		lblLogin.setBounds(148, 105, 46, 14);
 		panel.add(lblLogin);
 		
 		tfLogin = new JTextField();
-		tfLogin.setBounds(239, 127, 164, 20);
+		tfLogin.setBounds(239, 102, 164, 20);
 		panel.add(tfLogin);
 		tfLogin.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha.:");
-		lblSenha.setBounds(148, 155, 46, 14);
+		lblSenha.setBounds(148, 130, 46, 14);
 		panel.add(lblSenha);
 		
 		psSenha = new JPasswordField();
-		psSenha.setBounds(239, 152, 164, 20);
+		psSenha.setBounds(239, 127, 164, 20);
 		panel.add(psSenha);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha.:");
-		lblConfirmarSenha.setBounds(148, 180, 128, 14);
+		lblConfirmarSenha.setBounds(148, 155, 128, 14);
 		panel.add(lblConfirmarSenha);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(240, 176, 163, 20);
+		passwordField.setBounds(239, 152, 163, 20);
 		panel.add(passwordField);
 		
 		JLabel lblSexo = new JLabel("Sexo.:");
-		lblSexo.setBounds(148, 105, 46, 14);
+		lblSexo.setBounds(148, 80, 46, 14);
 		panel.add(lblSexo);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"MASCULINO", "FEMININO"}));
-		comboBox.setBounds(239, 102, 164, 20);
+		comboBox.setBounds(239, 77, 164, 20);
 		panel.add(comboBox);
 		
 		JPanel panel_1 = new JPanel();
@@ -280,8 +265,11 @@ public class TelaCadastrarCliente extends JInternalFrame {
 						tfCidade.setText("");
 					 }
 					}
-					else
+					else{
 						JOptionPane.showMessageDialog(null, "As senhas não são iguais");
+						psSenha.setText("");
+						passwordField.setText("");
+					}
 				}catch(Exception exception){
 					
 				}
