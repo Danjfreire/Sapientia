@@ -77,7 +77,7 @@ public class FormAtualCliente extends JFrame {
 		cliente = u;
 		setTitle("Atualizando Cliente");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 809, 434);
+		setBounds(100, 100, 791, 434);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

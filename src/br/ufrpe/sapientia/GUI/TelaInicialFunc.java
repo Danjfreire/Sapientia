@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.FlowLayout;
 import br.ufrpe.sapientia.negocio.beans.*;
+import javax.swing.JToggleButton;
 
 public class TelaInicialFunc extends JFrame {
 
@@ -287,6 +288,24 @@ public class TelaInicialFunc extends JFrame {
 			}
 		});
 		mnEmprstimo.add(mntmEmprestarLivro);
+		
+		JMenuItem mntmDevolverLivro = new JMenuItem("Devolver Livro");
+		mntmDevolverLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(desktopPane.getAllFrames().length != 0)
+					desktopPane.remove(0);
+				TelaDevolucao tela = new TelaDevolucao();
+				desktopPane.add(tela);
+				try {
+					tela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				tela.show();
+			}
+		});
+		mnEmprstimo.add(mntmDevolverLivro);
 		
 		
 		
