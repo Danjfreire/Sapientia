@@ -50,6 +50,11 @@ public class ControleEmprestimo implements IControleEmprestimo{
 		return repositorio.pesquisarEmprestimoISBN(isbn);
 	}
 
+	@Override
+	public List<Emprestimo> verificarEmprestimoFunc(String cpf) throws Exception{
+		return repositorio.pesquisarEmprestimoFuncionario(cpf);
+	}
+
 	
 //	public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status,
 //			Usuario funcionario, Usuario cliente)

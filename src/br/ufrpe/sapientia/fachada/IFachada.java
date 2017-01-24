@@ -18,6 +18,7 @@ public interface IFachada {
 	List<Emprestimo> verificarEmprestimoLivro(String titulo) throws Exception;
 	List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception;
 	List<Emprestimo> verificarEmprestimoISBN(String isbn) throws Exception;
+	List<Emprestimo> verificarEmprestimoFunc(String cpf) throws Exception;
 	
 	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
 			, String volume, String categoria, String resumo, int estoque, int total) throws Exception;

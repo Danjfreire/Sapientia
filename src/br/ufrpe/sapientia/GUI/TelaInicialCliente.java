@@ -89,7 +89,7 @@ public class TelaInicialCliente extends JFrame {
 		mntmHistricoEmprstimos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				TelaHistoricoCliente tela = new TelaHistoricoCliente();
+				TelaHistoricoCliente tela = new TelaHistoricoCliente(u);
 				desktopPane.add(tela);
 				try {
 					tela.setMaximum(true);

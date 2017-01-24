@@ -19,6 +19,13 @@ import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
+
 public class TelaHistóricoLivros extends JInternalFrame {
 	private JTextField textField;
 	private JTable table;
@@ -70,16 +77,8 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		textField.setBounds(85, 28, 515, 22);
 		panel.add(textField);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnBuscar.setBounds(628, 21, 92, 36);
-		panel.add(btnBuscar);
-		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"ISBN", "T\u00EDtulo"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"ISBN","Funcionario","Cliente"}));
 		comboBox.setBounds(10, 20, 65, 36);
 		panel.add(comboBox);
 		
@@ -88,16 +87,61 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Data", "Cliente", "Devolu\u00E7\u00E3o", "Funcion\u00E1rio", "Situa\u00E7\u00E3o"
-			}
-		));
+		DefaultTableModel modelo = new DefaultTableModel();
+		table.setModel(modelo);
+		modelo.addColumn("Cliente");
+		modelo.addColumn("Funcion\u00E1rio");
+		modelo.addColumn("Data");
+		modelo.addColumn("Devolu\u00E7\u00E3o");
+		modelo.addColumn("Situa\u00E7\u00E3o");
+		
 		scrollPane.setViewportView(table);
-
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					table = new JTable();
+					DefaultTableModel modelo = new DefaultTableModel();
+					table.setModel(modelo);
+					modelo.addColumn("Cliente");
+					modelo.addColumn("Funcion\u00E1rio");
+					modelo.addColumn("Data");
+					modelo.addColumn("Devolu\u00E7\u00E3o");
+					modelo.addColumn("Situa\u00E7\u00E3o");
+					
+					List<Emprestimo>emprestimos = new ArrayList<Emprestimo>();
+					if(comboBox.getSelectedItem().equals("ISBN")){
+						emprestimos = Fachada.getInstance().verificarEmprestimoISBN(textField.getText());
+					}else if(comboBox.getSelectedItem().equals("Funcionario")){
+						emprestimos = Fachada.getInstance().verificarEmprestimoFunc(textField.getText());
+					}else{
+						emprestimos = Fachada.getInstance().verificarEmprestimoCliente(textField.getText());
+					}
+					
+					for(Emprestimo emp : emprestimos){
+						Calendar inicio = emp.getDataEmprestimo();
+						String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
+						Calendar fim = emp.getDataDevolucao();
+						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
+						Usuario cliente = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfCliente(), "C");
+						Usuario func = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfFuncionario(), "F");
+						
+						modelo.addRow(new Object[]{cliente.getNome(),func.getNome(),dataInicio,dataFim,emp.getStatus()});
+					}
+					
+					
+					
+				}catch(Exception ex){
+					
+				}
+			}
+		});
+		btnBuscar.setBounds(628, 21, 92, 36);
+		panel.add(btnBuscar);
+		
+		
+		
 	}
 
 }

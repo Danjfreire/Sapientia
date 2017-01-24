@@ -21,5 +21,6 @@ public interface IControleEmprestimo {
 	List<Emprestimo>verificarEmprestimoLivro(String titulo) throws Exception;
 	List<Emprestimo>verificarEmprestimoCliente(String cpf) throws Exception;
 	List<Emprestimo>verificarEmprestimoISBN(String isbn)throws Exception;
+	List<Emprestimo>verificarEmprestimoFunc(String cpf)throws Exception;
 	
 }
