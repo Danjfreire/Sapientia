@@ -66,39 +66,47 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		setTitle("Pesquisar Livros");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 750, 527);
+		setBounds(100, 100, 800, 570);
 		getContentPane().setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(37, 34, 687, 130);
+		panel_1.setBounds(10, 11, 764, 73);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		tfPesquisa = new JTextField();
-		tfPesquisa.setBounds(182, 28, 393, 49);
+		tfPesquisa.setBounds(136, 28, 393, 26);
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"T\u00EDtulo", "Autor", "ISBN"}));
-		comboBox.setBounds(10, 28, 92, 49);
+		comboBox.setBounds(10, 28, 92, 26);
 		panel_1.add(comboBox);
 		
 		table_1 = new JTable();
 		DefaultTableModel modelo = new DefaultTableModel();
 		table_1.setModel(modelo);
+		modelo.addColumn("Id");
 		modelo.addColumn("Titulo");
 		modelo.addColumn("Autor");
 		modelo.addColumn("ISBN");
+		modelo.addColumn("Edição");
+		modelo.addColumn("Ano");
+		modelo.addColumn("Volume");
+		modelo.addColumn("Categoria");
+		modelo.addColumn("Resumo");
+		modelo.addColumn("Estoque");
+		modelo.addColumn("Total");
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(37, 243, 687, 151);
+		scrollPane.setBounds(10, 135, 764, 304);
 		getContentPane().add(scrollPane);
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(585, 27, 92, 50);
+		btnPesquisar.setBounds(631, 28, 92, 26);
 		panel_1.add(btnPesquisar);
 		btnPesquisar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -107,32 +115,64 @@ public class TelaPesquisarLivro extends JInternalFrame {
 					table_1 = new JTable();
 					DefaultTableModel modelo = new DefaultTableModel();
 					table_1.setModel(modelo);
+					modelo.addColumn("Id");
 					modelo.addColumn("Titulo");
 					modelo.addColumn("Autor");
 					modelo.addColumn("ISBN");
+					modelo.addColumn("Edição");
+					modelo.addColumn("Ano");
+					modelo.addColumn("Volume");
+					modelo.addColumn("Categoria");
+					modelo.addColumn("Resumo");
+					modelo.addColumn("Estoque");
+					modelo.addColumn("Total");
 					scrollPane.setViewportView(table_1);
 					
 					if(comboBox.getSelectedItem().equals("Titulo")){
 						livros = Fachada.getInstance().buscaLivroTitulo(tfPesquisa.getText());
-						for(Livro u : livros){
-							String titulo = u.getTitulo();
-							String autor = u.getAutor();
-							String isbn = u.getIsbn();
-							modelo.addRow(new Object[]{titulo,autor,isbn});
+						for(Livro l1 : livros){
+							String titulo = l1.getTitulo();
+							String autor = l1.getAutor();
+							String isbn = l1.getIsbn();
+							int id = l1.getId();
+							String edicao = l1.getEdicao();
+							String ano = l1.getAno();
+							String volume = l1.getVolume();
+							String categoria = l1.getResumo();
+							String resumo = l1.getResumo(); 
+							int estoque = l1.getEstoque();
+							int total = l1.getTotal();
+							modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 						}
 					}else if(comboBox.getSelectedItem().equals("ISBN")){
-						Livro livro = Fachada.getInstance().buscaLivroISBN(tfPesquisa.getText());
-							String titulo = livro.getTitulo();
-							String autor = livro.getAutor();
-							String isbn = livro.getIsbn();
-							modelo.addRow(new Object[]{titulo,autor,isbn});
+						Livro l2 = Fachada.getInstance().buscaLivroISBN(tfPesquisa.getText());
+						String titulo = l2.getTitulo();
+						String autor = l2.getAutor();
+						String isbn = l2.getIsbn();
+						int id = l2.getId();
+						String edicao = l2.getEdicao();
+						String ano = l2.getAno();
+						String volume = l2.getVolume();
+						String categoria = l2.getResumo();
+						String resumo = l2.getResumo(); 
+						int estoque = l2.getEstoque();
+						int total = l2.getTotal();
+						modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 					}else if(comboBox.getSelectedItem().equals("Autor")){
 						 livros = Fachada.getInstance().buscaLivroAutor(tfPesquisa.getText());
-						 for(Livro u : livros){
-								String titulo = u.getTitulo();
-								String autor = u.getAutor();
-								String isbn = u.getIsbn();
-								modelo.addRow(new Object[]{titulo,autor,isbn});
+						 for(Livro l3 : livros){
+							 String titulo = l3.getTitulo();
+							 String autor = l3.getAutor();
+							 String isbn = l3.getIsbn();
+							 int id = l3.getId();
+							 String edicao = l3.getEdicao();
+							 String ano = l3.getAno();
+							 String volume = l3.getVolume();
+							 String categoria = l3.getResumo();
+							 String resumo = l3.getResumo(); 
+							 int estoque = l3.getEstoque();
+							 int total = l3.getTotal();
+							 modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 						 }
 					}
 				}catch(Exception exception){
@@ -142,7 +182,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(536, 447, 89, 40);
+		btnExcluir.setBounds(344, 450, 89, 40);
 		getContentPane().add(btnExcluir);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,9 +194,17 @@ public class TelaPesquisarLivro extends JInternalFrame {
 						table_1 = new JTable();
 						DefaultTableModel modelo = new DefaultTableModel();
 						table_1.setModel(modelo);
+						modelo.addColumn("Id");
 						modelo.addColumn("Titulo");
 						modelo.addColumn("Autor");
 						modelo.addColumn("ISBN");
+						modelo.addColumn("Edição");
+						modelo.addColumn("Ano");
+						modelo.addColumn("Volume");
+						modelo.addColumn("Categoria");
+						modelo.addColumn("Resumo");
+						modelo.addColumn("Estoque");
+						modelo.addColumn("Total");
 						scrollPane.setViewportView(table_1);
 						
 						if(comboBox.getSelectedItem().equals("Nome")){
@@ -175,11 +223,19 @@ public class TelaPesquisarLivro extends JInternalFrame {
 							if(tfPesquisa.getText().equals(""))
 								livros = Fachada.getInstance().exibirLivros();
 						
-						for(Livro livro : livros){
-							String titulo = livro.getTitulo();
-							String autor = livro.getAutor();
-							String isbn = livro.getIsbn();
-							modelo.addRow(new Object[]{titulo,autor,isbn});
+						for(Livro l : livros){
+							String titulo = l.getTitulo();
+							String autor = l.getAutor();
+							String isbn = l.getIsbn();
+							int id = l.getId();
+							String edicao = l.getEdicao();
+							String ano = l.getAno();
+							String volume = l.getVolume();
+							String categoria = l.getResumo();
+							String resumo = l.getResumo(); 
+							int estoque = l.getEstoque();
+							int total = l.getTotal();
+							modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 						}
 				       } 
 					}catch(Exception exception){
@@ -189,7 +245,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(635, 447, 89, 40);
+		btnSair.setBounds(458, 450, 89, 40);
 		getContentPane().add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -203,7 +259,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(437, 447, 89, 40);
+		btnAtualizar.setBounds(223, 450, 89, 40);
 		getContentPane().add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -223,7 +279,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnMostrarTodos = new JButton("Mostrar Todos");
-		btnMostrarTodos.setBounds(601, 192, 123, 40);
+		btnMostrarTodos.setBounds(334, 95, 123, 29);
 		getContentPane().add(btnMostrarTodos);
 		btnMostrarTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -231,17 +287,33 @@ public class TelaPesquisarLivro extends JInternalFrame {
 					table_1 = new JTable();
 					DefaultTableModel modelo = new DefaultTableModel();
 					table_1.setModel(modelo);
+					modelo.addColumn("Id");
 					modelo.addColumn("Titulo");
 					modelo.addColumn("Autor");
 					modelo.addColumn("ISBN");
+					modelo.addColumn("Edição");
+					modelo.addColumn("Ano");
+					modelo.addColumn("Volume");
+					modelo.addColumn("Categoria");
+					modelo.addColumn("Resumo");
+					modelo.addColumn("Estoque");
+					modelo.addColumn("Total");
 					scrollPane.setViewportView(table_1);
 					
 					livros = Fachada.getInstance().exibirLivros();
-					for(Livro livro : livros){
-						String titulo = livro.getTitulo();
-						String autor = livro.getAutor();
-						String isbn = livro.getIsbn();
-						modelo.addRow(new Object[]{titulo,autor,isbn});
+					for(Livro l : livros){
+						String titulo = l.getTitulo();
+						String autor = l.getAutor();
+						String isbn = l.getIsbn();
+						int id = l.getId();
+						String edicao = l.getEdicao();
+						String ano = l.getAno();
+						String volume = l.getVolume();
+						String categoria = l.getResumo();
+						String resumo = l.getResumo(); 
+						int estoque = l.getEstoque();
+						int total = l.getTotal();
+						modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 					 }
 					
 				}catch(Exception exception){
