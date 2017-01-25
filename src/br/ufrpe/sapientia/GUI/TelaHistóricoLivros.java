@@ -98,6 +98,8 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(628, 21, 92, 36);
+		panel.add(btnBuscar);
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
@@ -109,6 +111,7 @@ public class TelaHistóricoLivros extends JInternalFrame {
 					modelo.addColumn("Data");
 					modelo.addColumn("Devolu\u00E7\u00E3o");
 					modelo.addColumn("Situa\u00E7\u00E3o");
+					scrollPane.setViewportView(table);
 					
 					List<Emprestimo>emprestimos;
 					if(comboBox.getSelectedItem().equals("ISBN")){
@@ -120,25 +123,23 @@ public class TelaHistóricoLivros extends JInternalFrame {
 					}
 					
 					for(Emprestimo emp : emprestimos){
+						System.out.println(emp);
+						Usuario cliente = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfCliente(), "C");
+						Usuario func = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfFuncionario(), "F");
 						Calendar inicio = emp.getDataEmprestimo();
 						String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 						Calendar fim = emp.getDataDevolucao();
 						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
-						Usuario cliente = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfCliente(), "C");
-						Usuario func = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfFuncionario(), "F");
 						
 						modelo.addRow(new Object[]{cliente.getNome(),func.getNome(),dataInicio,dataFim,emp.getStatus()});
-					}
-					
-					
+					}	
 					
 				}catch(Exception ex){
 					
 				}
 			}
 		});
-		btnBuscar.setBounds(628, 21, 92, 36);
-		panel.add(btnBuscar);
+		
 		
 		
 		

@@ -108,8 +108,8 @@ public class TelaPendenciaLivros extends JInternalFrame {
 					table = new JTable();
 					DefaultTableModel modelo = new DefaultTableModel();
 					table.setModel(modelo);
-					//modelo.addColumn("C\u00F3digo");
-					modelo.addColumn("ISBN");
+					modelo.addColumn("C\u00F3digo");
+					//modelo.addColumn("ISBN");
 					modelo.addColumn("T\u00EDtulo");
 					modelo.addColumn("Cliente");
 					modelo.addColumn("CPf cliente");
@@ -142,10 +142,10 @@ public class TelaPendenciaLivros extends JInternalFrame {
 						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
 						
 						if(!aux){
-							modelo.addRow(new Object[]{l.get(livro).getIsbn(),l.get(livro).getTitulo(),cliente.getNome(),cliente.getCpf(),func.getNome(),dataInicio,dataFim});
+							modelo.addRow(new Object[]{"",l.get(livro).getTitulo(),cliente.getNome(),cliente.getCpf(),func.getNome(),dataInicio,dataFim});
 							livro++;
 						}else
-							modelo.addRow(new Object[]{l1.getIsbn(),l1.getTitulo(),cliente.getNome(),cliente.getCpf(),func.getNome(),dataInicio,dataFim});	
+							modelo.addRow(new Object[]{"",l1.getTitulo(),cliente.getNome(),cliente.getCpf(),func.getNome(),dataInicio,dataFim});	
 							
 						
 					}
