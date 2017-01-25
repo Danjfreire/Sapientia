@@ -42,6 +42,7 @@ create table emprestimo(
     data_entrega_emprestimo date,
     status_emprestimo varchar(8),
     isbn_livro varchar(50),
+    titulo_livro varchar(50),
     constraint usuario_funcio foreign key(funcionario_cpf) references usuario(cpf_usuario),
     constraint usuario_cliente foreign key(cliente_cpf) references usuario(cpf_usuario),
     constraint isbn_lv foreign key(isbn_livro) references livro(isbn_livro)

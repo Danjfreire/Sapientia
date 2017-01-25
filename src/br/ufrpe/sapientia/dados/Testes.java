@@ -11,13 +11,13 @@ public class Testes {
 	public static void main(String [] args){
 		RepositorioUsuarios ru = new RepositorioUsuarios();
 		
-		//Usuario u = new Usuario("jose", "07665566464", "84009198", "wallace@gmail", "wallace@lima", "123", "M", "C", "Rua dracena", 241, "sancho", "recife", "PE");
-		/*try {
-			ru.atualizar("07665566464" ,"jose", "84009198", "wallace@gmail", "wallace@lima", "123", "M", "C", "Rua dracena", 241, "sancho", "recife", "PE");
+		Usuario u = new Usuario("jose", "07665566464", "84009198", "wallace@gmail", "jo", "123", "M", "F", "Rua dracena", 241, "sancho", "recife", "PE");
+		try {
+			ru.cadastrar(u);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}*/
+		}
 		List<Usuario> usuarios= new ArrayList<Usuario>();
 		try {
 			usuarios = ru.pesquisarTodos("F");
