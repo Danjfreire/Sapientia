@@ -144,7 +144,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 //					Date fim = df.parse(tfDataFinal.getText());
 //					Calendar termino = Calendar.getInstance();
 //					termino.setTime(fim);
-					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "P",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
+					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "PENDENTE",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
 						System.out.println("emprestimo realizado com sucesso");
 					}
 				}

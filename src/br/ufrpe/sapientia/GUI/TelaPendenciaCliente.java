@@ -78,8 +78,8 @@ public class TelaPendenciaCliente extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		try{
-			List<Emprestimo> emprestimos = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf(),"P");
-			List<Emprestimo> emprestimos1 = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf(), "A");
+			List<Emprestimo> emprestimos = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf(),"PENDENTE");
+			List<Emprestimo> emprestimos1 = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf(), "ATRASADO");
 			for(Emprestimo e : emprestimos){
 				Calendar inicio = e.getDataEmprestimo();
 				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);

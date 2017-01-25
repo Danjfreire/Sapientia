@@ -75,7 +75,7 @@ public class TelaHistoricoCliente extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		try {
-			List<Emprestimo>emprestimos = Fachada.getInstance().verificarPendenciasCliente(usuario.getCpf(), "E");
+			List<Emprestimo>emprestimos = Fachada.getInstance().verificarPendenciasCliente(usuario.getCpf(), "ENTREGUE");
 			for(Emprestimo emp : emprestimos){
 				Calendar inicio = emp.getDataEmprestimo();
 				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);

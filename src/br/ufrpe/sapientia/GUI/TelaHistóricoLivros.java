@@ -110,7 +110,7 @@ public class TelaHistóricoLivros extends JInternalFrame {
 					modelo.addColumn("Devolu\u00E7\u00E3o");
 					modelo.addColumn("Situa\u00E7\u00E3o");
 					
-					List<Emprestimo>emprestimos = new ArrayList<Emprestimo>();
+					List<Emprestimo>emprestimos;
 					if(comboBox.getSelectedItem().equals("ISBN")){
 						emprestimos = Fachada.getInstance().verificarEmprestimoISBN(textField.getText());
 					}else if(comboBox.getSelectedItem().equals("Funcionario")){
