@@ -200,16 +200,15 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 						scrollPane.setViewportView(table_1);
 						
 						if(comboBox.getSelectedItem().equals("Nome")){
-							
-							if(tfPesquisa.getText()!="")
-								funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
-							else
+							if(tfPesquisa.getText().equals(""))
 								funcionarios = Fachada.getInstance().exibirUsuarios("F");
-					      }else{
+							else
+								funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
+					    }else{
 					    	  if(tfPesquisa.getText().equals("")){
 					    		  funcionarios = Fachada.getInstance().exibirUsuarios("F");
 					    	  }
-					      }
+					    }
 						for(Usuario user : funcionarios){
 							String nome = user.getNome();
 							String cpf = user.getCpf();
@@ -219,10 +218,10 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 							String sexo = user.getSexo();
 							String login = user.getLogin();
 							modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
-						 }
+						}
 						
-				        } 
-					}catch(Exception exception){
+				    } 
+				}catch(Exception exception){
 					
 				}
 			}

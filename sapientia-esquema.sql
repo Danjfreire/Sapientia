@@ -7,12 +7,16 @@ create table usuario(
     cpf_usuario varchar(15) unique,
     nome_usuario varchar(50),
     telefone_usuario varchar(20),
-    endereco_usuario varchar(50),
     email_usuario varchar(50),
     login_usuario varchar(50) unique,
     senha_usuario varchar(50),
     tipo_usuario varchar(1),
-    sexo_usuario varchar(1)
+    sexo_usuario varchar(1),
+    logradouro varchar(50),
+    numero int,
+	bairro varchar(50),
+	cidade varchar(50),
+	estado varchar(2)
 )engine=InnoDB;
 
 create table livro(
@@ -36,7 +40,7 @@ create table emprestimo(
     cliente_cpf varchar(15),
     data_saida_emprestimo date,
     data_entrega_emprestimo date,
-    status_emprestimo varchar(1),
+    status_emprestimo varchar(8),
     isbn_livro varchar(50),
     constraint usuario_funcio foreign key(funcionario_cpf) references usuario(cpf_usuario),
     constraint usuario_cliente foreign key(cliente_cpf) references usuario(cpf_usuario),
@@ -56,9 +60,9 @@ begin
 		signal sqlstate '45000' set message_text='Livro indisponível no estoque!';
     elseif new.data_saida_emprestimo > new.data_entrega_emprestimo then
 		signal sqlstate '45000' set message_text='Data de saída não pode ser superior à de entrega!';
-	elseif new.status_emprestimo <> "E"
-    and new.status_emprestimo <> "A"  
-    and new.status_emprestimo <> "P" then
+	elseif new.status_emprestimo not like "ENTREGUE"
+       and new.status_emprestimo not like "ATRASADO"  
+       and new.status_emprestimo not like "PENDENTE" then
 		signal sqlstate '45000' set message_text='Tipo de status incorreto!';
 	else
 		update livro
