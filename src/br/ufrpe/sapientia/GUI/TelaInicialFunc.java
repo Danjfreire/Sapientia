@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.FlowLayout;
+import java.awt.Font;
+
 import br.ufrpe.sapientia.negocio.beans.*;
 import javax.swing.JToggleButton;
 import java.awt.Color;
@@ -63,6 +65,8 @@ public class TelaInicialFunc extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaInicialFunc(Usuario u) {
+		setResizable(false);
+		
 		setForeground(new Color(135, 206, 235));
 		setBackground(new Color(135, 206, 235));
 		
@@ -70,7 +74,7 @@ public class TelaInicialFunc extends JFrame {
 		setTitle("Sapientia");
 		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(289, 110, 788, 509);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 235));
@@ -83,9 +87,21 @@ public class TelaInicialFunc extends JFrame {
 		contentPane.add(desktopPane, "name_1356382438063");
 		desktopPane.setLayout(null);
 		
+		JLabel lblBemVindoAo = new JLabel("Bem vindo ao Sapientia!");
+		lblBemVindoAo.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblBemVindoAo.setForeground(Color.WHITE);
+		lblBemVindoAo.setBounds(10, 11, 256, 56);
+		desktopPane.add(lblBemVindoAo);
+		
+		JLabel lblSeuSistemaDe = new JLabel("Seu sistema de gerenciamento de Livros.");
+		lblSeuSistemaDe.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSeuSistemaDe.setForeground(Color.WHITE);
+		lblSeuSistemaDe.setBounds(10, 78, 432, 31);
+		desktopPane.add(lblSeuSistemaDe);
+		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador1.png")));
-		label.setBounds(0, -115, 1024, 728);
+		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador3.png")));
+		label.setBounds(0, 0, 780, 443);
 		desktopPane.add(label);
 		
 		JMenuBar menuBar = new JMenuBar();

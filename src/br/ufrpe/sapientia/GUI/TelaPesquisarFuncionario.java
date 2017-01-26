@@ -22,6 +22,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -66,12 +68,12 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		setTitle("Pesquisar Funcion\u00E1rios");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 791, 539);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(39, 11, 706, 88);
+		panel_1.setBounds(10, 11, 744, 88);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -81,7 +83,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		tfPesquisa.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(39, 176, 706, 206);
+		scrollPane.setBounds(10, 151, 744, 206);
 		getContentPane().add(scrollPane);
 		
 		
@@ -110,7 +112,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(518, 33, 136, 28);
+		btnPesquisar.setBounds(598, 34, 136, 28);
 		panel_1.add(btnPesquisar);
 		btnPesquisar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -156,7 +158,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		});
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(200, 432, 89, 30);
+		btnAtualizar.setBounds(200, 368, 89, 23);
 		getContentPane().add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -176,7 +178,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		});
 		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(332, 432, 89, 30);
+		btnExcluir.setBounds(332, 368, 89, 23);
 		getContentPane().add(btnExcluir);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -265,7 +267,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(460, 432, 89, 30);
+		btnSair.setBounds(460, 368, 89, 23);
 		getContentPane().add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -277,7 +279,10 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 				}
 			}
 		});
-
-
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 	}
 }

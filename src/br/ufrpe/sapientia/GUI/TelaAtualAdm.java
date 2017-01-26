@@ -59,7 +59,7 @@ public class TelaAtualAdm extends JInternalFrame {
 		setClosable(true);
 		setTitle("Atualizar ADM");
 		setIconifiable(true);
-		setBounds(100, 100, 731, 568);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JLabel label_1 = new JLabel("SAPIENTIA");
@@ -76,33 +76,33 @@ public class TelaAtualAdm extends JInternalFrame {
 		
 		JLabel lblAtualizaoDeAdm = new JLabel("Atualiza\u00E7\u00E3o de ADM");
 		lblAtualizaoDeAdm.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblAtualizaoDeAdm.setBounds(235, 160, 226, 27);
+		lblAtualizaoDeAdm.setBounds(252, 123, 226, 27);
 		getContentPane().add(lblAtualizaoDeAdm);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(47, 79, 79));
-		panel_1.setBounds(196, 198, 295, 282);
+		panel_1.setBounds(196, 149, 295, 253);
 		getContentPane().add(panel_1);
 		
 		JButton button = new JButton("");
 		button.setIcon(new ImageIcon(TelaAtualAdm.class.getResource("/Imagens/delete.png")));
-		button.setBounds(197, 208, 90, 63);
+		button.setBounds(195, 179, 90, 63);
 		panel_1.add(button);
 		
 		JButton button_1 = new JButton("");
 		button_1.setIcon(new ImageIcon(TelaAtualAdm.class.getResource("/Imagens/entrar.png")));
-		button_1.setBounds(10, 208, 90, 63);
+		button_1.setBounds(10, 179, 90, 63);
 		panel_1.add(button_1);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(84, 85, 203, 22);
+		passwordField.setBounds(84, 67, 203, 22);
 		panel_1.add(passwordField);
 		
 		JLabel label_6 = new JLabel("Senha.:");
 		label_6.setForeground(Color.BLACK);
 		label_6.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_6.setBounds(10, 82, 257, 22);
+		label_6.setBounds(10, 64, 257, 22);
 		panel_1.add(label_6);
 		
 		textField_3 = new JTextField();
@@ -119,16 +119,16 @@ public class TelaAtualAdm extends JInternalFrame {
 		JLabel label_8 = new JLabel("Confirmar Senha.:");
 		label_8.setForeground(Color.BLACK);
 		label_8.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_8.setBounds(10, 126, 257, 22);
+		label_8.setBounds(10, 100, 257, 22);
 		panel_1.add(label_8);
 		
 		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(10, 159, 203, 22);
+		passwordField_1.setBounds(10, 122, 203, 22);
 		panel_1.add(passwordField_1);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaAtualAdm.class.getResource("/Imagens/pensador1.png")));
-		label.setBounds(-16, 0, 815, 528);
+		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador3.png")));
+		label.setBounds(-7, -26, 780, 443);
 		getContentPane().add(label);
 
 	}

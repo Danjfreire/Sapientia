@@ -64,7 +64,7 @@ public class TelaInicialAdm extends JFrame {
 		setTitle("Sapientia-ADM");
 		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(289, 110, 788, 509);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -88,8 +88,8 @@ public class TelaInicialAdm extends JFrame {
 		desktopPane.add(lblSeuSistemaDe);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaInicialAdm.class.getResource("/Imagens/pensador1.png")));
-		label.setBounds(0, -61, 1024, 688);
+		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador3.png")));
+		label.setBounds(0, 0, 780, 443);
 		desktopPane.add(label);
 		
 		JMenuBar menuBar = new JMenuBar();

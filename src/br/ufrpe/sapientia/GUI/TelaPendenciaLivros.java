@@ -3,10 +3,12 @@ package br.ufrpe.sapientia.GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -61,28 +63,28 @@ public class TelaPendenciaLivros extends JInternalFrame {
 		setTitle("Livros Pendentes");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 577, 368);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 535, 70);
+		panel.setBounds(10, 11, 744, 70);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"T\u00EDtulo", "ISBN"}));
-		comboBox.setBounds(29, 22, 72, 20);
+		comboBox.setBounds(10, 22, 72, 20);
 		panel.add(comboBox);
 
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(111, 22, 316, 20);
+		textField.setBounds(92, 22, 526, 20);
 		panel.add(textField);
 
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 117, 535, 194);
+		scrollPane.setBounds(10, 117, 744, 217);
 		getContentPane().add(scrollPane);
 
 		table = new JTable();
@@ -100,8 +102,17 @@ public class TelaPendenciaLivros extends JInternalFrame {
 
 
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(436, 21, 89, 23);
+		btnBuscar.setBounds(647, 21, 89, 23);
 		panel.add(btnBuscar);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnSair.setBounds(338, 345, 89, 23);
+		getContentPane().add(btnSair);
 		btnBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
@@ -154,6 +165,10 @@ public class TelaPendenciaLivros extends JInternalFrame {
 				}
 			}
 		});
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 
 
 	}

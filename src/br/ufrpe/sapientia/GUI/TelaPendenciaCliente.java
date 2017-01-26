@@ -2,6 +2,7 @@ package br.ufrpe.sapientia.GUI;
 
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,6 +21,9 @@ import br.ufrpe.sapientia.negocio.beans.*;
 import java.util.Calendar;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.beans.*;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaPendenciaCliente extends JInternalFrame {
 	private JTable table;
@@ -59,11 +63,11 @@ public class TelaPendenciaCliente extends JInternalFrame {
 		setTitle("Pend\u00EAncias");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 596, 499);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(73, 118, 524, 275);
+		scrollPane.setBounds(10, 44, 744, 275);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -104,14 +108,29 @@ public class TelaPendenciaCliente extends JInternalFrame {
 		JLabel lblNewLabel = new JLabel("Livros em atraso!");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(285, 70, 201, 14);
+		lblNewLabel.setBounds(274, 11, 144, 14);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblContatarCliente = new JLabel("Devolva Imediatamente!");
 		lblContatarCliente.setForeground(Color.RED);
 		lblContatarCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblContatarCliente.setBounds(285, 445, 201, 14);
+		lblContatarCliente.setBounds(274, 329, 209, 30);
 		getContentPane().add(lblContatarCliente);
-
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnSair.setBounds(329, 370, 89, 23);
+		getContentPane().add(btnSair);
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
+		
+		
 	}
 }

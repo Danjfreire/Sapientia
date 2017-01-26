@@ -78,7 +78,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		setTitle("Cadastrar Clientes");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 750, 489);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -150,59 +150,59 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		panel.add(comboBox);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 237, 417, 202);
+		panel_1.setBounds(10, 237, 417, 165);
 		panel_1.setBorder(new TitledBorder(null, "Endere\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(TelaCadastrarCliente.class.getResource("/Imagens/casa.png")));
-		label_1.setBounds(10, 51, 119, 128);
+		label_1.setBounds(10, 22, 119, 128);
 		panel_1.add(label_1);
 		
 		JLabel lblLogradouro = new JLabel("Logradouro.:");
-		lblLogradouro.setBounds(139, 51, 75, 14);
+		lblLogradouro.setBounds(139, 22, 75, 14);
 		panel_1.add(lblLogradouro);
 		
 		tfLogradouro = new JTextField();
-		tfLogradouro.setBounds(224, 45, 183, 20);
+		tfLogradouro.setBounds(224, 19, 183, 20);
 		panel_1.add(tfLogradouro);
 		tfLogradouro.setColumns(10);
 		
 		JLabel lblNmero = new JLabel("N\u00FAmero.:");
-		lblNmero.setBounds(139, 76, 63, 14);
+		lblNmero.setBounds(139, 47, 63, 14);
 		panel_1.add(lblNmero);
 		
 		tfNumero = new JTextField();
-		tfNumero.setBounds(224, 70, 183, 20);
+		tfNumero.setBounds(224, 44, 183, 20);
 		panel_1.add(tfNumero);
 		tfNumero.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro.:");
-		lblBairro.setBounds(139, 101, 46, 14);
+		lblBairro.setBounds(139, 72, 46, 14);
 		panel_1.add(lblBairro);
 		
 		tfBairro = new JTextField();
-		tfBairro.setBounds(224, 95, 183, 20);
+		tfBairro.setBounds(224, 69, 183, 20);
 		panel_1.add(tfBairro);
 		tfBairro.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Cidade.:");
-		lblCidade.setBounds(139, 126, 46, 14);
+		lblCidade.setBounds(139, 97, 46, 14);
 		panel_1.add(lblCidade);
 		
 		tfCidade = new JTextField();
-		tfCidade.setBounds(224, 120, 183, 20);
+		tfCidade.setBounds(224, 94, 183, 20);
 		panel_1.add(tfCidade);
 		tfCidade.setColumns(10);
 		
 		JLabel lblEstado = new JLabel("Estado.:");
-		lblEstado.setBounds(139, 151, 46, 14);
+		lblEstado.setBounds(139, 122, 46, 14);
 		panel_1.add(lblEstado);
 		
 		JComboBox cbEstado = new JComboBox();
 		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"PE", "AM", "BA", "SC", "RJ", "SP"}));
-		cbEstado.setBounds(224, 151, 183, 20);
+		cbEstado.setBounds(224, 119, 183, 20);
 		panel_1.add(cbEstado);
 		
 		JPanel panel_2 = new JPanel();
@@ -240,7 +240,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		tfTelefone.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(488, 377, 98, 23);
+		btnCadastrar.setBounds(477, 317, 98, 23);
 		getContentPane().add(btnCadastrar);
 		btnCadastrar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -277,12 +277,16 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(616, 377, 89, 23);
+		btnCancelar.setBounds(595, 317, 89, 23);
 		getContentPane().add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				dispose();
 			}
 		});
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 	}
 }

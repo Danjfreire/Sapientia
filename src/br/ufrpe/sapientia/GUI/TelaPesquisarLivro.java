@@ -22,6 +22,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -66,12 +68,12 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		setTitle("Pesquisar Livros");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 800, 570);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 11, 764, 73);
+		panel_1.setBounds(10, 11, 744, 73);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -101,7 +103,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		modelo.addColumn("Total");
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 135, 764, 304);
+		scrollPane.setBounds(10, 135, 744, 196);
 		getContentPane().add(scrollPane);
 		scrollPane.setViewportView(table_1);
 		
@@ -182,7 +184,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(344, 450, 89, 40);
+		btnExcluir.setBounds(344, 354, 89, 29);
 		getContentPane().add(btnExcluir);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -245,7 +247,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(458, 450, 89, 40);
+		btnSair.setBounds(458, 354, 89, 29);
 		getContentPane().add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -259,7 +261,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(223, 450, 89, 40);
+		btnAtualizar.setBounds(223, 354, 89, 29);
 		getContentPane().add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -279,7 +281,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		});
 		
 		JButton btnMostrarTodos = new JButton("Mostrar Todos");
-		btnMostrarTodos.setBounds(334, 95, 123, 29);
+		btnMostrarTodos.setBounds(324, 95, 123, 29);
 		getContentPane().add(btnMostrarTodos);
 		btnMostrarTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -321,6 +323,10 @@ public class TelaPesquisarLivro extends JInternalFrame {
 				}
 			}
 		});
-
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 	}
 }

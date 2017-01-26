@@ -3,6 +3,7 @@ package br.ufrpe.sapientia.GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
@@ -11,6 +12,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -63,13 +65,13 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		setTitle("Hist\u00F3rico de Empr\u00E9stimo de Livro");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 780, 499);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 22, 730, 79);
+		panel.setBounds(10, 22, 744, 79);
 		getContentPane().add(panel);
 		
 		textField = new JTextField();
@@ -79,11 +81,11 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"ISBN","Funcionario","Cliente"}));
-		comboBox.setBounds(10, 20, 65, 36);
+		comboBox.setBounds(10, 28, 65, 22);
 		panel.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 112, 730, 305);
+		scrollPane.setBounds(10, 112, 744, 242);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -98,7 +100,7 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(628, 21, 92, 36);
+		btnBuscar.setBounds(642, 28, 92, 22);
 		panel.add(btnBuscar);
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,9 +142,20 @@ public class TelaHistóricoLivros extends JInternalFrame {
 			}
 		});
 		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnSair.setBounds(328, 365, 89, 23);
+		getContentPane().add(btnSair);
 		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 		
 		
 	}
-
 }

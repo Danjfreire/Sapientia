@@ -2,6 +2,7 @@ package br.ufrpe.sapientia.GUI;
 
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,6 +20,9 @@ import br.ufrpe.sapientia.negocio.beans.*;
 
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaHistoricoCliente extends JInternalFrame {
 	private JTable table;
@@ -58,11 +62,11 @@ public class TelaHistoricoCliente extends JInternalFrame {
 		setClosable(true);
 		setIconifiable(true);
 		setTitle("Hist\u00F3rico");
-		setBounds(100, 100, 642, 574);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(62, 117, 554, 312);
+		scrollPane.setBounds(10, 49, 744, 312);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -91,9 +95,24 @@ public class TelaHistoricoCliente extends JInternalFrame {
 		JLabel lblNewLabel = new JLabel("Meu historico");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setBounds(246, 67, 205, 22);
+		lblNewLabel.setBounds(320, 16, 110, 22);
 		getContentPane().add(lblNewLabel);
-
+		
+		JButton btnNewButton = new JButton("Sair");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(320, 372, 89, 23);
+		getContentPane().add(btnNewButton);
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
+		
+		
 	}
 
 }

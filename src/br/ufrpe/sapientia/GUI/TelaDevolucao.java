@@ -3,11 +3,13 @@ package br.ufrpe.sapientia.GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -40,12 +42,12 @@ public class TelaDevolucao extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("Devolver Livros");
-		setBounds(100, 100, 729, 454);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 693, 57);
+		panel.setBounds(10, 11, 744, 57);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -55,12 +57,12 @@ public class TelaDevolucao extends JInternalFrame {
 		panel.add(comboBox);
 		
 		textField = new JTextField();
-		textField.setBounds(98, 21, 383, 20);
+		textField.setBounds(98, 21, 508, 20);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(542, 20, 89, 23);
+		btnPesquisar.setBounds(645, 20, 89, 23);
 		panel.add(btnPesquisar);
 		
 		JButton btnPesquisarTodos = new JButton("Pesquisar Todos");
@@ -68,7 +70,7 @@ public class TelaDevolucao extends JInternalFrame {
 		getContentPane().add(btnPesquisarTodos);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 113, 693, 249);
+		scrollPane.setBounds(10, 113, 744, 249);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -84,12 +86,17 @@ public class TelaDevolucao extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnDevolver = new JButton("Devolver");
-		btnDevolver.setBounds(211, 373, 89, 23);
+		btnDevolver.setBounds(257, 373, 89, 23);
 		getContentPane().add(btnDevolver);
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(394, 373, 89, 23);
 		getContentPane().add(btnSair);
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 
 	}
 }

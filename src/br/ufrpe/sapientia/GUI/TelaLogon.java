@@ -64,7 +64,7 @@ public class TelaLogon extends JFrame {
 		setResizable(false);
 		setTitle("SAPIENTIA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 818, 584);
+		setBounds(289, 121, 788, 487);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -72,7 +72,7 @@ public class TelaLogon extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(47, 79, 79));
-		panel.setBounds(268, 221, 295, 255);
+		panel.setBounds(268, 166, 295, 255);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -172,8 +172,8 @@ public class TelaLogon extends JFrame {
 		contentPane.add(lblWwwsapientiacombr);
 		
 		JLabel lbTelaAzul = new JLabel("");
-		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador.jpg")));
-		lbTelaAzul.setBounds(0, -68, 840, 661);
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(0, 0, 780, 443);
 		contentPane.add(lbTelaAzul);
 		
 		JLabel label = new JLabel("SAPIENTIA");

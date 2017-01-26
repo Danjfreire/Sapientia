@@ -74,11 +74,11 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		setTitle("Cadastrar Funcionários");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 750, 488);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 43, 427, 190);
+		panel.setBounds(10, 11, 427, 190);
 		panel.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -152,7 +152,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		panel.add(cbSexo);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 268, 417, 176);
+		panel_1.setBounds(10, 212, 417, 176);
 		panel_1.setBorder(new TitledBorder(null, "Endere\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
@@ -215,7 +215,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Contato", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(473, 81, 261, 261);
+		panel_2.setBounds(473, 11, 261, 261);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -250,7 +250,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		tfTelefone.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(473, 410, 98, 23);
+		btnCadastrar.setBounds(508, 319, 98, 23);
 		getContentPane().add(btnCadastrar);
 		
 		btnCadastrar.addActionListener(new ActionListener(){
@@ -292,7 +292,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(635, 410, 89, 23);
+		btnCancelar.setBounds(616, 319, 89, 23);
 		getContentPane().add(btnCancelar);
 		
 		
@@ -305,6 +305,11 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 				}
 			}
 		});
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 
 	}
 	private static class __Tmp {

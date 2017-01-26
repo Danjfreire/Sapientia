@@ -146,7 +146,7 @@ public class FormAtuaLivro extends JFrame {
 		panel.add(label_7);
 		
 		JLabel label_8 = new JLabel("Resumo.:");
-		label_8.setBounds(247, 27, 46, 14);
+		label_8.setBounds(247, 27, 62, 14);
 		panel.add(label_8);
 		
 		tfCategoria = new JTextField();

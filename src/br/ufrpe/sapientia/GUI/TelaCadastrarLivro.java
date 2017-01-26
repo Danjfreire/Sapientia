@@ -74,12 +74,12 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		setTitle("Cadastrar Livros");
 		setClosable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(263, 11, 506, 279);
+		panel.setBounds(236, 62, 506, 279);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -184,28 +184,23 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		tfTotal.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(25, 11, 180, 169);
+		panel_1.setBounds(28, 62, 163, 128);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(TelaCadastrarLivro.class.getResource("/Imagens/livro.png")));
-		label_1.setBounds(22, 11, 135, 128);
+		label_1.setBounds(18, 0, 135, 128);
 		panel_1.add(label_1);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 191, 216, 99);
-		getContentPane().add(panel_2);
-		panel_2.setLayout(null);
-		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(109, 11, 89, 68);
-		panel_2.add(btnCancelar);
+		btnCancelar.setBounds(109, 232, 89, 68);
+		getContentPane().add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(10, 11, 89, 68);
-		panel_2.add(btnSalvar);
+		btnSalvar.setBounds(10, 232, 89, 68);
+		getContentPane().add(btnSalvar);
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnSalvar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -240,7 +235,10 @@ public class TelaCadastrarLivro extends JInternalFrame {
 				dispose();			}
 		});
 		
-		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 
 	}
 }

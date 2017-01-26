@@ -83,12 +83,12 @@ public class TelaEmpréstimo extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("\t\t\t\t\t\t\tSapientia - Empr\u00E9stimo de Livros");
-		setBounds(100, 100, 595, 523);
+		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados do Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 489, 74);
+		panel.setBounds(10, 11, 744, 74);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -98,31 +98,31 @@ public class TelaEmpréstimo extends JInternalFrame {
 		
 		tfNome = new JTextField();
 		tfNome.setColumns(10);
-		tfNome.setBounds(48, 20, 220, 20);
+		tfNome.setBounds(48, 20, 435, 20);
 		panel.add(tfNome);
 		
 		JLabel lblCpf = new JLabel("Cpf.:");
-		lblCpf.setBounds(278, 23, 32, 14);
+		lblCpf.setBounds(544, 23, 32, 14);
 		panel.add(lblCpf);
 		
 		tfCpf = new JTextField();
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(320, 20, 148, 20);
+		tfCpf.setBounds(586, 20, 148, 20);
 		panel.add(tfCpf);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados do Livro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 96, 489, 106);
+		panel_1.setBounds(10, 96, 744, 106);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo.:");
-		lblTtulo.setBounds(194, 27, 46, 14);
+		lblTtulo.setBounds(248, 27, 46, 14);
 		panel_1.add(lblTtulo);
 		
 		tfTitulo = new JTextField();
 		tfTitulo.setColumns(10);
-		tfTitulo.setBounds(244, 24, 235, 20);
+		tfTitulo.setBounds(304, 24, 430, 20);
 		panel_1.add(tfTitulo);
 		
 		JLabel lblIsbn = new JLabel("ISBN.:");
@@ -134,29 +134,9 @@ public class TelaEmpréstimo extends JInternalFrame {
 		tfIsbn.setBounds(53, 24, 131, 20);
 		panel_1.add(tfIsbn);
 		
-		JButton btnNovo = new JButton("Novo");
-		btnNovo.setBounds(390, 72, 89, 23);
-		panel_1.add(btnNovo);
-		btnNovo.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				try{
-//					SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
-//					Date fim = df.parse(tfDataFinal.getText());
-//					Calendar termino = Calendar.getInstance();
-//					termino.setTime(fim);
-					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "PENDENTE",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
-						System.out.println("emprestimo realizado com sucesso");
-					}
-				}
-				catch(Exception exception){
-					//msg de erro
-				}
-			}
-		});
-		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Empr\u00E9stimo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 223, 489, 106);
+		panel_2.setBounds(10, 223, 459, 106);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -166,7 +146,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 		
 		tfFuncionario = new JTextField();
 		tfFuncionario.setColumns(10);
-		tfFuncionario.setBounds(82, 21, 235, 20);
+		tfFuncionario.setBounds(82, 21, 365, 20);
 		panel_2.add(tfFuncionario);
 		tfFuncionario.setText(funcionario.getNome());
 		tfFuncionario.setEditable(false);
@@ -189,6 +169,41 @@ public class TelaEmpréstimo extends JInternalFrame {
 		tfDataFinal.setColumns(10);
 		tfDataFinal.setBounds(326, 58, 121, 20);
 		panel_2.add(tfDataFinal);
+		
+		JButton btnNovo = new JButton("Novo");
+		btnNovo.setBounds(278, 358, 89, 23);
+		getContentPane().add(btnNovo);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnSair.setBounds(394, 358, 89, 23);
+		getContentPane().add(btnSair);
+		
+		btnNovo.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+//					SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+//					Date fim = df.parse(tfDataFinal.getText());
+//					Calendar termino = Calendar.getInstance();
+//					termino.setTime(fim);
+					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "PENDENTE",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
+						System.out.println("emprestimo realizado com sucesso");
+					}
+				}
+				catch(Exception exception){
+					//msg de erro
+				}
+			}
+		});
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 
 	}
 }
