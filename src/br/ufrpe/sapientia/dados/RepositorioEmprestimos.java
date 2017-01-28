@@ -178,6 +178,91 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		return emprestimos;
 	}
 	
+	public List<Emprestimo> selecaoEmprestimoFuncionario(String cpf_funcionario, boolean tipo) throws Exception{
+		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		String sql;
+		if(tipo)
+			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'PENDENTE' or status_emprestimo = 'ATRASADO' order by titulo_livro";
+		else
+			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ENTREGUE' order by titulo_livro";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, cpf_funcionario);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				emprestimos.add(preencherEmprestimo(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			throw e;
+		}
+		return emprestimos;
+	}
+	
+	public List<Emprestimo> selecaoEmprestimoCliente(String cpf_cliente, boolean tipo) throws Exception{
+		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		String sql;
+		if(tipo)
+			sql = "select * from emprestimo where cliente_cpf = ? and status_emprestimo = 'PENDENTE' or status_emprestimo = 'ATRASADO' order by titulo_livro";
+		else
+			sql = "select * from emprestimo where cliente_cpf = ? and status_emprestimo = 'ENTREGUE' order by titulo_livro";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, cpf_cliente);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				emprestimos.add(preencherEmprestimo(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			throw e;
+		}
+		return emprestimos;
+	}
+	
+	public List<Emprestimo> selecaoEmprestimoISBN(String isbn_livro, boolean tipo) throws Exception{
+		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		String sql;
+		if(tipo)
+			sql = "select * from emprestimo where isbn_livro = ? and status_emprestimo = 'PENDENTE' or status_emprestimo = 'ATRASADO' order by titulo_livro";
+		else
+			sql = "select * from emprestimo where isbn_livro = ? and status_emprestimo = 'ENTREGUE' order by titulo_livro";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, isbn_livro);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				emprestimos.add(preencherEmprestimo(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			throw e;
+		}
+		return emprestimos;
+	}
+	
+	public List<Emprestimo> selecaoEmprestimoTitulo(String titulo_livro, boolean tipo) throws Exception{
+		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		String sql;
+		if(tipo)
+			sql = "select * from emprestimo where titulo_livro = ? and status_emprestimo = 'PENDENTE' or status_emprestimo = 'ATRASADO' order by titulo_livro";
+		else
+			sql = "select * from emprestimo where titulo_livro = ? and status_emprestimo = 'ENTREGUE' order by titulo_livro";
+		String titulo = '%' + titulo_livro + '%';
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, titulo);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				emprestimos.add(preencherEmprestimo(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			throw e;
+		}
+		return emprestimos;
+	}
+	
 	private Emprestimo preencherEmprestimo(ResultSet rs) throws Exception{
 		Emprestimo em = null;
 		try {
