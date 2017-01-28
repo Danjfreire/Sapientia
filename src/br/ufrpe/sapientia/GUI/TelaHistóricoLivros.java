@@ -93,6 +93,7 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		table.setModel(modelo);
 		modelo.addColumn("Cliente");
 		modelo.addColumn("Funcion\u00E1rio");
+		modelo.addColumn("Livro");
 		modelo.addColumn("Data");
 		modelo.addColumn("Devolu\u00E7\u00E3o");
 		modelo.addColumn("Situa\u00E7\u00E3o");
@@ -110,6 +111,7 @@ public class TelaHistóricoLivros extends JInternalFrame {
 					table.setModel(modelo);
 					modelo.addColumn("Cliente");
 					modelo.addColumn("Funcion\u00E1rio");
+					modelo.addColumn("Livro");
 					modelo.addColumn("Data");
 					modelo.addColumn("Devolu\u00E7\u00E3o");
 					modelo.addColumn("Situa\u00E7\u00E3o");
@@ -125,7 +127,7 @@ public class TelaHistóricoLivros extends JInternalFrame {
 					}
 					
 					for(Emprestimo emp : emprestimos){
-						System.out.println(emp);
+						Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
 						Usuario cliente = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfCliente(), "C");
 						Usuario func = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfFuncionario(), "F");
 						Calendar inicio = emp.getDataEmprestimo();
@@ -133,7 +135,7 @@ public class TelaHistóricoLivros extends JInternalFrame {
 						Calendar fim = emp.getDataDevolucao();
 						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
 						
-						modelo.addRow(new Object[]{cliente.getNome(),func.getNome(),dataInicio,dataFim,emp.getStatus()});
+						modelo.addRow(new Object[]{cliente.getNome(),func.getNome(),l.getTitulo(),dataInicio,dataFim,emp.getStatus()});
 					}	
 					
 				}catch(Exception ex){

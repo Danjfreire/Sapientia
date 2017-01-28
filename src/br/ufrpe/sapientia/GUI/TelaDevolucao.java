@@ -1,7 +1,8 @@
 package br.ufrpe.sapientia.GUI;
 
 import java.awt.EventQueue;
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +15,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.util.List;
+
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaDevolucao extends JInternalFrame {
 	private JTextField textField;
@@ -61,14 +66,6 @@ public class TelaDevolucao extends JInternalFrame {
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(645, 20, 89, 23);
-		panel.add(btnPesquisar);
-		
-		JButton btnPesquisarTodos = new JButton("Pesquisar Todos");
-		btnPesquisarTodos.setBounds(294, 79, 121, 23);
-		getContentPane().add(btnPesquisarTodos);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 113, 744, 249);
 		getContentPane().add(scrollPane);
@@ -84,6 +81,34 @@ public class TelaDevolucao extends JInternalFrame {
 		modelo.addColumn("Sexo");
 		modelo.addColumn("Login");
 		scrollPane.setViewportView(table);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBounds(645, 20, 89, 23);
+		panel.add(btnPesquisar);
+		btnPesquisar.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					try{
+						List<Emprestimo>emprestimos;
+						if(comboBox.getSelectedItem().equals("T\u00CDTULO")){
+							emprestimos = Fachada.getInstance().verificarEmprestimoLivro(textField.getText());
+						}else if(comboBox.getSelectedItem().equals("ISBN")){
+							//emprestimos = Fachada.getInstance().verificarPendenciasISBN(isbn)
+						}else if(comboBox.getSelectedItem().equals("Cliente")){
+							//emprestimos = Fachada.getInstance().verificarPendenciasCliente(textField.getText(), status);
+						}else{
+							//emprestimos = Fachada.getInstance().verificarPendenciasFunc(textField.getText());
+						}
+						
+					}catch(Exception ex){
+						
+					}
+				}});
+		
+		JButton btnPesquisarTodos = new JButton("Pesquisar Todos");
+		btnPesquisarTodos.setBounds(294, 79, 121, 23);
+		getContentPane().add(btnPesquisarTodos);
+		
+		
 		
 		JButton btnDevolver = new JButton("Devolver");
 		btnDevolver.setBounds(257, 373, 89, 23);
