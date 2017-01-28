@@ -22,6 +22,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import br.ufrpe.sapientia.fachada.Fachada;
@@ -35,7 +36,7 @@ public class FormAtuaFunc extends JFrame {
 	private JTextField tfCPF;
 	private JComboBox tfSexo;
 	private JTextField tfLogin;
-	private JPasswordField pfSenha;
+	private JPasswordField psSenha;
 	private JTextField tfLogradouro;
 	private JTextField tfNumero;
 	private JTextField tfBairro;
@@ -43,7 +44,7 @@ public class FormAtuaFunc extends JFrame {
 	private JTextField tfEmail;
 	private JTextField tfContato;
 	private Usuario funcionario;
-	private JPasswordField pfConfirmar;
+	private JPasswordField psConfirmar;
 
 	/**
 	 * Launch the application.
@@ -129,7 +130,12 @@ public class FormAtuaFunc extends JFrame {
 		panel.add(label_4);
 		
 		
-		tfLogin = new JTextField();
+		try {
+			tfLogin = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogin.setColumns(10);
 		tfLogin.setBounds(277, 95, 174, 20);
 		panel.add(tfLogin);
@@ -139,20 +145,20 @@ public class FormAtuaFunc extends JFrame {
 		label_5.setBounds(148, 123, 46, 14);
 		panel.add(label_5);
 		
-		pfSenha = new JPasswordField();
-		pfSenha.setBounds(277, 120, 174, 20);
-		panel.add(pfSenha);
-		pfSenha.setText(funcionario.getSenha());
+		psSenha = new JPasswordField();
+		psSenha.setBounds(277, 120, 174, 20);
+		panel.add(psSenha);
+		psSenha.setText(funcionario.getSenha());
 		
-		pfConfirmar = new JPasswordField();
-		pfConfirmar.setBounds(277, 145, 174, 20);
-		panel.add(pfConfirmar);
-		pfConfirmar.setColumns(10);
+		psConfirmar = new JPasswordField();
+		psConfirmar.setBounds(277, 145, 174, 20);
+		panel.add(psConfirmar);
+		psConfirmar.setColumns(10);
 		
 		JLabel lblConfimarSenha = new JLabel("Confimar Senha.:");
 		lblConfimarSenha.setBounds(148, 148, 86, 14);
 		panel.add(lblConfimarSenha);
-		pfConfirmar.setText(funcionario.getSenha());
+		psConfirmar.setText(funcionario.getSenha());
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -169,7 +175,12 @@ public class FormAtuaFunc extends JFrame {
 		label_7.setBounds(139, 24, 75, 14);
 		panel_1.add(label_7);
 		
-		tfLogradouro = new JTextField();
+		try {
+			tfLogradouro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogradouro.setColumns(10);
 		tfLogradouro.setBounds(224, 18, 217, 20);
 		panel_1.add(tfLogradouro);
@@ -179,7 +190,16 @@ public class FormAtuaFunc extends JFrame {
 		label_8.setBounds(139, 49, 63, 14);
 		panel_1.add(label_8);
 		
-		tfNumero = new JTextField();
+		tfNumero = new JFormattedTextField();
+		tfNumero.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(!(Character.isDigit(e.getKeyChar())) || tfNumero.getText().length() == 9 ){
+					if(e.getKeyChar() != KeyEvent.VK_BACK_SPACE && e.getKeyChar() != KeyEvent.VK_DELETE)
+						getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		tfNumero.setColumns(10);
 		tfNumero.setBounds(224, 43, 217, 20);
 		panel_1.add(tfNumero);
@@ -189,8 +209,13 @@ public class FormAtuaFunc extends JFrame {
 		label_9.setBounds(139, 74, 46, 14);
 		panel_1.add(label_9);
 		
-		tfBairro = new JTextField();
-		tfBairro.setColumns(10);
+		
+		try {
+			tfBairro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfBairro.setBounds(224, 68, 217, 20);
 		panel_1.add(tfBairro);
 		tfBairro.setText(funcionario.getBairro());
@@ -199,7 +224,12 @@ public class FormAtuaFunc extends JFrame {
 		label_10.setBounds(139, 99, 46, 14);
 		panel_1.add(label_10);
 		
-		tfCidade = new JTextField();
+		try {
+			tfCidade = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfCidade.setColumns(10);
 		tfCidade.setBounds(224, 93, 217, 20);
 		panel_1.add(tfCidade);
@@ -233,14 +263,19 @@ public class FormAtuaFunc extends JFrame {
 		label_14.setBounds(10, 219, 56, 14);
 		panel_2.add(label_14);
 		
-		tfEmail = new JTextField();
+		try {
+			tfEmail = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_2.add(tfEmail);
 		tfEmail.setText(funcionario.getEmail());
 		
 		try {
-			tfContato = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
+			tfContato = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -254,11 +289,11 @@ public class FormAtuaFunc extends JFrame {
 		contentPane.add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(pfSenha.getText().equals(pfConfirmar.getText())){
+				if(psSenha.getText().equals(psConfirmar.getText())){
 					try{
 						String sexo = (String)tfSexo.getSelectedItem();
 						boolean a = Fachada.getInstance().atualizarUsuario(funcionario.getCpf(), funcionario.getNome(), tfContato.getText(), 
-								tfEmail.getText(), tfLogin.getText(), pfSenha.getText(), "F", "" + sexo.charAt(0), tfLogradouro.getText(), 
+								tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "F", "" + sexo.charAt(0), tfLogradouro.getText(), 
 								Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)comboBox.getSelectedItem());	
 						if(a){
 							JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
@@ -268,19 +303,24 @@ public class FormAtuaFunc extends JFrame {
 							tfContato.setText("");
 							tfEmail.setText("");
 							tfLogin.setText("");
-							pfSenha.setText("");
+							psSenha.setText("");
 							tfLogradouro.setText("");
 							tfBairro.setText("");
 							tfCidade.setText("");
 						}
 						
-					}catch(Exception exception){
-						
+					}catch(SQLException exception){
+						ErrosGUI eg = new ErrosGUI(exception, tfEmail, psSenha, psConfirmar);
+						eg.mensagemUsuario();
+					}catch (NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "Campo número em branco!");
+					} catch (Exception e1) {
+						e1.printStackTrace();
 					}
 				}else{
 					JOptionPane.showMessageDialog(null, "As senhas não são iguais");
-					pfSenha.setText("");
-					pfConfirmar.setText("");
+					psSenha.setText("");
+					psConfirmar.setText("");
 				}
 			}
 		});

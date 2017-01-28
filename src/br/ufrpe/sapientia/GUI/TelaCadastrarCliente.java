@@ -1,6 +1,7 @@
 package br.ufrpe.sapientia.GUI;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 import java.awt.ItemSelectable;
 
 import javax.swing.JInternalFrame;
@@ -24,6 +25,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import br.ufrpe.sapientia.fachada.Fachada;
@@ -40,7 +42,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 	private JTextField tfCidade;
 	private JTextField tfEmail;
 	private JFormattedTextField tfTelefone;
-	private JPasswordField passwordField;
+	private JPasswordField psConfirmar;
 
 	/**
 	 * Launch the application.
@@ -96,7 +98,12 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblNome.setBounds(148, 30, 46, 14);
 		panel.add(lblNome);
 		
-		tfNome = new JTextField();
+		try {
+			tfNome = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfNome.setBounds(239, 27, 164, 20);
 		panel.add(tfNome);
 		tfNome.setColumns(10);
@@ -119,7 +126,13 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblLogin.setBounds(148, 105, 46, 14);
 		panel.add(lblLogin);
 		
-		tfLogin = new JTextField();
+
+		try {
+			tfLogin = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogin.setBounds(239, 102, 164, 20);
 		panel.add(tfLogin);
 		tfLogin.setColumns(10);
@@ -136,9 +149,9 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblConfirmarSenha.setBounds(148, 155, 128, 14);
 		panel.add(lblConfirmarSenha);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(239, 152, 163, 20);
-		panel.add(passwordField);
+		psConfirmar = new JPasswordField();
+		psConfirmar.setBounds(239, 152, 163, 20);
+		panel.add(psConfirmar);
 		
 		JLabel lblSexo = new JLabel("Sexo.:");
 		lblSexo.setBounds(148, 80, 46, 14);
@@ -164,7 +177,12 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblLogradouro.setBounds(139, 22, 75, 14);
 		panel_1.add(lblLogradouro);
 		
-		tfLogradouro = new JTextField();
+		try {
+			tfLogradouro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogradouro.setBounds(224, 19, 183, 20);
 		panel_1.add(tfLogradouro);
 		tfLogradouro.setColumns(10);
@@ -173,7 +191,16 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblNmero.setBounds(139, 47, 63, 14);
 		panel_1.add(lblNmero);
 		
-		tfNumero = new JTextField();
+		tfNumero = new JFormattedTextField();
+		tfNumero.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(!(Character.isDigit(e.getKeyChar())) || tfNumero.getText().length() == 9 ){
+					if(e.getKeyChar() != KeyEvent.VK_BACK_SPACE && e.getKeyChar() != KeyEvent.VK_DELETE)
+						getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		tfNumero.setBounds(224, 44, 183, 20);
 		panel_1.add(tfNumero);
 		tfNumero.setColumns(10);
@@ -182,7 +209,12 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblBairro.setBounds(139, 72, 46, 14);
 		panel_1.add(lblBairro);
 		
-		tfBairro = new JTextField();
+		try {
+			tfBairro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfBairro.setBounds(224, 69, 183, 20);
 		panel_1.add(tfBairro);
 		tfBairro.setColumns(10);
@@ -191,7 +223,12 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblCidade.setBounds(139, 97, 46, 14);
 		panel_1.add(lblCidade);
 		
-		tfCidade = new JTextField();
+		try {
+			tfCidade = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfCidade.setBounds(224, 94, 183, 20);
 		panel_1.add(tfCidade);
 		tfCidade.setColumns(10);
@@ -224,13 +261,18 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		lblTelefone.setBounds(10, 219, 56, 14);
 		panel_2.add(lblTelefone);
 		
-		tfEmail = new JTextField();
+		try {
+			tfEmail = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_2.add(tfEmail);
 		tfEmail.setColumns(10);
 		
 		try {
-			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
+			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -246,7 +288,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					String sexo = (String)comboBox.getSelectedItem();
-					if(psSenha.getText().equals(passwordField.getText())){
+					if(psSenha.getText().equals(psConfirmar.getText())){
 						Usuario u = new Usuario(tfNome.getText(), tfCpf.getText(), tfTelefone.getText(), tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "" + sexo.charAt(0), 
 							"C", tfLogradouro.getText(), Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)cbEstado.getSelectedItem());
 						if(Fachada.getInstance().CadastrarUsuario(u)){
@@ -268,10 +310,15 @@ public class TelaCadastrarCliente extends JInternalFrame {
 					else{
 						JOptionPane.showMessageDialog(null, "As senhas não são iguais");
 						psSenha.setText("");
-						passwordField.setText("");
+						psConfirmar.setText("");
 					}
-				}catch(Exception exception){
-					
+				}catch(SQLException exception){
+					ErrosGUI eg = new ErrosGUI(exception, tfCpf, tfLogin, tfEmail, psSenha, psConfirmar);
+					eg.mensagemUsuario();
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "Campo número em branco!");
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

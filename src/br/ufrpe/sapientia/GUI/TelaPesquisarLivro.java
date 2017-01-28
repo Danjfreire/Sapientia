@@ -90,7 +90,6 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		table_1 = new JTable();
 		DefaultTableModel modelo = new DefaultTableModel();
 		table_1.setModel(modelo);
-		modelo.addColumn("Id");
 		modelo.addColumn("Titulo");
 		modelo.addColumn("Autor");
 		modelo.addColumn("ISBN");
@@ -117,7 +116,6 @@ public class TelaPesquisarLivro extends JInternalFrame {
 					table_1 = new JTable();
 					DefaultTableModel modelo = new DefaultTableModel();
 					table_1.setModel(modelo);
-					modelo.addColumn("Id");
 					modelo.addColumn("Titulo");
 					modelo.addColumn("Autor");
 					modelo.addColumn("ISBN");
@@ -136,45 +134,42 @@ public class TelaPesquisarLivro extends JInternalFrame {
 							String titulo = l1.getTitulo();
 							String autor = l1.getAutor();
 							String isbn = l1.getIsbn();
-							int id = l1.getId();
 							String edicao = l1.getEdicao();
-							String ano = l1.getAno();
+							int ano = l1.getAno();
 							String volume = l1.getVolume();
 							String categoria = l1.getResumo();
 							String resumo = l1.getResumo(); 
 							int estoque = l1.getEstoque();
 							int total = l1.getTotal();
-							modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
+							modelo.addRow(new Object[]{titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 						}
 					}else if(comboBox.getSelectedItem().equals("ISBN")){
 						Livro l2 = Fachada.getInstance().buscaLivroISBN(tfPesquisa.getText());
 						String titulo = l2.getTitulo();
 						String autor = l2.getAutor();
 						String isbn = l2.getIsbn();
-						int id = l2.getId();
 						String edicao = l2.getEdicao();
-						String ano = l2.getAno();
+						int ano = l2.getAno();
 						String volume = l2.getVolume();
 						String categoria = l2.getResumo();
 						String resumo = l2.getResumo(); 
 						int estoque = l2.getEstoque();
 						int total = l2.getTotal();
-						modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
+						modelo.addRow(new Object[]{titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 					}else if(comboBox.getSelectedItem().equals("Autor")){
 						 livros = Fachada.getInstance().buscaLivroAutor(tfPesquisa.getText());
 						 for(Livro l3 : livros){
 							 String titulo = l3.getTitulo();
 							 String autor = l3.getAutor();
 							 String isbn = l3.getIsbn();
-							 int id = l3.getId();
 							 String edicao = l3.getEdicao();
-							 String ano = l3.getAno();
+							 int ano = l3.getAno();
 							 String volume = l3.getVolume();
 							 String categoria = l3.getResumo();
 							 String resumo = l3.getResumo(); 
 							 int estoque = l3.getEstoque();
 							 int total = l3.getTotal();
-							 modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
+							 modelo.addRow(new Object[]{titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 						 }
 					}
 				}catch(Exception exception){
@@ -190,13 +185,13 @@ public class TelaPesquisarLivro extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					Livro u = livros.get(table_1.getSelectedRow());
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que excluir este cliente?" ,"Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 					boolean a = Fachada.getInstance().removerLivro(u.getIsbn());
 					
 					if(a){
 						table_1 = new JTable();
 						DefaultTableModel modelo = new DefaultTableModel();
 						table_1.setModel(modelo);
-						modelo.addColumn("Id");
 						modelo.addColumn("Titulo");
 						modelo.addColumn("Autor");
 						modelo.addColumn("ISBN");
@@ -229,18 +224,17 @@ public class TelaPesquisarLivro extends JInternalFrame {
 							String titulo = l.getTitulo();
 							String autor = l.getAutor();
 							String isbn = l.getIsbn();
-							int id = l.getId();
 							String edicao = l.getEdicao();
-							String ano = l.getAno();
+							int ano = l.getAno();
 							String volume = l.getVolume();
 							String categoria = l.getResumo();
 							String resumo = l.getResumo(); 
 							int estoque = l.getEstoque();
 							int total = l.getTotal();
-							modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
+							modelo.addRow(new Object[]{titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 						}
 				       } 
-					}catch(Exception exception){
+				}}catch(Exception exception){
 					
 				}
 			}
@@ -289,7 +283,6 @@ public class TelaPesquisarLivro extends JInternalFrame {
 					table_1 = new JTable();
 					DefaultTableModel modelo = new DefaultTableModel();
 					table_1.setModel(modelo);
-					modelo.addColumn("Id");
 					modelo.addColumn("Titulo");
 					modelo.addColumn("Autor");
 					modelo.addColumn("ISBN");
@@ -307,15 +300,14 @@ public class TelaPesquisarLivro extends JInternalFrame {
 						String titulo = l.getTitulo();
 						String autor = l.getAutor();
 						String isbn = l.getIsbn();
-						int id = l.getId();
 						String edicao = l.getEdicao();
-						String ano = l.getAno();
+						int ano = l.getAno();
 						String volume = l.getVolume();
 						String categoria = l.getResumo();
 						String resumo = l.getResumo(); 
 						int estoque = l.getEstoque();
 						int total = l.getTotal();
-						modelo.addRow(new Object[]{id, titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
+						modelo.addRow(new Object[]{titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 					 }
 					
 				}catch(Exception exception){

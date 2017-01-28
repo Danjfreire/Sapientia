@@ -185,44 +185,45 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 				try{
 					int linha = table_1 .getSelectedRow();
 					Usuario u = funcionarios.get(table_1.getSelectedRow());
-					boolean a = Fachada.getInstance().removerUsuario(u.getCpf());
-					
-					if(a){
-						//sucesso
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que excluir este cliente?" ,"Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+						boolean a = Fachada.getInstance().removerUsuario(u.getCpf());
 						
-						DefaultTableModel modelo = new DefaultTableModel();
-						table_1.setModel(modelo);
-						modelo.addColumn("Nome");
-						modelo.addColumn("CPF");
-						modelo.addColumn("Endereço");
-						modelo.addColumn("Contato");
-						modelo.addColumn("Email");
-						modelo.addColumn("Sexo");
-						modelo.addColumn("Login");
-						scrollPane.setViewportView(table_1);
-						
-						if(comboBox.getSelectedItem().equals("Nome")){
-							if(tfPesquisa.getText().equals(""))
-								funcionarios = Fachada.getInstance().exibirUsuarios("F");
-							else
-								funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
-					    }else{
-					    	  if(tfPesquisa.getText().equals("")){
-					    		  funcionarios = Fachada.getInstance().exibirUsuarios("F");
-					    	  }
-					    }
-						for(Usuario user : funcionarios){
-							String nome = user.getNome();
-							String cpf = user.getCpf();
-							String endereco = user.getLogradouro() + ", " + user.getNumero() + " -" + user.getBairro() + "- " + user.getCidade() + "/" + user.getEstado();
-							String contato = user.getContato();
-							String email = user.getEmail();
-							String sexo = user.getSexo();
-							String login = user.getLogin();
-							modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
-						}
-						
-				    } 
+						if(a){
+							//sucesso
+							
+								DefaultTableModel modelo = new DefaultTableModel();
+								table_1.setModel(modelo);
+								modelo.addColumn("Nome");
+								modelo.addColumn("CPF");
+								modelo.addColumn("Endereço");
+								modelo.addColumn("Contato");
+								modelo.addColumn("Email");
+								modelo.addColumn("Sexo");
+								modelo.addColumn("Login");
+								scrollPane.setViewportView(table_1);
+								
+								if(comboBox.getSelectedItem().equals("Nome")){
+									if(tfPesquisa.getText().equals(""))
+										funcionarios = Fachada.getInstance().exibirUsuarios("F");
+									else
+										funcionarios = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "F");
+							    }else{
+							    	  if(tfPesquisa.getText().equals("")){
+							    		  funcionarios = Fachada.getInstance().exibirUsuarios("F");
+							    	  }
+							    }
+								for(Usuario user : funcionarios){
+									String nome = user.getNome();
+									String cpf = user.getCpf();
+									String endereco = user.getLogradouro() + ", " + user.getNumero() + " -" + user.getBairro() + "- " + user.getCidade() + "/" + user.getEstado();
+									String contato = user.getContato();
+									String email = user.getEmail();
+									String sexo = user.getSexo();
+									String login = user.getLogin();
+									modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
+								}
+							
+				    }} 
 				}catch(Exception exception){
 					
 				}

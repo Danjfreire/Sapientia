@@ -56,7 +56,6 @@ public class TelaLogon extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */

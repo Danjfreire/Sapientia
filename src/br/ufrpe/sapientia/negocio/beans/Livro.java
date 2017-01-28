@@ -1,19 +1,17 @@
 package br.ufrpe.sapientia.negocio.beans;
 
 public class Livro {
-	
-	private int id;
 	private String titulo;
 	private String autor;
 	private String edicao;
-	private String ano;
+	private int ano;
 	private String isbn;
 	private String categoria;
 	private String resumo;
 	private String volume;
 	private int estoque;
 	private int total;
-	public Livro(String titulo, String autor, String edicao, String ano, String isbn, String categoria, String resumo,
+	public Livro(String titulo, String autor, String edicao, int ano, String isbn, String categoria, String resumo,
 			String volume, int estoque, int total) {
 		this.titulo = titulo;
 		this.autor = autor;
@@ -25,12 +23,6 @@ public class Livro {
 		this.volume = volume;
 		this.estoque = estoque;
 		this.total = total;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -50,10 +42,10 @@ public class Livro {
 	public void setEdicao(String edicao) {
 		this.edicao = edicao;
 	}
-	public String getAno() {
+	public int getAno() {
 		return ano;
 	}
-	public void setAno(String ano) {
+	public void setAno(int ano) {
 		this.ano = ano;
 	}
 	public String getIsbn() {
@@ -93,7 +85,7 @@ public class Livro {
 		this.total = total;
 	}
 	public String toString() {
-		return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", edicao=" + edicao + ", ano=" + ano
+		return "Livro [titulo=" + titulo + ", autor=" + autor + ", edicao=" + edicao + ", ano=" + ano
 				+ ", isbn=" + isbn + ", categoria=" + categoria + ", resumo=" + resumo + ", volume=" + volume
 				+ ", estoque=" + estoque + ", total=" + total + "]";
 	}

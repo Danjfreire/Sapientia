@@ -14,8 +14,8 @@ public class RepositorioLivros implements IRepositorioLivros{
 	public RepositorioLivros(){
 		this.connection = new Conexao().construirConexao();
 	}
-	public boolean cadastrar(String titulo, String autor, String edicao, String ano, String isbn
-			, String volume, String categoria, String resumo, int estoque, int total) throws Exception{
+	public boolean cadastrar(String titulo, String autor, String edicao, int ano, String isbn
+			, String volume, String categoria, String resumo, int estoque, int total) throws SQLException{
 		
 		boolean s = false;
 		String sql = "insert into livro (titulo_livro, autor_livro, edicao_livro,"
@@ -26,7 +26,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.setString(1, titulo);
 			stmt.setString(2, autor);
 			stmt.setString(3, edicao);
-			stmt.setString(4, ano);
+			stmt.setInt(4, ano);
 			stmt.setString(5, isbn);
 			stmt.setString(6, volume);
 			stmt.setString(7, categoria);
@@ -38,13 +38,12 @@ public class RepositorioLivros implements IRepositorioLivros{
 			s = true;
 			System.out.println("Cadastrado");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Faha no cadastro do livro!");
+			throw e;
 		}
 		return s;
 	}
 	
-	public boolean remover(String Isbn) throws Exception{
+	public boolean remover(String Isbn) throws SQLException{
 		boolean s = false;
 		String sql = "delete from livro where isbn_livro = ?";
 		try{
@@ -55,14 +54,13 @@ public class RepositorioLivros implements IRepositorioLivros{
 			s = true;
 			System.out.println("removido");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na remoção do livro!");
+			throw e;
 		}
 		return s;
 	}
 	
-	public boolean atualizar(String isbn, String titulo, String autor, String edicao, String ano
-			, String volume, String categoria, String resumo, int estoque, int total) throws Exception{
+	public boolean atualizar(String isbn, String titulo, String autor, String edicao, int ano
+			, String volume, String categoria, String resumo, int estoque, int total) throws SQLException{
 		
 		boolean s = false;
 		String sql = "update livro set titulo_livro = ?, autor_livro = ?,"+
@@ -73,7 +71,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.setString(1, titulo);
 			stmt.setString(2, autor);
 			stmt.setString(3, edicao);
-			stmt.setString(4, ano);
+			stmt.setInt(4, ano);
 			stmt.setString(5, volume);
 			stmt.setString(6, categoria);
 			stmt.setString(7, resumo);
@@ -85,13 +83,12 @@ public class RepositorioLivros implements IRepositorioLivros{
 			s = true;
 			System.out.println("atualizado");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na atualização do livro!");
+			throw e;
 		}
 		return s;
 	}
 	
-	public List<Livro> pesquisarTodos() throws Exception{
+	public List<Livro> pesquisarTodos() throws SQLException{
 		List<Livro> livros = new ArrayList<Livro>();
 		String sql = "select * from livro";
 		try{
@@ -102,13 +99,12 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa!");
+			throw e;
 		}
 		return livros;
 	}
 	
-	public List<Livro> pesquisarTitulo(String titulo) throws Exception{
+	public List<Livro> pesquisarTitulo(String titulo) throws SQLException{
 		List<Livro> livros = new ArrayList<Livro>();
 		String consulta = '%' + titulo + '%';
 		String sql = "select * from livro where titulo_livro like ?";
@@ -121,13 +117,12 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa do título!");
+			throw e;
 		}
 		return livros;
 	}
 	
-	public Livro pesquisarISBN(String isbn) throws Exception{
+	public Livro pesquisarISBN(String isbn) throws SQLException{
 		Livro l = null;
 		String sql = "select * from livro where isbn_livro = ?";
 		try{
@@ -139,13 +134,12 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Faalha na pesquisa do livro!");
+			throw e;
 		}
 		return l;
 	}
 	
-	public List<Livro> pesquisarAutor(String autor) throws Exception{
+	public List<Livro> pesquisarAutor(String autor) throws SQLException{
 		List<Livro> livros = new ArrayList<Livro>();
 		String sql = "select * from livro where autor_livro = ?";
 		try{
@@ -157,21 +151,19 @@ public class RepositorioLivros implements IRepositorioLivros{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa do autor!");
+			throw e;
 		}
 		return livros;
 
 	}
 	
-	private Livro preencherLivro(ResultSet rs){
+	private Livro preencherLivro(ResultSet rs) throws SQLException{
 		Livro l = null;
 		try {
-			int id = rs.getInt("id_livro");
 			String titulo = rs.getString("titulo_livro");
 			String autor = rs.getString("autor_livro");
 			String edicao = rs.getString("edicao_livro");
-			String ano = rs.getString("ano_livro");
+			int ano = rs.getInt("ano_livro");
 			String isbn = rs.getString("isbn_livro");
 			String volume = rs.getString("volume_livro");
 			String categoria = rs.getString("categoria_livro");
@@ -179,9 +171,8 @@ public class RepositorioLivros implements IRepositorioLivros{
 			int estoque = rs.getInt("estoque_livro");
 			int total = rs.getInt("total_livro");
 			l = new Livro(titulo, autor, edicao, ano, isbn, categoria, resumo, volume, estoque, total);
-			l.setId(id);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		return l;
 	}

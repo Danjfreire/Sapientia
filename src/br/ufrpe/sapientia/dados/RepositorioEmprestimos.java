@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,8 +27,8 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		 */
 		boolean s = false;
 		SimpleDateFormat forma = new SimpleDateFormat("dd/MM/yyyy");
-		Date dataEmprestimoForma = new Date(forma.parse(dataEmprestimo).getTime());
-		Date dataDevolucaoForma = new Date(forma.parse(dataDevolucao).getTime());
+		
+		
 		String sql = "insert into emprestimo (funcionario_cpf, cliente_cpf, status_emprestimo,  data_saida_emprestimo,"
 				+ " data_entrega_emprestimo, isbn_livro, titulo_livro)"
 				+ " value(?,?,?,?,?,?,?)";
@@ -37,6 +38,8 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.setString(1, cpf_funcionario);
 			stmt.setString(2, cpf_cliente);
 			stmt.setString(3, status);
+			Date dataEmprestimoForma = new Date(forma.parse(dataEmprestimo).getTime());		
+			Date dataDevolucaoForma = new Date(forma.parse(dataDevolucao).getTime());
 			stmt.setDate(4, dataEmprestimoForma);
 			stmt.setDate(5, dataDevolucaoForma);
 			stmt.setString(6, isbn_livro);
@@ -47,8 +50,11 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			System.out.println("Cadastrado");	
 			
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha no cadastro do empréstimo!");
+			throw e;
+		} catch (ParseException e) {
+			throw e;
+		}catch(NullPointerException e){
+			throw e;
 		}
 		return s;
 	}
@@ -64,8 +70,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			s = true;
 			System.out.println("removido");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na remoção do livro!");
+			throw e;
 		}
 		return s;
 	}
@@ -82,8 +87,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			s = true;
 			System.out.println("atualizado");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na atualização do livro!");
+			throw e;
 		}
 		return s;
 	}
@@ -101,8 +105,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa do título do livro!");
+			throw e;
 		}
 		return emprestimos;
 	}
@@ -119,8 +122,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa do isbn do livro!");
+			throw e;
 		}
 		return emprestimos;
 	}
@@ -136,8 +138,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa!");
+			throw e;
 		}
 		return emprestimos;
 	}
@@ -155,8 +156,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();				
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa por cliente!");
+			throw e;
 		}
 		return emprestimos;
 	}
@@ -173,13 +173,12 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa por funcionário!");
+			throw e;
 		}
 		return emprestimos;
 	}
 	
-	private Emprestimo preencherEmprestimo(ResultSet rs){
+	private Emprestimo preencherEmprestimo(ResultSet rs) throws Exception{
 		Emprestimo em = null;
 		try {
 			int id = rs.getInt("id_emprestimo");
@@ -195,7 +194,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 			em = new Emprestimo(dataEmprestimo, dataDevolucao, status, isbn, cliente, funcionario, titulo);
 			em.setIdEmprestimo(id);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		return em;
 	}

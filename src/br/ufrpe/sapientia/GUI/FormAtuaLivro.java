@@ -7,17 +7,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.text.ParseException;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 import br.ufrpe.sapientia.fachada.Fachada;
@@ -104,29 +110,49 @@ public class FormAtuaLivro extends JFrame {
 		label_6.setBounds(10, 139, 46, 14);
 		panel.add(label_6);
 		
-		tfTitulo = new JTextField();
+		try {
+			tfTitulo = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfTitulo.setColumns(10);
 		tfTitulo.setBounds(83, 36, 115, 20);
 		panel.add(tfTitulo);
 		tfTitulo.setText(livro.getTitulo());
 		
-		tfEdicao = new JTextField();
+		try {
+			tfEdicao = new JFormattedTextField(new MaskFormatter("**********"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfEdicao.setColumns(10);
 		tfEdicao.setBounds(83, 86, 115, 20);
 		panel.add(tfEdicao);
 		tfEdicao.setText(livro.getEdicao());
 		
-		tfAutor = new JTextField();
+		try {
+			tfAutor = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfAutor.setColumns(10);
 		tfAutor.setBounds(83, 61, 115, 20);
 		panel.add(tfAutor);
 		tfAutor.setText(livro.getAutor());
 		
-		tfAno = new JTextField();
+		try {
+			tfAno = new JFormattedTextField(new MaskFormatter("####"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfAno.setColumns(10);
 		tfAno.setBounds(83, 111, 115, 20);
 		panel.add(tfAno);
-		tfAno.setText(livro.getAno());
+		tfAno.setText(Integer.toString(livro.getAno()));
 		
 		tfISBN = new JTextField();
 		tfISBN.setEditable(false);
@@ -135,7 +161,12 @@ public class FormAtuaLivro extends JFrame {
 		panel.add(tfISBN);
 		tfISBN.setText(livro.getIsbn());
 		
-		tfVolume = new JTextField();
+		try {
+			tfVolume = new JFormattedTextField(new MaskFormatter("**********"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfVolume.setColumns(10);
 		tfVolume.setBounds(83, 136, 115, 20);
 		panel.add(tfVolume);
@@ -149,16 +180,21 @@ public class FormAtuaLivro extends JFrame {
 		label_8.setBounds(247, 27, 62, 14);
 		panel.add(label_8);
 		
-		tfCategoria = new JTextField();
+		try {
+			tfCategoria = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfCategoria.setColumns(10);
 		tfCategoria.setBounds(83, 161, 115, 20);
 		panel.add(tfCategoria);
 		tfCategoria.setText(livro.getCategoria());
 		
-		JTextArea resumo = new JTextArea();
-		resumo.setBounds(245, 47, 185, 196);
-		panel.add(resumo);
-		resumo.setText(livro.getResumo());
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(245, 47, 185, 196);
+		panel.add(textArea);
+		textArea.setText(livro.getResumo());
 		
 		JLabel lblEstoque = new JLabel("Estoque.:");
 		lblEstoque.setBounds(10, 189, 72, 14);
@@ -168,13 +204,32 @@ public class FormAtuaLivro extends JFrame {
 		lblTotal.setBounds(10, 214, 46, 14);
 		panel.add(lblTotal);
 		
-		tfEstoque = new JTextField();
+		
+		tfEstoque = new JFormattedTextField();
+		tfEstoque.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(!(Character.isDigit(e.getKeyChar())) || tfEstoque.getText().length() == 9 ){
+					if(e.getKeyChar() != KeyEvent.VK_BACK_SPACE && e.getKeyChar() != KeyEvent.VK_DELETE)
+						getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		tfEstoque.setBounds(83, 186, 115, 20);
 		panel.add(tfEstoque);
 		tfEstoque.setColumns(10);
 		tfEstoque.setText(Integer.toString(livro.getEstoque()));
 		
-		tfTotal = new JTextField();
+		tfTotal = new JFormattedTextField();
+		tfTotal.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(!(Character.isDigit(e.getKeyChar())) || tfTotal.getText().length() == 9 ){
+					if(e.getKeyChar() != KeyEvent.VK_BACK_SPACE && e.getKeyChar() != KeyEvent.VK_DELETE)
+						getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		tfTotal.setBounds(83, 211, 115, 20);
 		panel.add(tfTotal);
 		tfTotal.setColumns(10);
@@ -206,14 +261,23 @@ public class FormAtuaLivro extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				try{
 					boolean a = Fachada.getInstance().atualizarLivro(tfISBN.getText(), tfTitulo.getText(), tfEdicao.getText(), tfAutor.getText(),
-							tfAno.getText(), tfVolume.getText(), tfCategoria.getText(), resumo.getText(), 10, 10);
+							Integer.parseInt(tfAno.getText()), tfVolume.getText(), tfCategoria.getText(), textArea.getText(), 
+							Integer.parseInt(tfEstoque.getText()), Integer.parseInt(tfTotal.getText()));
 					if(a){
 						//sucesso
 						dispose();
 					}
 					
-				}catch(Exception exception){
-					
+				} catch(SQLException exception){
+					ErrosGUI eg = new ErrosGUI(exception, tfISBN, tfEstoque, tfTotal, textArea);
+					eg.mensagemLivro();
+				} catch(NumberFormatException e1) {
+					if(tfEstoque.getText().equals(""))
+						JOptionPane.showMessageDialog(null, "Campo estoque em branco!");
+					else
+						JOptionPane.showMessageDialog(null, "Campo total em branco!");					
+				} catch(Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

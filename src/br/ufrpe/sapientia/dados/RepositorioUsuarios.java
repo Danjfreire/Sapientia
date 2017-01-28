@@ -15,7 +15,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	public RepositorioUsuarios(){
 		this.connection = new Conexao().construirConexao();
 	}
-	public boolean cadastrar(Usuario u) throws Exception{
+	public boolean cadastrar(Usuario u) throws SQLException{
 		boolean s = false;
 		String sql = "insert into usuario (cpf_usuario, nome_usuario, telefone_usuario,"
 				+ " email_usuario, login_usuario, senha_usuario, tipo_usuario, sexo_usuario, logradouro, numero, bairro, cidade, estado)"
@@ -40,13 +40,12 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			s = true;
 			System.out.println("Cadastrado");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha ao cadastrar o usuário!");
+			throw e;
 		}
 		return s;
 	}
 	
-	public boolean remover(String cpf) throws Exception{
+	public boolean remover(String cpf) throws SQLException{
 		boolean s = false;
 		String sql = "delete from usuario where cpf_usuario = ?";
 		try{
@@ -57,15 +56,14 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			s = true;
 			System.out.println("removido");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha ao remover o usuário!");
+			throw e;
 		}
 		return s;
 	}
 	
 	public boolean atualizar(String cpf, String nome, String contato, 
 			String email, String login, String senha, String tipo, String sexo, String logradouro, 
-			int numero, String bairro, String cidade, String estado) throws Exception{
+			int numero, String bairro, String cidade, String estado) throws SQLException{
 		
 		boolean s = false;
 		String sql = "update usuario set nome_usuario = ?, telefone_usuario = ?,"+
@@ -92,13 +90,12 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			s = true;
 			System.out.println("atualizado");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha ao atualizar o usuário");
+			throw e;
 		}
 		return s;
 	}
 	
-	public List<Usuario> pesquisarTodos(String tipo) throws Exception{
+	public List<Usuario> pesquisarTodos(String tipo) throws SQLException{
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		String sql = "select * from usuario where tipo_usuario = ?";
 		try{
@@ -110,13 +107,12 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa!");
+			throw e;
 		}
 		return usuarios;
 	}
 	
-	public List<Usuario> pesquisarNome(String nome, String tipo) throws Exception{
+	public List<Usuario> pesquisarNome(String nome, String tipo) throws SQLException{
 		
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		String sql = "select * from usuario where nome_usuario = ? and tipo_usuario = ?";
@@ -130,13 +126,12 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa do nome!");
+			throw e;
 		}
 		return usuarios;
 	}
 	
-	public Usuario pesquisarCPF(String cpf, String tipo) throws Exception{
+	public Usuario pesquisarCPF(String cpf, String tipo) throws SQLException{
 		/*
 		 * O mesmo caso de cima, deve possuir um parametro de tipo porque existem casos em que a busca só pode retornar um cliente
 		 * ou só um funcionário, não faz sentido uma busca por um cliente retornar um funcionário caso o cpf seja inserido incorretamente
@@ -153,13 +148,12 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa do cpf!");
+			throw e;
 		}
 		return u;
 	}
 	
-	public Usuario pesquisarLoginSenha(String login, String senha) throws Exception{
+	public Usuario pesquisarLoginSenha(String login, String senha) throws SQLException{
 		Usuario u = null;
 		String sql = "select * from usuario where login_usuario = ? and senha_usuario = ?";
 		try{
@@ -172,13 +166,12 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			stmt.close();
 			System.out.println("Resultados:\n\n");
 		}catch(SQLException e){
-			System.out.print(e.getMessage());
-			throw new Exception("Falha na pesquisa do login e senha!");
+			throw e;
 		}
 		return u;
 	}
 	
-	private Usuario preencherUsuario(ResultSet rs){
+	private Usuario preencherUsuario(ResultSet rs) throws SQLException{
 		Usuario u = null;
 		try{
 			int id = rs.getInt("id_usuario");
@@ -198,7 +191,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 			u = new Usuario(nome, cpf, contato, email, login, senha, sexo, tipo, logradouro, numero, bairro, cidade, estado);
 			u.setId(id);
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		return u;
 	}

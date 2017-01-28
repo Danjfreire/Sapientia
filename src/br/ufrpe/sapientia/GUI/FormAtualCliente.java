@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -36,7 +37,7 @@ public class FormAtualCliente extends JFrame {
 	private JTextField tfCPF;
 	private JComboBox cbSexo;
 	private JTextField tfLogin;
-	private JPasswordField pfSenha;
+	private JPasswordField psSenha;
 	private JTextField tfEmail;
 	private JFormattedTextField tfContato;
 	private JTextField tfLogradouro;
@@ -44,7 +45,7 @@ public class FormAtualCliente extends JFrame {
 	private JTextField tfBairro;
 	private JTextField tfCidade;
 	private Usuario cliente;
-	private JPasswordField pfConfirmar;
+	private JPasswordField psConfirmar;
 
 	/**
 	 * Launch the application.
@@ -130,7 +131,12 @@ public class FormAtualCliente extends JFrame {
 		label_4.setBounds(148, 98, 46, 14);
 		panel.add(label_4);
 		
-		tfLogin = new JTextField();
+		try {
+			tfLogin = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogin.setColumns(10);
 		tfLogin.setBounds(270, 95, 187, 20);
 		panel.add(tfLogin);
@@ -140,20 +146,20 @@ public class FormAtualCliente extends JFrame {
 		label_5.setBounds(148, 123, 46, 14);
 		panel.add(label_5);
 		
-		pfSenha = new JPasswordField();
-		pfSenha.setBounds(270, 120, 187, 20);
-		panel.add(pfSenha);
-		pfSenha.setText(cliente.getSenha());
+		psSenha = new JPasswordField();
+		psSenha.setBounds(270, 120, 187, 20);
+		panel.add(psSenha);
+		psSenha.setText(cliente.getSenha());
 		
 		JLabel lblConfirmar = new JLabel("Confirmar Senha:.");
 		lblConfirmar.setBounds(148, 148, 97, 14);
 		panel.add(lblConfirmar);
 		
-		pfConfirmar = new JPasswordField();
-		pfConfirmar.setBounds(270, 145, 187, 20);
-		panel.add(pfConfirmar);
-		pfConfirmar.setColumns(10);
-		pfConfirmar.setText(cliente.getSenha());
+		psConfirmar = new JPasswordField();
+		psConfirmar.setBounds(270, 145, 187, 20);
+		panel.add(psConfirmar);
+		psConfirmar.setColumns(10);
+		psConfirmar.setText(cliente.getSenha());
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -174,14 +180,19 @@ public class FormAtualCliente extends JFrame {
 		label_8.setBounds(10, 219, 56, 14);
 		panel_1.add(label_8);
 		
-		tfEmail = new JTextField();
+		try {
+			tfEmail = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_1.add(tfEmail);
 		tfEmail.setText(cliente.getEmail());
 		
 		try {
-			tfContato = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
+			tfContato = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -205,7 +216,12 @@ public class FormAtualCliente extends JFrame {
 		label_10.setBounds(139, 24, 75, 14);
 		panel_2.add(label_10);
 		
-		tfLogradouro = new JTextField();
+		try {
+			tfLogradouro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogradouro.setColumns(10);
 		tfLogradouro.setBounds(264, 21, 183, 20);
 		panel_2.add(tfLogradouro);
@@ -215,7 +231,17 @@ public class FormAtualCliente extends JFrame {
 		label_11.setBounds(139, 49, 63, 14);
 		panel_2.add(label_11);
 		
-		tfNumero = new JTextField();
+		
+		tfNumero = new JFormattedTextField();
+		tfNumero.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(!(Character.isDigit(e.getKeyChar())) || tfNumero.getText().length() == 9 ){
+					if(e.getKeyChar() != KeyEvent.VK_BACK_SPACE && e.getKeyChar() != KeyEvent.VK_DELETE)
+						getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		tfNumero.setColumns(10);
 		tfNumero.setBounds(264, 46, 183, 20);
 		panel_2.add(tfNumero);
@@ -225,7 +251,12 @@ public class FormAtualCliente extends JFrame {
 		label_12.setBounds(139, 74, 46, 14);
 		panel_2.add(label_12);
 		
-		tfBairro = new JTextField();
+		try {
+			tfBairro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfBairro.setColumns(10);
 		tfBairro.setBounds(264, 71, 183, 20);
 		panel_2.add(tfBairro);
@@ -235,7 +266,12 @@ public class FormAtualCliente extends JFrame {
 		label_13.setBounds(139, 99, 46, 14);
 		panel_2.add(label_13);
 		
-		tfCidade = new JTextField();
+		try {
+			tfCidade = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfCidade.setColumns(10);
 		tfCidade.setBounds(264, 96, 183, 20);
 		panel_2.add(tfCidade);
@@ -255,11 +291,11 @@ public class FormAtualCliente extends JFrame {
 		contentPane.add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(pfSenha.getText().equals(pfConfirmar.getText())){
+				if(psSenha.getText().equals(psConfirmar.getText())){
 					try{
 						String sexo = (String)cbSexo.getSelectedItem();
 						boolean a = Fachada.getInstance().atualizarUsuario(cliente.getCpf(), cliente.getNome(), tfContato.getText(), 
-								 tfEmail.getText(), tfLogin.getText(), pfSenha.getText(), "C", "" + sexo.charAt(0), tfLogradouro.getText(),
+								 tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "C", "" + sexo.charAt(0), tfLogradouro.getText(),
 								 Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)cbEstado.getSelectedItem());	
 						if(a){
 							JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
@@ -270,20 +306,25 @@ public class FormAtualCliente extends JFrame {
 							tfContato.setText("");
 							tfEmail.setText("");
 							tfLogin.setText("");
-							pfSenha.setText("");
+							psSenha.setText("");
 							tfLogradouro.setText("");
 							tfBairro.setText("");
 							tfCidade.setText("");
 						}
 					
-					}catch(Exception exception){
-						
+					}catch(SQLException exception){
+						ErrosGUI eg = new ErrosGUI(exception, tfEmail, psSenha, psConfirmar);
+						eg.mensagemUsuario();
+					}catch (NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "Campo número em branco!");
+					} catch (Exception e1) {
+						e1.printStackTrace();
 					}
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "As senhas não são iguais");
-					pfSenha.setText("");
-					pfConfirmar.setText("");
+					psSenha.setText("");
+					psConfirmar.setText("");
 				}
 			}
 		});

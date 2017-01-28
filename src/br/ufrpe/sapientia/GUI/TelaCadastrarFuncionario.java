@@ -20,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -92,7 +93,12 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblNome.setBounds(147, 23, 46, 14);
 		panel.add(lblNome);
 		
-		tfNome = new JTextField();
+		try {
+			tfNome = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfNome.setToolTipText("Digite seu nome");
 		tfNome.setBounds(238, 20, 164, 20);
 		panel.add(tfNome);
@@ -122,7 +128,12 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblLogin.setBounds(148, 98, 46, 14);
 		panel.add(lblLogin);
 		
-		tfLogin = new JTextField();
+		try {
+			tfLogin = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogin.setToolTipText("Digite seu Login");
 		tfLogin.setBounds(238, 95, 164, 20);
 		panel.add(tfLogin);
@@ -166,7 +177,12 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblLogradouro.setBounds(139, 24, 75, 14);
 		panel_1.add(lblLogradouro);
 		
-		tfLogradouro = new JTextField();
+		try {
+			tfLogradouro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfLogradouro.addFocusListener(new FocusAdapter() {
 		});
 		tfLogradouro.setToolTipText("Rua");
@@ -178,7 +194,16 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblNmero.setBounds(139, 49, 63, 14);
 		panel_1.add(lblNmero);
 		
-		tfNumero = new JTextField();
+		tfNumero = new JFormattedTextField();
+		tfNumero.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(!(Character.isDigit(e.getKeyChar())) || tfNumero.getText().length() == 9 ){
+					if(e.getKeyChar() != KeyEvent.VK_BACK_SPACE && e.getKeyChar() != KeyEvent.VK_DELETE)
+						getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		tfNumero.setToolTipText("N\u00FAmero da Resid\u00EAncia");
 		tfNumero.setBounds(224, 43, 183, 20);
 		panel_1.add(tfNumero);
@@ -188,7 +213,12 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblBairro.setBounds(139, 74, 46, 14);
 		panel_1.add(lblBairro);
 		
-		tfBairro = new JTextField();
+		try {
+			tfBairro = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfBairro.setToolTipText("Seu Bairro");
 		tfBairro.setBounds(224, 68, 183, 20);
 		panel_1.add(tfBairro);
@@ -198,7 +228,12 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblCidade.setBounds(139, 99, 46, 14);
 		panel_1.add(lblCidade);
 		
-		tfCidade = new JTextField();
+		try {
+			tfCidade = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfCidade.setToolTipText("Sua cidade");
 		tfCidade.setBounds(224, 93, 183, 20);
 		panel_1.add(tfCidade);
@@ -232,14 +267,19 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		lblTelefone.setBounds(10, 219, 56, 14);
 		panel_2.add(lblTelefone);
 		
-		tfEmail = new JTextField();
+		try {
+			tfEmail = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfEmail.setToolTipText("Seu email");
 		tfEmail.setBounds(76, 179, 175, 20);
 		panel_2.add(tfEmail);
 		tfEmail.setColumns(10);
 		
 		try {
-			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) - ##### - ####"));
+			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
 			tfTelefone.setToolTipText("Telefone");
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
@@ -284,9 +324,13 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 						psSenha.setText("");
 						passwordField.setText("");
 					}
-				}catch(Exception exception){
-					
-					
+				}catch(SQLException exception){
+					ErrosGUI eg = new ErrosGUI(exception, tfCpf, tfLogin, tfEmail, psSenha, passwordField);
+					eg.mensagemUsuario();
+				}catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "Campo número em branco!");
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

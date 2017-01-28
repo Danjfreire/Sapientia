@@ -4,16 +4,22 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,7 +28,6 @@ import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
 
 public class TelaEmpréstimo extends JInternalFrame {
-	private JTextField tfNome;
 	private JTextField tfCpf;
 	private JTextField tfTitulo;
 	private JTextField tfIsbn;
@@ -87,32 +92,48 @@ public class TelaEmpréstimo extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados do Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 744, 74);
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "CPF do Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(10, 117, 261, 63);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNome = new JLabel("Nome.:");
-		lblNome.setBounds(10, 23, 48, 14);
-		panel.add(lblNome);
-		
-		tfNome = new JTextField();
-		tfNome.setColumns(10);
-		tfNome.setBounds(48, 20, 435, 20);
-		panel.add(tfNome);
 		
 		JLabel lblCpf = new JLabel("Cpf.:");
-		lblCpf.setBounds(544, 23, 32, 14);
+		lblCpf.setBounds(10, 23, 32, 14);
 		panel.add(lblCpf);
 		
-		tfCpf = new JTextField();
+		try {
+			tfCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+			tfCpf.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if(!(tfIsbn.getText().equals(""))){
+						try {
+							tfTitulo.setEditable(true);
+							tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
+							tfTitulo.setEditable(false);
+						} catch (NullPointerException e3) {
+							JOptionPane.showMessageDialog(null, "ISBN não cadastrado");
+							tfIsbn.setText("");
+							tfTitulo.setText("");
+							tfTitulo.setEditable(false);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			});
+			tfCpf.setToolTipText("Digite seu cpf");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(586, 20, 148, 20);
+		tfCpf.setBounds(52, 20, 148, 20);
 		panel.add(tfCpf);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados do Livro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 96, 744, 106);
+		panel_1.setBounds(10, 11, 744, 74);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -120,19 +141,49 @@ public class TelaEmpréstimo extends JInternalFrame {
 		lblTtulo.setBounds(248, 27, 46, 14);
 		panel_1.add(lblTtulo);
 		
-		tfTitulo = new JTextField();
+		try {
+			tfTitulo = new JFormattedTextField(new MaskFormatter("**************************************************"));
+			tfTitulo.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if(!(tfIsbn.getText().equals(""))){
+						try {
+							tfTitulo.setEditable(true);
+							tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
+							tfTitulo.setEditable(false);
+						} catch (NullPointerException e3) {
+							JOptionPane.showMessageDialog(null, "ISBN não cadastrado");
+							tfIsbn.setText("");
+							tfTitulo.setText("");
+							tfTitulo.setEditable(false);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			});
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		try {
+			tfIsbn = new JFormattedTextField(new MaskFormatter("###-#-##-######-#"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		tfIsbn.setColumns(10);
+		tfIsbn.setBounds(53, 24, 131, 20);
+		panel_1.add(tfIsbn);
+		
 		tfTitulo.setColumns(10);
 		tfTitulo.setBounds(304, 24, 430, 20);
 		panel_1.add(tfTitulo);
+		tfTitulo.setEditable(false);
 		
 		JLabel lblIsbn = new JLabel("ISBN.:");
 		lblIsbn.setBounds(10, 27, 46, 14);
 		panel_1.add(lblIsbn);
-		
-		tfIsbn = new JTextField();
-		tfIsbn.setColumns(10);
-		tfIsbn.setBounds(53, 24, 131, 20);
-		panel_1.add(tfIsbn);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Empr\u00E9stimo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -160,12 +211,36 @@ public class TelaEmpréstimo extends JInternalFrame {
 		tfDataInicio.setBounds(82, 58, 121, 20);
 		panel_2.add(tfDataInicio);
 		tfDataInicio.setText(inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR));
+		tfDataInicio.setEditable(false);
 		
 		JLabel lblDataDevoluo = new JLabel("Data Devolu\u00E7\u00E3o.:");
 		lblDataDevoluo.setBounds(232, 61, 84, 14);
 		panel_2.add(lblDataDevoluo);
 		
-		tfDataFinal = new JTextField();
+		try {
+			tfDataFinal = new JFormattedTextField(new MaskFormatter("##/##/####"));
+			tfDataFinal.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if(!(tfIsbn.getText().equals(""))){
+						try {
+							tfTitulo.setEditable(true);
+							tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
+							tfTitulo.setEditable(false);
+						} catch (NullPointerException e3) {
+							JOptionPane.showMessageDialog(null, "ISBN não cadastrado");
+							tfIsbn.setText("");
+							tfTitulo.setText("");
+							tfTitulo.setEditable(false);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			});
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		tfDataFinal.setColumns(10);
 		tfDataFinal.setBounds(326, 58, 121, 20);
 		panel_2.add(tfDataFinal);
@@ -190,12 +265,24 @@ public class TelaEmpréstimo extends JInternalFrame {
 //					Date fim = df.parse(tfDataFinal.getText());
 //					Calendar termino = Calendar.getInstance();
 //					termino.setTime(fim);
+					tfTitulo.setEditable(true);
+					tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
+					tfTitulo.setEditable(false);
 					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "PENDENTE",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
-						System.out.println("emprestimo realizado com sucesso");
+						JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso");
+						dispose();
 					}
 				}
-				catch(Exception exception){
-					//msg de erro
+				catch(SQLException exception){
+					ErrosGUI eg = new ErrosGUI();
+					eg.mensagemEmprestimo(exception, tfCpf, tfIsbn);
+				} catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "ISBN não cadastrado");
+					tfIsbn.setText("");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}finally{
+					tfTitulo.setEditable(false);
 				}
 			}
 		});

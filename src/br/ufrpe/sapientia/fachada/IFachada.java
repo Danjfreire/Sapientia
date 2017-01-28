@@ -20,14 +20,14 @@ public interface IFachada {
 	List<Emprestimo> verificarEmprestimoISBN(String isbn) throws Exception;
 	List<Emprestimo> verificarEmprestimoFunc(String cpf) throws Exception;
 	
-	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, String ano
+	boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, int ano
 			, String volume, String categoria, String resumo, int estoque, int total) throws Exception;
 	boolean removerLivro(String isbn) throws Exception;
 	List<Livro> buscaLivroTitulo(String titulo) throws Exception;
 	Livro buscaLivroISBN(String isbn) throws Exception;
 	List<Livro> buscaLivroAutor(String autor) throws Exception;
 	List<Livro>exibirLivros() throws Exception;
-	boolean cadastraLivro(String titulo, String autor, String edicao, String ano, String isbn
+	boolean cadastraLivro(String titulo, String autor, String edicao, int ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total) throws Exception;
 	
 	Usuario efetuarLogin(String login, String senha) throws Exception;
