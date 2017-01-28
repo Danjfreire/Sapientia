@@ -4,9 +4,9 @@ use sapientia;
 
 create table usuario(
 	id_usuario int auto_increment primary key not null,
-    cpf_usuario varchar(15) unique,
+    cpf_usuario varchar(14) unique,
     nome_usuario varchar(50),
-    telefone_usuario varchar(20),
+    telefone_usuario varchar(15),
     email_usuario varchar(50),
     login_usuario varchar(50) unique,
     senha_usuario varchar(50),
@@ -20,34 +20,47 @@ create table usuario(
 )engine=InnoDB;
 
 create table livro(
-	id_livro int auto_increment not null,
     titulo_livro varchar(50),
     autor_livro varchar(50),
     edicao_livro varchar(10),
-    ano_livro varchar(10),
-    isbn_livro varchar(50) unique,
+    ano_livro int,
+    isbn_livro varchar(17) primary key not null,
     volume_livro varchar(10),
     categoria_livro varchar(50),
-    resumo_livro varchar(50),
+    resumo_livro varchar(1000),
     total_livro int,
-    estoque_livro int,
-    primary key(id_livro, isbn_livro)
+    estoque_livro int
 )engine=InnoDB;
 
 create table emprestimo(
 	id_emprestimo int auto_increment primary key not null,
-    funcionario_cpf varchar(15),
-    cliente_cpf varchar(15),
+    funcionario_cpf varchar(14),
+    cliente_cpf varchar(14),
     data_saida_emprestimo date,
     data_entrega_emprestimo date,
     status_emprestimo varchar(8),
-    isbn_livro varchar(50),
+    isbn_livro varchar(17),
     titulo_livro varchar(50),
-    constraint usuario_funcio foreign key(funcionario_cpf) references usuario(cpf_usuario),
     constraint usuario_cliente foreign key(cliente_cpf) references usuario(cpf_usuario),
     constraint isbn_lv foreign key(isbn_livro) references livro(isbn_livro)
 )engine=InnoDB;
 
+create table historico(
+	id int auto_increment primary key not null, 
+	funcionario_cpf varchar(14),
+    cliente_cpf varchar(14),
+    data_saida_emprestimo date,
+    data_entrega_emprestimo date,
+    isbn_livro varchar(17),
+    titulo_livro varchar(50)
+);
+delimiter //
+create procedure inserirHistorico(funcionario_cpf varchar(14), cliente_cpf varchar(14), data_saida_emprestimo date, isbn_livro varchar(17), titulo_livro varchar(50))
+begin
+	insert into historico(funcionario_cpf, cliente_cpf, data_saida_emprestimo, data_entrega_emprestimo, isbn_livro,
+    titulo_livro) value(funcionario_cpf, cliente_cpf, data_saida_emprestimo, curdate(), isbn_livro, titulo_livro);
+end
+//
 delimiter //
 create trigger inserirEmprestimo
 before insert on emprestimo
@@ -61,8 +74,7 @@ begin
 		signal sqlstate '45000' set message_text='Livro indisponível no estoque!';
     elseif new.data_saida_emprestimo > new.data_entrega_emprestimo then
 		signal sqlstate '45000' set message_text='Data de saída não pode ser superior à de entrega!';
-	elseif new.status_emprestimo not like "ENTREGUE"
-       and new.status_emprestimo not like "ATRASADO"  
+	elseif new.status_emprestimo not like "ABERTO"  
        and new.status_emprestimo not like "PENDENTE" then
 		signal sqlstate '45000' set message_text='Tipo de status incorreto!';
 	else
@@ -77,6 +89,7 @@ create trigger removerEmprestimo
 before delete on emprestimo
 for each row
 begin
+	call inserirHistorico(old.funcionario_cpf, old.cliente_cpf, old.data_saida_emprestimo, old.isbn_livro, old.titulo_livro);
 	update livro
     set estoque_livro = estoque_livro + 1
     where isbn_livro = old.isbn_livro;
@@ -85,6 +98,16 @@ end//
 delimiter //
 create trigger inserirLivro
 before insert on livro
+for each row
+begin
+	if new.estoque_livro > new.total_livro then
+		signal sqlstate '45000' set message_text='Estoque não pode ser maior que total!';
+    end if;
+end//
+
+delimiter //
+create trigger atualizarLivro
+before update on livro
 for each row
 begin
 	if new.estoque_livro > new.total_livro then
@@ -104,5 +127,17 @@ begin
     elseif new.sexo_usuario <> "M"
     and new.sexo_usuario <> "F"  then
 		signal sqlstate '45000' set message_text='Tipo de sexo incorreto!';
+	elseif new.email_usuario not like "%@%" then
+		signal sqlstate '45000' set message_text='Email inválido!';
+	end if;
+end//
+
+delimiter //
+create trigger atualizarUsuario
+before update on usuario
+for each row
+begin
+	if new.email_usuario not like "%@%" then
+		signal sqlstate '45000' set message_text='Email inválido!';
 	end if;
 end//
