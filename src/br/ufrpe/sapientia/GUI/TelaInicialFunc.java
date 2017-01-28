@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import br.ufrpe.sapientia.negocio.beans.*;
 import javax.swing.JToggleButton;
@@ -74,7 +75,7 @@ public class TelaInicialFunc extends JFrame {
 		setTitle("Sapientia");
 		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(289, 110, 788, 509);
+		setBounds((int)((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 788)/2), (int)((Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 509)/2), 788, 509);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 235));

@@ -1,5 +1,7 @@
 package br.ufrpe.sapientia.dados;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +12,20 @@ import br.ufrpe.sapientia.negocio.beans.Usuario;
 
 public class Testes {
 	public static void main(String [] args){
-		/*RepositorioUsuarios ru = new RepositorioUsuarios();
+		RepositorioUsuarios ru = new RepositorioUsuarios();
 		
-		Usuario u = new Usuario("jose", "1", "84009198", "wallace@gmail", "w", "123", "M", "C", "Rua dracena", 241, "sancho", "recife", "PE");
+		
 			try {
+				Usuario u = new Usuario("jose", "1", "84009198", "wallace@gmail", "j", "123", "M", "C", "Rua dracena", 241, "sancho", "recife", "PE");
 				ru.cadastrar(u);
+				Usuario u2 = new Usuario("jose", "2", "84009198", "wallace@gmail", "jo", "123", "M", "F", "Rua dracena", 241, "sancho", "recife", "PE");
+				ru.cadastrar(u2);
 				//ru.atualizar("07665546", "jose", "84009198", "wallace@gmail", "jool", "123", "M", "F", "Rua dracena", 241, "sancho", "recife", "PE");
 			} catch (SQLException e1) {
 				System.out.println(e1.getErrorCode() + "," + e1.getMessage());
 				
 			}
-		/*List<Usuario> usuarios= new ArrayList<Usuario>();
+		List<Usuario> usuarios= new ArrayList<Usuario>();
 		try {
 			usuarios = ru.pesquisarTodos("F");
 		} catch (Exception e) {
@@ -47,11 +52,11 @@ public class Testes {
 		/*for(Usuario user : usuarios)
 			System.out.println(user);*/
 		
-		//RepositorioLivros rl = new RepositorioLivros();
+		RepositorioLivros rl = new RepositorioLivros();
 		//rl.remover("12");
 		//rl.atualizar("129", "harry poter", "j.k. rowling", "unico", "2000", "unico", "amor", "bruxos", 10, 10);
 	
-		/*try {
+		try {
 			rl.cadastrar("a culpa e das estrelas", "alice", "unico", 2000,"123",  "unico", "amor", "historia de amor", 10, 10);
 		} catch (SQLException e1) {
 			System.out.println(e1.getErrorCode() + "," + e1.getMessage());
@@ -65,13 +70,13 @@ public class Testes {
 			e.printStackTrace();
 		}
 		for(Livro l : livros)
-			System.out.println(l);*/
+			System.out.println(l);
 		
 		//RepositorioEmprestimos re = new RepositorioEmprestimos();
 		
 		RepositorioEmprestimos re = new RepositorioEmprestimos();
 		try {
-			re.cadastrar("31/1/1990", "35/13/2000", "PENDENTE", "0", "11", "123");
+			re.cadastrar("31/1/1990", "35/13/2000", "PENDENTE", "2", "1", "123");
 		} catch (SQLException e1) {
 			System.out.println(e1.getErrorCode() + "," + e1.getMessage());
 			
@@ -88,5 +93,10 @@ public class Testes {
 		}
 		for(Emprestimo e : emprestimos)
 			System.out.println(e);
+		try {
+			re.remove(1);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 }

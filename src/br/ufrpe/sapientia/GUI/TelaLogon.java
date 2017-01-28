@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.*;
 import br.ufrpe.sapientia.negocio.beans.*;
 
@@ -63,7 +64,7 @@ public class TelaLogon extends JFrame {
 		setResizable(false);
 		setTitle("SAPIENTIA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(289, 121, 788, 487);
+		setBounds((int)((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 788)/2), (int)((Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 487)/2), 788, 487);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

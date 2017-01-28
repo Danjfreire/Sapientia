@@ -3,6 +3,7 @@ package br.ufrpe.sapientia.GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -68,7 +69,7 @@ public class TelaInicialCliente extends JFrame {
 		setTitle("Sapientia");
 		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(289, 110, 788, 509);
+		setBounds((int)((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 788)/2), (int)((Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 509)/2), 788, 509);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

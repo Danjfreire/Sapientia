@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class TelaInicialAdm extends JFrame {
 
@@ -64,7 +65,7 @@ public class TelaInicialAdm extends JFrame {
 		setTitle("Sapientia-ADM");
 		//setExtendedState( MAXIMIZED_BOTH );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(289, 110, 788, 509);
+		setBounds((int)((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 788)/2), (int)((Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 509)/2), 788, 509);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
