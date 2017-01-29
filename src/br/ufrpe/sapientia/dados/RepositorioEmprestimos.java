@@ -143,13 +143,12 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		return emprestimos;
 	}
 	
-	public List<Emprestimo> pesquisarEmprestimoCliente(String cpf_cliente, String status) throws Exception{
+	public List<Emprestimo> pesquisarEmprestimoCliente(String cpf_cliente) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from emprestimo where cliente_cpf = ? and status_emprestimo = ?";
+		String sql = "select * from emprestimo where cliente_cpf = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cpf_cliente);
-			stmt.setString(2, status);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next())
 				emprestimos.add(preencherEmprestimo(rs));
@@ -163,7 +162,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	
 	public List<Emprestimo> pesquisarEmprestimoFuncionario(String cpf_funcionario) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from livro where funcionario_emprestimo = ?";
+		String sql = "select * from livro where funcionario_cpf = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cpf_funcionario);

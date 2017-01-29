@@ -82,8 +82,7 @@ public class TelaPendenciaCliente extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		try{
-			List<Emprestimo> emprestimos = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf(),"PENDENTE");
-			List<Emprestimo> emprestimos1 = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf(), "ATRASADO");
+			List<Emprestimo> emprestimos = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf());
 			for(Emprestimo e : emprestimos){
 				Calendar inicio = e.getDataEmprestimo();
 				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
@@ -92,14 +91,14 @@ public class TelaPendenciaCliente extends JInternalFrame {
 				Livro l = Fachada.getInstance().buscaLivroISBN(e.getIsbnLivro());
 				modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,e.getStatus()});
 			}
-			for(Emprestimo e : emprestimos1){
-				Calendar inicio = e.getDataEmprestimo();
-				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
-				Calendar fim = e.getDataDevolucao();
-				String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
-				Livro l = Fachada.getInstance().buscaLivroISBN(e.getIsbnLivro());
-				modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,e.getStatus()});
-			}
+//			for(Emprestimo e : emprestimos1){
+//				Calendar inicio = e.getDataEmprestimo();
+//				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
+//				Calendar fim = e.getDataDevolucao();
+//				String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
+//				Livro l = Fachada.getInstance().buscaLivroISBN(e.getIsbnLivro());
+//				modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,e.getStatus()});
+//			}
 		}catch(Exception e){
 			
 		}

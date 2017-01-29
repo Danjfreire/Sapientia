@@ -3,6 +3,7 @@ package br.ufrpe.sapientia.fachada;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.*;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
+import br.ufrpe.sapientia.negocio.beans.Historico;
 import br.ufrpe.sapientia.negocio.beans.Livro;
 import br.ufrpe.sapientia.negocio.beans.Usuario;
 
@@ -12,6 +13,7 @@ public class Fachada implements IFachada {
 	private IControleLivro controleLivro;
 	private IControleLogin controleLogin;
 	private IControleUsuario controleUsuario;
+	private IControleHistorico controleHistorico;
 	public static Fachada instance;
 
 	private Fachada() {
@@ -44,8 +46,8 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public List<Emprestimo> verificarPendenciasCliente(String cpf, String status) throws Exception{
-		return controleEmprestimo.verificarPendenciasCliente(cpf,status);
+	public List<Emprestimo> verificarPendenciasCliente(String cpf) throws Exception{
+		return controleEmprestimo.verificarPendenciasCliente(cpf);
 	}
 
 	@Override
@@ -66,6 +68,11 @@ public class Fachada implements IFachada {
 	@Override
 	public List<Emprestimo> verificarEmprestimoFunc(String cpf) throws Exception{
 		return controleEmprestimo.verificarEmprestimoFunc(cpf);
+	}
+	
+	@Override
+	public List<Emprestimo> verificarTodosEmprestimos()throws Exception{
+		return controleEmprestimo.verificarTodosEmprestimos();
 	}
 
 	@Override
@@ -150,6 +157,31 @@ public class Fachada implements IFachada {
 	@Override
 	public boolean atualizarADM() throws Exception{
 		return controleUsuario.atualizarADM();
+	}
+
+	@Override
+	public List<Historico> pesquisarHistoricoTitulo(String titulo) throws Exception {
+		return pesquisarHistoricoTitulo(titulo);
+	}
+
+	@Override
+	public List<Historico> pesquisarHistoricoFuncionario(String funcionario_cpf) throws Exception {
+		return controleHistorico.pesquisarHistoricoFuncionario(funcionario_cpf);
+	}
+
+	@Override
+	public List<Historico> pesquisarHistoricoCliente(String cliente_cpf) throws Exception {
+		return controleHistorico.pesquisarHistoricoCliente(cliente_cpf);
+	}
+
+	@Override
+	public List<Historico> pesquisarHistoricoISBN(String isbn_livro) throws Exception {
+		return controleHistorico.pesquisarHistoricoISBN(isbn_livro);
+	}
+
+	@Override
+	public List<Historico> pesquisarHistoricoTodos() throws Exception {
+		return controleHistorico.pesquisarHistoricoTodos();
 	}
 
 }
