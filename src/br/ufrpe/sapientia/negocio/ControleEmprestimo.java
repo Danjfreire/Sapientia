@@ -29,8 +29,8 @@ public class ControleEmprestimo implements IControleEmprestimo{
 	}
 
 	@Override
-	public List<Emprestimo> verificarPendenciasCliente(String cpf, String status) throws Exception{
-		return repositorio.pesquisarEmprestimoCliente(cpf, status);
+	public List<Emprestimo> verificarPendenciasCliente(String cpf) throws Exception{
+		return repositorio.pesquisarEmprestimoCliente(cpf);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class ControleEmprestimo implements IControleEmprestimo{
 
 	@Override
 	public List<Emprestimo> verificarEmprestimoCliente(String cpf) throws Exception{
-		return repositorio.pesquisarEmprestimoCliente(cpf, "E");
+		return repositorio.pesquisarEmprestimoCliente(cpf);
 	}
 
 	@Override
@@ -53,6 +53,11 @@ public class ControleEmprestimo implements IControleEmprestimo{
 	@Override
 	public List<Emprestimo> verificarEmprestimoFunc(String cpf) throws Exception{
 		return repositorio.pesquisarEmprestimoFuncionario(cpf);
+	}
+
+	@Override
+	public List<Emprestimo> verificarTodosEmprestimos() throws Exception {
+		return repositorio.pesquisarTodos();
 	}
 
 	

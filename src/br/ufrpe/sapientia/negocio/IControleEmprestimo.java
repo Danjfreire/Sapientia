@@ -17,10 +17,11 @@ public interface IControleEmprestimo {
 			,String cliente, String isbn) throws Exception;
 
 	List<Emprestimo>verificarPendenciasLivro(String isbn);
-	List<Emprestimo>verificarPendenciasCliente(String cpf, String status) throws Exception;
+	List<Emprestimo>verificarPendenciasCliente(String cpf) throws Exception;
 	List<Emprestimo>verificarEmprestimoLivro(String titulo) throws Exception;
 	List<Emprestimo>verificarEmprestimoCliente(String cpf) throws Exception;
 	List<Emprestimo>verificarEmprestimoISBN(String isbn)throws Exception;
 	List<Emprestimo>verificarEmprestimoFunc(String cpf)throws Exception;
+	List<Emprestimo>verificarTodosEmprestimos()throws Exception;
 	
 }

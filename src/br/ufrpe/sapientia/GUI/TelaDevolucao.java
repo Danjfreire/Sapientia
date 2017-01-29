@@ -15,7 +15,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import java.util.Calendar;
 import java.util.List;
+import java.util.ArrayList;
 
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
@@ -78,7 +81,7 @@ public class TelaDevolucao extends JInternalFrame {
 		modelo.addColumn("Endereço");
 		modelo.addColumn("Contato");
 		modelo.addColumn("Email");
-		modelo.addColumn("Sexo");
+		modelo.addColumn("ISBN");
 		modelo.addColumn("Login");
 		scrollPane.setViewportView(table);
 		
@@ -88,16 +91,37 @@ public class TelaDevolucao extends JInternalFrame {
 		btnPesquisar.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					try{
-						List<Emprestimo>emprestimos;
+						table = new JTable();
+						DefaultTableModel modelo = new DefaultTableModel();
+						table.setModel(modelo);
+						modelo.addColumn("Nome");
+						modelo.addColumn("CPF");
+						modelo.addColumn("Endereço");
+						modelo.addColumn("Contato");
+						modelo.addColumn("Email");
+						modelo.addColumn("ISBN");
+						modelo.addColumn("Login");
+						scrollPane.setViewportView(table);
+				
+						List<Emprestimo>emprestimos = new ArrayList<Emprestimo>();
 						if(comboBox.getSelectedItem().equals("T\u00CDTULO")){
 							emprestimos = Fachada.getInstance().verificarEmprestimoLivro(textField.getText());
+						}else if(comboBox.getSelectedItem().equals("CLIENTE")){
+								emprestimos = Fachada.getInstance().verificarPendenciasCliente(textField.getText());
 						}else if(comboBox.getSelectedItem().equals("ISBN")){
-							//emprestimos = Fachada.getInstance().verificarPendenciasISBN(isbn)
-						}else if(comboBox.getSelectedItem().equals("Cliente")){
-							//emprestimos = Fachada.getInstance().verificarPendenciasCliente(textField.getText(), status);
-						}else{
-							//emprestimos = Fachada.getInstance().verificarPendenciasFunc(textField.getText());
+							emprestimos = Fachada.getInstance().verificarEmprestimoISBN(textField.getText());
+						}else if(comboBox.getSelectedItem().equals("FUNCION\u00C1RIO")){
+							emprestimos = Fachada.getInstance().verificarEmprestimoFunc(textField.getText());
 						}
+						for(Emprestimo emp : emprestimos){
+							Calendar inicio = emp.getDataEmprestimo();
+							String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
+							Calendar fim = emp.getDataDevolucao();
+							String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
+							Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
+							modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,emp.getStatus(),emp.getIsbnLivro()});
+						}
+						
 						
 					}catch(Exception ex){
 						
@@ -107,6 +131,36 @@ public class TelaDevolucao extends JInternalFrame {
 		JButton btnPesquisarTodos = new JButton("Pesquisar Todos");
 		btnPesquisarTodos.setBounds(294, 79, 121, 23);
 		getContentPane().add(btnPesquisarTodos);
+		btnPesquisarTodos.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					table = new JTable();
+					DefaultTableModel modelo = new DefaultTableModel();
+					table.setModel(modelo);
+					modelo.addColumn("Nome");
+					modelo.addColumn("CPF");
+					modelo.addColumn("Endereço");
+					modelo.addColumn("Contato");
+					modelo.addColumn("Email");
+					modelo.addColumn("ISBN");
+					modelo.addColumn("Login");
+					scrollPane.setViewportView(table);
+					
+					
+					List<Emprestimo>emprestimos = Fachada.getInstance().verificarTodosEmprestimos();
+					for(Emprestimo emp : emprestimos){
+						Calendar inicio = emp.getDataEmprestimo();
+						String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
+						Calendar fim = emp.getDataDevolucao();
+						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
+						Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
+						modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,emp.getStatus(),emp.getIsbnLivro()});
+					}
+				}catch(Exception ex){
+					
+				}
+			}
+		});
 		
 		
 		

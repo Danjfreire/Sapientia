@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import br.ufrpe.sapientia.fachada.Fachada;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -79,8 +81,9 @@ public class TelaHistoricoCliente extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		try {
-			List<Emprestimo>emprestimos = Fachada.getInstance().verificarPendenciasCliente(usuario.getCpf(), "ENTREGUE");
-			for(Emprestimo emp : emprestimos){
+			List<Historico>emprestimos = Fachada.getInstance().pesquisarHistoricoCliente(usuario.getCpf());
+			if(emprestimos.size()>0){
+			for(Historico emp : emprestimos){
 				Calendar inicio = emp.getDataEmprestimo();
 				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 				Calendar fim = emp.getDataDevolucao();
@@ -88,9 +91,13 @@ public class TelaHistoricoCliente extends JInternalFrame {
 				Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
 				modelo.addRow(new Object[]{"",l.getTitulo(),dataInicio,dataFim});
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Historico vazio");
+		}
+		 catch(Exception ex){
+			 ex.printStackTrace();
+		 }
 		
 		JLabel lblNewLabel = new JLabel("Meu historico");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));

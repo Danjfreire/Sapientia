@@ -268,7 +268,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 					tfTitulo.setEditable(true);
 					tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
 					tfTitulo.setEditable(false);
-					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "PENDENTE",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
+					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "ABERTO",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
 						JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso");
 						dispose();
 					}

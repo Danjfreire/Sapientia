@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.beans.Historico;
 
-public class RepositorioHistorico {
+public class RepositorioHistorico implements IRepositorioHistorico{
 	private Connection connection;
 	public RepositorioHistorico(){
 		this.connection = new Conexao().construirConexao();
