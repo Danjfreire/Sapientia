@@ -230,8 +230,13 @@ public class TelaPesquisarCliente extends JInternalFrame {
 								modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
 			    		  }
 				        }} 
-					}catch(Exception exception){
-					
+					}catch(SQLException exception){
+						ErrosGUI eg = new ErrosGUI();
+						eg.mensagemExcluirCliente(exception, table_1);
+				} catch (ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(null, "Nenhum cliente foi selecionado!");
+					} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -125,6 +126,30 @@ public class ErrosGUI {
 		else{
 			this.exception = e;
 			mensagem = this.exception.getMessage();
+		}
+		JOptionPane.showMessageDialog(null, mensagem);
+	}
+	
+	public void mensagemExcluirLivro(SQLException e, JTable t){
+		String mensagem;
+		if(e.getErrorCode() == 1451){
+			mensagem = "Livro vinculado a um empréstimo!\nNão é possível exclui-lo.";
+			t.getSelectionModel().clearSelection();
+		}
+		else{
+			mensagem  = e.getMessage();
+		}
+		JOptionPane.showMessageDialog(null, mensagem);
+	}
+	
+	public void mensagemExcluirCliente(SQLException e, JTable t){
+		String mensagem;
+		if(e.getErrorCode() == 1451){
+			mensagem = "Cliente vinculado a um empréstimo!\nNão é possível exclui-lo.";
+			t.getSelectionModel().clearSelection();
+		}
+		else{
+			mensagem  = e.getMessage();
 		}
 		JOptionPane.showMessageDialog(null, mensagem);
 	}

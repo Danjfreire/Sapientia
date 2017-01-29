@@ -17,7 +17,7 @@ public class Testes {
 		
 			try {
 				Usuario u = new Usuario("jose", "1", "84009198", "wallace@gmail", "j", "123", "M", "C", "Rua dracena", 241, "sancho", "recife", "PE");
-				ru.cadastrar(u);
+				//ru.cadastrar(u);
 				Usuario u2 = new Usuario("jose", "2", "84009198", "wallace@gmail", "jo", "123", "M", "F", "Rua dracena", 241, "sancho", "recife", "PE");
 				ru.cadastrar(u2);
 				//ru.atualizar("07665546", "jose", "84009198", "wallace@gmail", "jool", "123", "M", "F", "Rua dracena", 241, "sancho", "recife", "PE");
@@ -52,7 +52,7 @@ public class Testes {
 		/*for(Usuario user : usuarios)
 			System.out.println(user);*/
 		
-		RepositorioLivros rl = new RepositorioLivros();
+		/*RepositorioLivros rl = new RepositorioLivros();
 		//rl.remover("12");
 		//rl.atualizar("129", "harry poter", "j.k. rowling", "unico", "2000", "unico", "amor", "bruxos", 10, 10);
 	
@@ -74,7 +74,7 @@ public class Testes {
 		
 		//RepositorioEmprestimos re = new RepositorioEmprestimos();
 		
-		RepositorioEmprestimos re = new RepositorioEmprestimos();
+		/*RepositorioEmprestimos re = new RepositorioEmprestimos();
 		try {
 			re.cadastrar("31/1/1990", "35/13/2000", "PENDENTE", "2", "1", "123");
 		} catch (SQLException e1) {
@@ -97,6 +97,6 @@ public class Testes {
 			re.remove(1);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		}
+		}*/
 	}
 }

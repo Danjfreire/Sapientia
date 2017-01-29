@@ -186,7 +186,7 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 				try{
 					int linha = table_1 .getSelectedRow();
 					Usuario u = funcionarios.get(table_1.getSelectedRow());
-					if(JOptionPane.showConfirmDialog(null, "Tem certeza que excluir este cliente?" ,"Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que excluir este funcionário?" ,"Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 						boolean a = Fachada.getInstance().removerUsuario(u.getCpf());
 						
 						if(a){
@@ -225,10 +225,9 @@ public class TelaPesquisarFuncionario extends JInternalFrame {
 								}
 							
 				    }} 
-				}catch(SQLException exception){
-					System.out.println(exception.getErrorCode() + exception.getMessage());
+				}catch (ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(null, "Nenhum funcionário foi selecionado!");
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

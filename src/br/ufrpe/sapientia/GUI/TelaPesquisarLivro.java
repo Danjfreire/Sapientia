@@ -25,6 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 import java.util.List;
@@ -185,7 +186,7 @@ public class TelaPesquisarLivro extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					Livro u = livros.get(table_1.getSelectedRow());
-					if(JOptionPane.showConfirmDialog(null, "Tem certeza que excluir este cliente?" ,"Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que excluir este livro?" ,"Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 					boolean a = Fachada.getInstance().removerLivro(u.getIsbn());
 					
 					if(a){
@@ -234,8 +235,13 @@ public class TelaPesquisarLivro extends JInternalFrame {
 							modelo.addRow(new Object[]{titulo, autor, isbn, edicao, ano, volume, categoria, resumo, estoque, total});
 						}
 				       } 
-				}}catch(Exception exception){
-					
+				}}catch(SQLException exception){
+					ErrosGUI eg = new ErrosGUI();
+					eg.mensagemExcluirLivro(exception, table_1);
+				} catch (ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(null, "Nenhum livro foi selecionado!");
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

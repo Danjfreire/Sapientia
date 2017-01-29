@@ -163,7 +163,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	
 	public List<Emprestimo> pesquisarEmprestimoFuncionario(String cpf_funcionario) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from livro where funcionario_emprestimo = ?";
+		String sql = "select * from emprestimo where funcionario_cpf = ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cpf_funcionario);
