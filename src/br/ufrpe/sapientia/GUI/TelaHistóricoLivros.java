@@ -96,7 +96,6 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		modelo.addColumn("Livro");
 		modelo.addColumn("Data");
 		modelo.addColumn("Devolu\u00E7\u00E3o");
-		modelo.addColumn("Situa\u00E7\u00E3o");
 		
 		scrollPane.setViewportView(table);
 		

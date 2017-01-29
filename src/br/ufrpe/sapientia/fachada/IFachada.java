@@ -21,6 +21,7 @@ public interface IFachada {
 	List<Emprestimo> verificarEmprestimoISBN(String isbn) throws Exception;
 	List<Emprestimo> verificarEmprestimoFunc(String cpf) throws Exception;
 	List<Emprestimo> verificarTodosEmprestimos() throws Exception;
+	boolean removerEmprestimo(int id) throws Exception;
 	
 	List<Historico> pesquisarHistoricoTitulo(String titulo) throws Exception;
 	List<Historico> pesquisarHistoricoFuncionario(String funcionario_cpf) throws Exception;
