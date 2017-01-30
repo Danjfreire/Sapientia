@@ -8,6 +8,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
+import br.ufrpe.sapientia.dados.RepositorioEmprestimos;
+import br.ufrpe.sapientia.negocio.beans.Emprestimo;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JMenuBar;
@@ -17,6 +19,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -60,6 +65,27 @@ public class TelaInicialAdm extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaInicialAdm() {
+		RepositorioEmprestimos re = new RepositorioEmprestimos();
+		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+		Calendar data = Calendar.getInstance();
+		try{
+			emprestimos = re.pesquisarTodos();
+			for(Emprestimo e : emprestimos){
+				if(data.get(Calendar.YEAR) > e.getDataDevolucao().get(Calendar.YEAR))
+					re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+				else if(data.get(Calendar.YEAR) == e.getDataDevolucao().get(Calendar.YEAR)){
+					if(data.get(Calendar.MONTH) > e.getDataDevolucao().get(Calendar.MONTH))
+						re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+					else if(data.get(Calendar.MONTH) == e.getDataDevolucao().get(Calendar.MONTH)){
+						if(data.get(Calendar.DAY_OF_MONTH) > e.getDataDevolucao().get(Calendar.DAY_OF_MONTH))
+							re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setResizable(false);
 		
 		setTitle("Sapientia-ADM");

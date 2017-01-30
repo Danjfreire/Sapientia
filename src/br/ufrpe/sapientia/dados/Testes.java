@@ -89,27 +89,7 @@ public class Testes {
 			e1.printStackTrace();
 		}
 		
-		/*try {
-			List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-			emprestimos = re.pesquisarTodos();
-			for(Emprestimo e : emprestimos){
-				if(Calendar.YEAR > e.getDataDevolucao().get(Calendar.YEAR))
-					re.atualizar(e.getIdEmprestimo(), "PENDENTE");
-				else if(Calendar.DATE == e.getDataDevolucao().get(Calendar.YEAR)){
-					if(Calendar.MONTH > e.getDataDevolucao().get(Calendar.MONTH))
-						re.atualizar(e.getIdEmprestimo(), "PENDENTE");
-					else if(Calendar.MONTH == e.getDataDevolucao().get(Calendar.MONTH)){
-						if(Calendar.DAY_OF_MONTH > e.getDataDevolucao().get(Calendar.DAY_OF_MONTH))
-							re.atualizar(e.getIdEmprestimo(), "PENDENTE");
-					}
-				}
-				System.out.println(Calendar.YEAR);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		RepositorioHistorico rh = new RepositorioHistorico();
+		/*RepositorioHistorico rh = new RepositorioHistorico();
 		List<Historico> historicos = new ArrayList<Historico>();
 		try {
 			
@@ -119,6 +99,8 @@ public class Testes {
 			e.printStackTrace();
 		}
 		for(Historico h: historicos)
-			System.out.println(h);
+			System.out.println(h);*/
+		//Calendar data = Calendar.getInstance();
+		//System.out.println(data.get(Calendar.YEAR));
 	}
 }

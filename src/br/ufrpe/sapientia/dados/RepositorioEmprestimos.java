@@ -78,10 +78,11 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	public boolean atualizar(int id, String status) throws Exception{
 		boolean s = false;
 		String sql = "update emprestimo"
-				+ " set status = ? where isbn_livro = ?";
+				+ " set status_emprestimo = ? where id_emprestimo = ?";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, status);
+			stmt.setInt(2, id);
 			stmt.execute();
 			stmt.close();
 			s = true;
