@@ -23,5 +23,6 @@ public interface IControleEmprestimo {
 	List<Emprestimo>verificarEmprestimoISBN(String isbn)throws Exception;
 	List<Emprestimo>verificarEmprestimoFunc(String cpf)throws Exception;
 	List<Emprestimo>verificarTodosEmprestimos()throws Exception;
+	boolean removerEmprestimo(int id)throws Exception;
 	
 }

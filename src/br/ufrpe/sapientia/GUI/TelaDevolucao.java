@@ -26,7 +26,7 @@ import br.ufrpe.sapientia.negocio.beans.*;
 public class TelaDevolucao extends JInternalFrame {
 	private JTextField textField;
 	private JTable table;
-
+	private List<Emprestimo>emprestimos;
 	/**
 	 * Launch the application.
 	 */
@@ -78,11 +78,11 @@ public class TelaDevolucao extends JInternalFrame {
 		table.setModel(modelo);
 		modelo.addColumn("Nome");
 		modelo.addColumn("CPF");
-		modelo.addColumn("Endereço");
 		modelo.addColumn("Contato");
-		modelo.addColumn("Email");
-		modelo.addColumn("ISBN");
-		modelo.addColumn("Login");
+		modelo.addColumn("Emprestimo");
+		modelo.addColumn("Devolucao");
+		modelo.addColumn("Situação");
+		modelo.addColumn("ID");
 		scrollPane.setViewportView(table);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
@@ -96,14 +96,14 @@ public class TelaDevolucao extends JInternalFrame {
 						table.setModel(modelo);
 						modelo.addColumn("Nome");
 						modelo.addColumn("CPF");
-						modelo.addColumn("Endereço");
 						modelo.addColumn("Contato");
-						modelo.addColumn("Email");
-						modelo.addColumn("ISBN");
-						modelo.addColumn("Login");
+						modelo.addColumn("Emprestimo");
+						modelo.addColumn("Devolucao");
+						modelo.addColumn("Situação");
+						modelo.addColumn("ID");
 						scrollPane.setViewportView(table);
 				
-						List<Emprestimo>emprestimos = new ArrayList<Emprestimo>();
+						//List<Emprestimo>emprestimos = new ArrayList<Emprestimo>();
 						if(comboBox.getSelectedItem().equals("T\u00CDTULO")){
 							emprestimos = Fachada.getInstance().verificarEmprestimoLivro(textField.getText());
 						}else if(comboBox.getSelectedItem().equals("CLIENTE")){
@@ -114,12 +114,13 @@ public class TelaDevolucao extends JInternalFrame {
 							emprestimos = Fachada.getInstance().verificarEmprestimoFunc(textField.getText());
 						}
 						for(Emprestimo emp : emprestimos){
+							Usuario cliente = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfCliente(), "C");
 							Calendar inicio = emp.getDataEmprestimo();
 							String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 							Calendar fim = emp.getDataDevolucao();
 							String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
 							Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
-							modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,emp.getStatus(),emp.getIsbnLivro()});
+							modelo.addRow(new Object[]{cliente.getNome(),emp.getCpfCliente(),cliente.getContato(),dataInicio,dataFim,emp.getStatus(),emp.getIdEmprestimo()});
 						}
 						
 						
@@ -139,22 +140,23 @@ public class TelaDevolucao extends JInternalFrame {
 					table.setModel(modelo);
 					modelo.addColumn("Nome");
 					modelo.addColumn("CPF");
-					modelo.addColumn("Endereço");
 					modelo.addColumn("Contato");
-					modelo.addColumn("Email");
-					modelo.addColumn("ISBN");
-					modelo.addColumn("Login");
+					modelo.addColumn("Emprestimo");
+					modelo.addColumn("Devolucao");
+					modelo.addColumn("Situação");
+					modelo.addColumn("ID");
 					scrollPane.setViewportView(table);
 					
 					
-					List<Emprestimo>emprestimos = Fachada.getInstance().verificarTodosEmprestimos();
+					emprestimos = Fachada.getInstance().verificarTodosEmprestimos();
 					for(Emprestimo emp : emprestimos){
+						Usuario cliente = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfCliente(), "C");
 						Calendar inicio = emp.getDataEmprestimo();
 						String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 						Calendar fim = emp.getDataDevolucao();
 						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
 						Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
-						modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,emp.getStatus(),emp.getIsbnLivro()});
+						modelo.addRow(new Object[]{cliente.getNome(),emp.getCpfCliente(),cliente.getContato(),dataInicio,dataFim,emp.getStatus(),emp.getIdEmprestimo()});
 					}
 				}catch(Exception ex){
 					
@@ -167,10 +169,26 @@ public class TelaDevolucao extends JInternalFrame {
 		JButton btnDevolver = new JButton("Devolver");
 		btnDevolver.setBounds(257, 373, 89, 23);
 		getContentPane().add(btnDevolver);
+		btnDevolver.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					Emprestimo emp = emprestimos.get(table.getSelectedRow());
+					Fachada.getInstance().removerEmprestimo(emp.getIdEmprestimo());
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
+			}
+		});
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(394, 373, 89, 23);
 		getContentPane().add(btnSair);
+		btnSair.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+			dispose();
+				
+			}
+		});
 		
 		JLabel lbTelaAzul = new JLabel("");
 		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));

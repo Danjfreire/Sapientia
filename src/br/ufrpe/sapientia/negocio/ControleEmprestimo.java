@@ -60,6 +60,11 @@ public class ControleEmprestimo implements IControleEmprestimo{
 		return repositorio.pesquisarTodos();
 	}
 
+	@Override
+	public boolean removerEmprestimo(int id) throws Exception {
+		return repositorio.remove(id);
+	}
+
 	
 //	public boolean efetuarEmprestimo(Calendar dataEmprestimo, Calendar dataDevolucao, String status,
 //			Usuario funcionario, Usuario cliente)

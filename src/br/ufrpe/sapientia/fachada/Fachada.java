@@ -75,7 +75,12 @@ public class Fachada implements IFachada {
 	public List<Emprestimo> verificarTodosEmprestimos()throws Exception{
 		return controleEmprestimo.verificarTodosEmprestimos();
 	}
-
+	
+	@Override
+	public boolean removerEmprestimo(int id)throws Exception{
+		return controleEmprestimo.removerEmprestimo(id);
+	}
+	
 	@Override
 	public boolean atualizarLivro(String isbn, String titulo, String autor, String edicao, int ano, String volume,
 			String categoria, String resumo, int estoque, int total) throws Exception{
@@ -162,7 +167,7 @@ public class Fachada implements IFachada {
 
 	@Override
 	public List<Historico> pesquisarHistoricoTitulo(String titulo) throws Exception {
-		return pesquisarHistoricoTitulo(titulo);
+		return controleHistorico.pesquisarHistoricoTitulo(titulo);
 	}
 
 	@Override
