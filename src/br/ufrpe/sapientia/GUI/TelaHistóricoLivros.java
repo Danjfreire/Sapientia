@@ -91,13 +91,13 @@ public class TelaHistóricoLivros extends JInternalFrame {
 		table = new JTable();
 		DefaultTableModel modelo = new DefaultTableModel();
 		table.setModel(modelo);
+		modelo.addColumn("id");
+		modelo.addColumn("título");
 		modelo.addColumn("Cliente");
-		modelo.addColumn("Funcion\u00E1rio");
+		modelo.addColumn("Funcionário");
 		modelo.addColumn("Livro");
-		modelo.addColumn("Data");
-		modelo.addColumn("Devolu\u00E7\u00E3o");
-		modelo.addColumn("Situa\u00E7\u00E3o");
-		
+		modelo.addColumn("Empréstimo");
+		modelo.addColumn("Devolução");
 		scrollPane.setViewportView(table);
 		
 		JButton btnBuscar = new JButton("Buscar");
@@ -109,32 +109,37 @@ public class TelaHistóricoLivros extends JInternalFrame {
 					table = new JTable();
 					DefaultTableModel modelo = new DefaultTableModel();
 					table.setModel(modelo);
+					modelo.addColumn("id");
+					modelo.addColumn("título");
 					modelo.addColumn("Cliente");
-					modelo.addColumn("Funcion\u00E1rio");
+					modelo.addColumn("Funcionário");
 					modelo.addColumn("Livro");
-					modelo.addColumn("Data");
-					modelo.addColumn("Devolu\u00E7\u00E3o");
+					modelo.addColumn("Empréstimo");
+					modelo.addColumn("Devolução");
 					scrollPane.setViewportView(table);
 					
-					List<Historico>emprestimos;
+					List<Historico> historicos;
 					if(comboBox.getSelectedItem().equals("ISBN")){
-						emprestimos = Fachada.getInstance().pesquisarHistoricoISBN(textField.getText());
+						historicos = Fachada.getInstance().pesquisarHistoricoISBN(textField.getText());
 					}else if(comboBox.getSelectedItem().equals("Funcionario")){
-						emprestimos = Fachada.getInstance().pesquisarHistoricoFuncionario(textField.getText());
+						historicos = Fachada.getInstance().pesquisarHistoricoFuncionario(textField.getText());
 					}else{
-						emprestimos = Fachada.getInstance().pesquisarHistoricoCliente(textField.getText());
+						System.out.println("oooooooooo");
+						historicos = Fachada.getInstance().pesquisarHistoricoCliente(textField.getText());
 					}
 					
-					for(Historico emp : emprestimos){
-						Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
-						Usuario cliente = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfCliente(), "C");
-						Usuario func = Fachada.getInstance().buscarUsuarioCPF(emp.getCpfFuncionario(), "F");
-						Calendar inicio = emp.getDataEmprestimo();
+					for(Historico h : historicos){
+						int id = h.getId();
+						String titulo = h.getTituloLivro();
+						String cpf_cliente = h.getCpfCliente();
+						String cpf_funcionario = h.getCpfFuncionario();
+						String isbn = h.getIsbnLivro();
+						Calendar inicio = h.getDataEmprestimo();
 						String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
-						Calendar fim = emp.getDataDevolucao();
+						Calendar fim = h.getDataDevolucao();
 						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
 						
-						modelo.addRow(new Object[]{cliente.getNome(),func.getNome(),l.getTitulo(),dataInicio,dataFim});
+						modelo.addRow(new Object[]{id, titulo, cpf_cliente, cpf_funcionario, isbn, dataInicio, dataFim});
 					}	
 					
 				}catch(Exception ex){

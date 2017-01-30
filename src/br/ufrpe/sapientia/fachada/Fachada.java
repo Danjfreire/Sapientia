@@ -21,6 +21,7 @@ public class Fachada implements IFachada {
 		this.controleLivro = new ControleLivro();
 		this.controleUsuario = new ControleUsuario();
 		this.controleLogin = new ControleLogin();
+		this.controleHistorico = new ControleHistorico();
 	}
 
 	public static Fachada getInstance() {

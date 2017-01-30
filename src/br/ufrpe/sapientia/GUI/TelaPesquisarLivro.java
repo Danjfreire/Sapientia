@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.Usuario;
@@ -21,11 +22,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 import java.util.List;
@@ -78,12 +83,34 @@ public class TelaPesquisarLivro extends JInternalFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		tfPesquisa = new JTextField();
+		try {
+			tfPesquisa = new JFormattedTextField(new MaskFormatter("**************************************************"));
+		} catch (ParseException e2) {
+			e2.printStackTrace();
+		}
 		tfPesquisa.setBounds(136, 28, 393, 26);
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				try {
+					panel_1.remove(tfPesquisa);
+					if(comboBox.getSelectedItem().equals("Nome"))
+						tfPesquisa = new JFormattedTextField(new MaskFormatter("**************************************************"));
+					else
+						tfPesquisa = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+					tfPesquisa.setBounds(106, 28, 402, 25);
+					panel_1.add(tfPesquisa);
+					tfPesquisa.setColumns(10);
+					comboBox.transferFocus();
+				} catch (ParseException e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"T\u00EDtulo", "Autor", "ISBN"}));
 		comboBox.setBounds(10, 28, 92, 26);
 		panel_1.add(comboBox);

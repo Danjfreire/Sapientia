@@ -4,9 +4,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
+import br.ufrpe.sapientia.negocio.beans.Historico;
 import br.ufrpe.sapientia.negocio.beans.Livro;
 import br.ufrpe.sapientia.negocio.beans.Usuario;
 
@@ -72,11 +75,12 @@ public class Testes {
 		for(Livro l : livros)
 			System.out.println(l);
 		
-		//RepositorioEmprestimos re = new RepositorioEmprestimos();
+		//RepositorioEmprestimos re = new RepositorioEmprestimos();*/
 		
-		/*RepositorioEmprestimos re = new RepositorioEmprestimos();
+		RepositorioEmprestimos re = new RepositorioEmprestimos();
 		try {
-			re.cadastrar("31/1/1990", "35/13/2000", "PENDENTE", "2", "1", "123");
+			re.remove(11);
+			//re.cadastrar("31/1/1990", "35/13/2000", "ABERTO", "2", "1", "123");
 		} catch (SQLException e1) {
 			System.out.println(e1.getErrorCode() + "," + e1.getMessage());
 			
@@ -84,19 +88,37 @@ public class Testes {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		try {
+		
+		/*try {
+			List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 			emprestimos = re.pesquisarTodos();
+			for(Emprestimo e : emprestimos){
+				if(Calendar.YEAR > e.getDataDevolucao().get(Calendar.YEAR))
+					re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+				else if(Calendar.DATE == e.getDataDevolucao().get(Calendar.YEAR)){
+					if(Calendar.MONTH > e.getDataDevolucao().get(Calendar.MONTH))
+						re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+					else if(Calendar.MONTH == e.getDataDevolucao().get(Calendar.MONTH)){
+						if(Calendar.DAY_OF_MONTH > e.getDataDevolucao().get(Calendar.DAY_OF_MONTH))
+							re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+					}
+				}
+				System.out.println(Calendar.YEAR);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		RepositorioHistorico rh = new RepositorioHistorico();
+		List<Historico> historicos = new ArrayList<Historico>();
+		try {
+			
+			historicos = rh.pesquisarHistoricoCliente("1");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(Emprestimo e : emprestimos)
-			System.out.println(e);
-		try {
-			re.remove(1);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}*/
+		for(Historico h: historicos)
+			System.out.println(h);
 	}
 }

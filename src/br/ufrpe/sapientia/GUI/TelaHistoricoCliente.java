@@ -81,17 +81,16 @@ public class TelaHistoricoCliente extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		try {
-			List<Historico>emprestimos = Fachada.getInstance().pesquisarHistoricoCliente(usuario.getCpf());
-			if(emprestimos.size()>0){
-			for(Historico emp : emprestimos){
-				Calendar inicio = emp.getDataEmprestimo();
-				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
-				Calendar fim = emp.getDataDevolucao();
-				String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
-				Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
-				modelo.addRow(new Object[]{"",l.getTitulo(),dataInicio,dataFim});
+			List<Historico> historicos = Fachada.getInstance().pesquisarHistoricoCliente(usuario.getCpf());
+			if(historicos.size()>0){
+				for(Historico emp : historicos){
+					Calendar inicio = emp.getDataEmprestimo();
+					String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);					Calendar fim = emp.getDataDevolucao();
+					String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
+					Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
+					modelo.addRow(new Object[]{"",l.getTitulo(),dataInicio,dataFim});
+				}
 			}
-		}
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Historico vazio");
 		}

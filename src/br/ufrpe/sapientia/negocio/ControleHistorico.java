@@ -24,6 +24,7 @@ public class ControleHistorico implements IControleHistorico{
 
 	@Override
 	public List<Historico> pesquisarHistoricoCliente(String cliente_cpf) throws Exception {
+		System.out.println("iiiiiiiiiii");
 		return repositorio.pesquisarHistoricoCliente(cliente_cpf);
 	}
 

@@ -2,14 +2,11 @@ package br.ufrpe.sapientia.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import br.ufrpe.sapientia.fachada.Fachada;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
@@ -90,7 +87,6 @@ public class TelaLogon extends JFrame {
 		btnAcessar.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/entrar.png")));
 		btnAcessar.setBounds(10, 169, 90, 63);
 		panel.add(btnAcessar);
-		
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(84, 122, 203, 22);
