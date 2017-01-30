@@ -124,7 +124,6 @@ public class TelaHistóricoLivros extends JInternalFrame {
 					}else if(comboBox.getSelectedItem().equals("Funcionario")){
 						historicos = Fachada.getInstance().pesquisarHistoricoFuncionario(textField.getText());
 					}else{
-						System.out.println("oooooooooo");
 						historicos = Fachada.getInstance().pesquisarHistoricoCliente(textField.getText());
 					}
 					
