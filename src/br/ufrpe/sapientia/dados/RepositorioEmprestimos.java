@@ -96,7 +96,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	public List<Emprestimo> pesquisarEmprestimoTitulo(String titulo) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String consulta = '%' + titulo + '%';
-		String sql = "select * from emprestimo where titulo_livro like ?";
+		String sql = "select * from emprestimo where titulo_livro like ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, consulta);
@@ -113,7 +113,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	
 	public List<Emprestimo> pesquisarEmprestimoISBN(String isbn) throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from emprestimo where isbn_livro like ?";
+		String sql = "select * from emprestimo where isbn_livro like ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, isbn);
@@ -130,7 +130,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 	
 	public List<Emprestimo> pesquisarTodos() throws Exception{
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-		String sql = "select * from emprestimo";
+		String sql = "select * from emprestimo order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -182,7 +182,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql;
 		if(tipo)
-			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'PENDENTE' order by titulo_livro";
+			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ATRASADO' order by titulo_livro";
 		else
 			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ABERTO' order by titulo_livro";
 		try{
@@ -203,7 +203,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql;
 		if(tipo)
-			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'PENDENTE' order by titulo_livro";
+			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ATRASADO' order by titulo_livro";
 		else
 			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ABERTO' order by titulo_livro";
 		try{
@@ -224,7 +224,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql;
 		if(tipo)
-			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'PENDENTE' order by titulo_livro";
+			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ATRASADO' order by titulo_livro";
 		else
 			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ABERTO' order by titulo_livro";
 		try{
@@ -245,7 +245,7 @@ public class RepositorioEmprestimos implements IRepositorioEmprestimos {
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		String sql;
 		if(tipo)
-			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'PENDENTE' order by titulo_livro";
+			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ATRASADO' order by titulo_livro";
 		else
 			sql = "select * from emprestimo where funcionario_cpf = ? and status_emprestimo = 'ABERTO' order by titulo_livro";
 		String titulo = '%' + titulo_livro + '%';

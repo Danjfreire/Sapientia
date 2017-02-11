@@ -28,6 +28,7 @@ import java.text.ParseException;
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class FormAtuaFunc extends JFrame {
 
@@ -74,6 +75,7 @@ public class FormAtuaFunc extends JFrame {
 	 * Create the frame.
 	 */
 	public FormAtuaFunc(Usuario u) {
+		setResizable(false);
 		funcionario = u;
 		setTitle("Atualizando Funcion\u00E1rio");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -84,8 +86,9 @@ public class FormAtuaFunc extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
-		panel.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
 		panel.setBounds(10, 11, 461, 176);
 		contentPane.add(panel);
 		
@@ -95,6 +98,8 @@ public class FormAtuaFunc extends JFrame {
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("Nome.:");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_1.setForeground(new Color(95, 158, 160));
 		label_1.setBounds(147, 23, 46, 14);
 		panel.add(label_1);
 		
@@ -106,6 +111,8 @@ public class FormAtuaFunc extends JFrame {
 		tfNome.setEditable(false);
 		
 		JLabel label_2 = new JLabel("Cpf.:");
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setForeground(new Color(95, 158, 160));
 		label_2.setBounds(148, 48, 46, 14);
 		panel.add(label_2);
 		
@@ -117,6 +124,8 @@ public class FormAtuaFunc extends JFrame {
 		tfCPF.setEditable(false);
 		
 		JLabel Sexo = new JLabel("Sexo.:");
+		Sexo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		Sexo.setForeground(new Color(95, 158, 160));
 		Sexo.setBounds(148, 73, 86, 14);
 		panel.add(Sexo);
 		
@@ -126,22 +135,30 @@ public class FormAtuaFunc extends JFrame {
 		panel.add(tfSexo);
 		
 		JLabel label_4 = new JLabel("Login.:");
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_4.setForeground(new Color(95, 158, 160));
 		label_4.setBounds(147, 98, 46, 14);
 		panel.add(label_4);
 		
 		
-		try {
-			tfLogin = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		tfLogin = new JFormattedTextField();
+		tfLogin.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfLogin.getText().length() == 50){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
+		
 		tfLogin.setColumns(10);
 		tfLogin.setBounds(277, 95, 174, 20);
 		panel.add(tfLogin);
 		tfLogin.setText(funcionario.getLogin());
 		
 		JLabel label_5 = new JLabel("Senha.:");
+		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_5.setForeground(new Color(95, 158, 160));
 		label_5.setBounds(148, 123, 46, 14);
 		panel.add(label_5);
 		
@@ -156,14 +173,17 @@ public class FormAtuaFunc extends JFrame {
 		psConfirmar.setColumns(10);
 		
 		JLabel lblConfimarSenha = new JLabel("Confimar Senha.:");
+		lblConfimarSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblConfimarSenha.setForeground(new Color(95, 158, 160));
 		lblConfimarSenha.setBounds(148, 148, 86, 14);
 		panel.add(lblConfimarSenha);
 		psConfirmar.setText(funcionario.getSenha());
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		panel_1.setLayout(null);
-		panel_1.setBorder(new TitledBorder(null, "Endere\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(20, 198, 451, 176);
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Endere\u00E7o", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
+		panel_1.setBounds(10, 198, 461, 176);
 		contentPane.add(panel_1);
 		
 		JLabel label_6 = new JLabel("");
@@ -172,21 +192,28 @@ public class FormAtuaFunc extends JFrame {
 		panel_1.add(label_6);
 		
 		JLabel label_7 = new JLabel("Logradouro.:");
+		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_7.setForeground(new Color(95, 158, 160));
 		label_7.setBounds(139, 24, 75, 14);
 		panel_1.add(label_7);
 		
-		try {
-			tfLogradouro = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		tfLogradouro = new JTextField();
+		tfLogradouro.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfLogradouro.getText().length() == 50){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		tfLogradouro.setColumns(10);
 		tfLogradouro.setBounds(224, 18, 217, 20);
 		panel_1.add(tfLogradouro);
 		tfLogradouro.setText(funcionario.getLogradouro());
 		
 		JLabel label_8 = new JLabel("N\u00FAmero.:");
+		label_8.setForeground(new Color(95, 158, 160));
+		label_8.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_8.setBounds(139, 49, 63, 14);
 		panel_1.add(label_8);
 		
@@ -206,36 +233,48 @@ public class FormAtuaFunc extends JFrame {
 		tfNumero.setText(Integer.toString(funcionario.getNumero()));
 		
 		JLabel label_9 = new JLabel("Bairro.:");
+		label_9.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_9.setForeground(new Color(95, 158, 160));
 		label_9.setBounds(139, 74, 46, 14);
 		panel_1.add(label_9);
 		
 		
-		try {
-			tfBairro = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		tfBairro = new JTextField();
+		tfBairro.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfBairro.getText().length() == 50){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		tfBairro.setBounds(224, 68, 217, 20);
 		panel_1.add(tfBairro);
 		tfBairro.setText(funcionario.getBairro());
 		
 		JLabel label_10 = new JLabel("Cidade.:");
+		label_10.setForeground(new Color(95, 158, 160));
+		label_10.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_10.setBounds(139, 99, 46, 14);
 		panel_1.add(label_10);
 		
-		try {
-			tfCidade = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		tfCidade = new JTextField();
+		tfCidade.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfCidade.getText().length() == 50){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		tfCidade.setColumns(10);
 		tfCidade.setBounds(224, 93, 217, 20);
 		panel_1.add(tfCidade);
 		tfCidade.setText(funcionario.getCidade());
 		
 		JLabel label_11 = new JLabel("Estado.:");
+		label_11.setForeground(new Color(95, 158, 160));
+		label_11.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_11.setBounds(139, 124, 46, 14);
 		panel_1.add(label_11);
 		
@@ -245,8 +284,9 @@ public class FormAtuaFunc extends JFrame {
 		panel_1.add(comboBox);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
 		panel_2.setLayout(null);
-		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Contato", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Contato", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
 		panel_2.setBounds(481, 11, 261, 261);
 		contentPane.add(panel_2);
 		
@@ -256,10 +296,14 @@ public class FormAtuaFunc extends JFrame {
 		panel_2.add(label_12);
 		
 		JLabel label_13 = new JLabel("Email.:");
+		label_13.setForeground(new Color(95, 158, 160));
+		label_13.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_13.setBounds(10, 179, 46, 14);
 		panel_2.add(label_13);
 		
 		JLabel label_14 = new JLabel("Telefone.:");
+		label_14.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_14.setForeground(new Color(95, 158, 160));
 		label_14.setBounds(10, 219, 56, 14);
 		panel_2.add(label_14);
 		
@@ -283,32 +327,66 @@ public class FormAtuaFunc extends JFrame {
 		tfContato.setColumns(10);
 		tfContato.setBounds(76, 216, 175, 20);
 		panel_2.add(tfContato);
+		tfContato.setText(funcionario.getContato());
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(520, 319, 89, 23);
+		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAtualizar.setBounds(509, 319, 100, 27);
 		contentPane.add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(psSenha.getText().equals(psConfirmar.getText())){
 					try{
 						String sexo = (String)tfSexo.getSelectedItem();
-						boolean a = Fachada.getInstance().atualizarUsuario(funcionario.getCpf(), funcionario.getNome(), tfContato.getText(), 
-								tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "F", "" + sexo.charAt(0), tfLogradouro.getText(), 
-								Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)comboBox.getSelectedItem());	
-						if(a){
-							JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
-							dispose();
-						}else{
-							JOptionPane.showMessageDialog(null,"Dados inválidos!");
-							tfContato.setText("");
-							tfEmail.setText("");
-							tfLogin.setText("");
+						if(!(psSenha.getText().equals(psConfirmar.getText()))){
+							JOptionPane.showMessageDialog(null, "As senhas não são iguais");
 							psSenha.setText("");
-							tfLogradouro.setText("");
-							tfBairro.setText("");
-							tfCidade.setText("");
+							psConfirmar.setText("");
+							psSenha.grabFocus();;
 						}
-						
+						else if(tfLogin.getText().equals("")){
+							JOptionPane.showMessageDialog(null, "Campo login vazio");
+							tfLogin.grabFocus();
+						}
+						else if(psSenha.getText().length() < 8){
+							JOptionPane.showMessageDialog(null, "Senha muito pequena");
+							psSenha.grabFocus();
+						}
+						else if(tfLogradouro.getText().equals("")){
+							JOptionPane.showMessageDialog(null, "Campo logradouro vazio");
+							tfLogradouro.grabFocus();
+						}
+						else if(tfBairro.getText().equals("")){
+							JOptionPane.showMessageDialog(null, "Campo bairro vazio");
+							tfBairro.grabFocus();
+						}
+						else if(tfCidade.getText().equals("")){
+							JOptionPane.showMessageDialog(null, "Campo cidade vazio");
+							tfCidade.grabFocus();
+						}
+						else if(tfContato.getText().equals("(  )      -    ")){
+							JOptionPane.showMessageDialog(null, "Campo contato vazio");
+							tfContato.grabFocus();
+						}
+						else{
+							if(Fachada.getInstance().atualizarUsuario(funcionario.getCpf(), funcionario.getNome(), tfContato.getText(), 
+							tfEmail.getText(), tfLogin.getText(), psSenha.getText(), "F", "" + sexo.charAt(0), tfLogradouro.getText(),
+							Integer.parseInt(tfNumero.getText()), tfBairro.getText(), tfCidade.getText(), (String)comboBox.getSelectedItem())){
+								JOptionPane.showMessageDialog(null,"Atualizado com Sucesso!");
+								dispose();
+							}
+							else{
+								JOptionPane.showMessageDialog(null,"Dados inválidos!");
+								tfContato.setText("");
+								tfEmail.setText("");
+								tfLogin.setText("");
+								psSenha.setText("");
+								tfLogradouro.setText("");
+								tfBairro.setText("");
+								tfCidade.setText("");
+							 }
+						}
+					
 					}catch(SQLException exception){
 						ErrosGUI eg = new ErrosGUI(exception, tfEmail, psSenha, psConfirmar);
 						eg.mensagemUsuario();
@@ -317,7 +395,8 @@ public class FormAtuaFunc extends JFrame {
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-				}else{
+				}
+				else{
 					JOptionPane.showMessageDialog(null, "As senhas não são iguais");
 					psSenha.setText("");
 					psConfirmar.setText("");
@@ -326,7 +405,8 @@ public class FormAtuaFunc extends JFrame {
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(619, 319, 89, 23);
+		btnSair.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnSair.setBounds(619, 319, 100, 27);
 		contentPane.add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -338,5 +418,9 @@ public class FormAtuaFunc extends JFrame {
 				}
 			}
 		});
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 	}
 }

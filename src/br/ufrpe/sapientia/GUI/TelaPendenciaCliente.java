@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -28,7 +30,6 @@ import java.awt.event.ActionEvent;
 public class TelaPendenciaCliente extends JInternalFrame {
 	private JTable table;
 	private Usuario cliente;
-
 	/**
 	 * Launch the application.
 	 */
@@ -59,15 +60,15 @@ public class TelaPendenciaCliente extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public TelaPendenciaCliente(Usuario cliente) {
+		List<Emprestimo> emprestimos;
 		this.cliente = cliente;
 		setTitle("Pend\u00EAncias");
 		setClosable(true);
-		setIconifiable(true);
 		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 44, 744, 275);
+		scrollPane.setBounds(10, 74, 744, 275);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -79,17 +80,43 @@ public class TelaPendenciaCliente extends JInternalFrame {
 		modelo.addColumn("Devolu\u00E7\u00E3o");
 		modelo.addColumn("Atraso");
 		
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(table);		
+		
+		JLabel lblNewLabel = new JLabel("Lista de livros pendentes:");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel.setBounds(10, 36, 239, 27);
+		getContentPane().add(lblNewLabel);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnSair.setBounds(318, 360, 100, 27);
+		getContentPane().add(btnSair);
+		
+		JLabel lbTelaAzul = new JLabel("");
+		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
+		lbTelaAzul.setBounds(-7, -26, 780, 443);
+		getContentPane().add(lbTelaAzul);
 		
 		try{
-			List<Emprestimo> emprestimos = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf());
+			emprestimos = Fachada.getInstance().verificarPendenciasCliente(cliente.getCpf());
+			if(emprestimos.isEmpty()){
+				JOptionPane.showMessageDialog(null, "Cliente não possui emprestimos!");
+				dispose();
+			}
 			for(Emprestimo e : emprestimos){
+				int id = e.getIdEmprestimo();
 				Calendar inicio = e.getDataEmprestimo();
 				String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 				Calendar fim = e.getDataDevolucao();
 				String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
 				Livro l = Fachada.getInstance().buscaLivroISBN(e.getIsbnLivro());
-				modelo.addRow(new Object[]{" ",l.getTitulo(),dataInicio,dataFim,e.getStatus()});
+				modelo.addRow(new Object[]{id,l.getTitulo(),dataInicio,dataFim,e.getStatus()});
 			}
 //			for(Emprestimo e : emprestimos1){
 //				Calendar inicio = e.getDataEmprestimo();
@@ -102,34 +129,5 @@ public class TelaPendenciaCliente extends JInternalFrame {
 		}catch(Exception e){
 			
 		}
-		
-		
-		JLabel lblNewLabel = new JLabel("Livros em atraso!");
-		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(274, 11, 144, 14);
-		getContentPane().add(lblNewLabel);
-		
-		JLabel lblContatarCliente = new JLabel("Devolva Imediatamente!");
-		lblContatarCliente.setForeground(Color.RED);
-		lblContatarCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblContatarCliente.setBounds(274, 329, 209, 30);
-		getContentPane().add(lblContatarCliente);
-		
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		btnSair.setBounds(329, 370, 89, 23);
-		getContentPane().add(btnSair);
-		
-		JLabel lbTelaAzul = new JLabel("");
-		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
-		lbTelaAzul.setBounds(-7, -26, 780, 443);
-		getContentPane().add(lbTelaAzul);
-		
-		
 	}
 }

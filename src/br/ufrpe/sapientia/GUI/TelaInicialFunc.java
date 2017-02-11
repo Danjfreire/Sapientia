@@ -9,6 +9,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.corba.se.impl.oa.toa.TransientObjectManager;
+
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JMenuBar;
@@ -31,6 +33,8 @@ import java.awt.Toolkit;
 import br.ufrpe.sapientia.dados.RepositorioEmprestimos;
 import br.ufrpe.sapientia.negocio.beans.*;
 import javax.swing.JToggleButton;
+import javax.swing.Timer;
+
 import java.awt.Color;
 
 public class TelaInicialFunc extends JFrame {
@@ -41,6 +45,7 @@ public class TelaInicialFunc extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Usuario funcionario;
+	private int count;
 
 	/**
 	 * Launch the application.
@@ -77,13 +82,13 @@ public class TelaInicialFunc extends JFrame {
 			emprestimos = re.pesquisarTodos();
 			for(Emprestimo e : emprestimos){
 				if(data.get(Calendar.YEAR) > e.getDataDevolucao().get(Calendar.YEAR))
-					re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+					re.atualizar(e.getIdEmprestimo(), "ATRASADO");
 				else if(data.get(Calendar.YEAR) == e.getDataDevolucao().get(Calendar.YEAR)){
 					if(data.get(Calendar.MONTH) > e.getDataDevolucao().get(Calendar.MONTH))
-						re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+						re.atualizar(e.getIdEmprestimo(), "ATRASADO");
 					else if(data.get(Calendar.MONTH) == e.getDataDevolucao().get(Calendar.MONTH)){
 						if(data.get(Calendar.DAY_OF_MONTH) > e.getDataDevolucao().get(Calendar.DAY_OF_MONTH))
-							re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+							re.atualizar(e.getIdEmprestimo(), "ATRASADO");
 					}
 				}
 			}
@@ -123,8 +128,12 @@ public class TelaInicialFunc extends JFrame {
 		JLabel lblSeuSistemaDe = new JLabel("Seu sistema de gerenciamento de Livros.");
 		lblSeuSistemaDe.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblSeuSistemaDe.setForeground(Color.WHITE);
-		lblSeuSistemaDe.setBounds(10, 78, 432, 31);
+		lblSeuSistemaDe.setBounds(10, 78, 373, 31);
 		desktopPane.add(lblSeuSistemaDe);
+		
+		JLabel slide = new JLabel();
+		slide.setBounds(10, 120, 363, 172);
+		desktopPane.add(slide);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador3.png")));
@@ -134,15 +143,11 @@ public class TelaInicialFunc extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		
-		
 		JMenu mnGerenciamento = new JMenu("Gerenciamento");
 		menuBar.add(mnGerenciamento);
 		
 		JMenu mnFuncionrios = new JMenu("Funcion\u00E1rios");
 		mnGerenciamento.add(mnFuncionrios);
-		
-		
 		
 		
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
@@ -355,8 +360,27 @@ public class TelaInicialFunc extends JFrame {
 		});
 		mnEmprstimo.add(mntmDevolverLivro);
 		
+		List<ImageIcon> fotos= new ArrayList<ImageIcon>();
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro1.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro2.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro3.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro4.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro5.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro6.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro7.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro8.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro9.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro10.png")));
+		count = 0;
 		
-		
-
+		Timer tempo = new Timer(5000, new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(count == 10)
+					count = 0;
+				slide.setIcon(fotos.get(count));
+				count++;
+			}
+		});
+		tempo.start();
 	}
 }

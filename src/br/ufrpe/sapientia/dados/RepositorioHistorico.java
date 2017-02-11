@@ -18,7 +18,7 @@ public class RepositorioHistorico implements IRepositorioHistorico{
 	public List<Historico> pesquisarHistoricoTitulo(String titulo) throws Exception{
 		List<Historico> historicos = new ArrayList<Historico>();
 		String consulta = '%' + titulo + '%';
-		String sql = "select * from historico where titulo_livro like ?";
+		String sql = "select * from historico where titulo_livro like ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, consulta);
@@ -35,7 +35,7 @@ public class RepositorioHistorico implements IRepositorioHistorico{
 	
 	public List<Historico> pesquisarHistoricoFuncionario(String funcionario_cpf) throws Exception{
 		List<Historico> historicos = new ArrayList<Historico>();
-		String sql = "select * from historico where funcionario_cpf like ?";
+		String sql = "select * from historico where funcionario_cpf like ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, funcionario_cpf);
@@ -52,7 +52,7 @@ public class RepositorioHistorico implements IRepositorioHistorico{
 	
 	public List<Historico> pesquisarHistoricoCliente(String cliente_cpf) throws Exception{
 		List<Historico> historicos = new ArrayList<Historico>();
-		String sql = "select * from historico where cliente_cpf like ?";
+		String sql = "select * from historico where cliente_cpf like ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cliente_cpf);
@@ -69,7 +69,7 @@ public class RepositorioHistorico implements IRepositorioHistorico{
 	
 	public List<Historico> pesquisarHistoricoISBN(String isbn_livro) throws Exception{
 		List<Historico> historicos = new ArrayList<Historico>();
-		String sql = "select * from historico where isbn_livro like ?";
+		String sql = "select * from historico where isbn_livro like ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, isbn_livro);
@@ -86,7 +86,7 @@ public class RepositorioHistorico implements IRepositorioHistorico{
 	
 	public List<Historico> pesquisarHistoricoTodos() throws Exception{
 		List<Historico> historicos = new ArrayList<Historico>();
-		String sql = "select * from historico";
+		String sql = "select * from historico order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();

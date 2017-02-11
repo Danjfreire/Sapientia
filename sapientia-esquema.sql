@@ -137,7 +137,14 @@ create trigger atualizarUsuario
 before update on usuario
 for each row
 begin
-	if new.email_usuario not like "%@%" then
+	if new.tipo_usuario <> "F" 
+    and new.tipo_usuario <> "C" 
+    and new.tipo_usuario <> "A" then
+		signal sqlstate '45000' set message_text='Tipo de usuário incorreto!';
+    elseif new.sexo_usuario <> "M"
+    and new.sexo_usuario <> "F"  then
+		signal sqlstate '45000' set message_text='Tipo de sexo incorreto!';
+	elseif new.email_usuario not like "%@%" then
 		signal sqlstate '45000' set message_text='Email inválido!';
 	end if;
 end//

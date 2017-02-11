@@ -97,7 +97,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	
 	public List<Usuario> pesquisarTodos(String tipo) throws SQLException{
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "select * from usuario where tipo_usuario = ?";
+		String sql = "select * from usuario where tipo_usuario = ? order by nome_usuario";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, tipo);
@@ -115,7 +115,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	public List<Usuario> pesquisarNome(String nome, String tipo) throws SQLException{
 		
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "select * from usuario where nome_usuario = ? and tipo_usuario = ?";
+		String sql = "select * from usuario where nome_usuario = ? and tipo_usuario = ? order by nome_usuario";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, nome);
@@ -137,7 +137,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 		 * ou só um funcionário, não faz sentido uma busca por um cliente retornar um funcionário caso o cpf seja inserido incorretamente
 		 */
 		Usuario u = null;
-		String sql = "select * from usuario where cpf_usuario = ? and tipo_usuario = ?";
+		String sql = "select * from usuario where cpf_usuario = ? and tipo_usuario = ? order by nome_usuario";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, cpf);
@@ -155,7 +155,7 @@ public class RepositorioUsuarios implements IRepositorioUsuarios{
 	
 	public Usuario pesquisarLoginSenha(String login, String senha) throws SQLException{
 		Usuario u = null;
-		String sql = "select * from usuario where login_usuario = ? and senha_usuario = ?";
+		String sql = "select * from usuario where login_usuario = ? and senha_usuario = ? order by nome_usuario";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, login);

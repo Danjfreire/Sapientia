@@ -90,7 +90,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 	
 	public List<Livro> pesquisarTodos() throws SQLException{
 		List<Livro> livros = new ArrayList<Livro>();
-		String sql = "select * from livro";
+		String sql = "select * from livro order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -107,7 +107,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 	public List<Livro> pesquisarTitulo(String titulo) throws SQLException{
 		List<Livro> livros = new ArrayList<Livro>();
 		String consulta = '%' + titulo + '%';
-		String sql = "select * from livro where titulo_livro like ?";
+		String sql = "select * from livro where titulo_livro like ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, consulta);
@@ -124,7 +124,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 	
 	public Livro pesquisarISBN(String isbn) throws SQLException{
 		Livro l = null;
-		String sql = "select * from livro where isbn_livro = ?";
+		String sql = "select * from livro where isbn_livro = ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, isbn);
@@ -141,7 +141,7 @@ public class RepositorioLivros implements IRepositorioLivros{
 	
 	public List<Livro> pesquisarAutor(String autor) throws SQLException{
 		List<Livro> livros = new ArrayList<Livro>();
-		String sql = "select * from livro where autor_livro = ?";
+		String sql = "select * from livro where autor_livro = ? order by titulo_livro";
 		try{
 			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 			stmt.setString(1, autor);

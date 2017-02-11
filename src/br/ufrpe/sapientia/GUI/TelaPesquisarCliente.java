@@ -43,6 +43,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Color;
 
 public class TelaPesquisarCliente extends JInternalFrame {
 	private JTextField tfPesquisa;
@@ -80,13 +83,13 @@ public class TelaPesquisarCliente extends JInternalFrame {
 	 */
 	public TelaPesquisarCliente() {
 		setTitle("Pesquisar Clientes");
-		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
 		panel_1.setBounds(10, 11, 744, 64);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
@@ -97,8 +100,17 @@ public class TelaPesquisarCliente extends JInternalFrame {
 			public void focusLost(FocusEvent arg0) {
 				try {
 					panel_1.remove(tfPesquisa);
-					if(comboBox.getSelectedItem().equals("Nome"))
-						tfPesquisa = new JFormattedTextField(new MaskFormatter("**************************************************"));
+					if(comboBox.getSelectedItem().equals("Nome")){
+						tfPesquisa = new JTextField();
+						tfPesquisa.addKeyListener(new KeyAdapter() {
+							public void keyTyped(KeyEvent e) {
+								if(tfPesquisa.getText().length() == 50){
+									getToolkit().beep();
+									e.consume();
+								}
+							}
+						});
+					}
 					else
 						tfPesquisa = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
 					tfPesquisa.setBounds(106, 28, 402, 25);
@@ -114,11 +126,16 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		comboBox.setBounds(10, 28, 88, 25);
 		panel_1.add(comboBox);
 		
-		try {
-			tfPesquisa = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			e2.printStackTrace();
-		}
+		
+		tfPesquisa = new JTextField();
+		tfPesquisa.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(tfPesquisa.getText().length() == 50){
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		tfPesquisa.setBounds(106, 28, 402, 25);
 		panel_1.add(tfPesquisa);
 		tfPesquisa.setColumns(10);
@@ -148,7 +165,8 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(598, 27, 136, 26);
+		btnPesquisar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnPesquisar.setBounds(598, 27, 120, 27);
 		panel_1.add(btnPesquisar);
 		btnPesquisar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -166,8 +184,35 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					scrollPane.setViewportView(table_1);
 					
 					if(comboBox.getSelectedItem().equals("Nome")){
-						clientes = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "C");
-						for(Usuario u : clientes){
+						if(tfPesquisa.getText().equals("")){
+							JOptionPane.showMessageDialog(null, "Campo nome vazio");
+							tfPesquisa.grabFocus();
+						}
+						else{
+							clientes = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "C");
+							for(Usuario u : clientes){
+								String nome = u.getNome();
+								String cpf = u.getCpf();
+								String endereco = u.getLogradouro() + ", " + u.getNumero() + " -" + u.getBairro() + "- " + u.getCidade() + "/" + u.getEstado();
+								String contato = u.getContato();
+								String email = u.getEmail();
+								String sexo = u.getSexo();
+								String login = u.getLogin();
+								modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
+							}
+							if(clientes.isEmpty())
+								JOptionPane.showMessageDialog(null, "Nenhum registro encontrado!");
+						}
+					}
+					else if(comboBox.getSelectedItem().equals("Cpf")){
+						if(tfPesquisa.getText().equals("   .   .   -  ")){
+							JOptionPane.showMessageDialog(null, "Campo cpf vazio");
+							tfPesquisa.grabFocus();
+						}
+						else{
+							Usuario u = Fachada.getInstance().buscarUsuarioCPF(tfPesquisa.getText(), "C");
+							if(u == null)
+								JOptionPane.showMessageDialog(null, "Cliente nao encontrado");
 							String nome = u.getNome();
 							String cpf = u.getCpf();
 							String endereco = u.getLogradouro() + ", " + u.getNumero() + " -" + u.getBairro() + "- " + u.getCidade() + "/" + u.getEstado();
@@ -176,18 +221,8 @@ public class TelaPesquisarCliente extends JInternalFrame {
 							String sexo = u.getSexo();
 							String login = u.getLogin();
 							modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
+			
 						}
-					}
-					else if(comboBox.getSelectedItem().equals("Cpf")){
-						Usuario u = Fachada.getInstance().buscarUsuarioCPF(tfPesquisa.getText(), "C");
-						String nome = u.getNome();
-						String cpf = u.getCpf();
-						String endereco = u.getLogradouro() + ", " + u.getNumero() + " -" + u.getBairro() + "- " + u.getCidade() + "/" + u.getEstado();
-						String contato = u.getContato();
-						String email = u.getEmail();
-						String sexo = u.getSexo();
-						String login = u.getLogin();
-						modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
 					}
 						
 				}catch(Exception exception){
@@ -197,39 +232,43 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		});
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(187, 367, 89, 23);
+		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAtualizar.setBounds(187, 367, 100, 27);
 		getContentPane().add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				try{
 					Usuario u = clientes.get(table_1.getSelectedRow());
-					
+					table_1.getSelectionModel().clearSelection();
 					FormAtualCliente tela = new FormAtualCliente(u);
-					//dispose();
-					tela.setVisible(true);
-					
-				}catch(Exception exception){
-					
+					tela.setVisible(true);	
 				}
-					
-					
+				catch(ArrayIndexOutOfBoundsException e2){
+					JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado");
 				}
+				catch(NullPointerException e1){
+					JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado!");
+				}
+				catch(Exception exception){					
+					exception.printStackTrace();
+				}
+			}
 		});
 		
-		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(345, 367, 89, 23);
+		btnExcluir.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnExcluir.setBounds(345, 367, 100, 27);
 		getContentPane().add(btnExcluir);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					
 					Usuario u = clientes.get(table_1.getSelectedRow());
+					System.out.println(table_1.getSelectedRow());
 					if(JOptionPane.showConfirmDialog(null, "Tem certeza que excluir este cliente?" ,"Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 						boolean a = Fachada.getInstance().removerUsuario(u.getCpf());
-						
 						if(a){
 							//sucesso
+							clientes.remove(table_1.getSelectedRow());
 							table_1 = new JTable();
 							DefaultTableModel modelo = new DefaultTableModel();
 							table_1.setModel(modelo);
@@ -241,8 +280,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 							modelo.addColumn("Sexo");
 							modelo.addColumn("Login");
 							scrollPane.setViewportView(table_1);
-							
-							if(comboBox.getSelectedItem().equals("Nome")){
+							/*if(comboBox.getSelectedItem().equals("Nome")){
 								if(tfPesquisa.getText()!="")
 									clientes = Fachada.getInstance().buscarUsuarioNome(tfPesquisa.getText(), "C");
 								else
@@ -252,6 +290,7 @@ public class TelaPesquisarCliente extends JInternalFrame {
 						    		  clientes = Fachada.getInstance().exibirUsuarios("C");
 						    	  }
 						      }
+							*/
 							
 							for(Usuario user : clientes){
 								String nome = user.getNome();
@@ -262,21 +301,27 @@ public class TelaPesquisarCliente extends JInternalFrame {
 								String sexo = user.getSexo();
 								String login = user.getLogin();
 								modelo.addRow(new Object[]{nome, cpf, endereco, contato, email, sexo, login});
-			    		  }
-				        }} 
-					}catch(SQLException exception){
-						ErrosGUI eg = new ErrosGUI();
-						eg.mensagemExcluirCliente(exception, table_1);
-				} catch (ArrayIndexOutOfBoundsException e1) {
+							}
+				        }
+					}
+				} catch(SQLException exception){
+					ErrosGUI eg = new ErrosGUI();
+					eg.mensagemExcluirCliente(exception, table_1);
+				} 
+				catch(ArrayIndexOutOfBoundsException e3){
 					JOptionPane.showMessageDialog(null, "Nenhum cliente foi selecionado!");
-					} catch (Exception e1) {
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Nenhum cliente foi selecionado!");
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
 		
 		JButton btnExibirTodos = new JButton("Exibir todos");
-		btnExibirTodos.setBounds(305, 106, 135, 23);
+		btnExibirTodos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnExibirTodos.setBounds(317, 102, 130, 27);
 		getContentPane().add(btnExibirTodos);
 		btnExibirTodos.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -294,6 +339,8 @@ public class TelaPesquisarCliente extends JInternalFrame {
 					scrollPane.setViewportView(table_1);
 					
 					clientes = Fachada.getInstance().exibirUsuarios("C");
+					if(clientes.isEmpty())
+						JOptionPane.showMessageDialog(null, "Nenhum registro encontrado");
 					for(Usuario u : clientes){
 						String nome = u.getNome();
 						String cpf = u.getCpf();
@@ -312,13 +359,13 @@ public class TelaPesquisarCliente extends JInternalFrame {
 		});
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(501, 367, 89, 23);
+		btnSair.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnSair.setBounds(501, 367, 100, 27);
 		getContentPane().add(btnSair);
 		btnSair.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
 					dispose();
-					
 				}catch(Exception exception){
 					
 				}

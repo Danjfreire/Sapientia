@@ -67,10 +67,12 @@ public class ErrosGUI {
 					Fachada.getInstance().buscarUsuarioCPF(this.tfCpf.getText(), "C") == null &&
 					Fachada.getInstance().buscarUsuarioCPF(this.tfCpf.getText(), "F") == null){
 					mensagem = "Login já cadastrado!";
-					this.tfLogin.setText(""); 
+					this.tfLogin.setText("");
+					this.tfLogin.grabFocus();
 				}else{
 					mensagem = "Cpf já cadastrado";
 					this.tfCpf.setText("");
+					this.tfCpf.grabFocus();
 				}
 			}catch(Exception ex){
 				mensagem = ex.getMessage();
@@ -78,10 +80,12 @@ public class ErrosGUI {
 		}else if (e.getErrorCode() == 1644){
 			mensagem = e.getMessage();
 			this.tfEmail.setText("");
+			this.tfEmail.grabFocus();
 		}else if (e.getErrorCode() == 1406){
 			mensagem = "Senha muito grande!";
 			this.psSenha.setText("");
 			this.psConfirmar.setText("");
+			this.psSenha.grabFocus();
 		}else
 			mensagem = e.getMessage();
 		JOptionPane.showMessageDialog(null, mensagem);
@@ -93,13 +97,16 @@ public class ErrosGUI {
 		if(e.getErrorCode() == 1062 && this.tfIsbn != null){
 			mensagem = "ISBN já cadastrado";
 			this.tfIsbn.setText("");
+			this.tfIsbn.grabFocus();
 		}else if (e.getErrorCode() == 1644){
 			mensagem = e.getMessage();
 			this.tfEstoque.setText("");
 			this.tfTotal.setText("");
+			this.tfEstoque.grabFocus();
 		}else if (e.getErrorCode() == 1406){
 			mensagem = "Resumo ultrapassou o limite de caracteres!";
 			this.taResumo.setText("");
+			this.taResumo.grabFocus();
 		}else
 			mensagem = this.exception.getMessage();
 		JOptionPane.showMessageDialog(null, mensagem);
@@ -112,9 +119,11 @@ public class ErrosGUI {
 				if(Fachada.getInstance().buscaLivroISBN(isbn.getText()) != null){
 					mensagem = "Cliente não cadastrado!";
 					cliente.setText("");
+					cliente.grabFocus();
 				}else{
 					mensagem = "ISBN não cadastrado";
 					isbn.setText("");
+					isbn.grabFocus();
 				}
 			} catch (Exception e1) {
 				mensagem = e1.getMessage();

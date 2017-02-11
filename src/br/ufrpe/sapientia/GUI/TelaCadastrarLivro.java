@@ -80,137 +80,169 @@ public class TelaCadastrarLivro extends JInternalFrame {
 	public TelaCadastrarLivro() {
 		setTitle("Cadastrar Livros");
 		setClosable(true);
-		setIconifiable(true);
 		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(95, 158, 160)));
 		panel.setBounds(236, 62, 506, 279);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo.:");
-		lblTtulo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTtulo.setForeground(new Color(95, 158, 160));
+		lblTtulo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblTtulo.setBounds(10, 27, 72, 14);
 		panel.add(lblTtulo);
 		
 		JLabel lblAutor = new JLabel("Autor.:");
-		lblAutor.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAutor.setForeground(new Color(95, 158, 160));
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAutor.setBounds(10, 52, 62, 14);
 		panel.add(lblAutor);
 		
 		JLabel lblEdio = new JLabel("Edi\u00E7\u00E3o.:");
-		lblEdio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblEdio.setForeground(new Color(95, 158, 160));
+		lblEdio.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEdio.setBounds(10, 77, 62, 14);
 		panel.add(lblEdio);
 		
 		JLabel lblAno = new JLabel("Ano.:");
-		lblAno.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAno.setForeground(new Color(95, 158, 160));
+		lblAno.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAno.setBounds(10, 102, 62, 14);
 		panel.add(lblAno);
 		
 		JLabel lblIsbn = new JLabel("ISBN.:");
-		lblIsbn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblIsbn.setForeground(new Color(95, 158, 160));
+		lblIsbn.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblIsbn.setBounds(10, 127, 62, 14);
 		panel.add(lblIsbn);
 		
 		JLabel lblVolume = new JLabel("Volume.:");
-		lblVolume.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVolume.setBounds(10, 152, 62, 14);
+		lblVolume.setForeground(new Color(95, 158, 160));
+		lblVolume.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblVolume.setBounds(10, 152, 72, 14);
 		panel.add(lblVolume);
 		
-		try {
-			tfTitulo = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		tfTitulo.setBounds(91, 26, 143, 20);
+		tfTitulo = new JTextField();
+		tfTitulo.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfTitulo.getText().length() == 50){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
+		tfTitulo.setBounds(104, 26, 143, 20);
 		panel.add(tfTitulo);
 		tfTitulo.setColumns(10);
 		
-		try {
-			tfEdicao = new JFormattedTextField(new MaskFormatter("**********"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		tfEdicao.setBounds(91, 76, 143, 20);
+		tfEdicao = new JTextField();
+		tfEdicao.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfEdicao.getText().length() == 10){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
+		tfEdicao.setBounds(104, 76, 143, 20);
 		panel.add(tfEdicao);
 		tfEdicao.setColumns(10);
 		
-		try {
-			tfAutor = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		tfAutor = new JTextField();
+		tfAutor.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfAutor.getText().length() == 50){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		tfAutor.setColumns(10);
-		tfAutor.setBounds(91, 51, 143, 20);
+		tfAutor.setBounds(104, 51, 143, 20);
 		panel.add(tfAutor);
 		
 		try {
 			tfAno = new JFormattedTextField(new MaskFormatter("####"));
 		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		tfAno.setColumns(10);
-		tfAno.setBounds(91, 101, 142, 20);
+		tfAno.setBounds(104, 101, 142, 20);
 		panel.add(tfAno);
 		
 		try {
 			tfISBN = new JFormattedTextField(new MaskFormatter("###-#-##-######-#"));
 		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		tfISBN.setColumns(10);
-		tfISBN.setBounds(92, 126, 142, 20);
+		tfISBN.setBounds(105, 126, 142, 20);
 		panel.add(tfISBN);
 		
-		try {
-			tfVolume = new JFormattedTextField(new MaskFormatter("**********"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		tfVolume = new JTextField();
+		tfVolume.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfVolume.getText().length() == 10){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		tfVolume.setColumns(10);
-		tfVolume.setBounds(92, 151, 142, 20);
+		tfVolume.setBounds(105, 151, 142, 20);
 		panel.add(tfVolume);
 		
 		JLabel lblCategoria = new JLabel("Categoria.:");
-		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblCategoria.setBounds(10, 177, 88, 14);
+		lblCategoria.setForeground(new Color(95, 158, 160));
+		lblCategoria.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblCategoria.setBounds(10, 177, 83, 14);
 		panel.add(lblCategoria);
 		
 		JLabel lblResumo = new JLabel("Resumo.:");
-		lblResumo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblResumo.setForeground(new Color(95, 158, 160));
+		lblResumo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblResumo.setBounds(294, 27, 72, 14);
 		panel.add(lblResumo);
 		
-		try {
-			tfCategoria = new JFormattedTextField(new MaskFormatter("**************************************************"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		tfCategoria = new JTextField();
+		tfCategoria.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(tfCategoria.getText().length() == 50){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		tfCategoria.setColumns(10);
-		tfCategoria.setBounds(92, 176, 143, 20);
+		tfCategoria.setBounds(104, 176, 143, 20);
 		panel.add(tfCategoria);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(textArea.getText().length() == 1000){
+					arg0.consume();
+					getToolkit().beep();
+				}
+			}
+		});
+		textArea.setBackground(new Color(95, 158, 160));
 		textArea.setBounds(294, 49, 188, 197);
 		panel.add(textArea);
 		
 		JLabel lblEstoque = new JLabel("Estoque.:");
-		lblEstoque.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEstoque.setBounds(10, 202, 79, 14);
+		lblEstoque.setForeground(new Color(95, 158, 160));
+		lblEstoque.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblEstoque.setBounds(10, 202, 72, 14);
 		panel.add(lblEstoque);
 		
 		JLabel lblTotal = new JLabel("Total.:");
-		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTotal.setForeground(new Color(95, 158, 160));
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblTotal.setBounds(10, 227, 62, 14);
 		panel.add(lblTotal);
 		
@@ -226,10 +258,9 @@ public class TelaCadastrarLivro extends JInternalFrame {
 					
 			}
 		});
-		tfEstoque.setBounds(91, 201, 143, 20);
+		tfEstoque.setBounds(104, 201, 143, 20);
 		panel.add(tfEstoque);
 		tfEstoque.setColumns(10);
-		
 		
 		tfTotal = new JFormattedTextField();
 		tfTotal.addKeyListener(new KeyAdapter() {
@@ -242,12 +273,12 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			}
 		});
 		tfTotal.setColumns(10);
-		tfTotal.setBounds(92, 226, 143, 20);
+		tfTotal.setBounds(104, 226, 143, 20);
 		panel.add(tfTotal);
 		
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(28, 62, 163, 128);
+		panel_1.setBounds(39, 93, 163, 128);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -257,54 +288,77 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		panel_1.add(label_1);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(109, 232, 89, 68);
+		btnCancelar.setBounds(126, 232, 100, 27);
 		getContentPane().add(btnCancelar);
-		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(10, 232, 89, 68);
+		btnSalvar.setBounds(10, 232, 100, 27);
 		getContentPane().add(btnSalvar);
-		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnSalvar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-				if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), Integer.parseInt(tfAno.getText()),
-						tfISBN.getText(), tfVolume.getText(), tfCategoria.getText(), textArea.getText(), Integer.parseInt(tfEstoque.getText()),
-						Integer.parseInt(tfTotal.getText()))){
-					JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
-					//Livro l = new Livro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(), 
-					//		tfVolume.getText(), tfCategoria.getText(), textArea.getText(), 10, 10);
-					//System.out.println(l);
-					dispose();
-				}else{
-					JOptionPane.showMessageDialog(null,"Dados inválidos!");
-					tfTitulo.setText("");
-					tfEdicao.setText("");
-					tfAutor.setText("");
-					tfAno.setText("");
-					tfISBN.setText("");
-					textArea.setText("");
-					tfVolume.setText("");
-					tfEstoque.setText("");
-					tfTotal.setText("");
-				}
-			}catch(SQLException exception){
-				ErrosGUI eg = new ErrosGUI(exception, tfISBN, tfEstoque, tfTotal, textArea);
-				eg.mensagemLivro();
+					if(tfISBN.getText().equals("   - -  -      - ")){
+						JOptionPane.showMessageDialog(null, "O campo isbn esta em branco!");
+						tfISBN.grabFocus();
+					}
+					else if(tfTitulo.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "Campo título em branco!");
+						tfTitulo.grabFocus();
+					}
+					else if(tfAutor.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "Campo autor em branco!");
+						tfAutor.grabFocus();
+					}
+					else{
+						if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), Integer.parseInt(tfAno.getText()),
+								tfISBN.getText(), tfVolume.getText(), tfCategoria.getText(), textArea.getText(), Integer.parseInt(tfEstoque.getText()),
+								Integer.parseInt(tfTotal.getText()))){
+							JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
+							//Livro l = new Livro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(), 
+							//		tfVolume.getText(), tfCategoria.getText(), textArea.getText(), 10, 10);
+							//System.out.println(l);
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null,"Dados inválidos!");
+							tfTitulo.setText("");
+							tfEdicao.setText("");
+							tfAutor.setText("");
+							tfAno.setText("");
+							tfISBN.setText("");
+							textArea.setText("");
+							tfVolume.setText("");
+							tfEstoque.setText("");
+							tfTotal.setText("");
+						}
+					}
+				}catch(SQLException exception){
+					ErrosGUI eg = new ErrosGUI(exception, tfISBN, tfEstoque, tfTotal, textArea);
+					eg.mensagemLivro();
 				
-			}catch (NumberFormatException e1) {
-				if(tfEstoque.getText().equals(""))
-					JOptionPane.showMessageDialog(null, "Campo estoque em branco!");
-				else
-					JOptionPane.showMessageDialog(null, "Campo total em branco!");
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			} 
+				}catch (NumberFormatException e1) {
+					if(tfAno.getText().equals("    ")){
+						JOptionPane.showMessageDialog(null, "Campo ano em branco!");
+						tfAno.grabFocus();
+					}
+					else if(tfEstoque.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "Campo estoque em branco!");
+						tfEstoque.grabFocus();
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Campo total em branco!");
+						tfTotal.grabFocus();
+					}
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				} 
 			}
 		});
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();			}
+				dispose();			
+			}
 		});
 		
 		JLabel lbTelaAzul = new JLabel("");

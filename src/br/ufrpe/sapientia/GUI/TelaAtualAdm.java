@@ -4,13 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.TitledBorder;
 
+import br.ufrpe.sapientia.fachada.Fachada;
+import br.ufrpe.sapientia.negocio.beans.Usuario;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -19,16 +24,20 @@ import javax.swing.JPanel;
 import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 public class TelaAtualAdm extends JInternalFrame {
 	private JPasswordField passwordField;
 	private JTextField textField_3;
 	private JPasswordField passwordField_1;
+	private Usuario u;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -49,16 +58,15 @@ public class TelaAtualAdm extends JInternalFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaAtualAdm() {
+	public TelaAtualAdm(Usuario u) {
 		getContentPane().setForeground(new Color(135, 206, 250));
 		setClosable(true);
-		setTitle("Atualizar ADM");
-		setIconifiable(true);
+		setTitle("Atualizar Administrador");
 		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
@@ -74,57 +82,118 @@ public class TelaAtualAdm extends JInternalFrame {
 		label_2.setBounds(10, 100, 377, 27);
 		getContentPane().add(label_2);
 		
-		JLabel lblAtualizaoDeAdm = new JLabel("Atualiza\u00E7\u00E3o de ADM");
-		lblAtualizaoDeAdm.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblAtualizaoDeAdm.setBounds(252, 123, 226, 27);
-		getContentPane().add(lblAtualizaoDeAdm);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBackground(new Color(47, 79, 79));
-		panel_1.setBounds(196, 149, 295, 253);
-		getContentPane().add(panel_1);
-		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(TelaAtualAdm.class.getResource("/Imagens/delete.png")));
-		button.setBounds(195, 179, 90, 63);
-		panel_1.add(button);
-		
-		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon(TelaAtualAdm.class.getResource("/Imagens/entrar.png")));
-		button_1.setBounds(10, 179, 90, 63);
-		panel_1.add(button_1);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(84, 67, 203, 22);
-		panel_1.add(passwordField);
-		
-		JLabel label_6 = new JLabel("Senha.:");
-		label_6.setForeground(Color.BLACK);
-		label_6.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_6.setBounds(10, 64, 257, 22);
-		panel_1.add(label_6);
+		JPanel panel = new JPanel();
+		panel.setForeground(Color.WHITE);
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Atualizar Senha", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
+		panel.setBounds(10, 138, 377, 162);
+		getContentPane().add(panel);
+		panel.setLayout(null);
 		
 		textField_3 = new JTextField();
+		textField_3.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(textField_3.getText().length() == 50){
+					getToolkit().beep();
+					arg0.consume();
+				}
+			}
+		});
+		textField_3.setBounds(155, 23, 203, 24);
+		panel.add(textField_3);
 		textField_3.setColumns(10);
-		textField_3.setBounds(84, 33, 203, 24);
-		panel_1.add(textField_3);
+		textField_3.setText(u.getLogin());
 		
-		JLabel label_7 = new JLabel("Login.:");
-		label_7.setForeground(Color.BLACK);
-		label_7.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_7.setBounds(10, 31, 257, 22);
-		panel_1.add(label_7);
-		
-		JLabel label_8 = new JLabel("Confirmar Senha.:");
-		label_8.setForeground(Color.BLACK);
-		label_8.setFont(new Font("Tahoma", Font.BOLD, 18));
-		label_8.setBounds(10, 100, 257, 22);
-		panel_1.add(label_8);
+		passwordField = new JPasswordField();
+		passwordField.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(passwordField.getText().length() == 50){
+					getToolkit().beep();
+					arg0.consume();
+				}
+			}
+		});
+		passwordField.setBounds(155, 58, 203, 22);
+		panel.add(passwordField);
 		
 		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(10, 122, 203, 22);
-		panel_1.add(passwordField_1);
+		passwordField_1.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent arg0) {
+				if(passwordField_1.getText().length() == 50){
+					getToolkit().beep();
+					arg0.consume();
+				}
+			}
+		});
+		passwordField_1.setBounds(155, 91, 203, 22);
+		panel.add(passwordField_1);
+		
+		JLabel label_8 = new JLabel("Confirmar Senha.:");
+		label_8.setBounds(10, 89, 142, 22);
+		panel.add(label_8);
+		label_8.setForeground(new Color(95, 158, 160));
+		label_8.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		JLabel label_6 = new JLabel("Senha.:");
+		label_6.setBounds(10, 58, 142, 22);
+		panel.add(label_6);
+		label_6.setForeground(new Color(95, 158, 160));
+		label_6.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		JLabel label_7 = new JLabel("Login.:");
+		label_7.setBounds(10, 25, 142, 22);
+		panel.add(label_7);
+		label_7.setForeground(new Color(95, 158, 160));
+		label_7.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(textField_3.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "Campo login em branco!");
+					textField_3.grabFocus();
+				}
+				else if(passwordField.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "Campo senha em branco!");
+					passwordField.grabFocus();
+				}
+				else if(!(passwordField.getText().equals(passwordField_1.getText()))){
+					JOptionPane.showMessageDialog(null, "Senhas diferentes");
+					passwordField.setText("");
+					passwordField_1.setText("");
+					passwordField.grabFocus();
+				}
+				else{
+					try{
+						if(Fachada.getInstance().atualizarUsuario(u.getCpf(), u.getNome(), u.getContato(), u.getEmail(), textField_3.getText(),
+								passwordField.getText(), "A", u.getSexo(), u.getLogradouro(), u.getNumero(), u.getBairro(), u.getCidade(), u.getEstado())){
+							JOptionPane.showMessageDialog(null, "Atualização efetuada!");
+							dispose();
+						}
+					}catch(SQLException e){
+						JOptionPane.showMessageDialog(null, "Login já cadastrado");
+						textField_3.setText("");
+						textField_3.grabFocus();
+					}
+					catch(Exception e1){
+						e1.getMessage();
+					}
+				}
+			}
+		});
+		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnSalvar.setBounds(155, 124, 90, 27);
+		panel.add(btnSalvar);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnSair.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnSair.setBounds(265, 124, 90, 27);
+		panel.add(btnSair);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador3.png")));

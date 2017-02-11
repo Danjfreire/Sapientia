@@ -4,12 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
 import br.ufrpe.sapientia.dados.RepositorioEmprestimos;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
+import br.ufrpe.sapientia.negocio.beans.Usuario;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 
 import javax.swing.JMenuBar;
@@ -36,11 +38,12 @@ public class TelaInicialAdm extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private int count;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try 
@@ -64,7 +67,7 @@ public class TelaInicialAdm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaInicialAdm() {
+	public TelaInicialAdm(Usuario u) {
 		RepositorioEmprestimos re = new RepositorioEmprestimos();
 		List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		Calendar data = Calendar.getInstance();
@@ -72,13 +75,13 @@ public class TelaInicialAdm extends JFrame {
 			emprestimos = re.pesquisarTodos();
 			for(Emprestimo e : emprestimos){
 				if(data.get(Calendar.YEAR) > e.getDataDevolucao().get(Calendar.YEAR))
-					re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+					re.atualizar(e.getIdEmprestimo(), "ATRASADO");
 				else if(data.get(Calendar.YEAR) == e.getDataDevolucao().get(Calendar.YEAR)){
 					if(data.get(Calendar.MONTH) > e.getDataDevolucao().get(Calendar.MONTH))
-						re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+						re.atualizar(e.getIdEmprestimo(), "ATRASADO");
 					else if(data.get(Calendar.MONTH) == e.getDataDevolucao().get(Calendar.MONTH)){
 						if(data.get(Calendar.DAY_OF_MONTH) > e.getDataDevolucao().get(Calendar.DAY_OF_MONTH))
-							re.atualizar(e.getIdEmprestimo(), "PENDENTE");
+							re.atualizar(e.getIdEmprestimo(), "ATRASADO");
 					}
 				}
 			}
@@ -113,6 +116,10 @@ public class TelaInicialAdm extends JFrame {
 		lblSeuSistemaDe.setForeground(Color.WHITE);
 		lblSeuSistemaDe.setBounds(10, 78, 432, 31);
 		desktopPane.add(lblSeuSistemaDe);
+		
+		JLabel slide = new JLabel();
+		slide.setBounds(10, 120, 363, 172);
+		desktopPane.add(slide);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/pensador3.png")));
@@ -312,7 +319,7 @@ public class TelaInicialAdm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(desktopPane.getAllFrames().length != 0)
 					desktopPane.remove(0);
-				TelaAtualAdm tela = new TelaAtualAdm();
+				TelaAtualAdm tela = new TelaAtualAdm(u);
 				desktopPane.add(tela);
 				try {
 					tela.setMaximum(true);
@@ -326,8 +333,27 @@ public class TelaInicialAdm extends JFrame {
 		});
 		mnAtualizaes.add(mntmAtualizarAdm);
 		
+		List<ImageIcon> fotos= new ArrayList<ImageIcon>();
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro1.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro2.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro3.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro4.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro5.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro6.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro7.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro8.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro9.png")));
+		fotos.add(new ImageIcon(TelaInicialFunc.class.getResource("/Imagens/livro10.png")));
+		count = 0;
 		
-		
-
+		Timer tempo = new Timer(3500, new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(count == 10)
+					count = 0;
+				slide.setIcon(fotos.get(count));
+				count++;
+			}
+		});
+		tempo.start();		
 	}
 }
