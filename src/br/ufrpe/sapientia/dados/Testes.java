@@ -60,7 +60,11 @@ public class Testes {
 		//rl.atualizar("129", "harry poter", "j.k. rowling", "unico", "2000", "unico", "amor", "bruxos", 10, 10);
 	
 		try {
-			rl.cadastrar("a culpa e das estrelas", "alice", "unico", 2000,"123",  "unico", "amor", "historia de amor", 10, 10);
+			int i = 9;
+			while(i < 100){
+				rl.cadastrar("z culpa e das estrelas", "alice", "unico", 2000,"12"+i,  "unico", "amor", "historia de amor", 10, 10);
+				i++;
+			}
 		} catch (SQLException e1) {
 			System.out.println(e1.getErrorCode() + "," + e1.getMessage());
 		}

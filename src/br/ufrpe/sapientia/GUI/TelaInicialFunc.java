@@ -146,47 +146,6 @@ public class TelaInicialFunc extends JFrame {
 		JMenu mnGerenciamento = new JMenu("Gerenciamento");
 		menuBar.add(mnGerenciamento);
 		
-		JMenu mnFuncionrios = new JMenu("Funcion\u00E1rios");
-		mnGerenciamento.add(mnFuncionrios);
-		
-		
-		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
-		mntmCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(desktopPane.getAllFrames().length != 0)
-					desktopPane.remove(0);
-				TelaCadastrarFuncionario tela = new TelaCadastrarFuncionario();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-			}
-		});
-		mnFuncionrios.add(mntmCadastrar);
-		
-		JMenuItem mntmPesquisar = new JMenuItem("Pesquisar");
-		mntmPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(desktopPane.getAllFrames().length != 0)
-					desktopPane.remove(0);
-				TelaPesquisarFuncionario tela = new TelaPesquisarFuncionario();
-				desktopPane.add(tela);
-				try {
-					tela.setMaximum(true);
-				} catch (PropertyVetoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				tela.show();
-				
-			}
-		});
-		mnFuncionrios.add(mntmPesquisar);
-		
 		JMenu mnLivros = new JMenu("Livros");
 		mnGerenciamento.add(mnLivros);
 		

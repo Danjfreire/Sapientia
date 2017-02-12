@@ -15,5 +15,5 @@ public interface IRepositorioLivros {
 	List<Livro>pesquisarTitulo(String titulo) throws Exception;
 	Livro pesquisarISBN(String isbn) throws SQLException;
 	List<Livro> pesquisarAutor(String autor) throws Exception;
-	
+	List<Livro> pesquisarTodosEstoque() throws SQLException;
 }

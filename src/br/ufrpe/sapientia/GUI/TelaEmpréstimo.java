@@ -23,9 +23,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import br.ufrpe.sapientia.fachada.Fachada;
 import br.ufrpe.sapientia.negocio.beans.*;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 public class TelaEmpréstimo extends JInternalFrame {
 	private JTextField tfCpf;
@@ -35,7 +41,9 @@ public class TelaEmpréstimo extends JInternalFrame {
 	private JTextField tfDataInicio;
 	private JTextField tfDataFinal;
 	private Usuario funcionario;
-	
+	private JTable table;
+	private List<Livro> livros;
+	private JScrollPane scrollPane;
 	/**
 	 * Launch the application.
 	 */
@@ -91,171 +99,128 @@ public class TelaEmpréstimo extends JInternalFrame {
 		setBounds(100, 100, 780, 443);
 		getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "CPF do Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 117, 261, 63);
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		
-		JLabel lblCpf = new JLabel("Cpf.:");
-		lblCpf.setBounds(10, 23, 32, 14);
-		panel.add(lblCpf);
-		
-		try {
-			tfCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
-			tfCpf.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					if(!(tfIsbn.getText().equals(""))){
-						try {
-							tfTitulo.setEditable(true);
-							tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
-							tfTitulo.setEditable(false);
-						} catch (NullPointerException e3) {
-							JOptionPane.showMessageDialog(null, "ISBN não cadastrado");
-							tfIsbn.setText("");
-							tfTitulo.setText("");
-							tfTitulo.setEditable(false);
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-					}
-				}
-			});
-			tfCpf.setToolTipText("Digite seu cpf");
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		tfCpf.setColumns(10);
-		tfCpf.setBounds(52, 20, 148, 20);
-		panel.add(tfCpf);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Dados do Livro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 11, 744, 74);
-		getContentPane().add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblTtulo = new JLabel("T\u00EDtulo.:");
-		lblTtulo.setBounds(248, 27, 46, 14);
-		panel_1.add(lblTtulo);
-		
-		try {
-			tfTitulo = new JFormattedTextField(new MaskFormatter("**************************************************"));
-			tfTitulo.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					if(!(tfIsbn.getText().equals(""))){
-						try {
-							tfTitulo.setEditable(true);
-							tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
-							tfTitulo.setEditable(false);
-						} catch (NullPointerException e3) {
-							JOptionPane.showMessageDialog(null, "ISBN não cadastrado");
-							tfIsbn.setText("");
-							tfTitulo.setText("");
-							tfTitulo.setEditable(false);
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-					}
-				}
-			});
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		try {
-			tfIsbn = new JFormattedTextField(new MaskFormatter("###-#-##-######-#"));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		tfIsbn.setColumns(10);
-		tfIsbn.setBounds(53, 24, 131, 20);
-		panel_1.add(tfIsbn);
-		
-		tfTitulo.setColumns(10);
-		tfTitulo.setBounds(304, 24, 430, 20);
-		panel_1.add(tfTitulo);
-		tfTitulo.setEditable(false);
-		
-		JLabel lblIsbn = new JLabel("ISBN.:");
-		lblIsbn.setBounds(10, 27, 46, 14);
-		panel_1.add(lblIsbn);
-		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Empr\u00E9stimo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 223, 459, 106);
+		panel_2.setBackground(Color.WHITE);
+		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Empr\u00E9stimo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
+		panel_2.setBounds(263, 12, 491, 297);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel lblFuncionrio = new JLabel("Funcion\u00E1rio.:");
-		lblFuncionrio.setBounds(10, 24, 70, 14);
-		panel_2.add(lblFuncionrio);
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(new TitledBorder(null, "Data", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
+		panel.setBounds(10, 211, 471, 75);
+		panel_2.add(panel);
+		panel.setLayout(null);
 		
-		tfFuncionario = new JTextField();
-		tfFuncionario.setColumns(10);
-		tfFuncionario.setBounds(82, 21, 365, 20);
-		panel_2.add(tfFuncionario);
-		tfFuncionario.setText(funcionario.getNome());
-		tfFuncionario.setEditable(false);
-		
-		JLabel lblDadtaIncio = new JLabel("Data In\u00EDcio.:");
-		lblDadtaIncio.setBounds(10, 61, 70, 14);
-		panel_2.add(lblDadtaIncio);
+		JLabel lblDadtaIncio = new JLabel("In\u00EDcio.:");
+		lblDadtaIncio.setForeground(new Color(95, 158, 160));
+		lblDadtaIncio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDadtaIncio.setBounds(10, 33, 59, 20);
+		panel.add(lblDadtaIncio);
 		
 		tfDataInicio = new JTextField();
+		tfDataInicio.setBounds(71, 35, 140, 20);
+		panel.add(tfDataInicio);
 		tfDataInicio.setColumns(10);
-		tfDataInicio.setBounds(82, 58, 121, 20);
-		panel_2.add(tfDataInicio);
 		tfDataInicio.setText(inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR));
 		tfDataInicio.setEditable(false);
 		
-		JLabel lblDataDevoluo = new JLabel("Data Devolu\u00E7\u00E3o.:");
-		lblDataDevoluo.setBounds(232, 61, 84, 14);
-		panel_2.add(lblDataDevoluo);
+		JLabel lblDataDevoluo = new JLabel("Devolu\u00E7\u00E3o.:");
+		lblDataDevoluo.setForeground(new Color(95, 158, 160));
+		lblDataDevoluo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDataDevoluo.setBounds(224, 33, 94, 20);
+		panel.add(lblDataDevoluo);
 		
 		try {
 			tfDataFinal = new JFormattedTextField(new MaskFormatter("##/##/####"));
-			tfDataFinal.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					if(!(tfIsbn.getText().equals(""))){
-						try {
-							tfTitulo.setEditable(true);
-							tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
-							tfTitulo.setEditable(false);
-						} catch (NullPointerException e3) {
-							JOptionPane.showMessageDialog(null, "ISBN não cadastrado");
-							tfIsbn.setText("");
-							tfTitulo.setText("");
-							tfTitulo.setEditable(false);
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-					}
-				}
-			});
+		} catch (ParseException e2) {
+			e2.printStackTrace();
+		}
+		tfDataFinal.setBounds(321, 35, 140, 20);
+		panel.add(tfDataFinal);
+		tfDataFinal.setColumns(10);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBorder(new TitledBorder(null, "Cpf", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
+		panel_1.setBounds(10, 125, 471, 75);
+		panel_2.add(panel_1);
+		panel_1.setLayout(null);
+		try {
+			tfCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		tfDataFinal.setColumns(10);
-		tfDataFinal.setBounds(326, 58, 121, 20);
-		panel_2.add(tfDataFinal);
+		tfCpf.setBounds(86, 29, 121, 20);
+		panel_1.add(tfCpf);
+		tfCpf.setColumns(10);
+		
+		
+		JLabel lblCpf = new JLabel("Cliente:.");
+		lblCpf.setForeground(new Color(95, 158, 160));
+		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblCpf.setBounds(10, 27, 66, 20);
+		panel_1.add(lblCpf);
+		
+		JLabel lblFuncionrio = new JLabel("Funcion\u00E1rio.:");
+		lblFuncionrio.setForeground(new Color(95, 158, 160));
+		lblFuncionrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblFuncionrio.setBounds(217, 27, 103, 20);
+		panel_1.add(lblFuncionrio);
+		
+		tfFuncionario = new JTextField();
+		tfFuncionario.setBounds(319, 29, 142, 20);
+		panel_1.add(tfFuncionario);
+		tfFuncionario.setColumns(10);
+		tfFuncionario.setText(funcionario.getCpf());
+		tfFuncionario.setEditable(false);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
+		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Livro", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
+		panel_3.setBounds(10, 39, 471, 75);
+		panel_2.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblIsbn = new JLabel("ISBN.:");
+		lblIsbn.setForeground(new Color(95, 158, 160));
+		lblIsbn.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblIsbn.setBounds(10, 26, 63, 20);
+		panel_3.add(lblIsbn);
+		
+		tfIsbn = new JTextField();
+		tfIsbn.setBounds(79, 28, 131, 20);
+		panel_3.add(tfIsbn);
+		tfIsbn.setColumns(10);
+		tfIsbn.setEditable(false);
+		
+		JLabel lblTtulo = new JLabel("T\u00EDtulo.:");
+		lblTtulo.setForeground(new Color(95, 158, 160));
+		lblTtulo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblTtulo.setBounds(224, 26, 58, 20);
+		panel_3.add(lblTtulo);
+		
+		tfTitulo = new JTextField();
+		tfTitulo.setBounds(282, 28, 179, 20);
+		panel_3.add(tfTitulo);		
+		tfTitulo.setColumns(10);
+		tfTitulo.setEditable(false);
 		
 		JButton btnNovo = new JButton("Novo");
-		btnNovo.setBounds(278, 358, 89, 23);
+		btnNovo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNovo.setBounds(263, 358, 100, 29);
 		getContentPane().add(btnNovo);
-		
+
 		JButton btnSair = new JButton("Sair");
+		btnSair.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
-		btnSair.setBounds(394, 358, 89, 23);
+		btnSair.setBounds(375, 358, 100, 29);
 		getContentPane().add(btnSair);
 		
 		btnNovo.addActionListener(new ActionListener(){
@@ -265,12 +230,62 @@ public class TelaEmpréstimo extends JInternalFrame {
 //					Date fim = df.parse(tfDataFinal.getText());
 //					Calendar termino = Calendar.getInstance();
 //					termino.setTime(fim);
-					tfTitulo.setEditable(true);
-					tfTitulo.setText(Fachada.getInstance().buscaLivroISBN(tfIsbn.getText()).getTitulo());
-					tfTitulo.setEditable(false);
-					if(Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "ABERTO",func.getCpf(),tfCpf.getText(),tfIsbn.getText())){
-						JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso");
-						dispose();
+					if(tfDataFinal.getText().equals("  /  /    ")){
+						JOptionPane.showMessageDialog(null, "Campo devolução vazio!");
+						tfDataFinal.grabFocus();
+					}
+					else if(tfCpf.getText().equals("   .   .   -  ")){
+						JOptionPane.showMessageDialog(null, "Campo cliente vazio!");
+						tfCpf.grabFocus();
+					}
+					else if(tfTitulo.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "Selecione um livro!");
+					}
+					else{
+						Fachada.getInstance().efetuarEmprestimo(tfDataInicio.getText(), tfDataFinal.getText(), "ABERTO",func.getCpf(),tfCpf.getText(),tfIsbn.getText());
+						if(JOptionPane.showConfirmDialog(null, "Emprestimo efetuado com sucesso.\nDeseja realizar mais empréstimos?", "Atenção", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+							DefaultTableModel modelo = new DefaultTableModel();
+							modelo.addColumn("Título");
+							modelo.addColumn("ISBN");
+							table = new JTable();
+							table.addMouseListener(new MouseAdapter() {
+								public void mouseClicked(MouseEvent arg0) {
+									tfIsbn.setEditable(true);
+									tfTitulo.setEditable(true);
+									Livro l = livros.get(table.getSelectedRow());
+									tfIsbn.setText(l.getIsbn());
+									tfTitulo.setText(l.getTitulo());
+									tfIsbn.setEditable(false);
+									tfTitulo.setEditable(false);
+								}
+							});
+							table.setModel(modelo);
+							table.getColumnModel().getColumn(0).setPreferredWidth(130);
+							scrollPane.setViewportView(table);
+							
+							livros = Fachada.getInstance().pesquisarLivrosEstoque();
+							if(livros.isEmpty())
+								JOptionPane.showMessageDialog(null, "Estoque de livros vazio!");
+							else{
+								for(Livro l : livros){
+									String titulo = l.getTitulo();
+									String isbn = l.getIsbn();
+									modelo.addRow(new Object[]{titulo, isbn});
+								}
+							}
+							tfCpf.setText("");
+							tfDataFinal.setText("");
+							tfTitulo.setEditable(true);
+							tfIsbn.setEditable(true);
+							tfDataInicio.setEditable(true);
+							tfTitulo.setText("");
+							tfIsbn.setText("");
+							tfDataInicio.setText(inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR));
+							tfTitulo.setEditable(false);
+							tfIsbn.setEditable(false);
+							tfDataInicio.setEditable(false);
+						}else
+							dispose();
 					}
 				}
 				catch(SQLException exception){
@@ -287,10 +302,54 @@ public class TelaEmpréstimo extends JInternalFrame {
 			}
 		});
 		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.WHITE);
+		panel_4.setBorder(new TitledBorder(null, "Selecionar Livro", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
+		panel_4.setBounds(10, 12, 243, 297);
+		getContentPane().add(panel_4);
+		panel_4.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 35, 223, 251);
+		panel_4.add(scrollPane);
+		
+		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("Título");
+		modelo.addColumn("ISBN");
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				tfIsbn.setEditable(true);
+				tfTitulo.setEditable(true);
+				Livro l = livros.get(table.getSelectedRow());
+				tfIsbn.setText(l.getIsbn());
+				tfTitulo.setText(l.getTitulo());
+				tfIsbn.setEditable(false);
+				tfTitulo.setEditable(false);
+			}
+		});
+		table.setModel(modelo);
+		table.getColumnModel().getColumn(0).setPreferredWidth(130);
+		scrollPane.setViewportView(table);
+		
+		try {
+			livros = Fachada.getInstance().pesquisarLivrosEstoque();
+			if(livros.isEmpty())
+				JOptionPane.showMessageDialog(null, "Estoque de livros vazio!");
+			else{
+				for(Livro l : livros){
+					String titulo = l.getTitulo();
+					String isbn = l.getIsbn();
+					modelo.addRow(new Object[]{titulo, isbn});
+				}
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 		JLabel lbTelaAzul = new JLabel("");
 		lbTelaAzul.setIcon(new ImageIcon(TelaLogon.class.getResource("/Imagens/pensador4.jpg")));
 		lbTelaAzul.setBounds(-7, -26, 780, 443);
 		getContentPane().add(lbTelaAzul);
-
 	}
 }

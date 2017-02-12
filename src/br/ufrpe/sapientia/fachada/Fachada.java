@@ -1,5 +1,6 @@
 package br.ufrpe.sapientia.fachada;
 
+import java.sql.SQLException;
 import java.util.List;
 import br.ufrpe.sapientia.negocio.*;
 import br.ufrpe.sapientia.negocio.beans.Emprestimo;
@@ -112,7 +113,11 @@ public class Fachada implements IFachada {
 	public List<Livro> exibirLivros() throws Exception{
 		return controleLivro.pesquisarTodos();
 	}
-
+	
+	public List<Livro> pesquisarLivrosEstoque() throws SQLException{
+		return controleLivro.pesquisarTodosEstoque();
+	}
+	
 	@Override
 	public boolean cadastraLivro(String titulo, String autor, String edicao, int ano, String isbn, String volume,
 			String categoria, String resumo, int estoque, int total) throws Exception{

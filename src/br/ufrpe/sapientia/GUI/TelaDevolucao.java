@@ -186,7 +186,6 @@ public class TelaDevolucao extends JInternalFrame {
 								String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 								Calendar fim = emp.getDataDevolucao();
 								String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
-								Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
 								modelo.addRow(new Object[]{emp.getIdEmprestimo(), cliente.getNome(),emp.getCpfCliente(),cliente.getContato(),dataInicio,dataFim,emp.getStatus()});
 							}
 							
@@ -225,7 +224,6 @@ public class TelaDevolucao extends JInternalFrame {
 						String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 						Calendar fim = emp.getDataDevolucao();
 						String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
-						Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
 						modelo.addRow(new Object[]{emp.getIdEmprestimo(), cliente.getNome(),emp.getCpfCliente(),cliente.getContato(),dataInicio,dataFim,emp.getStatus()});
 					}
 				}catch(Exception ex){
@@ -264,7 +262,6 @@ public class TelaDevolucao extends JInternalFrame {
 							String dataInicio = inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR);
 							Calendar fim = emp.getDataDevolucao();
 							String dataFim = fim.get(Calendar.DAY_OF_MONTH)+"/"+(fim.get(Calendar.MONTH)+1)+"/"+fim.get(Calendar.YEAR);
-							Livro l = Fachada.getInstance().buscaLivroISBN(emp.getIsbnLivro());
 							modelo.addRow(new Object[]{emp.getIdEmprestimo(), cliente.getNome(),emp.getCpfCliente(),cliente.getContato(),dataInicio,dataFim,emp.getStatus()});
 						}
 					}catch(ArrayIndexOutOfBoundsException e1){

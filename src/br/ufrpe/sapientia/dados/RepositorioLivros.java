@@ -104,6 +104,22 @@ public class RepositorioLivros implements IRepositorioLivros{
 		return livros;
 	}
 	
+	public List<Livro> pesquisarTodosEstoque() throws SQLException{
+		List<Livro> livros = new ArrayList<Livro>();
+		String sql = "select * from livro where estoque_livro > 0 order by titulo_livro";
+		try{
+			PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+				livros.add(preencherLivro(rs));
+			stmt.close();
+			System.out.println("Resultados:\n\n");
+		}catch(SQLException e){
+			throw e;
+		}
+		return livros;
+	}
+	
 	public List<Livro> pesquisarTitulo(String titulo) throws SQLException{
 		List<Livro> livros = new ArrayList<Livro>();
 		String consulta = '%' + titulo + '%';

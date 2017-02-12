@@ -2,6 +2,8 @@ package br.ufrpe.sapientia.negocio;
 
 import br.ufrpe.sapientia.negocio.beans.Livro;
 import br.ufrpe.sapientia.dados.*;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public class ControleLivro implements IControleLivro{
@@ -42,7 +44,11 @@ public class ControleLivro implements IControleLivro{
 	public List<Livro> pesquisarTodos() throws Exception{
 		return repositorio.pesquisarTodos();
 	}
-
+	
+	public List<Livro> pesquisarTodosEstoque() throws SQLException{
+		return repositorio.pesquisarTodosEstoque();
+	}
+	
 	@Override
 	public boolean cadastraLivro(String titulo, String autor, String edicao, int ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total) throws Exception{

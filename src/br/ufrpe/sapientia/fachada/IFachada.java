@@ -1,5 +1,6 @@
 package br.ufrpe.sapientia.fachada;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public interface IFachada {
 	Livro buscaLivroISBN(String isbn) throws Exception;
 	List<Livro> buscaLivroAutor(String autor) throws Exception;
 	List<Livro>exibirLivros() throws Exception;
+	List<Livro> pesquisarLivrosEstoque() throws SQLException;
 	boolean cadastraLivro(String titulo, String autor, String edicao, int ano, String isbn
 			, String volume, String categoria, String resumo, int estoque, int total) throws Exception;
 	

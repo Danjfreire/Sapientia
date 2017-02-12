@@ -1,6 +1,8 @@
 package br.ufrpe.sapientia.negocio;
 
 import br.ufrpe.sapientia.negocio.beans.*;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IControleLivro {
@@ -14,4 +16,5 @@ public interface IControleLivro {
 			, String volume, String categoria, String resumo, int estoque, int total) throws Exception;
 	List<Livro> pesquisarTodos() throws Exception;
 	List<Livro> buscaAutor(String autor) throws Exception;
+	List<Livro> pesquisarTodosEstoque() throws SQLException;
 }
