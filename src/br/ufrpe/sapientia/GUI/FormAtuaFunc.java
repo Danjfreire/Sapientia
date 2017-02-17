@@ -175,7 +175,7 @@ public class FormAtuaFunc extends JFrame {
 		JLabel lblConfimarSenha = new JLabel("Confimar Senha.:");
 		lblConfimarSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblConfimarSenha.setForeground(new Color(95, 158, 160));
-		lblConfimarSenha.setBounds(148, 148, 86, 14);
+		lblConfimarSenha.setBounds(148, 148, 133, 14);
 		panel.add(lblConfimarSenha);
 		psConfirmar.setText(funcionario.getSenha());
 		
@@ -304,7 +304,7 @@ public class FormAtuaFunc extends JFrame {
 		JLabel label_14 = new JLabel("Telefone.:");
 		label_14.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_14.setForeground(new Color(95, 158, 160));
-		label_14.setBounds(10, 219, 56, 14);
+		label_14.setBounds(10, 219, 69, 14);
 		panel_2.add(label_14);
 		
 		try {

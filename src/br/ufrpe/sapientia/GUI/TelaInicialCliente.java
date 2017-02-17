@@ -130,6 +130,12 @@ public class TelaInicialCliente extends JFrame {
 		label.setBounds(0, 0, 780, 443);
 		desktopPane.add(label);
 		
+		JMenu mnLogout = new JMenu("Sair");
+		menuBar.add(mnLogout);
+		
+		JMenuItem mntmLogout = new JMenuItem("Logout");
+		mnLogout.add(mntmLogout);
+		
 		JMenu mnHistorico = new JMenu("Hist\u00F3rico");
 		menuBar.add(mnHistorico);
 		

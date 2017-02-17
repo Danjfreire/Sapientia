@@ -307,7 +307,7 @@ public class TelaCadastrarCliente extends JInternalFrame {
 		JLabel lblTelefone = new JLabel("Telefone.:");
 		lblTelefone.setForeground(new Color(95, 158, 160));
 		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTelefone.setBounds(10, 219, 56, 14);
+		lblTelefone.setBounds(10, 219, 75, 14);
 		panel_2.add(lblTelefone);
 		
 		tfEmail = new JTextField();

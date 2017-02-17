@@ -127,6 +127,7 @@ public class ErrosGUI {
 				}
 			} catch (Exception e1) {
 				mensagem = e1.getMessage();
+				isbn.setText("");
 			}
 			
 		}

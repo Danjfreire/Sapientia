@@ -141,8 +141,8 @@ public class TelaPendenciaLivros extends JInternalFrame {
 		modelo.addColumn("T\u00EDtulo");
 		modelo.addColumn("Cliente");
 		modelo.addColumn("funcionario");
-		modelo.addColumn("Data emprestimo");
-		modelo.addColumn("Data devolucao");
+		modelo.addColumn("Emprestimo");
+		modelo.addColumn("Devolucao");
 		modelo.addColumn("status");
 		scrollPane.setViewportView(table);
 
@@ -171,8 +171,8 @@ public class TelaPendenciaLivros extends JInternalFrame {
 					modelo.addColumn("T\u00EDtulo");
 					modelo.addColumn("Cliente");
 					modelo.addColumn("funcionario");
-					modelo.addColumn("Data emprestimo");
-					modelo.addColumn("Data devolucao");
+					modelo.addColumn("Emprestimo");
+					modelo.addColumn("Devolucao");
 					modelo.addColumn("status");
 					scrollPane.setViewportView(table);
 					
@@ -223,8 +223,8 @@ public class TelaPendenciaLivros extends JInternalFrame {
 				modelo.addColumn("T\u00EDtulo");
 				modelo.addColumn("Cliente");
 				modelo.addColumn("funcionario");
-				modelo.addColumn("Data emprestimo");
-				modelo.addColumn("Data devolucao");
+				modelo.addColumn("Emprestimo");
+				modelo.addColumn("Devolucao");
 				modelo.addColumn("status");
 				scrollPane.setViewportView(table);
 				

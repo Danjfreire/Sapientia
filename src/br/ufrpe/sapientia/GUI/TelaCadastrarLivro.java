@@ -86,7 +86,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(95, 158, 160)));
-		panel.setBounds(236, 62, 506, 279);
+		panel.setBounds(236, 62, 518, 279);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -102,10 +102,10 @@ public class TelaCadastrarLivro extends JInternalFrame {
 		lblAutor.setBounds(10, 52, 62, 14);
 		panel.add(lblAutor);
 		
-		JLabel lblEdio = new JLabel("Edi\u00E7\u00E3o.:");
+		JLabel lblEdio = new JLabel("Editora.:");
 		lblEdio.setForeground(new Color(95, 158, 160));
 		lblEdio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblEdio.setBounds(10, 77, 62, 14);
+		lblEdio.setBounds(10, 77, 83, 14);
 		panel.add(lblEdio);
 		
 		JLabel lblAno = new JLabel("Ano.:");
@@ -135,20 +135,20 @@ public class TelaCadastrarLivro extends JInternalFrame {
 				}
 			}
 		});
-		tfTitulo.setBounds(104, 26, 143, 20);
+		tfTitulo.setBounds(148, 26, 143, 20);
 		panel.add(tfTitulo);
 		tfTitulo.setColumns(10);
 		
 		tfEdicao = new JTextField();
 		tfEdicao.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent arg0) {
-				if(tfEdicao.getText().length() == 10){
+				if(tfEdicao.getText().length() == 50){
 					arg0.consume();
 					getToolkit().beep();
 				}
 			}
 		});
-		tfEdicao.setBounds(104, 76, 143, 20);
+		tfEdicao.setBounds(148, 76, 143, 20);
 		panel.add(tfEdicao);
 		tfEdicao.setColumns(10);
 		
@@ -162,7 +162,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			}
 		});
 		tfAutor.setColumns(10);
-		tfAutor.setBounds(104, 51, 143, 20);
+		tfAutor.setBounds(148, 51, 143, 20);
 		panel.add(tfAutor);
 		
 		try {
@@ -171,7 +171,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			e2.printStackTrace();
 		}
 		tfAno.setColumns(10);
-		tfAno.setBounds(104, 101, 142, 20);
+		tfAno.setBounds(149, 101, 142, 20);
 		panel.add(tfAno);
 		
 		try {
@@ -180,7 +180,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			e2.printStackTrace();
 		}
 		tfISBN.setColumns(10);
-		tfISBN.setBounds(105, 126, 142, 20);
+		tfISBN.setBounds(149, 126, 142, 20);
 		panel.add(tfISBN);
 		
 		tfVolume = new JTextField();
@@ -193,19 +193,19 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			}
 		});
 		tfVolume.setColumns(10);
-		tfVolume.setBounds(105, 151, 142, 20);
+		tfVolume.setBounds(149, 151, 142, 20);
 		panel.add(tfVolume);
 		
 		JLabel lblCategoria = new JLabel("Categoria.:");
 		lblCategoria.setForeground(new Color(95, 158, 160));
 		lblCategoria.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblCategoria.setBounds(10, 177, 83, 14);
+		lblCategoria.setBounds(10, 177, 108, 14);
 		panel.add(lblCategoria);
 		
 		JLabel lblResumo = new JLabel("Resumo.:");
 		lblResumo.setForeground(new Color(95, 158, 160));
 		lblResumo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblResumo.setBounds(294, 27, 72, 14);
+		lblResumo.setBounds(320, 27, 72, 14);
 		panel.add(lblResumo);
 		
 		tfCategoria = new JTextField();
@@ -218,7 +218,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			}
 		});
 		tfCategoria.setColumns(10);
-		tfCategoria.setBounds(104, 176, 143, 20);
+		tfCategoria.setBounds(148, 176, 143, 20);
 		panel.add(tfCategoria);
 		
 		JTextArea textArea = new JTextArea();
@@ -231,7 +231,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			}
 		});
 		textArea.setBackground(new Color(95, 158, 160));
-		textArea.setBounds(294, 49, 188, 197);
+		textArea.setBounds(320, 49, 188, 197);
 		panel.add(textArea);
 		
 		JLabel lblEstoque = new JLabel("Estoque.:");
@@ -258,7 +258,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 					
 			}
 		});
-		tfEstoque.setBounds(104, 201, 143, 20);
+		tfEstoque.setBounds(148, 201, 143, 20);
 		panel.add(tfEstoque);
 		tfEstoque.setColumns(10);
 		
@@ -273,7 +273,7 @@ public class TelaCadastrarLivro extends JInternalFrame {
 			}
 		});
 		tfTotal.setColumns(10);
-		tfTotal.setBounds(104, 226, 143, 20);
+		tfTotal.setBounds(148, 226, 143, 20);
 		panel.add(tfTotal);
 		
 		

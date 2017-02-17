@@ -310,7 +310,7 @@ public class TelaCadastrarFuncionario extends JInternalFrame {
 		JLabel lblTelefone = new JLabel("Telefone.:");
 		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTelefone.setForeground(new Color(95, 158, 160));
-		lblTelefone.setBounds(10, 219, 56, 14);
+		lblTelefone.setBounds(10, 219, 66, 14);
 		panel_2.add(lblTelefone);
 		
 		try {

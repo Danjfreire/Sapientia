@@ -101,11 +101,11 @@ public class FormAtuaLivro extends JFrame {
 		label_2.setBounds(10, 83, 62, 14);
 		panel.add(label_2);
 		
-		JLabel label_3 = new JLabel("Edi\u00E7\u00E3o.:");
-		label_3.setForeground(new Color(95, 158, 160));
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_3.setBounds(10, 114, 76, 14);
-		panel.add(label_3);
+		JLabel lblEditora = new JLabel("Editora.:");
+		lblEditora.setForeground(new Color(95, 158, 160));
+		lblEditora.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblEditora.setBounds(10, 114, 76, 14);
+		panel.add(lblEditora);
 		
 		JLabel label_4 = new JLabel("Ano.:");
 		label_4.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -137,7 +137,7 @@ public class FormAtuaLivro extends JFrame {
 		tfTitulo.setText(livro.getTitulo());
 		
 		try {
-			tfEdicao = new JFormattedTextField(new MaskFormatter("**********"));
+			tfEdicao = new JFormattedTextField(new MaskFormatter("**************************************************"));
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();

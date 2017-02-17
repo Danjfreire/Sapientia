@@ -260,10 +260,12 @@ public class TelaInicialAdm extends JFrame {
 		});
 		mnClientes.add(mntmPesquisar_2);
 		
-		JMenuItem mntmSair = new JMenuItem("Sair");
+		JMenuItem mntmSair = new JMenuItem("Logout");
 		mntmSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				TelaLogon tl = new TelaLogon();
+				tl.setVisible(true);
 				dispose();
 				
 			}

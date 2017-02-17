@@ -44,6 +44,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 	private JTable table;
 	private List<Livro> livros;
 	private JScrollPane scrollPane;
+	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -102,14 +103,14 @@ public class TelaEmpréstimo extends JInternalFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Empr\u00E9stimo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
-		panel_2.setBounds(263, 12, 491, 297);
+		panel_2.setBounds(320, 12, 434, 297);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null, "Data", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
-		panel.setBounds(10, 211, 471, 75);
+		panel.setBounds(10, 211, 414, 75);
 		panel_2.add(panel);
 		panel.setLayout(null);
 		
@@ -120,7 +121,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 		panel.add(lblDadtaIncio);
 		
 		tfDataInicio = new JTextField();
-		tfDataInicio.setBounds(71, 35, 140, 20);
+		tfDataInicio.setBounds(71, 35, 121, 20);
 		panel.add(tfDataInicio);
 		tfDataInicio.setColumns(10);
 		tfDataInicio.setText(inicio.get(Calendar.DAY_OF_MONTH)+"/"+(inicio.get(Calendar.MONTH)+1)+"/"+inicio.get(Calendar.YEAR));
@@ -129,7 +130,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 		JLabel lblDataDevoluo = new JLabel("Devolu\u00E7\u00E3o.:");
 		lblDataDevoluo.setForeground(new Color(95, 158, 160));
 		lblDataDevoluo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDataDevoluo.setBounds(224, 33, 94, 20);
+		lblDataDevoluo.setBounds(202, 33, 94, 20);
 		panel.add(lblDataDevoluo);
 		
 		try {
@@ -137,14 +138,14 @@ public class TelaEmpréstimo extends JInternalFrame {
 		} catch (ParseException e2) {
 			e2.printStackTrace();
 		}
-		tfDataFinal.setBounds(321, 35, 140, 20);
+		tfDataFinal.setBounds(298, 35, 106, 20);
 		panel.add(tfDataFinal);
 		tfDataFinal.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBorder(new TitledBorder(null, "Cpf", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
-		panel_1.setBounds(10, 125, 471, 75);
+		panel_1.setBounds(10, 125, 414, 75);
 		panel_2.add(panel_1);
 		panel_1.setLayout(null);
 		try {
@@ -153,7 +154,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		tfCpf.setBounds(86, 29, 121, 20);
+		tfCpf.setBounds(86, 29, 103, 20);
 		panel_1.add(tfCpf);
 		tfCpf.setColumns(10);
 		
@@ -167,11 +168,11 @@ public class TelaEmpréstimo extends JInternalFrame {
 		JLabel lblFuncionrio = new JLabel("Funcion\u00E1rio.:");
 		lblFuncionrio.setForeground(new Color(95, 158, 160));
 		lblFuncionrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFuncionrio.setBounds(217, 27, 103, 20);
+		lblFuncionrio.setBounds(199, 27, 103, 20);
 		panel_1.add(lblFuncionrio);
 		
 		tfFuncionario = new JTextField();
-		tfFuncionario.setBounds(319, 29, 142, 20);
+		tfFuncionario.setBounds(312, 29, 93, 20);
 		panel_1.add(tfFuncionario);
 		tfFuncionario.setColumns(10);
 		tfFuncionario.setText(funcionario.getCpf());
@@ -180,7 +181,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
 		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Livro", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
-		panel_3.setBounds(10, 39, 471, 75);
+		panel_3.setBounds(10, 39, 414, 75);
 		panel_2.add(panel_3);
 		panel_3.setLayout(null);
 		
@@ -203,7 +204,7 @@ public class TelaEmpréstimo extends JInternalFrame {
 		panel_3.add(lblTtulo);
 		
 		tfTitulo = new JTextField();
-		tfTitulo.setBounds(282, 28, 179, 20);
+		tfTitulo.setBounds(282, 28, 122, 20);
 		panel_3.add(tfTitulo);		
 		tfTitulo.setColumns(10);
 		tfTitulo.setEditable(false);
@@ -305,12 +306,12 @@ public class TelaEmpréstimo extends JInternalFrame {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
 		panel_4.setBorder(new TitledBorder(null, "Selecionar Livro", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(95, 158, 160)));
-		panel_4.setBounds(10, 12, 243, 297);
+		panel_4.setBounds(10, 12, 300, 297);
 		getContentPane().add(panel_4);
 		panel_4.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 35, 223, 251);
+		scrollPane.setBounds(10, 72, 280, 214);
 		panel_4.add(scrollPane);
 		
 		DefaultTableModel modelo = new DefaultTableModel();
@@ -331,6 +332,67 @@ public class TelaEmpréstimo extends JInternalFrame {
 		table.setModel(modelo);
 		table.getColumnModel().getColumn(0).setPreferredWidth(130);
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton = new JButton("Pesquisar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					Livro l = Fachada.getInstance().buscaLivroISBN(textField.getText());
+					if(textField.getText().equals("   .   .   -  ")){
+						JOptionPane.showMessageDialog(null, "Campo isbn vazio!");
+						textField.grabFocus();
+					}
+					else if(l == null){
+						JOptionPane.showMessageDialog(null, "Livro indisponível no estoque!");
+						textField.setText("");
+						textField.grabFocus();
+					}
+					else{
+						DefaultTableModel modelo = new DefaultTableModel();
+						modelo.addColumn("Título");
+						modelo.addColumn("ISBN");
+						table = new JTable();
+						table.addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent arg0) {
+								tfIsbn.setEditable(true);
+								tfTitulo.setEditable(true);
+								Livro l = livros.get(table.getSelectedRow());
+								tfIsbn.setText(l.getIsbn());
+								tfTitulo.setText(l.getTitulo());
+								tfIsbn.setEditable(false);
+								tfTitulo.setEditable(false);
+							}
+						});
+						table.setModel(modelo);
+						table.getColumnModel().getColumn(0).setPreferredWidth(130);
+						scrollPane.setViewportView(table);
+						modelo.addRow(new Object[]{l.getTitulo(), l.getIsbn()});
+					}
+					
+				}catch(Exception e){
+					
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNewButton.setBounds(181, 42, 107, 29);
+		panel_4.add(btnNewButton);
+		
+		try {
+			textField = new JFormattedTextField(new MaskFormatter("###-#-##-######-#"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		textField.setBounds(62, 46, 116, 20);
+		panel_4.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblIsbn_1 = new JLabel("ISBN:.");
+		lblIsbn_1.setForeground(new Color(95, 158, 160));
+		lblIsbn_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblIsbn_1.setBounds(10, 47, 63, 14);
+		panel_4.add(lblIsbn_1);
 		
 		try {
 			livros = Fachada.getInstance().pesquisarLivrosEstoque();

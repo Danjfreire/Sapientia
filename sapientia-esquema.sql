@@ -22,7 +22,7 @@ create table usuario(
 create table livro(
     titulo_livro varchar(50),
     autor_livro varchar(50),
-    edicao_livro varchar(10),
+    edicao_livro varchar(50),
     ano_livro int,
     isbn_livro varchar(17) primary key not null,
     volume_livro varchar(10),
@@ -75,7 +75,7 @@ begin
     elseif new.data_saida_emprestimo > new.data_entrega_emprestimo then
 		signal sqlstate '45000' set message_text='Data de saída não pode ser superior à de entrega!';
 	elseif new.status_emprestimo not like "ABERTO"  
-       and new.status_emprestimo not like "PENDENTE" then
+       and new.status_emprestimo not like "ATRASADO" then
 		signal sqlstate '45000' set message_text='Tipo de status incorreto!';
 	else
 		update livro
@@ -148,3 +148,4 @@ begin
 		signal sqlstate '45000' set message_text='Email inválido!';
 	end if;
 end//
+insert into usuario(login_usuario, senha_usuario, tipo_usuario) value('adm', 'adm', 'A');
