@@ -337,7 +337,12 @@ public class TelaEmpréstimo extends JInternalFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try{
-					Livro l = Fachada.getInstance().buscaLivroISBN(textField.getText());
+					Livro l = null;
+					livros = Fachada.getInstance().pesquisarLivrosEstoque();
+					for(Livro lv : livros){
+						if(lv.getIsbn().equals(textField.getText()))
+								l = lv;
+					}
 					if(textField.getText().equals("   .   .   -  ")){
 						JOptionPane.showMessageDialog(null, "Campo isbn vazio!");
 						textField.grabFocus();
