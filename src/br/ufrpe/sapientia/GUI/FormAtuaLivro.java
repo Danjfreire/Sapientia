@@ -300,9 +300,9 @@ public class FormAtuaLivro extends JFrame {
 						tfAutor.grabFocus();
 					}
 					else{
-						if(	Fachada.getInstance().cadastraLivro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), Integer.parseInt(tfAno.getText()),
-								tfISBN.getText(), tfVolume.getText(), tfCategoria.getText(), textArea.getText(), Integer.parseInt(tfEstoque.getText()),
-								Integer.parseInt(tfTotal.getText()))){
+						if(	Fachada.getInstance().atualizarLivro(tfISBN.getText(), tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), 
+							Integer.parseInt(tfAno.getText()), tfVolume.getText(), tfCategoria.getText(), textArea.getText(), 
+							Integer.parseInt(tfEstoque.getText()), Integer.parseInt(tfTotal.getText()))){
 							JOptionPane.showMessageDialog(null,"Cadastrado com Sucesso!");
 							//Livro l = new Livro(tfTitulo.getText(), tfAutor.getText(), tfEdicao.getText(), tfAno.getText(), tfISBN.getText(), 
 							//		tfVolume.getText(), tfCategoria.getText(), textArea.getText(), 10, 10);

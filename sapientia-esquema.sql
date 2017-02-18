@@ -148,4 +148,4 @@ begin
 		signal sqlstate '45000' set message_text='Email inválido!';
 	end if;
 end//
-insert into usuario(login_usuario, senha_usuario, tipo_usuario) value('adm', 'adm', 'A');
+insert into usuario(cpf_usuario, login_usuario, senha_usuario, tipo_usuario) value('1','adm', 'adm', 'A');

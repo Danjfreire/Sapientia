@@ -134,6 +134,13 @@ public class TelaInicialCliente extends JFrame {
 		menuBar.add(mnLogout);
 		
 		JMenuItem mntmLogout = new JMenuItem("Logout");
+		mntmLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {				
+				TelaLogon tl = new TelaLogon();
+				tl.setVisible(true);
+				dispose();
+			}
+		});
 		mnLogout.add(mntmLogout);
 		
 		JMenu mnHistorico = new JMenu("Hist\u00F3rico");
