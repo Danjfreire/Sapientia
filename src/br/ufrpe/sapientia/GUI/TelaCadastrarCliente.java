@@ -349,6 +349,10 @@ public class TelaCadastrarCliente extends JInternalFrame {
 						psConfirmar.setText("");
 						psSenha.grabFocus();;
 					}
+					else if(tfCpf.getText().equals("000.000.000-00")){
+						JOptionPane.showMessageDialog(null, "Cpf inválido");
+						tfNome.grabFocus();
+					}
 					else if(tfNome.getText().equals("")){
 						JOptionPane.showMessageDialog(null, "Campo nome vazio");
 						tfNome.grabFocus();
